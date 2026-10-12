@@ -19,6 +19,21 @@
 - [영어 일기](./diary/index.md) — 내가 쓴 글과 교정본
 - [참조 자료](./references/index.md) — 원어민 스크립트와 음성 출처
 
+## 핵심 기본동사
+
+쉬운 동사로 일상 대화를 넓힙니다. 각 페이지에서 표현을 익히고 내 상황으로 2문장씩 말해보세요.
+
+- [HAVE](./patterns/have.md)
+- [GET](./patterns/get.md)
+- [MAKE](./patterns/make.md)
+- [TAKE](./patterns/take.md)
+- [DO](./patterns/do.md)
+- [LET](./patterns/let.md)
+- [GIVE](./patterns/give.md)
+- [WORK](./patterns/work.md)
+- [KEEP](./patterns/keep.md)
+- [GO](./patterns/go.md)
+
 ## 찾아보기
 
 [표현집](./patterns/useful-expressions.md) · [발음](./pronunciation/pronunciation-notes.md) · [실수 노트](./mistakes/common-mistakes.md) · [주간 복습](./review/week-01.md)

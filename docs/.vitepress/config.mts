@@ -23,10 +23,16 @@ export default defineConfig({
       { text: '표현집', collapsed: true, items: [
         { text: '자주 쓰는 표현', link: '/patterns/useful-expressions' },
         { text: '질문 패턴', link: '/patterns/question-patterns' },
+        { text: 'HAVE', link: '/patterns/have' },
         { text: 'GET', link: '/patterns/get' },
         { text: 'MAKE', link: '/patterns/make' },
-        { text: 'HAVE', link: '/patterns/have' },
-        { text: 'LET', link: '/patterns/let' }
+        { text: 'TAKE', link: '/patterns/take' },
+        { text: 'DO', link: '/patterns/do' },
+        { text: 'LET', link: '/patterns/let' },
+        { text: 'GIVE', link: '/patterns/give' },
+        { text: 'WORK', link: '/patterns/work' },
+        { text: 'KEEP', link: '/patterns/keep' },
+        { text: 'GO', link: '/patterns/go' }
       ] },
       { text: '발음과 교정', collapsed: true, items: [
         { text: '발음 노트', link: '/pronunciation/pronunciation-notes' },

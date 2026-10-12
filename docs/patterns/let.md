@@ -20,3 +20,5 @@ listen: true
 주의: **Let me know.**처럼 `to` 없이 씁니다.
 
 [자주 쓰는 표현](./useful-expressions.md) · [자주 하는 실수](../mistakes/common-mistakes.md)
+
+[핵심 기본동사 10개](../index.md#핵심-기본동사)

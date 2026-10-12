@@ -20,3 +20,5 @@ listen: true
 연습 질문: **Do you have any plans for tomorrow?** — 내일 계획이 있나요?
 
 [LET](./let.md) · [자주 쓰는 표현](./useful-expressions.md)
+
+[핵심 기본동사 10개](../index.md#핵심-기본동사)

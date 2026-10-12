@@ -20,3 +20,5 @@ listen: true
 주의: **makes me think**처럼 동사원형을 씁니다. `makes me to think`로 쓰지 않습니다.
 
 [질문 패턴](./question-patterns.md) · [자주 하는 실수](../mistakes/common-mistakes.md)
+
+[핵심 기본동사 10개](../index.md#핵심-기본동사)
