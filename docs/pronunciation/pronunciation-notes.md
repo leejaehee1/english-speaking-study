@@ -1,6 +1,6 @@
-<script setup>
-import ListenSentences from '../.vitepress/components/ListenSentences.vue'
-</script>
+---
+listen: true
+---
 
 # 발음 노트
 
@@ -19,9 +19,11 @@ import ListenSentences from '../.vitepress/components/ListenSentences.vue'
 
 ## 영작 문장 들어보기
 
-아래 버튼은 기기의 영어 음성으로 읽어줍니다. 원본 화자의 발음과는 다르며, 사용할 수 있는 목소리는 브라우저·기기에 따라 달라집니다.
+아래 굵은 영어 문장을 누르면 기기의 영어 음성으로 읽어줍니다. 원본 화자의 발음과는 다르며, 사용할 수 있는 목소리는 브라우저·기기에 따라 달라집니다.
 
-<ListenSentences />
+- **How old do you think she is?**
+- **Do you know how old she is?**
+- **What do you think we should do?**
 
 ## 하루 5분 연습
 
