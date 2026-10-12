@@ -13,7 +13,7 @@
 
 ## 자료 목록
 
-- [아침 일상 대화 · 0:51–4:22](./morning-conversation.md)
+- [10월 12일 녹음 숙제 · 아침 일상 대화 · 0:51–4:22](./2026-10-12-morning-conversation.md)
 
 - [스크립트 기록 양식](./script-template.md)
 

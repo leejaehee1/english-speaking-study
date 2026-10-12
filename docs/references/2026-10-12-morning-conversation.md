@@ -1,7 +1,8 @@
-# 아침 일상 대화
+# 2026-10-12 · 녹음 숙제 · 아침 일상 대화
 
 [영상 보기 · 0:51부터](https://www.youtube.com/watch?v=v07kPyPkLYw&t=51s)
 
+- 숙제 날짜: **2026-10-12(월)** · 당일 자정까지 카카오톡 제출
 - 자료: 30 Minutes of Real English Conversation You'll Actually Use (A2-B2)
 - 연습 구간: **0:51–4:22 · 약 3분 31초**
 - 내용: 아침에 한 일 → 좋아하는 시간대 → 매일 하는 습관
