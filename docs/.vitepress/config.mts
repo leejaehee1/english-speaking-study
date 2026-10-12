@@ -1,0 +1,48 @@
+import { defineConfig } from 'vitepress'
+
+export default defineConfig({
+  lang: 'ko-KR',
+  title: 'English Speaking Study',
+  description: '2개월 평일 영어회화 학습 기록과 나만의 표현집',
+  base: '/english-speaking-study/',
+  themeConfig: {
+    nav: [
+      { text: '홈', link: '/' },
+      { text: 'Daily', link: '/daily/2026-10-12' },
+      { text: '일기', link: '/diary/' },
+      { text: '참조 자료', link: '/references/' },
+      { text: '표현', link: '/patterns/useful-expressions' },
+      { text: '복습', link: '/review/week-01' },
+      { text: 'JoyTalk', link: 'https://projects-joytalk.vercel.app/', target: '_blank', rel: 'noopener noreferrer' }
+    ],
+    sidebar: [
+      { text: '시작', items: [{ text: '학습 안내', link: '/' }] },
+      { text: 'Daily', items: [{ text: '2026-10-12', link: '/daily/2026-10-12' }] },
+      { text: '영어 일기', items: [
+        { text: '일기 작성 안내', link: '/diary/' },
+        { text: '2026-10-12 · 작성 양식', link: '/diary/2026-10-12' }
+      ] },
+      { text: '원어민 참조 자료', items: [
+        { text: '자료 정리 안내', link: '/references/' },
+        { text: '스크립트 기록 양식', link: '/references/script-template' }
+      ] },
+      { text: 'Core Verbs & Patterns', items: [
+        { text: 'GET', link: '/patterns/get' },
+        { text: 'MAKE', link: '/patterns/make' },
+        { text: 'HAVE', link: '/patterns/have' },
+        { text: 'LET', link: '/patterns/let' },
+        { text: '질문 패턴', link: '/patterns/question-patterns' },
+        { text: '자주 쓰는 표현', link: '/patterns/useful-expressions' }
+      ] },
+      { text: '발음과 교정', items: [
+        { text: '발음 노트', link: '/pronunciation/pronunciation-notes' },
+        { text: '자주 하는 실수', link: '/mistakes/common-mistakes' }
+      ] },
+      { text: 'Review', items: [{ text: 'Week 1', link: '/review/week-01' }] }
+    ],
+    search: { provider: 'local' },
+    outline: { label: '이 페이지', level: [2, 3] },
+    docFooter: { prev: '이전', next: '다음' },
+    socialLinks: [{ icon: 'github', link: 'https://github.com/leejaehee1/english-speaking-study' }]
+  }
+})
