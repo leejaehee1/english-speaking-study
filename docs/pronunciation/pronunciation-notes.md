@@ -1,6 +1,27 @@
+<script setup>
+import ListenSentences from '../.vitepress/components/ListenSentences.vue'
+</script>
+
 # 발음 노트
 
 목표: 빠르게 말하기보다 상대가 알아들을 수 있게 말하기.
+
+## 2026-10-12 · 원본 발음 듣기
+
+링크를 누르면 영상의 해당 문장부터 들을 수 있습니다. 재생 후 한 문장을 듣고 멈춰 따라 합니다.
+
+- [0:56 · How was your morning today?](https://www.youtube.com/watch?v=v07kPyPkLYw&t=56s)
+- [2:30 · That makes sense.](https://www.youtube.com/watch?v=v07kPyPkLYw&t=150s)
+- [2:38 · What about you, David?](https://www.youtube.com/watch?v=v07kPyPkLYw&t=158s)
+- [3:45 · Let me think.](https://www.youtube.com/watch?v=v07kPyPkLYw&t=225s)
+
+질문은 억양을, 짧은 답변은 강세와 리듬을 따라 합니다. 처음에는 0.75배속, 익숙해지면 원래 속도로 연습합니다.
+
+## 영작 문장 들어보기
+
+아래 버튼은 기기의 영어 음성으로 읽어줍니다. 원본 화자의 발음과는 다르며, 사용할 수 있는 목소리는 브라우저·기기에 따라 달라집니다.
+
+<ListenSentences />
 
 ## 하루 5분 연습
 
