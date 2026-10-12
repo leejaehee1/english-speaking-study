@@ -12,147 +12,145 @@
 
 ::: details 녹음 대본 펼치기
 
-사용자가 제공한 자막 구간을 문장별로 정리했습니다. 대사마다 문단을 나눴습니다. 자동 자막은 실제 음성을 우선합니다.
+사용자가 제공한 자막 구간을 문장별로 정리했습니다. **남자 · David / 여자 · Alice**로 표시했습니다. 자동 자막은 실제 음성을 우선합니다.
 
-Okay, Alice, let's start simple. Let's start easy.
+**남자 · David:** Okay, Alice, let's start simple. Let's start easy.
 
-Perfect. I love easy.
+**여자 · Alice:** Perfect. I love easy.
 
-Tell me, how was your morning today?
+**남자 · David:** Tell me, how was your morning today?
 
-Oh, my morning. Hmm. My morning was okay, a little slow.
+**여자 · Alice:** Oh, my morning. Hmm. My morning was okay, a little slow.
 
-A little slow? What do you mean?
+**남자 · David:** A little slow? What do you mean?
 
-I mean, I did not want to get out of bed.
+**여자 · Alice:** I mean, I did not want to get out of bed.
 
-Oh, I understand that feeling very well.
+**남자 · David:** Oh, I understand that feeling very well.
 
-My alarm rang at 7:00. I turned it off, and then I just stayed in bed.
+**여자 · Alice:** My alarm rang at 7:00. I turned it off, and then I just stayed in bed.
 
-For how long?
+**남자 · David:** For how long?
 
-Maybe 30 minutes? Maybe more.
+**여자 · Alice:** Maybe 30 minutes? Maybe more.
 
-Alice, that is not good.
+**남자 · David:** Alice, that is not good.
 
-I know, I know, but the bed was so warm, and outside was so cold.
+**여자 · Alice:** I know, I know, but the bed was so warm, and outside was so cold.
 
-Okay, I understand. But, what happened after? Did you get up?
+**남자 · David:** Okay, I understand. But, what happened after? Did you get up?
 
-Yes, eventually. I got up, I went to the kitchen, I made coffee.
+**여자 · Alice:** Yes, eventually. I got up, I went to the kitchen, I made coffee.
 
-Good. Coffee is very important.
+**남자 · David:** Good. Coffee is very important.
 
-Very, very important. I cannot speak in the morning without coffee.
+**여자 · Alice:** Very, very important. I cannot speak in the morning without coffee.
 
-I believe you. And what did you eat for breakfast?
+**남자 · David:** I believe you. And what did you eat for breakfast?
 
-Just some toast and a banana. Very simple, very quick.
+**여자 · Alice:** Just some toast and a banana. Very simple, very quick.
 
-Simple and quick. That sounds like a good breakfast.
+**남자 · David:** Simple and quick. That sounds like a good breakfast.
 
-It was. And then I came here, and now we are talking to you.
+**여자 · Alice:** It was. And then I came here, and now we are talking to you.
 
-Exactly. And we are very happy you are here listening to us.
+**남자 · David:** Exactly. And we are very happy you are here listening to us.
 
-Yes. Thank you for being here.
+**여자 · Alice:** Yes. Thank you for being here.
 
-Okay. Now, let me ask you something important, Alice.
+**남자 · David:** Okay. Now, let me ask you something important, Alice.
 
-Oh, something important?
+**여자 · Alice:** Oh, something important?
 
-Yes, very important. Are you ready?
+**남자 · David:** Yes, very important. Are you ready?
 
-I am ready.
+**여자 · Alice:** I am ready.
 
-What is your favorite time of day?
+**남자 · David:** What is your favorite time of day?
 
-Ooh, that is a good question.
+**여자 · Alice:** Ooh, that is a good question.
 
-Thank you. I have good questions.
+**남자 · David:** Thank you. I have good questions.
 
-You do. Okay, my favorite time of day, I think it is the evening.
+**여자 · Alice:** You do. Okay, my favorite time of day, I think it is the evening.
 
-The evening? Why?
+**남자 · David:** The evening? Why?
 
-Because in the evening everything is quiet. The day is finished. I can relax.
+**여자 · Alice:** Because in the evening everything is quiet. The day is finished. I can relax.
 
-That makes sense.
+**남자 · David:** That makes sense.
 
-I like to sit on my sofa, maybe read a book, maybe watch something on TV, drink tea.
+**여자 · Alice:** I like to sit on my sofa, maybe read a book, maybe watch something on TV, drink tea.
 
-That sounds very peaceful.
+**남자 · David:** That sounds very peaceful.
 
-It is, very peaceful. What about you, David? What is your favorite time of day?
+**여자 · Alice:** It is, very peaceful. What about you, David? What is your favorite time of day?
 
-For me, I love the morning, early morning.
+**남자 · David:** For me, I love the morning, early morning.
 
-Really? Even though you don't want to get out of bed?
+**여자 · Alice:** Really? Even though you don't want to get out of bed?
 
-Well, I want to stay in bed, but when I get up early, I feel great.
+**남자 · David:** Well, I want to stay in bed, but when I get up early, I feel great.
 
-Why?
+**여자 · Alice:** Why?
 
-Because the world is quiet. Nobody is awake yet. It feels like the world belongs to you.
+**남자 · David:** Because the world is quiet. Nobody is awake yet. It feels like the world belongs to you.
 
-Oh, that is beautiful.
+**여자 · Alice:** Oh, that is beautiful.
 
-I like to make coffee, sit by the window, and just think.
+**남자 · David:** I like to make coffee, sit by the window, and just think.
 
-Just think?
+**여자 · Alice:** Just think?
 
-Yes. No phone, no noise, just me and my thoughts. And my coffee.
+**남자 · David:** Yes. No phone, no noise, just me and my thoughts. And my coffee.
 
-That sounds amazing, actually.
+**여자 · Alice:** That sounds amazing, actually.
 
-It is. I recommend it. Try it tomorrow.
+**남자 · David:** It is. I recommend it. Try it tomorrow.
 
-Maybe, if I can wake up.
+**여자 · Alice:** Maybe, if I can wake up.
 
-Okay, let's talk about daily life, daily habits.
+**남자 · David:** Okay, let's talk about daily life, daily habits.
 
-Good topic. Everyone has habits.
+**여자 · Alice:** Good topic. Everyone has habits.
 
-That's right. A habit is something you do every day, automatically, without thinking.
+**남자 · David:** That's right. A habit is something you do every day, automatically, without thinking.
 
-For example, brushing your teeth.
+**여자 · Alice:** For example, brushing your teeth.
 
-Yes, you don't think about it, you just do it.
+**남자 · David:** Yes, you don't think about it, you just do it.
 
-Every morning, every night.
+**여자 · Alice:** Every morning, every night.
 
-Exactly. That is a habit, a good habit.
+**남자 · David:** Exactly. That is a habit, a good habit.
 
-So, David, what are your daily habits?
+**여자 · Alice:** So, David, what are your daily habits?
 
-Hmm, let me think. In the morning, I wake up, I drink water first.
+**남자 · David:** Hmm, let me think. In the morning, I wake up, I drink water first.
 
-Water, before coffee?
+**여자 · Alice:** Water, before coffee?
 
-Yes, water first. It's good for your body.
+**남자 · David:** Yes, water first. It's good for your body.
 
-Okay, that is a good habit. I should do that.
+**여자 · Alice:** Okay, that is a good habit. I should do that.
 
-Then I make coffee, then I go for a short walk.
+**남자 · David:** Then I make coffee, then I go for a short walk.
 
-Every morning? Even when it is cold?
+**여자 · Alice:** Every morning? Even when it is cold?
 
-Almost every morning, even in cold weather. I put on a jacket and I walk.
+**남자 · David:** Almost every morning, even in cold weather. I put on a jacket and I walk.
 
-How long do you walk?
+**여자 · Alice:** How long do you walk?
 
-Maybe 20 minutes, maybe 30. It's not very long, but it helps me feel awake.
+**남자 · David:** Maybe 20 minutes, maybe 30. It's not very long, but it helps me feel awake.
 
-I can imagine. Fresh air in the morning is very good.
+**여자 · Alice:** I can imagine. Fresh air in the morning is very good.
 
-Very good. After my walk, I come home, I eat breakfast, and then I start work.
+**남자 · David:** Very good. After my walk, I come home, I eat breakfast, and then I start work.
 
-That sounds like a very organized morning.
+**여자 · Alice:** That sounds like a very organized morning.
 
-I try. Some days it doesn't go perfectly.
-
-Of course, nobody is perfect every day.
+**남자 · David:** I try. Some days it doesn't go perfectly.
 
 :::
 
