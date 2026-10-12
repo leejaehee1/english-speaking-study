@@ -16,6 +16,7 @@ export default defineConfig({
         { text: '오늘의 기록', link: '/daily/2026-10-12' },
         { text: '영어 일기', link: '/diary/' },
         { text: '참조 자료', link: '/references/' },
+        { text: '아침 일상 대화', link: '/references/morning-conversation' },
         { text: '주간 복습', link: '/review/week-01' }
       ] },
       { text: '표현집', collapsed: true, items: [
