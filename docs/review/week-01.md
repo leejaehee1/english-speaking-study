@@ -16,7 +16,9 @@
 - [ ] 여행 표현 3개를 외우고 장소나 경험을 바꿔 말하기
 - [ ] **No Korean… / Not every Korean…**의 부정 범위를 구별하기
 - [ ] **What a beautiful day!**의 의미를 문맥과 억양에 따라 설명하기
-- [ ] **go through**로 내 문장 5개 만들고 노트 없이 말하기
+- [x] [**go through** 내 문장 5개 작성·첨삭](../writing/2026-10-13-go-through.md)
+- [ ] 교정한 5문장과 필수 표현을 노트 없이 말하기
+- [ ] **go through / get through**의 차이를 설명하기
 
 [10월 13일 기록과 숙제](../daily/2026-10-13.md) · [GO](../patterns/go.md) · [여행 표현](../patterns/useful-expressions.md)
 

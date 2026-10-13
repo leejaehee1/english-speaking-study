@@ -78,3 +78,17 @@ listen: true
   **That was thoughtful of you.** — 배려해줘서 고마워요. **She looked thoughtful.** — 그녀는 생각에 잠긴 듯했어요.
 
 [10월 13일 수업 기록](../daily/2026-10-13.md) · [억양과 문맥](../pronunciation/pronunciation-notes.md)
+
+## 어려움을 겪고 극복하기 · 10월 13일 영작
+
+- **I’m going through a tough time.** — 요즘 힘든 시기를 겪고 있어요.
+- **I’ll be able to get through this.** — 이겨낼 수 있을 거예요.
+- **I can get through this.** — 이겨낼 수 있어요.
+- **I’m facing a language barrier.** — 언어 장벽에 부딪히고 있어요.
+- **Are you going through a tough time?** — 요즘 힘든 시기를 겪고 있나요?
+
+**I’m going through a tough time, but I can get through this.** — 지금 힘든 시기를 겪고 있지만, 이겨낼 수 있어요.
+
+**go through**는 겪는 경험을, **get through**는 어려움을 견디고 넘기는 것을 나타냅니다.
+
+[내 영작 5문장과 첨삭](../writing/2026-10-13-go-through.md)

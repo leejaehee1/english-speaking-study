@@ -80,3 +80,14 @@ listen: true
 음식 예문은 부정 범위 비교를 위한 문장입니다. 이름 사용이나 반어법도 영어권 전체에 적용되는 고정 규칙으로 외우기보다 상황과 관계를 함께 봅니다.
 
 [10월 13일 수업 기록](../daily/2026-10-13.md)
+
+## 2026-10-13 · go through 영작
+
+- `recruit market` → **job market**: 취업 시장.
+- `I go through…` → **I’m going through…**: 지금 겪는 상황은 현재진행형으로 표현합니다.
+- `langueuge wall` → **language barrier**: 언어 장벽. **face a language barrier**로 말합니다.
+- `I would able to…` → **I’ll be able to…**: 앞으로 할 수 있다는 뜻이면 **will be able to + 동사**.
+- `go through this situation` → **get through this situation**: 이겨낸다는 의도에서는 **get through**를 씁니다. **go through** 자체가 틀린 표현은 아니며 뜻이 달라집니다.
+- `Do you go through bad condition?` → **Are you going through a tough time?**: 현재 힘든 시기를 겪는지 묻습니다.
+
+[원문 5문장과 전체 첨삭](../writing/2026-10-13-go-through.md)

@@ -32,3 +32,13 @@ listen: true
 `go through + 검토할 내용 / 겪는 일 / 통과하는 곳·절차`를 문맥에 맞게 사용합니다. 과거형은 **went through**입니다.
 
 [10월 13일 숙제](../daily/2026-10-13.md#go-through-5문장-연습-예시): 내 상황으로 5문장을 만들고 소리 내어 연습합니다.
+
+## 어려움을 겪는 중: be going through
+
+**I’m going through a tough time.** — 요즘 힘든 시기를 겪고 있어요.
+
+현재 겪는 일은 **am/is/are going through**로 말합니다. **Are you going through a tough time?** — 요즘 힘든 시기를 겪고 있나요?
+
+극복을 말할 때는 **get through**를 함께 익힙니다: **I’m going through a tough time, but I can get through this.** — 지금 힘든 시기를 겪고 있지만, 이겨낼 수 있어요.
+
+[10월 13일 내 영작과 첨삭](../writing/2026-10-13-go-through.md)
