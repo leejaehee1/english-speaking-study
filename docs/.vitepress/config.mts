@@ -12,17 +12,29 @@ export default defineConfig({
       { text: 'JoyTalk', link: 'https://projects-joytalk.vercel.app/', target: '_blank', rel: 'noopener noreferrer' }
     ],
     sidebar: [
-      { text: '매일 기록', items: [
-        { text: '오늘의 기록', link: '/daily/2026-10-13' },
-        { text: '10월 12일 기록', link: '/daily/2026-10-12' },
-        { text: '영어 일기', link: '/diary/' },
-        { text: '10월 13일 일기 · 비 오는 날과 새 스터디룸', link: '/diary/2026-10-13' },
-        { text: '영작 숙제', link: '/writing/' },
-        { text: '10월 13일 · go through 영작', link: '/writing/2026-10-13-go-through' },
-        { text: '참조 자료', link: '/references/' },
-        { text: '10월 13일 녹음 숙제 · 좋은 습관과 나쁜 습관', link: '/references/2026-10-13-daily-habits' },
-        { text: '10월 12일 녹음 숙제 · 아침 일상 대화', link: '/references/2026-10-12-morning-conversation' },
-        { text: '주간 복습', link: '/review/week-01' }
+      { text: '수업 기록', collapsed: true, items: [
+        { text: '오늘의 기록 · 10월 13일', link: '/daily/2026-10-13' },
+        { text: '10월 12일', link: '/daily/2026-10-12' }
+      ] },
+      { text: '영어 일기', collapsed: true, items: [
+        { text: '일기 목록', link: '/diary/' },
+        { text: '10월 13일 · 비 오는 날', link: '/diary/2026-10-13' },
+        { text: '10월 12일 · 공부 시작', link: '/diary/2026-10-12' }
+      ] },
+      { text: '영작 숙제', collapsed: true, items: [
+        { text: '영작 목록', link: '/writing/' },
+        { text: '10월 13일 · go through', link: '/writing/2026-10-13-go-through' },
+        { text: '10월 12일 · Think', link: '/writing/2026-10-12-think' }
+      ] },
+      { text: '참조 자료', collapsed: true, items: [
+        { text: '자료 목록', link: '/references/' },
+        { text: '10월 13일 · 습관 대화', link: '/references/2026-10-13-daily-habits' },
+        { text: '10월 12일 · 아침 대화', link: '/references/2026-10-12-morning-conversation' },
+        { text: '10월 12일 · 코스트코 읽기', link: '/references/2026-10-12-costco-reading' },
+        { text: '스크립트 양식', link: '/references/script-template' }
+      ] },
+      { text: '주간 복습', collapsed: true, items: [
+        { text: '1주차 · 10월 12–16일', link: '/review/week-01' }
       ] },
       { text: '표현집', collapsed: true, items: [
         { text: '자주 쓰는 표현', link: '/patterns/useful-expressions' },

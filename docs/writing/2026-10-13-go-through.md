@@ -65,7 +65,7 @@ listen: true
 
 - [x] 내 문장 5개 작성
 - [x] 첨삭과 필수 표현 정리
-- [ ] 교정한 5문장을 소리 내어 연습
+- [x] 교정한 5문장을 소리 내어 연습
 - [ ] 필수 표현을 노트 없이 말하기
 
 [오늘의 Daily](../daily/2026-10-13.md) · [영작 목록](./index.md) · [GO](../patterns/go.md) · [필수 표현](../patterns/useful-expressions.md) · [실수 노트](../mistakes/common-mistakes.md)
