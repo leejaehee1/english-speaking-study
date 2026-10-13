@@ -8,11 +8,13 @@ export default defineConfig({
   themeConfig: {
     nav: [
       { text: '홈', link: '/' },
+      { text: '학습 달력', link: '/calendar' },
       { text: '오늘의 기록', link: '/daily/2026-10-13' },
       { text: 'JoyTalk', link: 'https://projects-joytalk.vercel.app/', target: '_blank', rel: 'noopener noreferrer' }
     ],
     sidebar: [
       { text: '수업 기록', collapsed: true, items: [
+        { text: '두 달 학습 달력', link: '/calendar' },
         { text: '오늘의 기록 · 10월 13일', link: '/daily/2026-10-13' },
         { text: '10월 12일', link: '/daily/2026-10-12' }
       ] },
