@@ -46,6 +46,10 @@
 
 [문장에서 단어 추출 · 발음 연습](./pronunciation/word-practice.md) — 일기·영작·녹음 대본에서 단어를 뽑아 듣고 따라 말하기
 
+## 학습 가이드
+
+[영어 수준과 학습 시간 · CEFR](./guides/cefr-levels.md) — A1부터 C2까지의 능력과 누적 학습 시간, 우리 스터디 목표
+
 ## 찾아보기
 
 [표현집](./patterns/useful-expressions.md) · [발음](./pronunciation/pronunciation-notes.md) · [아침 5분 발음 연습](./pronunciation/morning-practice.md) · [실수 노트](./mistakes/common-mistakes.md) · [주간 복습](./review/week-01.md)

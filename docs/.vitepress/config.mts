@@ -13,6 +13,9 @@ export default defineConfig({
       { text: 'JoyTalk', link: 'https://projects-joytalk.vercel.app/', target: '_blank', rel: 'noopener noreferrer' }
     ],
     sidebar: [
+      { text: '학습 가이드', collapsed: true, items: [
+        { text: '영어 수준과 학습 시간', link: '/guides/cefr-levels' }
+      ] },
       { text: '수업 기록', collapsed: true, items: [
         { text: '10월 14일 · 음식 예습', link: '/daily/2026-10-14' },
         { text: '오늘의 기록 · 10월 13일', link: '/daily/2026-10-13' },
