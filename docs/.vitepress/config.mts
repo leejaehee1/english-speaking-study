@@ -53,6 +53,7 @@ export default defineConfig({
       ] },
       { text: '발음과 교정', collapsed: true, items: [
         { text: '발음 노트', link: '/pronunciation/pronunciation-notes' },
+        { text: '단어 추출 · 발음 연습', link: '/pronunciation/word-practice' },
         { text: '아침 회화 전 · 5분 발음 연습', link: '/pronunciation/morning-practice' },
         { text: '자주 하는 실수', link: '/mistakes/common-mistakes' }
       ] }

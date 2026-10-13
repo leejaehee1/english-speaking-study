@@ -78,3 +78,7 @@ listen: true
 - [6:21 · Do you have this habit too?](https://www.youtube.com/watch?v=v07kPyPkLYw&t=381s): 질문의 억양.
 
 [오늘 녹음 대본](../references/2026-10-13-daily-habits.md)을 한 문장씩 듣고 멈춰 따라 합니다.
+
+## 문장에서 단어별 발음 연습
+
+[단어 추출 · 발음 연습](./word-practice.md)에 일기·영작·녹음 대본을 붙여 넣어 어려운 단어를 듣고 따라 말합니다. 마지막에는 원래 문장 전체를 다시 말합니다.
