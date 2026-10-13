@@ -128,3 +128,13 @@ listen: true
 - **It's a little too spicy for me.** — 제 입맛에는 조금 너무 매워요.
 
 [음식 형용사와 반복 말하기](./food-adjectives.md) · [10월 14일 예습](../daily/2026-10-14.md)
+
+
+## 음식과 요리 · 재료와 실전 대화
+
+- **I'm going to make dinner.** — 저녁을 만들 거예요.
+- **What ingredients do we need?** — 어떤 재료가 필요해요?
+- **Let me chop the onions.** — 제가 양파를 썰게요.
+- **Could I have the sauce on the side?** — 소스는 따로 주실래요?
+
+[식재료·요리 이름·조리 동사·주방용품](./food-and-cooking.md) · [기본동사 문장과 식당·요리 대화](../daily/2026-10-14.md)
