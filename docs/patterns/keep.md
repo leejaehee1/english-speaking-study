@@ -20,3 +20,13 @@ listen: true
 **Let’s keep in touch.** — 계속 연락하며 지내요.
 
 [핵심 기본동사 10개](../index.md#핵심-기본동사) · [자주 쓰는 표현](./useful-expressions.md)
+
+## keep + 사람 + from + 동사-ing
+
+사람이 어떤 행동을 하지 못하게 하는 이유를 말합니다.
+
+**The bad weather kept me from walking.** — 날씨가 나빠서 걷지 못했어요.
+
+내 상황으로 연습: **___ kept me from ___ing.**
+
+[10월 13일 일기와 첨삭](../diary/2026-10-13.md)

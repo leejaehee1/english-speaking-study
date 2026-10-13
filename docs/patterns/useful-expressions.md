@@ -92,3 +92,16 @@ listen: true
 **go through**는 겪는 경험을, **get through**는 어려움을 견디고 넘기는 것을 나타냅니다.
 
 [내 영작 5문장과 첨삭](../writing/2026-10-13-go-through.md)
+
+## 비 오는 날과 스터디 모임 · 10월 13일 일기
+
+- **I got off after just two stops.** — 겨우 두 정거장 만에 내렸어요.
+- **I’m trying to lose weight.** — 살을 빼려고 노력하고 있어요.
+- **The bad weather kept me from walking.** — 날씨가 나빠서 걷지 못했어요.
+- **We had to look for another place.** — 다른 장소를 찾아야 했어요.
+- **One person couldn’t make it today.** — 오늘 한 명이 참석하지 못했어요.
+- **The room was equipped with a TV.** — 그 방에는 TV가 갖춰져 있었어요.
+
+버스에서 내리다는 **get off the bus**, 참석하지 못하다는 **couldn’t make it**으로 익힙니다.
+
+[일기 원문과 교정본](../diary/2026-10-13.md) · [KEEP 패턴](./keep.md)

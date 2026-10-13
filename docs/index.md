@@ -36,6 +36,6 @@
 
 ## 찾아보기
 
-[표현집](./patterns/useful-expressions.md) · [발음](./pronunciation/pronunciation-notes.md) · [실수 노트](./mistakes/common-mistakes.md) · [주간 복습](./review/week-01.md)
+[표현집](./patterns/useful-expressions.md) · [발음](./pronunciation/pronunciation-notes.md) · [아침 5분 발음 연습](./pronunciation/morning-practice.md) · [실수 노트](./mistakes/common-mistakes.md) · [주간 복습](./review/week-01.md)
 
 [JoyTalk 바로가기](https://projects-joytalk.vercel.app/)

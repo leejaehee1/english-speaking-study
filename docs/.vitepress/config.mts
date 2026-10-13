@@ -16,6 +16,7 @@ export default defineConfig({
         { text: '오늘의 기록', link: '/daily/2026-10-13' },
         { text: '10월 12일 기록', link: '/daily/2026-10-12' },
         { text: '영어 일기', link: '/diary/' },
+        { text: '10월 13일 일기 · 비 오는 날과 새 스터디룸', link: '/diary/2026-10-13' },
         { text: '영작 숙제', link: '/writing/' },
         { text: '10월 13일 · go through 영작', link: '/writing/2026-10-13-go-through' },
         { text: '참조 자료', link: '/references/' },
@@ -38,6 +39,7 @@ export default defineConfig({
       ] },
       { text: '발음과 교정', collapsed: true, items: [
         { text: '발음 노트', link: '/pronunciation/pronunciation-notes' },
+        { text: '아침 회화 전 · 5분 발음 연습', link: '/pronunciation/morning-practice' },
         { text: '자주 하는 실수', link: '/mistakes/common-mistakes' }
       ] }
     ],

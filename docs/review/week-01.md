@@ -22,6 +22,18 @@
 
 [10월 13일 기록과 숙제](../daily/2026-10-13.md) · [GO](../patterns/go.md) · [여행 표현](../patterns/useful-expressions.md)
 
+## 10월 13일 일기 복습
+
+- [x] [비 오는 날과 새 스터디룸 · 일기 작성·첨삭](../diary/2026-10-13.md)
+- [ ] 교정본을 공책에 필사
+- [ ] **get off / lose weight / couldn’t make it**으로 내 문장 말하기
+- [ ] **keep + 사람 + from + 동사-ing**으로 걷지 못한 이유 말하기
+
+## 발음 연습 복습
+
+- [ ] [아침 5분 루틴](../pronunciation/morning-practice.md)을 따라 하고 어려운 소리 한 가지 기록하기
+- [ ] 루틴 전후 같은 문장을 말하고 또렷함과 리듬 비교하기
+
 ## 다음 주에 가져갈 것
 
 - 다시 쓸 표현 1개:

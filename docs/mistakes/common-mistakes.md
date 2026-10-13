@@ -91,3 +91,17 @@ listen: true
 - `Do you go through bad condition?` → **Are you going through a tough time?**: 현재 힘든 시기를 겪는지 묻습니다.
 
 [원문 5문장과 전체 첨삭](../writing/2026-10-13-go-through.md)
+
+## 2026-10-13 · 일기
+
+- `a really bad` → **really bad**: **The weather was really bad.**에서 셀 수 없는 **weather**에 `a`를 붙이지 않습니다.
+- `my shoes supposed to get being wet` → **I thought my shoes would get wet**: 예상한 결과를 **would + 동사**로 표현합니다.
+- `two station / take off the bus` → **two stops / get off the bus**.
+- `loose weight` → **lose weight**: **loose**는 “헐렁한”, **lose**는 “잃다”.
+- `made me can't walk` → **kept me from walking**: **keep + 사람 + from + 동사-ing**.
+- `very silence place` → **a very quiet place**: 명사 **silence**와 형용사 **quiet**을 구별합니다.
+- `an hour more earlier` → **an hour earlier**: 비교급에 `more`를 중복하지 않습니다.
+- `1 people didn't present` → **One person couldn’t make it.**: 한 명은 **person**, 여러 명은 **people**.
+- 철자: `Hounestly / Unfortunly / equiped / compotable` → **Honestly / Unfortunately / equipped / comfortable**.
+
+[일기 전체 첨삭과 의미 확인 메모](../diary/2026-10-13.md)
