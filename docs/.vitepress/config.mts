@@ -39,6 +39,7 @@ export default defineConfig({
       ] },
       { text: '표현집', collapsed: true, items: [
         { text: '자주 쓰는 표현', link: '/patterns/useful-expressions' },
+        { text: '여행 형용사와 감탄 표현', link: '/patterns/travel-adjectives' },
         { text: '질문 패턴', link: '/patterns/question-patterns' },
         { text: '숫자 읽기 · 1부터 1조', link: '/patterns/numbers' },
         { text: 'HAVE', link: '/patterns/have' },

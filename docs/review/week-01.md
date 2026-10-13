@@ -54,3 +54,10 @@
 - [ ] [숫자 읽기 13개](../patterns/numbers.md)를 섞어서 3초 안에 말하기
 - [ ] 만·억·십억·조를 영어로 바로 말하기
 - 다시 연습할 숫자: __
+
+## 여행 형용사와 레이크 루이스 경험 복습
+
+- [여행 형용사와 감탄 표현](../patterns/travel-adjectives.md)에서 경치·음식·사람을 설명하는 문장 하나씩 말하기
+- **unreal / surreal / otherworldly**로 레이크 루이스의 느낌 설명하기
+- **Photos don't do it justice.**를 넣어 여행 경험 세 문장 말하기
+- 경험의 **exciting / exhausting**과 내 기분의 **excited / exhausted** 구별하기

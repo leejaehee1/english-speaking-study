@@ -69,6 +69,10 @@ listen: true
 - **The best part of the trip was the view.** — 여행에서 가장 좋았던 건 경치였어요.
 - **I'd love to go back someday.** — 언젠가 다시 가고 싶어요.
 
+**The view was unreal. Photos don't do it justice.** — 경치가 현실 같지 않았어요. 사진으로는 다 담을 수 없어요.
+
+[여행 형용사와 레이크 루이스 표현](./travel-adjectives.md) — 상황별 형용사·예문·말하기 반복
+
 ## deserve / juicy / thoughtful
 
 - **deserve + 명사 / to + 동사** — ~을 받을 만하다 / ~할 자격이 있다.
