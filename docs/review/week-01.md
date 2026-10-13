@@ -48,3 +48,9 @@
 - 다음 주 연습 상황:
 
 [카페 대화 예시](../patterns/useful-expressions.md) · [실수 노트](../mistakes/common-mistakes.md)
+
+## 숫자 읽기 반복 학습
+
+- [ ] [숫자 읽기 13개](../patterns/numbers.md)를 섞어서 3초 안에 말하기
+- [ ] 만·억·십억·조를 영어로 바로 말하기
+- 다시 연습할 숫자: __

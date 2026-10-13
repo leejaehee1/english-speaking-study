@@ -34,6 +34,10 @@
 - [KEEP](./patterns/keep.md)
 - [GO](./patterns/go.md)
 
+## 숫자 말하기
+
+[숫자 읽기 · 1부터 1조](./patterns/numbers.md) — 발음 듣기와 3분 반복 연습
+
 ## 찾아보기
 
 [표현집](./patterns/useful-expressions.md) · [발음](./pronunciation/pronunciation-notes.md) · [아침 5분 발음 연습](./pronunciation/morning-practice.md) · [실수 노트](./mistakes/common-mistakes.md) · [주간 복습](./review/week-01.md)

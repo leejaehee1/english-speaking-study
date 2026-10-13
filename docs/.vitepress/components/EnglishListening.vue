@@ -39,7 +39,8 @@ function speak() {
   const current = revision
   utterance = new SpeechSynthesisUtterance(text.value)
   const voices = window.speechSynthesis.getVoices()
-  const voice = voices.find(v => v.lang === 'en-CA') || voices.find(v => v.lang === 'en-US') || voices.find(v => v.lang.startsWith('en'))
+  const preferredLang = frontmatter.value.listeningLang || 'en-CA'
+  const voice = voices.find(v => v.lang === preferredLang) || voices.find(v => v.lang === 'en-US') || voices.find(v => v.lang.startsWith('en'))
   utterance.lang = voice?.lang || 'en-US'
   if (voice) utterance.voice = voice
   utterance.rate = Number(rate.value)

@@ -27,6 +27,7 @@ export default defineConfig({
       { text: '표현집', collapsed: true, items: [
         { text: '자주 쓰는 표현', link: '/patterns/useful-expressions' },
         { text: '질문 패턴', link: '/patterns/question-patterns' },
+        { text: '숫자 읽기 · 1부터 1조', link: '/patterns/numbers' },
         { text: 'HAVE', link: '/patterns/have' },
         { text: 'GET', link: '/patterns/get' },
         { text: 'MAKE', link: '/patterns/make' },
