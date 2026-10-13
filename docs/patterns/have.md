@@ -31,3 +31,11 @@ listen: true
 [LET](./let.md) · [자주 쓰는 표현](./useful-expressions.md)
 
 [핵심 기본동사 10개](../index.md#핵심-기본동사)
+
+## 작별 인사: Have a good one!
+
+**Have a good one!** — 좋은 하루 보내요 / 잘 보내요. 헤어질 때 사용하는 캐주얼한 표현입니다.
+
+**Have a good one, Alex!**처럼 상대방의 이름을 넣어 연습합니다. 상황에 따라 하루나 저녁 등 좋은 시간을 보내라는 뜻입니다.
+
+[10월 13일 수업 기록](../daily/2026-10-13.md)

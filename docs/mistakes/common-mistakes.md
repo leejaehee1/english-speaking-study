@@ -65,3 +65,18 @@ listen: true
 [GET](../patterns/get.md) · [LET](../patterns/let.md) · [질문 패턴](../patterns/question-patterns.md)
 
 :::
+
+## 2026-10-13 · 수업 메모의 철자와 의미 확인
+
+아래는 메모에서 불확실했던 내용을 정리한 것이며, 모두 실제 말하기 오류였다는 뜻은 아닙니다.
+
+- `spectaclures` → **spectacular**: 장관인, 매우 인상적인.
+- `breathe taking` → **breathtaking**: 숨이 멎을 듯한. 한 단어로 씁니다.
+- `No every Korean…` → **No Korean…**: 어떤 한국인도 ~하지 않는다(전체 부정).
+  **No Korean likes this food.** — 어떤 한국인도 이 음식을 좋아하지 않는다.
+- **Not every Korean likes this food.** — 모든 한국인이 이 음식을 좋아하는 것은 아니다(부분 부정). 적어도 일부는 좋아하지 않는다는 뜻이며, 좋아하는 사람의 수를 정하지 않습니다.
+- **thoughtful**은 “생각이 많다”로만 외우지 않습니다. **That was thoughtful of you.**는 배려를, **She looked thoughtful.**는 생각에 잠긴 모습을 나타냅니다.
+
+음식 예문은 부정 범위 비교를 위한 문장입니다. 이름 사용이나 반어법도 영어권 전체에 적용되는 고정 규칙으로 외우기보다 상황과 관계를 함께 봅니다.
+
+[10월 13일 수업 기록](../daily/2026-10-13.md)

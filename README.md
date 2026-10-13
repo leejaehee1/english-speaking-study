@@ -14,7 +14,7 @@
 
 ## 기록 위치
 
-- [Daily](docs/daily/2026-10-12.md): 숙제 체크와 짧은 메모
+- [Daily](docs/daily/2026-10-13.md): 숙제 체크와 짧은 메모
 - [영작](docs/writing/index.md): 문제·내 답안·첨삭
 - [일기](docs/diary/index.md): 내가 쓴 글과 교정본
 - [참조 자료](docs/references/index.md): 원어민 스크립트·음성 출처
