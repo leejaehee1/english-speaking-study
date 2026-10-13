@@ -70,3 +70,11 @@ listen: true
 굵은 표현의 기기 음성은 기본 발음 연습에 사용합니다. 반어적 의도는 자동 음성만으로 판단하지 말고 수업에서 들은 말투와 상황을 떠올려 연습합니다.
 
 [10월 13일 수업 기록](../daily/2026-10-13.md)
+
+## 2026-10-13 · 습관 대화 원음 따라 하기
+
+- [5:17 · Slowly but surely](https://www.youtube.com/watch?v=v07kPyPkLYw&t=317s): 중심 단어의 강세와 리듬.
+- [6:03 · Before you know it](https://www.youtube.com/watch?v=v07kPyPkLYw&t=363s): 짧은 표현을 한 덩어리로 연결하기.
+- [6:21 · Do you have this habit too?](https://www.youtube.com/watch?v=v07kPyPkLYw&t=381s): 질문의 억양.
+
+[오늘 녹음 대본](../references/2026-10-13-daily-habits.md)을 한 문장씩 듣고 멈춰 따라 합니다.

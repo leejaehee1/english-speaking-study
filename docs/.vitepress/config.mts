@@ -20,6 +20,7 @@ export default defineConfig({
         { text: '영작 숙제', link: '/writing/' },
         { text: '10월 13일 · go through 영작', link: '/writing/2026-10-13-go-through' },
         { text: '참조 자료', link: '/references/' },
+        { text: '10월 13일 녹음 숙제 · 좋은 습관과 나쁜 습관', link: '/references/2026-10-13-daily-habits' },
         { text: '10월 12일 녹음 숙제 · 아침 일상 대화', link: '/references/2026-10-12-morning-conversation' },
         { text: '주간 복습', link: '/review/week-01' }
       ] },

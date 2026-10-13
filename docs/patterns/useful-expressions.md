@@ -105,3 +105,14 @@ listen: true
 버스에서 내리다는 **get off the bus**, 참석하지 못하다는 **couldn’t make it**으로 익힙니다.
 
 [일기 원문과 교정본](../diary/2026-10-13.md) · [KEEP 패턴](./keep.md)
+
+## 습관 이야기 · 10월 13일 녹음
+
+- **Every morning I make my bed.** — 매일 아침 침대를 정리해요.
+- **I read before bed every night.** — 매일 밤 잠들기 전에 책을 읽어요.
+- **Slowly but surely.** — 느리지만 꾸준히, 확실하게.
+- **Before you know it, thirty minutes are gone.** — 어느새 30분이 지나가요.
+- **The first thing I do is check my phone.** — 내가 가장 먼저 하는 일은 휴대폰 확인이에요.
+- **first thing in the morning** — 아침에 일어나자마자 / 아침 가장 먼저.
+
+[녹음 대본과 내 습관 말하기](../references/2026-10-13-daily-habits.md)

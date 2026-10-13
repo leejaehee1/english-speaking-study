@@ -34,6 +34,12 @@
 - [ ] [아침 5분 루틴](../pronunciation/morning-practice.md)을 따라 하고 어려운 소리 한 가지 기록하기
 - [ ] 루틴 전후 같은 문장을 말하고 또렷함과 리듬 비교하기
 
+## 10월 13일 녹음 자료 복습
+
+- [ ] [습관 대화](../references/2026-10-13-daily-habits.md)의 두 역할을 따라 말하기
+- [ ] **slowly but surely / before you know it**을 내 상황에 쓰기
+- [ ] 좋은 습관과 나쁜 습관을 하나씩 말하기
+
 ## 다음 주에 가져갈 것
 
 - 다시 쓸 표현 1개:
