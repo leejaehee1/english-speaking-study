@@ -1,5 +1,5 @@
 ---
-title: 두 달 학습 달력
+title: 학습 달력
 aside: false
 ---
 
@@ -7,9 +7,9 @@ aside: false
 import StudyCalendar from './.vitepress/components/StudyCalendar.vue'
 </script>
 
-# 두 달 학습 달력
+# 학습 달력
 
-2026년 10월·11월의 수업과 숙제 자료를 날짜별로 모았습니다. 완료 여부 대신 등록된 자료를 표시합니다.
+2026년 10월·11월·12월의 수업과 숙제 자료를 날짜별로 모았습니다. 완료 여부 대신 등록된 자료를 표시합니다.
 
 <StudyCalendar />
 

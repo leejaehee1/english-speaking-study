@@ -14,7 +14,7 @@ const records = Object.entries(sources).flatMap(([path, content]) => {
 const selected = ref(records.some(r => r.date === '2026-10-13') ? '2026-10-13' : '')
 const chosen = computed(() => records.filter(r => r.date === selected.value))
 const weekdays = ['월', '화', '수', '목', '금', '토', '일']
-const months = [10, 11].map(month => {
+const months = [10, 11, 12].map(month => {
   const offset = (new Date(2026, month - 1, 1).getDay() + 6) % 7
   const count = new Date(2026, month, 0).getDate()
   const size = Math.ceil((offset + count) / 7) * 7
