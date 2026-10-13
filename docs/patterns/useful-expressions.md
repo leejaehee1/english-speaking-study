@@ -120,3 +120,11 @@ listen: true
 - **first thing in the morning** — 아침에 일어나자마자 / 아침 가장 먼저.
 
 [녹음 대본과 내 습관 말하기](../references/2026-10-13-daily-habits.md)
+
+## 음식 이야기 · 10월 14일 예습
+
+- **The steak was tender and juicy.** — 스테이크가 부드럽고 육즙이 풍부했어요.
+- **It's crispy on the outside and juicy on the inside.** — 겉은 바삭하고 속은 육즙이 풍부해요.
+- **It's a little too spicy for me.** — 제 입맛에는 조금 너무 매워요.
+
+[음식 형용사와 반복 말하기](./food-adjectives.md) · [10월 14일 예습](../daily/2026-10-14.md)

@@ -61,3 +61,9 @@
 - **unreal / surreal / otherworldly**로 레이크 루이스의 느낌 설명하기
 - **Photos don't do it justice.**를 넣어 여행 경험 세 문장 말하기
 - 경험의 **exciting / exhausting**과 내 기분의 **excited / exhausted** 구별하기
+
+## 음식 형용사 예습 복습
+
+- [음식 형용사](../patterns/food-adjectives.md) 다섯 개로 맛과 식감 설명하기
+- 좋아하는 음식 하나를 세 문장으로 소개하기
+- **crispy / crunchy**, **rich / flavorful**의 느낌 구별하기
