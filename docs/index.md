@@ -44,6 +44,8 @@
 
 ## 단어별 발음 연습
 
+[모음 음소 · 여덟 가지 소리](./pronunciation/vowel-phonemes.md) — bad/bed, cap/cup, fool/full, ship/sheep 비교
+
 [자음 음소 · B/P, D/T, G/K, V/F, S/Z, J/CH](./pronunciation/consonant-phonemes.md) — 발음 원리와 이미지 속 단어, 최소대립쌍·문장 연습
 
 [문장에서 단어 추출 · 발음 연습](./pronunciation/word-practice.md) — 일기·영작·녹음 대본에서 단어를 뽑아 듣고 따라 말하기
