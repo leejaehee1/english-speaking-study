@@ -45,3 +45,23 @@ listen: true
 연습: **I have a cold / I just got a cold**, **I’m tired / I’m getting tired**를 비교하고 **I just got home**으로 귀가를 말합니다.
 
 [HAVE의 소유·상태·식사·완료](./have.md#have와-get-비교) · [10월 14일 수업 기록](../daily/2026-10-14.md)
+
+## get to + 동사원형 · 기회가 생기다
+
+10월 14일 수업 추가 메모: **get to + 동사원형**은 “~할 기회를 얻다”, “~할 수 있게 되다”라는 뜻으로도 씁니다. 허락이나 상황 덕분에 할 수 있으며, 화자가 이를 반가운 기회나 혜택으로 여기는 뉘앙스가 있을 수 있습니다.
+
+아래는 메모를 바탕으로 보완한 예문입니다.
+
+- **I get to work from home.** — 재택근무를 할 수 있어요. (허용된 기회·혜택에 초점)
+- **I got to work from home yesterday.** — 어제는 재택근무를 할 수 있었어요.
+- **I’m getting to work from home more often these days.** — 요즘은 재택근무를 할 기회가 더 자주 생기고 있어요.
+
+**I work from home.**은 재택근무한다는 사실, **I get to work from home.**은 그렇게 할 수 있는 기회·허용에 초점을 둡니다. get to가 언제나 큰 특혜나 새로 얻은 기회라는 뜻은 아니며 문맥에 따라 해석합니다.
+
+### get to + 장소와 구별
+
+- **I get to work at nine.** — 9시에 직장에 도착해요. 여기서 work는 장소를 뜻하는 명사입니다.
+- **I get to work from home.** — 재택근무를 할 수 있어요. 여기서 work는 동사원형입니다.
+- **I get home at six.** — 6시에 집에 도착해요. home 앞에는 to를 쓰지 않습니다.
+
+[10월 14일 수업 기록](../daily/2026-10-14.md)

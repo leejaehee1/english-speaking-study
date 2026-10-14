@@ -85,3 +85,6 @@
 - [ ] **I got tired / I’m tired**로 변화와 현재 상태 구별하기
 
 [HAVE 비교](../patterns/have.md#have와-get-비교) · [GET 비교](../patterns/get.md#have와-get-비교)
+
+- [ ] **I work from home / I get to work from home**의 초점 차이 말하기
+- [ ] **get to + 동사원형**(기회)과 **get to + 장소**(도착) 구별하기
