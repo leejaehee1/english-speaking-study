@@ -23,6 +23,7 @@ export default defineConfig({
       ] },
       { text: '영어 일기', collapsed: true, items: [
         { text: '일기 목록', link: '/diary/' },
+        { text: '10월 14일 · 스터디룸과 듣기 전략', link: '/diary/2026-10-14' },
         { text: '10월 13일 · 비 오는 날', link: '/diary/2026-10-13' },
         { text: '10월 12일 · 공부 시작', link: '/diary/2026-10-12' }
       ] },
@@ -33,6 +34,7 @@ export default defineConfig({
       ] },
       { text: '참조 자료', collapsed: true, items: [
         { text: '자료 목록', link: '/references/' },
+        { text: '10월 14일 · 세 토픽 읽기 녹음', link: '/references/2026-10-14-travel-food-reading' },
         { text: '10월 13일 · 습관 대화', link: '/references/2026-10-13-daily-habits' },
         { text: '10월 12일 · 아침 대화', link: '/references/2026-10-12-morning-conversation' },
         { text: '10월 12일 · 코스트코 읽기', link: '/references/2026-10-12-costco-reading' },
