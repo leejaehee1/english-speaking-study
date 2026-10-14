@@ -77,3 +77,11 @@
 - [ ] 음식 형용사·조리·주문 표현으로 내 음식 소개하기
 
 [10월 14일 수업 기록](../daily/2026-10-14.md) · [질문 패턴](../patterns/question-patterns.md)
+
+## HAVE·GET 비교 복습
+
+- [ ] **I have the ingredients / I’ll get the ingredients**의 초점 차이 설명하기
+- [ ] **have lunch / get lunch**를 상황에 맞게 말하기
+- [ ] **I got tired / I’m tired**로 변화와 현재 상태 구별하기
+
+[HAVE 비교](../patterns/have.md#have와-get-비교) · [GET 비교](../patterns/get.md#have와-get-비교)
