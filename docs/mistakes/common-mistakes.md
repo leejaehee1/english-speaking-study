@@ -105,3 +105,15 @@ listen: true
 - 철자: `Hounestly / Unfortunly / equiped / compotable` → **Honestly / Unfortunately / equipped / comfortable**.
 
 [일기 전체 첨삭과 의미 확인 메모](../diary/2026-10-13.md)
+
+## 2026-10-14 · 질문 어순과 do의 역할
+
+수업에서 강조한 주의점이며, 모두 개인이 실제로 한 오류라는 뜻은 아닙니다.
+
+- `What do you think do I do?` → **What do you think I do?**: 뒤 절은 평서문 어순. 지금 하는 행동이라면 **What do you think I’m doing?**
+- **What do you think I do?**의 두 do는 조동사와 본동사이므로 함께 쓸 수 있습니다.
+- **How much of it do you think we’ll need?**: How much of it 전체를 앞으로, 뒤는 we’ll need.
+- **Is this what I thought it was?**: what절 전체가 명사절 역할. 뒤에 의문문 어순을 넣지 않습니다.
+- **salmon /ˈsæmən/**: l은 묵음.
+
+[오늘 수업](../daily/2026-10-14.md) · [질문 패턴](../patterns/question-patterns.md)

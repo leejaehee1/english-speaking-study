@@ -84,3 +84,14 @@ listen: true
 ## 문장에서 단어별 발음 연습
 
 [단어 추출 · 발음 연습](./word-practice.md)에 일기·영작·녹음 대본을 붙여 넣어 어려운 단어를 듣고 따라 말합니다. 마지막에는 원래 문장 전체를 다시 말합니다.
+
+## 2026-10-14 · salmon의 묵음 l
+
+**salmon** — 연어. 미국식 대표 발음 **/ˈsæmən/**: 첫 음절에 강세, **l은 발음하지 않습니다.**
+
+- **Could I get the grilled salmon, please?** — 연어구이로 주세요.
+- **The salmon is tender and juicy.** — 연어가 부드럽고 촉촉해요.
+
+단어만 세 번 말한 뒤 주문 문장으로 연결합니다. /l/ 소리를 넣지 않았는지 확인하세요.
+
+[오늘 수업](../daily/2026-10-14.md) · [음식과 요리](../patterns/food-and-cooking.md)

@@ -67,3 +67,13 @@
 - [음식 형용사](../patterns/food-adjectives.md) 다섯 개로 맛과 식감 설명하기
 - 좋아하는 음식 하나를 세 문장으로 소개하기
 - **crispy / crunchy**, **rich / flavorful**의 느낌 구별하기
+
+## 10월 14일 수업 복습
+
+- [ ] **How much of it do you think we’ll need?**를 덩어리로 연결하기
+- [ ] **I do / I’m doing**의 의미와 do의 두 역할 설명하기
+- [ ] **Is this what I thought it was?**를 상황에 맞게 말하기
+- [ ] **salmon**의 l을 발음하지 않고 주문하기
+- [ ] 음식 형용사·조리·주문 표현으로 내 음식 소개하기
+
+[10월 14일 수업 기록](../daily/2026-10-14.md) · [질문 패턴](../patterns/question-patterns.md)

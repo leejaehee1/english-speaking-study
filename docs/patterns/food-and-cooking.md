@@ -38,7 +38,7 @@ listeningLang: en-US
 - **shrimp** — 새우
 - **clams** — 조개류 중 대합·바지락 같은 종류
 - **mussels** — 홍합
-- **salmon** — 연어
+- **salmon** — 연어. /ˈsæmən/: l은 묵음 (10월 14일 수업)
 - **mackerel** — 고등어
 
 ### 채소와 기타 재료
