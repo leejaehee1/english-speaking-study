@@ -127,4 +127,4 @@ listen: true
 
 전체 듣기 → 한 문장씩 따라 하기 → 두 역할 녹음 순서로 연습하고, 끝에 내 습관 두 문장을 말합니다. 녹음 파일은 따로 보관하지 않습니다.
 
-[오늘의 숙제](../daily/2026-10-13.md) · [참조 자료 목록](./index.md) · [표현집](../patterns/useful-expressions.md) · [아침 발음 연습](../pronunciation/morning-practice.md)
+[10월 13일 수업 기록](../daily/2026-10-13.md) · [녹음 숙제·수업 자료 목록](./index.md) · [표현집](../patterns/useful-expressions.md) · [아침 발음 연습](../pronunciation/morning-practice.md)

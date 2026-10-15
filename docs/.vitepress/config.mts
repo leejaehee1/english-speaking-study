@@ -33,7 +33,7 @@ export default defineConfig({
         { text: '10월 13일 · go through', link: '/writing/2026-10-13-go-through' },
         { text: '10월 12일 · Think', link: '/writing/2026-10-12-think' }
       ] },
-      { text: '참조 자료', collapsed: true, items: [
+      { text: '녹음 숙제·수업 자료', collapsed: true, items: [
         { text: '자료 목록', link: '/references/' },
         { text: '10월 14일 · 세 토픽 읽기 녹음', link: '/references/2026-10-14-travel-food-reading' },
         { text: '10월 13일 · 습관 대화', link: '/references/2026-10-13-daily-habits' },
