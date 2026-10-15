@@ -9,7 +9,7 @@ export default defineConfig({
     nav: [
       { text: '홈', link: '/' },
       { text: '학습 달력', link: '/calendar' },
-      { text: '오늘의 기록', link: '/daily/2026-10-14' },
+      { text: '오늘의 기록', link: '/daily/2026-10-15' },
       { text: 'JoyTalk', link: 'https://projects-joytalk.vercel.app/', target: '_blank', rel: 'noopener noreferrer' }
     ],
     sidebar: [
@@ -17,6 +17,7 @@ export default defineConfig({
         { text: '영어 수준과 학습 시간', link: '/guides/cefr-levels' }
       ] },
       { text: '수업 기록', collapsed: true, items: [
+        { text: '10월 15일 · 시제·생활 표현과 직업', link: '/daily/2026-10-15' },
         { text: '10월 14일 · 질문 패턴과 음식 표현', link: '/daily/2026-10-14' },
         { text: '10월 13일 · 여행과 표현', link: '/daily/2026-10-13' },
         { text: '10월 12일', link: '/daily/2026-10-12' }
