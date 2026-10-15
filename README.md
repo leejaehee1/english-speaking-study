@@ -16,12 +16,14 @@
 
 ## 기록 위치
 
-- [Daily](docs/daily/2026-10-13.md): 숙제 항목과 짧은 메모
+- [Daily](docs/daily/2026-10-15.md): 수업 내용과 이해를 돕는 예문
 - [영작](docs/writing/index.md): 문제·내 답안·첨삭
 - [일기](docs/diary/index.md): 내가 쓴 글과 교정본
 - [참조 자료](docs/references/index.md): 원어민 스크립트·음성 출처
 - [표현집](docs/patterns/useful-expressions.md): 다시 쓸 표현
 - [주간 복습](docs/review/week-01.md): 금요일에 확인할 내용
+
+수업 기록(`docs/daily/`)에는 실제 수업에서 다룬 내용과 이를 설명하는 예문만 정리합니다. 숙제 목록, 제출·필사 안내, 수행 여부, 별도 자가 학습·예습·영작 과제는 포함하지 않습니다. 일기·영작·참조 자료는 각 전용 문서에서 관리합니다.
 
 새 기록은 기존 양식을 복사하고, 각 목록과 `docs/.vitepress/config.mts`에 링크를 추가합니다.
 
