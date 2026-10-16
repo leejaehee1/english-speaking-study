@@ -48,6 +48,7 @@ export default defineConfig({
       ] },
       { text: '표현집', collapsed: true, items: [
         { text: '자주 쓰는 표현', link: '/patterns/useful-expressions' },
+        { text: 'Korean Drinking Culture · 한국의 술 문화', link: '/patterns/korean-drinking-culture' },
         { text: 'Someone I Admire · 존경하는 사람', link: '/patterns/someone-i-admire' },
         { text: 'Feelings & Emotions · 감정 표현', link: '/patterns/feelings-and-emotions' },
         { text: '여행 형용사와 감탄 표현', link: '/patterns/travel-adjectives' },
