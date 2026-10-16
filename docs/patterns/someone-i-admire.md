@@ -142,9 +142,9 @@ listeningLang: en-US
 ## 내 경험으로 말하기
 
 1. 존경하는 사람 한 명과 성품을 설명하는 형용사 두 개를 고릅니다.
-2. **I admire the way …**, **What I admire most about … is …**, **I've learned … from …**으로 한 문장씩 만듭니다.
+2. **I admire the way …**, **What I admire most about … is …**, <strong>I've learned … from …</strong>으로 한 문장씩 만듭니다.
 3. 실제 사례 하나와 나에게 준 영향을 덧붙여 1분 동안 말합니다.
-4. 상대가 **Can you give me an example?**이라고 물었다고 생각하고 추가로 대답합니다.
+4. 상대가 <strong>Can you give me an example?</strong>이라고 물었다고 생각하고 추가로 대답합니다.
 
 ::: details 저는 그녀가 사람들을 대하는 모습을 존경해요.
 **I admire the way she treats people.**

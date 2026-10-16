@@ -910,7 +910,7 @@ listeningLang: en-US
 
 **And I said it again because I thought maybe they didn't hear me. Even worse. And they looked even more confused.**
 
-**And finally, I said it slowly and they understood. But oh, my face was so red. **
+<strong>And finally, I said it slowly and they understood. But oh, my face was so red.</strong>
 
 </details>
 

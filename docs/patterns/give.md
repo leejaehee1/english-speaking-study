@@ -26,6 +26,6 @@ listen: true
 
 `Can you give me ___?`로 도움이나 필요한 것을 부탁합니다.
 
-물건이 `it`이면 **Give it to me.**처럼 씁니다.
+물건이 `it`이면 <strong>Give it to me.</strong>처럼 씁니다.
 
 [핵심 기본동사 10개](../index.md#핵심-기본동사) · [자주 쓰는 표현](./useful-expressions.md)

@@ -28,7 +28,7 @@ listen: true
 - 내 답안: I went through students life middle school, high school, elementary school.
 - 첨삭: **I went through elementary school, middle school, and high school.**
 - 뜻: 초등학교, 중학교, 고등학교 과정을 거쳤어요.
-- 기억할 점: `students life`는 빼고 학교를 순서대로 나열합니다. 단순히 학교에 다녔다는 뜻이면 **I attended elementary school, middle school, and high school.**이 더 일반적입니다. 학창 생활을 강조하려는 뜻이라면 별도로 문장을 바꿉니다.
+- 기억할 점: `students life`는 빼고 학교를 순서대로 나열합니다. 단순히 학교에 다녔다는 뜻이면 <strong>I attended elementary school, middle school, and high school.</strong>이 더 일반적입니다. 학창 생활을 강조하려는 뜻이라면 별도로 문장을 바꿉니다.
 
 ## 3. 언어 장벽
 
@@ -49,7 +49,7 @@ listen: true
 - 내 답안: Do you go through bad condition?
 - 첨삭: **Are you going through a tough time?**
 - 뜻: 요즘 힘든 시기를 겪고 있나요?
-- 기억할 점: 지금 상황을 물으면 **Are you going through…?**가 자연스럽습니다. 여기서는 `bad condition`보다 **a tough time**이 명확합니다. 건강 상태를 묻는 의도라면 **Are you feeling unwell?** 등으로 달리 표현합니다.
+- 기억할 점: 지금 상황을 물으면 <strong>Are you going through…?</strong>가 자연스럽습니다. 여기서는 `bad condition`보다 **a tough time**이 명확합니다. 건강 상태를 묻는 의도라면 **Are you feeling unwell?** 등으로 달리 표현합니다.
 
 ## 통째로 외울 필수 표현
 

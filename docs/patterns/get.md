@@ -56,7 +56,7 @@ listen: true
 - **I got to work from home yesterday.** — 어제는 재택근무를 할 수 있었어요.
 - **I’m getting to work from home more often these days.** — 요즘은 재택근무를 할 기회가 더 자주 생기고 있어요.
 
-**I work from home.**은 재택근무한다는 사실, **I get to work from home.**은 그렇게 할 수 있는 기회·허용에 초점을 둡니다. get to가 언제나 큰 특혜나 새로 얻은 기회라는 뜻은 아니며 문맥에 따라 해석합니다.
+<strong>I work from home.</strong>은 재택근무한다는 사실, <strong>I get to work from home.</strong>은 그렇게 할 수 있는 기회·허용에 초점을 둡니다. get to가 언제나 큰 특혜나 새로 얻은 기회라는 뜻은 아니며 문맥에 따라 해석합니다.
 
 ### get to + 장소와 구별
 

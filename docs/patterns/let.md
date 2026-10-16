@@ -15,9 +15,9 @@ listen: true
 
 ## 내 상황으로 연습
 
-대답할 시간이 필요하면 **Let me think.**를 말한 뒤 한 문장으로 답합니다.
+대답할 시간이 필요하면 <strong>Let me think.</strong>를 말한 뒤 한 문장으로 답합니다.
 
-주의: **Let me know.**처럼 `to` 없이 씁니다.
+주의: <strong>Let me know.</strong>처럼 `to` 없이 씁니다.
 
 [자주 쓰는 표현](./useful-expressions.md) · [자주 하는 실수](../mistakes/common-mistakes.md)
 

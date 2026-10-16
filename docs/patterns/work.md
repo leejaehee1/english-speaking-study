@@ -16,7 +16,7 @@ listen: true
 - **I work as a software engineer.** — 소프트웨어 엔지니어로 일해요.
 - **I work as a backend developer.** — 백엔드 개발자로 일해요.
 
-가볍게 자기소개할 때는 **I’m a software developer.**도 자연스럽습니다.
+가볍게 자기소개할 때는 <strong>I’m a software developer.</strong>도 자연스럽습니다.
 
 ### Work on — 어떤 프로젝트나 과제를 하는지
 
@@ -37,7 +37,7 @@ listen: true
 - **He works in web development.** — 그는 웹 개발 분야에서 일해요.
 - **I work in the cloud department.** — 클라우드 부서에서 일해요.
 
-언어를 말할 때 **I work in Java.**도 가능하지만, 사용하는 기술을 소개할 때는 **I work with Java.** 또는 **I develop software in Java.**라고 말할 수 있습니다.
+언어를 말할 때 <strong>I work in Java.</strong>도 가능하지만, 사용하는 기술을 소개할 때는 **I work with Java.** 또는 <strong>I develop software in Java.</strong>라고 말할 수 있습니다.
 
 ### Work for / at — 어느 회사나 고객을 위해 일하는지
 
@@ -47,7 +47,7 @@ listen: true
 - **I work for a startup.** — 스타트업에서 일해요.
 - **I work for several clients as a freelancer.** — 프리랜서로 여러 고객의 일을 해요.
 
-고객과 협업한다는 점을 강조하려면 **I work with several clients.**라고 말합니다.
+고객과 협업한다는 점을 강조하려면 <strong>I work with several clients.</strong>라고 말합니다.
 
 ### Work with — 어떤 도구를 쓰고 누구와 협업하는지
 

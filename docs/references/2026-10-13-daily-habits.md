@@ -118,7 +118,7 @@ listen: true
 
 - [5:17 · Slowly but surely](https://www.youtube.com/watch?v=v07kPyPkLYw&t=317s): **slowly**, **surely**를 중심으로 리듬을 따라 합니다.
 - [6:03 · Before you know it](https://www.youtube.com/watch?v=v07kPyPkLYw&t=363s): 네 단어를 따로 끊기보다 한 덩어리로 듣고 말합니다.
-- [6:21 · 질문의 억양](https://www.youtube.com/watch?v=v07kPyPkLYw&t=381s): **Do you have this habit too?**의 억양을 듣고 자신의 습관을 묻는 질문으로 바꿉니다.
+- [6:21 · 질문의 억양](https://www.youtube.com/watch?v=v07kPyPkLYw&t=381s): <strong>Do you have this habit too?</strong>의 억양을 듣고 자신의 습관을 묻는 질문으로 바꿉니다.
 
 휴대폰이 잘못했고 미안해할 거라는 부분은 장난스럽게 말하는 대목입니다. 말의 뜻과 실제 의도를 구별하며 어조를 들어봅니다.
 

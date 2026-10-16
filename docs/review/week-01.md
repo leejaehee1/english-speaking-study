@@ -11,12 +11,12 @@
 
 ## 10월 13일 수업 복습
 
-- [ ] 상대 이름을 넣어 인사하고 **Have a good one!**으로 끝맺기
+- [ ] 상대 이름을 넣어 인사하고 <strong>Have a good one!</strong>으로 끝맺기
 - [ ] **deserve / juicy / thoughtful**의 뜻을 설명하고 한 문장씩 말하기
 - [ ] 여행 경험을 **gorgeous / stunning / spectacular / breathtaking**으로 설명하기
 - [ ] 여행 표현 3개를 외우고 장소나 경험을 바꿔 말하기
-- [ ] **No Korean… / Not every Korean…**의 부정 범위를 구별하기
-- [ ] **What a beautiful day!**의 의미를 문맥과 억양에 따라 설명하기
+- [ ] <strong>No Korean… / Not every Korean…</strong>의 부정 범위를 구별하기
+- [ ] <strong>What a beautiful day!</strong>의 의미를 문맥과 억양에 따라 설명하기
 - [x] [**go through** 내 문장 5개 작성·첨삭](../writing/2026-10-13-go-through.md)
 - [ ] 교정한 5문장과 필수 표현을 노트 없이 말하기
 - [ ] **go through / get through**의 차이를 설명하기
@@ -59,7 +59,7 @@
 
 - [여행 형용사와 감탄 표현](../patterns/travel-adjectives.md)에서 경치·음식·사람을 설명하는 문장 하나씩 말하기
 - **unreal / surreal / otherworldly**로 레이크 루이스의 느낌 설명하기
-- **Photos don't do it justice.**를 넣어 여행 경험 세 문장 말하기
+- <strong>Photos don't do it justice.</strong>를 넣어 여행 경험 세 문장 말하기
 - 경험의 **exciting / exhausting**과 내 기분의 **excited / exhausted** 구별하기
 
 ## 음식 형용사 예습 복습
@@ -70,9 +70,9 @@
 
 ## 10월 14일 수업 복습
 
-- [ ] **How much of it do you think we’ll need?**를 덩어리로 연결하기
+- [ ] <strong>How much of it do you think we’ll need?</strong>를 덩어리로 연결하기
 - [ ] **I do / I’m doing**의 의미와 do의 두 역할 설명하기
-- [ ] **Is this what I thought it was?**를 상황에 맞게 말하기
+- [ ] <strong>Is this what I thought it was?</strong>를 상황에 맞게 말하기
 - [ ] **salmon**의 l을 발음하지 않고 주문하기
 - [ ] 음식 형용사·조리·주문 표현으로 내 음식 소개하기
 

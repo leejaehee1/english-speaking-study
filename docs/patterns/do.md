@@ -17,6 +17,6 @@ listen: true
 
 `I do ___ after ___.`로 일상에서 하는 일을 말합니다.
 
-일·활동에는 `do homework`, 결과를 만드는 표현에는 `make a plan`을 씁니다. **What are you doing?**은 지금 무엇을 하는지 묻습니다.
+일·활동에는 `do homework`, 결과를 만드는 표현에는 `make a plan`을 씁니다. <strong>What are you doing?</strong>은 지금 무엇을 하는지 묻습니다.
 
 [핵심 기본동사 10개](../index.md#핵심-기본동사) · [자주 쓰는 표현](./useful-expressions.md)

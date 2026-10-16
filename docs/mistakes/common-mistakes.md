@@ -21,7 +21,7 @@ listen: true
 
 **맞았던 답:** Where do you think she is from? / What do you think it is?
 
-1번의 **What age**와 10번의 **How much do you think I need?**도 문맥상 가능합니다. 모두 틀린 답으로 외우지 않습니다.
+1번의 **What age**와 10번의 <strong>How much do you think I need?</strong>도 문맥상 가능합니다. 모두 틀린 답으로 외우지 않습니다.
 
 [전체 답안과 첨삭](../writing/2026-10-12-think.md)
 
@@ -75,7 +75,7 @@ listen: true
 - `No every Korean…` → **No Korean…**: 어떤 한국인도 ~하지 않는다(전체 부정).
   **No Korean likes this food.** — 어떤 한국인도 이 음식을 좋아하지 않는다.
 - **Not every Korean likes this food.** — 모든 한국인이 이 음식을 좋아하는 것은 아니다(부분 부정). 적어도 일부는 좋아하지 않는다는 뜻이며, 좋아하는 사람의 수를 정하지 않습니다.
-- **thoughtful**은 “생각이 많다”로만 외우지 않습니다. **That was thoughtful of you.**는 배려를, **She looked thoughtful.**는 생각에 잠긴 모습을 나타냅니다.
+- **thoughtful**은 “생각이 많다”로만 외우지 않습니다. <strong>That was thoughtful of you.</strong>는 배려를, <strong>She looked thoughtful.</strong>는 생각에 잠긴 모습을 나타냅니다.
 
 음식 예문은 부정 범위 비교를 위한 문장입니다. 이름 사용이나 반어법도 영어권 전체에 적용되는 고정 규칙으로 외우기보다 상황과 관계를 함께 봅니다.
 
@@ -94,7 +94,7 @@ listen: true
 
 ## 2026-10-13 · 일기
 
-- `a really bad` → **really bad**: **The weather was really bad.**에서 셀 수 없는 **weather**에 `a`를 붙이지 않습니다.
+- `a really bad` → **really bad**: <strong>The weather was really bad.</strong>에서 셀 수 없는 **weather**에 `a`를 붙이지 않습니다.
 - `my shoes supposed to get being wet` → **I thought my shoes would get wet**: 예상한 결과를 **would + 동사**로 표현합니다.
 - `two station / take off the bus` → **two stops / get off the bus**.
 - `loose weight` → **lose weight**: **loose**는 “헐렁한”, **lose**는 “잃다”.
@@ -111,7 +111,7 @@ listen: true
 수업에서 강조한 주의점이며, 모두 개인이 실제로 한 오류라는 뜻은 아닙니다.
 
 - `What do you think do I do?` → **What do you think I do?**: 뒤 절은 평서문 어순. 지금 하는 행동이라면 **What do you think I’m doing?**
-- **What do you think I do?**의 두 do는 조동사와 본동사이므로 함께 쓸 수 있습니다.
+- <strong>What do you think I do?</strong>의 두 do는 조동사와 본동사이므로 함께 쓸 수 있습니다.
 - **How much of it do you think we’ll need?**: How much of it 전체를 앞으로, 뒤는 we’ll need.
 - **Is this what I thought it was?**: what절 전체가 명사절 역할. 뒤에 의문문 어순을 넣지 않습니다.
 - **salmon /ˈsæmən/**: l은 묵음.
