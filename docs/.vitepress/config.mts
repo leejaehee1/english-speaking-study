@@ -41,16 +41,16 @@ export default defineConfig({
         { text: '10월 12일 · Think', link: '/writing/2026-10-12-think' }
       ] },
       { text: '수업 자료', collapsed: true, items: [
-        { text: '일상 영어 대화 · 전체 대본', link: '/references/everyday-english-full-script' },
+        { text: '10월 19일 · 실생활 영어 대화', link: '/references/everyday-english-full-script' },
         { text: '10월 19일 · 수업 준비', link: '/references/2026-10-19-class-preparation' },
         { text: '10월 12일 · 코스트코 읽기', link: '/references/2026-10-12-costco-reading' }
       ] },
+      { text: '10월 19일 · 한국의 술 문화', link: '/patterns/korean-drinking-culture' },
       { text: '주간 복습', collapsed: true, items: [
         { text: '1주차 · 10월 12–16일', link: '/review/week-01' }
       ] },
       { text: '표현집', collapsed: true, items: [
         { text: '자주 쓰는 표현', link: '/patterns/useful-expressions' },
-        { text: 'Korean Drinking Culture · 한국의 술 문화', link: '/patterns/korean-drinking-culture' },
         { text: 'Someone I Admire · 존경하는 사람', link: '/patterns/someone-i-admire' },
         { text: 'Feelings & Emotions · 감정 표현', link: '/patterns/feelings-and-emotions' },
         { text: '여행 형용사와 감탄 표현', link: '/patterns/travel-adjectives' },
@@ -73,9 +73,9 @@ export default defineConfig({
         { text: '음소 학습 시리즈 · 소리튠영어', link: '/pronunciation/pronunciation-notes#phoneme-series' },
         { text: '모음 음소 · 여덟 가지 소리', link: '/pronunciation/vowel-phonemes' },
         { text: '자음 음소 · B/P, D/T, G/K, V/F, S/Z, J/CH', link: '/pronunciation/consonant-phonemes' },
-        { text: '단어 추출 · 발음 연습', link: '/pronunciation/word-practice' },
         { text: '아침 회화 전 · 5분 발음 연습', link: '/pronunciation/morning-practice' },
-      ] }
+      ] },
+      { text: '단어 추출 · 발음 연습', link: '/pronunciation/word-practice' }
     ],
     search: { provider: 'local' },
     outline: { label: '이 페이지', level: [2, 3] },

@@ -27,7 +27,7 @@
 
 ## 매일 녹음하는 영상 · 전체 대본
 
-[일상 영어 대화 · 한국어/영어 펼치기 연습](./references/everyday-english-full-script.md) — 전체 영상 52개 문단, 시간별 듣기·영작·읽기 연습
+[10월 19일 · 실생활 영어 대화](./references/everyday-english-full-script.md) — 전체 영상 52개 문단, 시간별 듣기·영작·읽기 연습
 
 ## 핵심 기본동사
 
@@ -74,7 +74,7 @@
 
 ## 한국의 술 문화
 
-[Korean Drinking Culture · 한국의 술 문화](./patterns/korean-drinking-culture.md) — 혼합주·고진감래주·술자리 예절·핵심 Chunk 20개·실전 회화·실제 제조 과정
+[10월 19일 · 한국의 술 문화](./patterns/korean-drinking-culture.md) — 혼합주·고진감래주·술자리 예절·핵심 Chunk 20개·실전 회화·실제 제조 과정
 
 ## 찾아보기
 

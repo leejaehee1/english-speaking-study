@@ -1,12 +1,14 @@
 ---
-title: 일상 영어 대화 · 전체 스크립트
+title: 10월 19일 · 실생활 영어 대화
 listen: true
 listeningLang: en-US
 ---
 
-# 일상 영어 대화 · 전체 스크립트
+# 10월 19일 · 실생활 영어 대화
 
 [원본 유튜브 영상](https://www.youtube.com/watch?v=v07kPyPkLYw) · 0:01–29:18 · 사용자가 제공한 전체 자막 기준
+
+원제: **30 Minutes of Real English Conversation You'll Actually Use (A2-B2)**
 
 매일 녹음하는 영상의 전체 대본을 짧은 대화 흐름별로 나눴습니다. 각 문단의 **한국어 뜻**과 **영어 원문**은 따로 펼치고 접을 수 있습니다. 시간 링크를 누르면 해당 구간의 영상으로 이동합니다.
 
