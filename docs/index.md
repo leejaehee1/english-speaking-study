@@ -59,6 +59,10 @@
 
 [Feelings & Emotions · 감정 형용사와 Chunk](./patterns/feelings-and-emotions.md) — 감정 변화·feel/get/make·핵심 20개 표현·상황별 회화
 
+## 존경하는 사람
+
+[Someone I Admire · 존경하는 사람](./patterns/someone-i-admire.md) — 성품 형용사·핵심 20개 표현·상황별 회화·1분 말하기
+
 ## 찾아보기
 
 [표현집](./patterns/useful-expressions.md) · [발음](./pronunciation/pronunciation-notes.md) · [아침 5분 발음 연습](./pronunciation/morning-practice.md) · [실수 노트](./mistakes/common-mistakes.md) · [주간 복습](./review/week-01.md)

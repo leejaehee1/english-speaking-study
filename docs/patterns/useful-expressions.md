@@ -8,6 +8,8 @@ listen: true
 
 [Feelings & Emotions · 감정 표현](./feelings-and-emotions.md) — 긍정·부정 감정 형용사, 핵심 20개 표현과 회화 연습
 
+[Someone I Admire · 존경하는 사람](./someone-i-admire.md) — 존경하는 이유와 나에게 준 영향 말하기
+
 ## 인사와 근황
 
 - **I'm pretty good. How about you?** — 잘 지내요. 당신은요?
