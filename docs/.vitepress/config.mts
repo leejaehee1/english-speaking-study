@@ -70,6 +70,7 @@ export default defineConfig({
         { text: 'GO', link: '/patterns/go' }
       ] },
       { text: '발음과 교정', collapsed: true, items: [
+        { text: '음소 학습 시리즈 · 소리튠영어', link: '/pronunciation/pronunciation-notes#phoneme-series' },
         { text: '발음 노트', link: '/pronunciation/pronunciation-notes' },
         { text: '모음 음소 · 여덟 가지 소리', link: '/pronunciation/vowel-phonemes' },
         { text: '자음 음소 · B/P, D/T, G/K, V/F, S/Z, J/CH', link: '/pronunciation/consonant-phonemes' },

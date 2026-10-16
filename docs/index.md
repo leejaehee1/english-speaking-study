@@ -49,6 +49,8 @@
 
 ## 단어별 발음 연습
 
+**[음소 학습 시리즈 · 주아쌤 소리튠영어](./pronunciation/pronunciation-notes.md#phoneme-series)** — 음소 연습을 시작할 때 볼 영상·재생목록
+
 [모음 음소 · 여덟 가지 소리](./pronunciation/vowel-phonemes.md) — bad/bed, cap/cup, fool/full, ship/sheep 비교
 
 [자음 음소 · B/P, D/T, G/K, V/F, S/Z, J/CH](./pronunciation/consonant-phonemes.md) — 발음 원리와 이미지 속 단어, 최소대립쌍·문장 연습

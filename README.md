@@ -34,6 +34,8 @@
 
 ## 발음 듣기
 
+**[음소 학습 시리즈 · 주아쌤_소리튠영어](https://www.youtube.com/watch?v=or7k3weRAtI&list=PLJv1Fpdyo3rbXoHAh_SiMdcKKZof0-Iow)** — 발음 연습의 기본 참고 영상·재생목록. [발음 노트](docs/pronunciation/pronunciation-notes.md#phoneme-series)에서 기존 모음·자음 자료와 함께 활용합니다.
+
 표현집·영작·일기·녹음 대본 등에서 굵은 영어 표현을 누르면 발음을 듣습니다. 영어 단어·문장을 선택한 뒤 듣기도 가능합니다. 속도 조절과 멈추기를 지원하며, 기기의 영어 음성을 사용합니다.
 
 새 학습 페이지에 적용하려면 Markdown 맨 위에 `listen: true`를 frontmatter로 추가합니다. 홈·목록·코스트코 읽기 자료에는 적용하지 않았습니다.
