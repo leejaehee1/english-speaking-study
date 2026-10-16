@@ -14,6 +14,8 @@
 
 ## 녹음 숙제 자료
 
+- [2026-10-16 · Learning English 녹음](./2026-10-16-english-learning-reading.md) — 16:45–20:12 · 상당히 빠른 템포로 녹음 완료
+
 - [2026-10-15 · Feelings 녹음](./2026-10-15-feelings-reading.md) — 14:11–16:47 · 수행 보고 완료, 주제는 사용자 추정
 
 - [2026-10-14 · 세 토픽 읽기 녹음](./2026-10-14-travel-food-reading.md) — 6:38–14:11 · 실제 수행은 Read Aloud

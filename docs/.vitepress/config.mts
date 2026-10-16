@@ -25,6 +25,7 @@ export default defineConfig({
         { text: '10월 12일', link: '/daily/2026-10-12' }
       ] },
       { text: '녹음 숙제', collapsed: true, items: [
+        { text: '10월 16일 · Learning English 녹음', link: '/references/2026-10-16-english-learning-reading' },
         { text: '10월 15일 · Feelings 녹음', link: '/references/2026-10-15-feelings-reading' },
         { text: '10월 14일 · 세 토픽 읽기 녹음', link: '/references/2026-10-14-travel-food-reading' },
         { text: '10월 13일 · 습관 대화', link: '/references/2026-10-13-daily-habits' },
