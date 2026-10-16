@@ -41,11 +41,11 @@ export default defineConfig({
         { text: '10월 12일 · Think', link: '/writing/2026-10-12-think' }
       ] },
       { text: '수업 자료', collapsed: true, items: [
+        { text: '10월 19일 · 한국의 술 문화', link: '/patterns/korean-drinking-culture' },
         { text: '10월 19일 · 실생활 영어 대화', link: '/references/everyday-english-full-script' },
         { text: '10월 19일 · 수업 준비', link: '/references/2026-10-19-class-preparation' },
         { text: '10월 12일 · 코스트코 읽기', link: '/references/2026-10-12-costco-reading' }
       ] },
-      { text: '10월 19일 · 한국의 술 문화', link: '/patterns/korean-drinking-culture' },
       { text: '주간 복습', collapsed: true, items: [
         { text: '1주차 · 10월 12–16일', link: '/review/week-01' }
       ] },
