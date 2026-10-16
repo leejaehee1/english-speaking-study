@@ -25,7 +25,6 @@ export default defineConfig({
         { text: '10월 12일', link: '/daily/2026-10-12' }
       ] },
       { text: '녹음 숙제', collapsed: true, items: [
-        { text: '일상 영어 대화 · 전체 대본', link: '/references/everyday-english-full-script' },
         { text: '10월 15일 · Feelings 녹음', link: '/references/2026-10-15-feelings-reading' },
         { text: '10월 14일 · 세 토픽 읽기 녹음', link: '/references/2026-10-14-travel-food-reading' },
         { text: '10월 13일 · 습관 대화', link: '/references/2026-10-13-daily-habits' },
@@ -42,6 +41,7 @@ export default defineConfig({
         { text: '10월 12일 · Think', link: '/writing/2026-10-12-think' }
       ] },
       { text: '수업 자료', collapsed: true, items: [
+        { text: '일상 영어 대화 · 전체 대본', link: '/references/everyday-english-full-script' },
         { text: '10월 19일 · 수업 준비', link: '/references/2026-10-19-class-preparation' },
         { text: '10월 12일 · 코스트코 읽기', link: '/references/2026-10-12-costco-reading' }
       ] },
@@ -71,12 +71,10 @@ export default defineConfig({
       ] },
       { text: '발음과 교정', collapsed: true, items: [
         { text: '음소 학습 시리즈 · 소리튠영어', link: '/pronunciation/pronunciation-notes#phoneme-series' },
-        { text: '발음 노트', link: '/pronunciation/pronunciation-notes' },
         { text: '모음 음소 · 여덟 가지 소리', link: '/pronunciation/vowel-phonemes' },
         { text: '자음 음소 · B/P, D/T, G/K, V/F, S/Z, J/CH', link: '/pronunciation/consonant-phonemes' },
         { text: '단어 추출 · 발음 연습', link: '/pronunciation/word-practice' },
         { text: '아침 회화 전 · 5분 발음 연습', link: '/pronunciation/morning-practice' },
-        { text: '자주 하는 실수', link: '/mistakes/common-mistakes' }
       ] }
     ],
     search: { provider: 'local' },
