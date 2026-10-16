@@ -21,8 +21,8 @@ listeningLang: en-US
 
 ### 월요일 · 아침 일상과 질문
 
-- **How was your morning today?**에 세 문장으로 답하고 **What about you?**로 되묻기
-- 상대 말에 **That makes sense.**로 반응하고 관련 질문 하나 하기
+- <strong>How was your morning today?</strong>에 세 문장으로 답하고 <strong>What about you?</strong>로 되묻기
+- 상대 말에 <strong>That makes sense.</strong>로 반응하고 관련 질문 하나 하기
 - “무엇을 하는 것 같아?”와 “무엇을 하는지 알아?”를 각각 질문하기
 - **I drank / I went out drinking**으로 지난주 일을 말하기
 
@@ -30,13 +30,13 @@ listeningLang: en-US
 
 ### 화요일 · 여행·인사·go through
 
-- 이름을 넣어 인사하고 **Thanks, Alex. Have a good one!**으로 끝맺기
+- 이름을 넣어 인사하고 <strong>Thanks, Alex. Have a good one!</strong>으로 끝맺기
 - **deserve / juicy / thoughtful**로 한 문장씩 말하기; thoughtful의 두 의미 구별하기
 - **gorgeous / stunning / spectacular / breathtaking**으로 여행 경험 설명하기
-- 레이크 루이스를 **unreal / surreal / otherworldly** 중 하나와 **Photos don't do it justice.**로 묘사하기
+- 레이크 루이스를 <strong>unreal / surreal / otherworldly</strong> 중 하나와 <strong>Photos don't do it justice.</strong>로 묘사하기
 - **exciting / exhausting**은 경험, **excited / exhausted**는 내 기분에 연결하기
-- **No Korean… / Not every Korean…**의 부정 범위 설명하기
-- **What a beautiful day!**가 진심·반어로 들리는 상황을 각각 설명하기
+- <strong>No Korean… / Not every Korean…</strong>의 부정 범위 설명하기
+- <strong>What a beautiful day!</strong>가 진심·반어로 들리는 상황을 각각 설명하기
 - **go through**의 검토·경험·통과 의미와 **get through**의 극복 의미로 문장 만들기
 - 첨삭한 go through 5문장을 내 현재 상황으로 바꿔 말하기
 
@@ -44,13 +44,13 @@ listeningLang: en-US
 
 ### 수요일 · 질문 어순·HAVE와 GET·음식
 
-- **How much of it do you think we'll need?**를 끊김 없이 말하고 의문사구 전체 찾기
-- **What do you think I do? / What do you think I'm doing?**의 상황 구별하기
-- **Is this what I thought it was?**로 물건이나 상황 확인하기
+- <strong>How much of it do you think we'll need?</strong>를 끊김 없이 말하고 의문사구 전체 찾기
+- <strong>What do you think I do? / What do you think I'm doing?</strong>의 상황 구별하기
+- <strong>Is this what I thought it was?</strong>로 물건이나 상황 확인하기
 - **have a car / get a car**, **have a cold / get a cold**의 초점 비교하기
 - **have lunch / get lunch**, 완료형 **have finished**, **get home / get going**으로 문장 만들기
 - **I work from home / I get to work from home**의 차이 말하기; get to + 장소와 구별하기
-- salmon의 l을 빼고 **Could I get the grilled salmon, please?**로 주문하기
+- salmon의 l을 빼고 <strong>Could I get the grilled salmon, please?</strong>로 주문하기
 - 음식 맛·식감·재료·조리 순서를 설명하고 소스를 따로 요청하기
 
 HAVE=상태, GET=변화는 학습용 출발점입니다. have lunch는 활동, have + 과거분사는 완료형이며 모든 get 뒤에 -ing를 붙일 수 있는 것은 아닙니다.
@@ -67,7 +67,7 @@ HAVE=상태, GET=변화는 학습용 출발점입니다. have lunch는 활동, h
 - **You must be busy / That must be tough / No wonder / Good for you** 중 알맞게 반응한 뒤 질문하기
 - **frozen food section / aisle / go stale / seriously underrated / OTC medicine**을 생활 상황에서 쓰기
 - **stick to my plan / stick with it / currently**로 공부 근황 말하기
-- **What do you do for a living?**에 답하고 **work as / in / for / on / with**로 확장하기
+- <strong>What do you do for a living?</strong>에 답하고 <strong>work as / in / for / on / with</strong>로 확장하기
 - **college football analyst / barista / sheriff / venue manager**의 뜻 확인하기
 - **full-time / part-time / casual / freelance**를 구별하기; full-time을 정규직과 같은 뜻으로 단정하지 않기
 - **enough money / high enough**, **3K / 10K / 100K**를 말하고 통화·월/연 단위 확인하기
@@ -78,7 +78,7 @@ HAVE=상태, GET=변화는 학습용 출발점입니다. have lunch는 활동, h
 
 ### 금요일 · 감사·존경·쇼핑·영화와 TV
 
-- **You're welcome / Thank you, too / No, thank YOU!**를 감사의 초점에 맞게 말하기
+- <strong>You're welcome / Thank you, too / No, thank YOU!</strong>를 감사의 초점에 맞게 말하기
 - **look up to / belief·believe / passed away / the late + 이름**을 문장으로 구별하기
 - **an ordinary day / daily life**의 차이와 겉·속 성격을 설명하기
 - **buy one, get one free / hit or miss flavor-wise / weird**로 상품 이야기하기
@@ -190,7 +190,7 @@ HAVE=상태, GET=변화는 학습용 출발점입니다. have lunch는 활동, h
 - [10/15 · 14:11–16:47](../references/2026-10-15-feelings-reading.md): 감정을 나타내는 문장을 골라 내 경험으로 바꾸기
 - [10/16 · Learning English · 16:45–20:12](../references/2026-10-16-english-learning-reading.md): 빠른 템포에서 놓친 강세·단어 끝소리를 확인하고, 대본 없이 학습법 세 문장 말하기
 
-[전체 대본](../references/everyday-english-full-script.md)에서 한국어 상황 → 내 영어 → 원문 비교 순서로 연습합니다. **소리 내어 읽기(Read Aloud)**와 **음성을 실시간으로 따라 말하기(Shadowing)**는 구별합니다. 빠른 템포로 완료한 것과 정확성·즉흥 말하기는 각각 확인합니다.
+[전체 대본](../references/everyday-english-full-script.md)에서 한국어 상황 → 내 영어 → 원문 비교 순서로 연습합니다. <strong>소리 내어 읽기(Read Aloud)</strong>와 <strong>음성을 실시간으로 따라 말하기(Shadowing)</strong>는 구별합니다. 빠른 템포로 완료한 것과 정확성·즉흥 말하기는 각각 확인합니다.
 
 ### 발음과 억양
 
@@ -198,7 +198,7 @@ HAVE=상태, GET=변화는 학습용 출발점입니다. have lunch는 활동, h
 - [모음](../pronunciation/vowel-phonemes.md): **bad/bed, cap/cup, fool/full, ship/sheep**를 단어와 문장에서 구별하기
 - [자음](../pronunciation/consonant-phonemes.md): **B/P, D/T, G/K, V/F, S/Z, J/CH** 중 어려운 두 쌍 연습하기
 - **salmon / vitamin / delicious / barista**를 강세·약한 모음·자음 연결에 집중해 말하기
-- **Thank YOU!**와 **What a beautiful day!**를 상황에 맞는 억양으로 말하기
+- <strong>Thank YOU!</strong>와 <strong>What a beautiful day!</strong>를 상황에 맞는 억양으로 말하기
 - [단어 추출 연습](../pronunciation/word-practice.md)으로 이번 주 문장 속 어려운 단어 세 개 다시 듣기
 
 [음소 영상·발음 자료](../pronunciation/pronunciation-notes.md). 한글 독음보다 원음과 조음 위치를 확인하고, 미국식 t 변이를 모든 t의 생략 규칙으로 외우지 않습니다.
