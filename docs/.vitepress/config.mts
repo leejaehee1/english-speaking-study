@@ -42,7 +42,7 @@ export default defineConfig({
       ] },
       { text: '수업 자료', collapsed: true, items: [
         { text: '10월 19일 · 한국의 술 문화', link: '/patterns/korean-drinking-culture' },
-        { text: '10월 19일 · 실생활 영어 대화', link: '/references/everyday-english-full-script' },
+        { text: '10월 19일 · 유튜브 A2-B2 스크립트', link: '/references/everyday-english-full-script' },
         { text: '10월 19일 · 수업 준비', link: '/references/2026-10-19-class-preparation' },
         { text: '10월 12일 · 코스트코 읽기', link: '/references/2026-10-12-costco-reading' }
       ] },

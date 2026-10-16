@@ -1,10 +1,10 @@
 ---
-title: 10월 19일 · 실생활 영어 대화
+title: 10월 19일 · 유튜브 A2-B2 스크립트
 listen: true
 listeningLang: en-US
 ---
 
-# 10월 19일 · 실생활 영어 대화
+# 10월 19일 · 유튜브 A2-B2 스크립트
 
 [원본 유튜브 영상](https://www.youtube.com/watch?v=v07kPyPkLYw) · 0:01–29:18 · 사용자가 제공한 전체 자막 기준
 

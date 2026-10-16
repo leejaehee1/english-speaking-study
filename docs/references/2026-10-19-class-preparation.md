@@ -3,7 +3,7 @@ listen: true
 listeningLang: en-US
 ---
 
-# 10월 19일 · 월요일 수업 준비와 추가 준비 메모
+# 10월 19일 · 수업 준비
 
 10월 16일 수업에서 안내받은 준비 내용입니다. 수행 완료 기록은 아닙니다.
 
@@ -17,15 +17,5 @@ listeningLang: en-US
 - **One of my favorite holiday memories is…** — 제가 좋아하는 명절·휴일 추억 중 하나는…
 
 위 구성과 표현은 준비를 돕는 별도 예시입니다.
-
-## 추가 준비 · 제출·발표 날짜 미확인
-
-**한국 술 문화와 제조 방법**을 준비해 옵니다. 월요일 과제와 같은 마감인지 메모에 명시되지 않아 구분해 둡니다.
-
-[기존 한국 술 문화 자료](../patterns/korean-drinking-culture.md)에서 혼합주·술자리 문화를 확인하고, 문서 아래쪽의 막걸리·소주 제조 과정을 함께 봅니다.
-
-- **be made with** — ~을 재료로 만들다.
-- **be made by mixing A with B** — A와 B를 섞어 만들다.
-- **ferment / distill / dilute** — 발효하다 / 증류하다 / 희석하다.
 
 [10월 16일 수업 기록](../daily/2026-10-16.md) · [녹음 숙제·수업 자료 목록](./index.md)

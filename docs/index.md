@@ -27,7 +27,7 @@
 
 ## 매일 녹음하는 영상 · 전체 대본
 
-[10월 19일 · 실생활 영어 대화](./references/everyday-english-full-script.md) — 전체 영상 52개 문단, 시간별 듣기·영작·읽기 연습
+[10월 19일 · 유튜브 A2-B2 스크립트](./references/everyday-english-full-script.md) — 전체 영상 52개 문단, 시간별 듣기·영작·읽기 연습
 
 ## 핵심 기본동사
 
