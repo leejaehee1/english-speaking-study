@@ -14,7 +14,8 @@ export default defineConfig({
     ],
     sidebar: [
       { text: '학습 가이드', collapsed: true, items: [
-        { text: '영어 수준과 학습 시간', link: '/guides/cefr-levels' }
+        { text: '영어 수준과 학습 시간', link: '/guides/cefr-levels' },
+        { text: '외국어 학습법 · 소리와 표현 쌓기', link: '/guides/language-learning-method' }
       ] },
       { text: '수업 기록', collapsed: true, items: [
         { text: '10월 15일 · 시제·생활 표현과 직업', link: '/daily/2026-10-15' },
