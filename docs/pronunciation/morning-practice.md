@@ -31,7 +31,7 @@ listeningLang: en-US
 
 ## 월요일 · 모음 /æ/와 /ɛ/
 
-[모음 음소 자료](./vowel-phonemes.md)에서 시작합니다. **/æ/**는 /ɛ/보다 입을 더 열고 혀를 낮추되, 입을 크게 벌리는 것만으로 구분하지 않습니다.
+[모음 음소 자료](./vowel-phonemes.md)에서 시작합니다. <strong>/æ/</strong>는 /ɛ/보다 입을 더 열고 혀를 낮추되, 입을 크게 벌리는 것만으로 구분하지 않습니다.
 
 - 비교 단어: **bad** / **bed**, **man** / **men**
 - 연결 문장: **The bed was comfortable.** — 침대가 편안했어요.
@@ -67,7 +67,7 @@ listeningLang: en-US
 
 ## 금요일 · J/CH와 이번 주 문장
 
-자음 자료의 **J /dʒ/**와 **CH /tʃ/**를 짧게 비교한 뒤, 이번 주 수업·일기·영작에서 다시 쓸 문장 하나로 연결합니다.
+자음 자료의 <strong>J /dʒ/</strong>와 <strong>CH /tʃ/</strong>를 짧게 비교한 뒤, 이번 주 수업·일기·영작에서 다시 쓸 문장 하나로 연결합니다.
 
 - 비교 단어: **cheap** / **jeep**, **chin** / **gin**
 - 연결 문장: **I chose a cheap jacket.** — 저는 저렴한 재킷을 골랐어요.
