@@ -13,6 +13,31 @@ listen: true
 - **I had a meeting this morning.** — 오늘 아침 회의가 있었어요.
 - **I had a good time.** — 즐거운 시간을 보냈어요.
 
+## 자주 사용하는 표현
+
+소유뿐 아니라 식사·일정·대화·경험에도 **have + 명사**를 사용합니다. 표현을 덩어리로 익힙니다.
+
+- **have a reservation** — 예약이 되어 있다.
+- **have an appointment** — 진료·상담 등의 예약이나 약속이 있다.
+- **have breakfast / lunch / dinner** — 아침·점심·저녁을 먹다. 일반적인 식사 표현에는 관사를 붙이지 않습니다.
+- **have a coffee** — 커피 한 잔 마시다. **have coffee**도 가능합니다.
+- **have a meeting** — 회의하다·회의가 있다.
+- **have a conversation** — 대화하다.
+- **have a question** — 질문이 있다.
+- **have a problem** — 문제가 있다.
+- **have time** — 시간이 있다.
+- **have a good time** — 즐거운 시간을 보내다.
+
+### HAVE와 MAKE · 예약하기와 예약이 되어 있기
+
+**I'd like to make a reservation.** — 예약하고 싶어요. 지금 예약을 잡으려는 상황입니다.
+
+**I have a reservation under Kim.** — 김이라는 이름으로 예약했어요. 이미 예약이 되어 있는 상황입니다.
+
+**make an appointment**는 예약을 잡는 행동, **have an appointment**는 잡힌 일정이 있다는 뜻입니다.
+
+[MAKE의 자주 사용하는 표현](./make.md#자주-사용하는-표현)
+
 ## 함께 익힐 표현: have a conversation
 
 **have a conversation** — 대화를 나누다. 대화 상대는 `with + 사람`, 주제는 `about + 주제`로 붙입니다.
