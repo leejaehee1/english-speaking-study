@@ -15,12 +15,6 @@ export default defineConfig({
       { text: 'JoyTalk', link: 'https://projects-joytalk.vercel.app/', target: '_blank', rel: 'noopener noreferrer' }
     ],
     sidebar: [
-      { text: '영화 자막', collapsed: true, items: [
-        { text: '영화별 목록', link: '/movies/' },
-        { text: 'Greenland 2 · 시청용', link: '/movies/greenland-2' },
-        { text: 'Greenland 2 · 상세 복습', link: '/movies/greenland-2-review' },
-        { text: '날짜별 학습 양식', link: '/movies/study-template' }
-      ] },
       { text: '학습 가이드', collapsed: true, items: [
         { text: '영어 수준과 학습 시간', link: '/guides/cefr-levels' },
         { text: '외국어 학습법 · 소리와 표현 쌓기', link: '/guides/language-learning-method' }
@@ -85,6 +79,12 @@ export default defineConfig({
         { text: '자음 음소 · B/P, D/T, G/K, V/F, S/Z, J/CH', link: '/pronunciation/consonant-phonemes' },
         { text: '아침 회화 전 · 5분 발음 연습', link: '/pronunciation/morning-practice' },
         { text: '단어 추출 · 발음 연습', link: '/pronunciation/word-practice' }
+      ] },
+      { text: '영화 자막', collapsed: true, items: [
+        { text: '영화별 목록', link: '/movies/' },
+        { text: 'Greenland 2 · 시청용', link: '/movies/greenland-2' },
+        { text: 'Greenland 2 · 상세 복습', link: '/movies/greenland-2-review' },
+        { text: '날짜별 학습 양식', link: '/movies/study-template' }
       ] },
     ],
     search: { provider: 'local' },
