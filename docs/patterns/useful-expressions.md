@@ -6,6 +6,8 @@ listen: true
 
 문장이 막힐 때도 대화를 이어갈 수 있는 표현부터 익힙니다.
 
+[Feelings & Emotions · 감정 표현](./feelings-and-emotions.md) — 긍정·부정 감정 형용사, 핵심 20개 표현과 회화 연습
+
 ## 인사와 근황
 
 - **I'm pretty good. How about you?** — 잘 지내요. 당신은요?

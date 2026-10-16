@@ -48,6 +48,7 @@ export default defineConfig({
       ] },
       { text: '표현집', collapsed: true, items: [
         { text: '자주 쓰는 표현', link: '/patterns/useful-expressions' },
+        { text: 'Feelings & Emotions · 감정 표현', link: '/patterns/feelings-and-emotions' },
         { text: '여행 형용사와 감탄 표현', link: '/patterns/travel-adjectives' },
         { text: '음식 형용사 · 맛과 식감', link: '/patterns/food-adjectives' },
         { text: '음식과 요리 · 재료와 조리', link: '/patterns/food-and-cooking' },
