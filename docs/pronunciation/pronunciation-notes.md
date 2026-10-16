@@ -1,109 +1,24 @@
 ---
-listen: true
+title: 음소 학습 시리즈 · 소리튠영어
 ---
 
-# 발음 노트
+# 음소 학습 시리즈 · 소리튠영어
 
-## 음소 학습 · 주아쌤 소리튠영어 {#phoneme-series}
+## 주아쌤 소리튠영어 · 영상과 재생목록 {#phoneme-series}
 
 **[주아쌤_소리튠영어 · 음소 학습 시리즈 바로가기](https://www.youtube.com/watch?v=or7k3weRAtI&list=PLJv1Fpdyo3rbXoHAh_SiMdcKKZof0-Iow)**
 
-음소 연습에 사용할 영상 시리즈입니다. 위 링크는 지정한 영상과 재생목록을 함께 엽니다. 모음·자음 노트와 함께 볼 기본 참고 자료로 둡니다.
+영어의 기본 소리를 듣고 따라 하는 학습 자료입니다. 영상에서 소리를 확인하고, 아래 모음·자음 자료의 단어와 문장으로 연습을 이어갑니다.
 
-스터디 활용 제안: **오늘 연습할 소리 하나 고르기 → 영상 듣고 따라 하기 → 단어와 문장에 적용하기 → 내 녹음과 비교하기.**
+## 짧게 연습하는 순서
 
-## 발음 연습 자료
+**소리 한 쌍 고르기 → 영상 듣고 따라 하기 → 단어 비교 → 문장으로 말하기**
 
-[모음 음소 · æ, ɛ, ʌ, ɔː, uː, ʊ, ɪ, iː](./vowel-phonemes.md) — 입 모양·혀 위치, 비교 단어와 음식 문장 연습.
+입 모양·혀 위치와 소리의 차이를 확인하고, 빠르게 말하기보다 구별되는 소리를 유지합니다. 한 번에 여러 소리를 끝내려 하지 말고, 내 녹음과 비교해 고칠 점 하나만 고릅니다. 이 순서는 스터디 활용 제안입니다.
 
-[자음 음소 · B/P, D/T, G/K, V/F, S/Z, J/CH](./consonant-phonemes.md) — 여섯 자음 쌍의 강의 단어, 조음 위치와 발음 변이, 최소대립쌍·문장 연습.
+## 함께 볼 자료
 
-목표: 빠르게 말하기보다 상대가 알아들을 수 있게 말하기.
-
-[아침 회화 전 · 5분 발음 연습](./morning-practice.md) — 입 풀기 → 혀 위치 → 모음 대비 → 텅 트위스터와 문장 리듬.
-
-## 2026-10-12 · 원본 발음 듣기
-
-링크를 누르면 영상의 해당 문장부터 들을 수 있습니다. 재생 후 한 문장을 듣고 멈춰 따라 합니다.
-
-- [0:56 · How was your morning today?](https://www.youtube.com/watch?v=v07kPyPkLYw&t=56s)
-- [2:30 · That makes sense.](https://www.youtube.com/watch?v=v07kPyPkLYw&t=150s)
-- [2:38 · What about you, David?](https://www.youtube.com/watch?v=v07kPyPkLYw&t=158s)
-- [3:45 · Let me think.](https://www.youtube.com/watch?v=v07kPyPkLYw&t=225s)
-
-질문은 억양을, 짧은 답변은 강세와 리듬을 따라 합니다. 처음에는 0.75배속, 익숙해지면 원래 속도로 연습합니다.
-
-## 영작 문장 들어보기
-
-아래 굵은 영어 문장을 누르면 기기의 영어 음성으로 읽어줍니다. 원본 화자의 발음과는 다르며, 사용할 수 있는 목소리는 브라우저·기기에 따라 달라집니다.
-
-- **How old do you think she is?**
-- **Do you know how old she is?**
-- **What do you think we should do?**
-
-## 하루 5분 연습
-
-1. 출처와 구간을 남기고, 짧은 문장 1개를 듣습니다.
-2. 의미가 중요한 단어에 강세를 두며 천천히 3번 말합니다.
-3. 원래 음성을 따라 말한 뒤 녹음해 비교합니다.
-4. 한 번에 한 가지 어려운 소리만 고칩니다.
-
-## 녹음 숙제에 적용하기
-
-노트 한 페이지 정도를 문장 단위로 연습한 뒤 이어서 녹음합니다. 원어민 음성과 발음·강세·리듬을 비교하고, 당일 자정까지 카카오톡으로 제출합니다. 파일은 따로 저장하지 않고 [Daily](../daily/2026-10-13.md)에 제출 여부와 고칠 점 1개만 남깁니다.
-
-## 오늘 연습할 문장
-
-- **What makes you think so?** — `think`의 /θ/: 혀끝을 앞니 사이에 살짝 두고 공기를 내보냅니다.
-- **I got home late.** — `home`, `late`를 또렷하게 말합니다.
-- **Let me think.** — 단어 사이에 긴 쉼을 넣지 않고 연결합니다.
-
-강세는 전달하려는 의미에 따라 달라질 수 있습니다. 한글 발음 표기보다 원음을 듣고 따라 합니다.
-
-## 기록 양식
-
-- 날짜 / 문장:
-- 음성 출처 / 구간:
-- 어려운 소리 또는 강세:
-- 비교 후 고칠 점 1개:
-- 다음 복습 날짜:
-
-[Daily 기록](../daily/2026-10-13.md) · [Week 1 Review](../review/week-01.md)
-
-## 2026-10-13 · 새 단어와 반어적 억양
-
-- **spectacular** — `tac` 부분에 강세를 두고 단어 전체를 듣고 따라 합니다.
-- **breathtaking** — `breath` 부분에 주강세. `breath`의 끝은 /θ/이며, 동사 **breathe**의 /ð/와 구별합니다.
-- **thoughtful** — 첫 음절에 강세. **thought**의 /θ/를 연습합니다.
-- **deserve** — 두 번째 음절에 강세.
-- **juicy** — 첫 음절에 강세.
-- **Have a good one, Alex!** — 이름까지 포함하여 자연스럽게 이어 말합니다.
-
-<strong>What a beautiful day!</strong>를 실제로 감탄하는 상황과 날씨에 불만을 가진 상황에서 각각 연습합니다. 반어적 의미는 고정된 한 가지 억양만으로 결정되지 않으므로 문맥·표정·어조를 함께 확인합니다. 간접 표현이 모두 sarcasm인 것은 아닙니다.
-
-굵은 표현의 기기 음성은 기본 발음 연습에 사용합니다. 반어적 의도는 자동 음성만으로 판단하지 말고 수업에서 들은 말투와 상황을 떠올려 연습합니다.
-
-[10월 13일 수업 기록](../daily/2026-10-13.md)
-
-## 2026-10-13 · 습관 대화 원음 따라 하기
-
-- [5:17 · Slowly but surely](https://www.youtube.com/watch?v=v07kPyPkLYw&t=317s): 중심 단어의 강세와 리듬.
-- [6:03 · Before you know it](https://www.youtube.com/watch?v=v07kPyPkLYw&t=363s): 짧은 표현을 한 덩어리로 연결하기.
-- [6:21 · Do you have this habit too?](https://www.youtube.com/watch?v=v07kPyPkLYw&t=381s): 질문의 억양.
-
-[오늘 녹음 대본](../references/2026-10-13-daily-habits.md)을 한 문장씩 듣고 멈춰 따라 합니다.
-
-## 문장에서 단어별 발음 연습
-
-[단어 추출 · 발음 연습](./word-practice.md)에 일기·영작·녹음 대본을 붙여 넣어 어려운 단어를 듣고 따라 말합니다. 마지막에는 원래 문장 전체를 다시 말합니다.
-
-## 2026-10-14 · salmon의 묵음 l
-
-**salmon** — 연어. 미국식 대표 발음 **/ˈsæmən/**: 첫 음절에 강세, **l은 발음하지 않습니다.**
-
-- **Could I get the grilled salmon, please?** — 연어구이로 주세요.
-- **The salmon is tender and juicy.** — 연어가 부드럽고 촉촉해요.
-
-단어만 세 번 말한 뒤 주문 문장으로 연결합니다. /l/ 소리를 넣지 않았는지 확인하세요.
-
-[오늘 수업](../daily/2026-10-14.md) · [음식과 요리](../patterns/food-and-cooking.md)
+- [모음 음소 · 여덟 가지 소리](./vowel-phonemes.md) — 입 모양·혀 위치와 헷갈리는 모음 비교.
+- [자음 음소 · 여섯 가지 소리 쌍](./consonant-phonemes.md) — B/P, D/T, G/K, V/F, S/Z, J/CH 비교.
+- [아침 회화 전 · 5분 발음 연습](./morning-practice.md) — 평일 5분, 주말 하루 복습과 하루 휴식.
+- [단어 추출 · 발음 연습](./word-practice.md) — 수업·일기 문장의 어려운 단어를 골라 듣고 따라 말하기.
