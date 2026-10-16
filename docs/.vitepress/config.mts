@@ -2,6 +2,7 @@ import { defineConfig } from 'vitepress'
 
 export default defineConfig({
   lang: 'ko-KR',
+  srcExclude: ['public/downloads/**/*.md'],
   title: 'English Speaking Study',
   description: '2개월 평일 영어회화 학습 기록과 나만의 표현집',
   base: '/english-speaking-study/',
@@ -9,10 +10,17 @@ export default defineConfig({
     nav: [
       { text: '홈', link: '/' },
       { text: '학습 달력', link: '/calendar' },
+      { text: '영화 자막', link: '/movies/' },
       { text: '오늘의 기록', link: '/daily/2026-10-16' },
       { text: 'JoyTalk', link: 'https://projects-joytalk.vercel.app/', target: '_blank', rel: 'noopener noreferrer' }
     ],
     sidebar: [
+      { text: '영화 자막', collapsed: true, items: [
+        { text: '영화별 목록', link: '/movies/' },
+        { text: 'Greenland 2 · 시청용', link: '/movies/greenland-2' },
+        { text: 'Greenland 2 · 상세 복습', link: '/movies/greenland-2-review' },
+        { text: '날짜별 학습 양식', link: '/movies/study-template' }
+      ] },
       { text: '학습 가이드', collapsed: true, items: [
         { text: '영어 수준과 학습 시간', link: '/guides/cefr-levels' },
         { text: '외국어 학습법 · 소리와 표현 쌓기', link: '/guides/language-learning-method' }
