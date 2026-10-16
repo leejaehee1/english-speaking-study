@@ -4,6 +4,8 @@ listen: true
 
 # 2026-10-13 · 녹음 숙제 · 좋은 습관과 나쁜 습관
 
+[전체 대본 · 한국어/영어 펼치기 연습](./everyday-english-full-script.md)
+
 [영상 보기 · 4:23부터](https://www.youtube.com/watch?v=v07kPyPkLYw&t=263s)
 
 - 자료: 30 Minutes of Real English Conversation You'll Actually Use (A2-B2)

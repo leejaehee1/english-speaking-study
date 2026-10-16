@@ -5,6 +5,8 @@ listeningLang: en-US
 
 # 2026-10-14 · 읽기 녹음 · 이전 주제 이어서, Travel, Food
 
+[전체 대본 · 한국어/영어 펼치기 연습](./everyday-english-full-script.md)
+
 [원본 영상](https://www.youtube.com/watch?v=v07kPyPkLYw) · 기존 자료에서 사용한 같은 영상의 다음 구간입니다.
 
 ## 오늘 녹음한 구간

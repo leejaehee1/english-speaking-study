@@ -5,6 +5,8 @@ listeningLang: en-US
 
 # 2026-10-15 · 녹음 숙제 · Feelings
 
+[전체 대본 · 한국어/영어 펼치기 연습](./everyday-english-full-script.md)
+
 [원본 영상](https://www.youtube.com/watch?v=v07kPyPkLYw) · [전날 구간](./2026-10-14-travel-food-reading.md)에 이어서 진행했습니다.
 
 ## 녹음한 구간과 주제

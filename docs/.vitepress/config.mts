@@ -37,6 +37,7 @@ export default defineConfig({
       ] },
       { text: '녹음 숙제·수업 자료', collapsed: true, items: [
         { text: '자료 목록', link: '/references/' },
+        { text: '일상 영어 대화 · 전체 대본', link: '/references/everyday-english-full-script' },
         { text: '10월 15일 · Feelings 녹음', link: '/references/2026-10-15-feelings-reading' },
         { text: '10월 14일 · 세 토픽 읽기 녹음', link: '/references/2026-10-14-travel-food-reading' },
         { text: '10월 13일 · 습관 대화', link: '/references/2026-10-13-daily-habits' },

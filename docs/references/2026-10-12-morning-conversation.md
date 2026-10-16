@@ -4,6 +4,8 @@ listen: true
 
 # 2026-10-12 · 녹음 숙제 · 아침 일상 대화
 
+[전체 대본 · 한국어/영어 펼치기 연습](./everyday-english-full-script.md)
+
 **2026-10-12 · 카카오톡 녹음 제출 완료**
 
 [영상 보기 · 0:51부터](https://www.youtube.com/watch?v=v07kPyPkLYw&t=51s)
