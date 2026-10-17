@@ -128,6 +128,8 @@ listen: true
 - **record myself reading / enjoy recording / treat it like a game**을 통째로 연습. start to record와 start recording은 둘 다 가능.
 - `more good pronounce` → **better pronunciation**; 동사 pronounce와 명사 pronunciation 구별.
 - `I maybe do this everyday` → **I might do this every day.**
-- 철자: **comfortable / because / decision / alcohol / cousin / Saturday**
+- 철자: **comfortable / because / decision / alcohol / Saturday**
 
 [원문·첨삭·문장별 설명과 해석 확인](../diary/2026-10-17.md)
+
+- 10/17 일기의 `consine`은 사용자 확인에 따라 **niece (여자 조카)**로 교정. **cousin**은 사촌, **nephew**는 남자 조카. 원문은 보존.
