@@ -16,6 +16,8 @@
 
 ## 기록 위치
 
+- [영화 자막](docs/movies/index.md): 영화별 시청용 표현·상세 복습·시간 보정과 누적 학습
+
 - [Daily](docs/daily/2026-10-16.md): 수업 내용과 이해를 돕는 예문
 - [영작](docs/writing/index.md): 문제·내 답안·첨삭
 - [일기](docs/diary/index.md): 내가 쓴 글과 교정본
