@@ -10,7 +10,7 @@ export default defineConfig({
     nav: [
       { text: '홈', link: '/' },
       { text: '학습 달력', link: '/calendar' },
-      { text: '영화 자막', link: '/movies/' },
+      { text: '문장에서 단어 추출 · 발음 연습', link: '/pronunciation/word-practice' },
       { text: '오늘의 기록', link: '/daily/2026-10-16' },
       { text: 'JoyTalk', link: 'https://projects-joytalk.vercel.app/', target: '_blank', rel: 'noopener noreferrer' }
     ],
@@ -79,8 +79,8 @@ export default defineConfig({
         { text: '자음 음소 · B/P, D/T, G/K, V/F, S/Z, J/CH', link: '/pronunciation/consonant-phonemes' },
         { text: '아침 회화 전 · 5분 발음 연습', link: '/pronunciation/morning-practice' },
         { text: '아침 입 풀기 · 입술에서 목까지', link: '/pronunciation/morning-articulation-drill' },
-        { text: '단어 추출 · 발음 연습', link: '/pronunciation/word-practice' },
-        { text: '발음하기 어려운 표현 60개 · 연결 발화 확장', link: '/pronunciation/connected-speech-expanded' }
+        { text: '발음하기 어려운 표현 60개 · 연결 발화 확장', link: '/pronunciation/connected-speech-expanded' },
+        { text: '문장에서 단어 추출 · 발음 연습', link: '/pronunciation/word-practice' }
       ] },
       { text: '영화 자막', collapsed: true, items: [
         { text: '영화별 목록', link: '/movies/' },
