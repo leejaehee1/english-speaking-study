@@ -64,6 +64,7 @@ export default defineConfig({
         { text: '음식 형용사 · 맛과 식감', link: '/patterns/food-adjectives' },
         { text: '음식과 요리 · 재료와 조리', link: '/patterns/food-and-cooking' },
         { text: '질문 패턴', link: '/patterns/question-patterns' },
+        { text: '가족 호칭 · Family Terms', link: '/patterns/family-terms' },
         { text: '숫자 읽기 · 1부터 1조', link: '/patterns/numbers' },
         { text: 'HAVE', link: '/patterns/have' },
         { text: 'GET', link: '/patterns/get' },
