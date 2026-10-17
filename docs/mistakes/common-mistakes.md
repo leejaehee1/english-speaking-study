@@ -117,3 +117,17 @@ listen: true
 - **salmon /ˈsæmən/**: l은 묵음.
 
 [오늘 수업](../daily/2026-10-14.md) · [질문 패턴](../patterns/question-patterns.md)
+
+## 2026-10-17 · 영어 일기
+
+- `made my mind` → **made up my mind to practice**
+- `desicion do not go` → **decided not to go / made a decision not to go**
+- `was suppose to` → **was supposed to**
+- `need to your help` → **need my help**: need + 명사, need to + 동사원형 구별. 소유자는 원문에서 미확인.
+- `in the this morning` → **this morning**; **a podcast on YouTube**의 관사·전치사.
+- **record myself reading / enjoy recording / treat it like a game**을 통째로 연습. start to record와 start recording은 둘 다 가능.
+- `more good pronounce` → **better pronunciation**; 동사 pronounce와 명사 pronunciation 구별.
+- `I maybe do this everyday` → **I might do this every day.**
+- 철자: **comfortable / because / decision / alcohol / cousin / Saturday**
+
+[원문·첨삭·문장별 설명과 해석 확인](../diary/2026-10-17.md)

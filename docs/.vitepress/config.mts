@@ -36,6 +36,7 @@ export default defineConfig({
         { text: '10월 12일 · 아침 대화', link: '/references/2026-10-12-morning-conversation' }
       ] },
       { text: '영어 일기', collapsed: true, items: [
+        { text: '10월 17일 · 게임처럼 즐기는 영어 연습', link: '/diary/2026-10-17' },
         { text: '10월 16일 · 멋진 하루와 말하기 연습', link: '/diary/2026-10-16' },
         { text: '10월 15일 · 바쁘지만 행복한 하루', link: '/diary/2026-10-15' },
         { text: '10월 14일 · 스터디룸과 듣기 전략', link: '/diary/2026-10-14' },
