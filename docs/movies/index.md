@@ -14,6 +14,12 @@ title: "영화 자막"
 - [상세 복습 · 맥락과 연음](./greenland-2-review.md) — 원문, 한국어 뜻, 중요도, 일반 미국 영어 발음 포인트
 - [누적 학습 CSV](/downloads/movies/greenland-2-chunks.csv) — 원본 시간과 보정 시간을 함께 보관
 
+### Dead of Winter
+
+- [시청용 · 시간과 짧은 뜻](./dead-of-winter.md) — 111개 청크, 원본 영어 SRT 시간 기준
+- [상세 복습 · 사용법과 듣기](./dead-of-winter-review.md) — 청크 뜻·사용법·연결 발화 연습
+- [누적 학습 CSV](/downloads/movies/dead-of-winter-chunks.csv) — 자막 번호·원본 구간·학습 기록
+
 ## 매일 쌓는 방법
 
 수집량은 자유롭게 정하고, 집중 복습은 하루 3–5개를 고릅니다. 당일 → 다음 날 → 3일 뒤 → 7일 뒤 → 14일 뒤에 자막 없이 듣고, 내 상황으로 바꿔 말합니다.
