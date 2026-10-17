@@ -11,7 +11,7 @@ export default defineConfig({
       { text: '홈', link: '/' },
       { text: '학습 달력', link: '/calendar' },
       { text: '문장에서 단어 추출 · 발음 연습', link: '/pronunciation/word-practice' },
-      { text: '오늘의 기록', link: '/daily/2026-10-16' },
+      { text: '오늘의 기록', link: '/daily/2026-10-17' },
       { text: 'JoyTalk', link: 'https://projects-joytalk.vercel.app/', target: '_blank', rel: 'noopener noreferrer' }
     ],
     sidebar: [
@@ -20,6 +20,7 @@ export default defineConfig({
         { text: '외국어 학습법 · 소리와 표현 쌓기', link: '/guides/language-learning-method' }
       ] },
       { text: '수업 기록', collapsed: true, items: [
+        { text: '10월 17일 · 생활 표현과 꿈 녹음', link: '/daily/2026-10-17' },
         { text: '10월 16일 · 감사·인물과 프로그램 소개', link: '/daily/2026-10-16' },
         { text: '10월 15일 · 시제·생활 표현과 직업', link: '/daily/2026-10-15' },
         { text: '10월 14일 · 질문 패턴과 음식 표현', link: '/daily/2026-10-14' },
@@ -27,6 +28,7 @@ export default defineConfig({
         { text: '10월 12일', link: '/daily/2026-10-12' }
       ] },
       { text: '녹음 숙제', collapsed: true, items: [
+        { text: '10월 17일 · Common English Phrases & Dreams', link: '/references/2026-10-17-common-phrases-dreams-reading' },
         { text: '10월 16일 · Learning English 녹음', link: '/references/2026-10-16-english-learning-reading' },
         { text: '10월 15일 · Feelings 녹음', link: '/references/2026-10-15-feelings-reading' },
         { text: '10월 14일 · 세 토픽 읽기 녹음', link: '/references/2026-10-14-travel-food-reading' },
