@@ -126,3 +126,5 @@ title: 발음하기 어려운 표현 60개 · 연결 발화 확장
 한 번 녹음해 단어 사이에 불필요한 모음을 넣는지, 기능어마다 끊는지 확인합니다. 속도보다 편안하게 이어 말하는 것을 목표로 합니다.
 
 [발음 노트](./pronunciation-notes.md) · [아침 5분 발음 연습](./morning-practice.md) · [단어 추출 연습](./word-practice.md)
+
+- [영어 발음 훈련 — 턱의 긴장과 연결 발화](./jaw-tension-and-connected-speech.md) — 턱 해부학 이미지, if 연결, English 조음 협응.

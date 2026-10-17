@@ -25,3 +25,5 @@ title: 음소 학습 시리즈 · 소리튠영어
 
 - [발음하기 어려운 표현 60개 · 연결 발화 확장](./connected-speech-expanded.md) — 짧은 단어 연속, it/if/is/as 연결, 자음 충돌, 빠른 실전 회화.
 - [아침 입 풀기 · 입술에서 목까지](./morning-articulation-drill.md) — 입술에서 성문까지 쉬운 단어로 이어 가는 2분 드릴.
+
+- [영어 발음 훈련 — 턱의 긴장과 연결 발화](./jaw-tension-and-connected-speech.md) — 턱 해부학 이미지, if 연결, English 조음 협응.
