@@ -14,6 +14,8 @@
 
 ## 녹음 숙제 자료
 
+- [2026-10-18 · 표현 복습과 마무리](./2026-10-18-review-and-encouragement-reading.md) — 24:20–29:18 · 핵심 표현·말하기 질문·전체 녹음 대본
+
 - [2026-10-17 · Common English Phrases & Dreams 녹음](./2026-10-17-common-phrases-dreams-reading.md) — 20:16–24:20 · 녹음 완료 · 1~5번 연속 읽기 대본
 
 - [2026-10-16 · Learning English 녹음](./2026-10-16-english-learning-reading.md) — 16:45–20:12 · 상당히 빠른 템포로 녹음 완료
