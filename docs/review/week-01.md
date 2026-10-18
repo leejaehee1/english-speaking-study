@@ -5,7 +5,7 @@ listeningLang: en-US
 
 # Week 1 · 10월 12–16일 종합 복습
 
-**10월 16일까지의 수업·영작·일기·녹음과 연결 학습 자료를 함께 복습합니다.** 문장을 읽고 알아보는 것보다, 상황만 보고 내 말로 꺼내는 데 집중합니다. 아래 문제와 시간 배분은 복습용 제안입니다.
+**10월 12–16일 수업·영작·일기·녹음과 연결 학습 자료를 함께 복습합니다.** 10월 17일 토요일은 수업이 없었으며, 그날의 녹음·일기 내용은 아래 주말 자율 학습 항목으로 따로 정리했습니다. 문장을 읽고 알아보는 것보다, 상황만 보고 내 말로 꺼내는 데 집중합니다. 아래 문제와 시간 배분은 복습용 제안입니다.
 
 ## 복습하는 방법 · 45분
 
@@ -218,6 +218,45 @@ HAVE=상태, GET=변화는 학습용 출발점입니다. have lunch는 활동, h
 - **10/16:** Learning English 16:45–20:12(영상 3분 27초), **상당히 빠른 템포로 녹음 완료**. 실제 녹음 길이·배속·제출·필사 여부는 미확인.
 
 미확인 항목을 완료 횟수에 합산하지 않습니다. 10/15와 10/16의 영상 구간은 원래 보고대로 약간 겹친 상태로 보존합니다.
+
+## 주말 자율 학습 · 10월 17일 토요일 {#weekend-oct17}
+
+이날은 수업 없이 생활 표현·꿈에 관한 대본 읽기 녹음과 영어 일기 작성·첨삭을 진행했습니다. 수업 기록에 포함하지 않습니다.
+
+### 녹음에서 복습할 핵심 표현
+
+- **How are you doing?** — 어떻게 지내요? / **Pretty good, thanks. How about you?** — 꽤 잘 지내요. 당신은요?
+- **What's up?** — 별일 있어? / **Not much. Just chilling.** — 별일 없어. 그냥 쉬는 중이야.
+- **Never mind.** — 신경 쓰지 마세요. / **I figured it out.** — 알아냈어요, 해결했어요.
+- **Could you say that again, please?** — 다시 말씀해 주시겠어요?
+- **Sorry, I didn't catch that.** — 죄송하지만 못 알아들었어요.
+- **Could you speak a little more slowly, please?** — 조금 더 천천히 말씀해 주시겠어요?
+- **What is one dream you have?** — 가지고 있는 꿈 하나는 무엇인가요?
+- **I have wanted to write a book for a long time.** — 오랫동안 책을 쓰고 싶었어요.
+- **fear of failure** — 실패에 대한 두려움.
+- **I start anyway.** — 그래도 시작해요.
+- **Slowly but surely.** — 느리지만 꾸준히, 확실하게.
+- **Take one small step towards it today.** — 오늘 그것을 향해 작은 한 걸음을 내디뎌 보세요.
+- **One step is enough to begin.** — 시작하기에는 한 걸음이면 충분해요.
+
+[10/17 녹음 대본 · 20:16–24:20](../references/2026-10-17-common-phrases-dreams-reading.md)
+
+### 일기에서 복습할 문장 구조
+
+- **decide not to go out** — 외출하지 않기로 결정하다.
+- **be supposed to meet someone** — 누군가를 만나기로 되어 있다.
+- **record myself reading a script** — 대본을 읽는 내 목소리를 녹음하다.
+- **enjoy recording / start recording / start to record** — enjoy 뒤에는 -ing, start 뒤에는 -ing와 to 동사원형 모두 가능.
+- **make up my mind / treat it like a game** — 결심하다 / 게임처럼 여기다.
+- **this morning / on YouTube / every day / better pronunciation** — 시간·전치사·비교 표현 점검.
+
+일기에는 영어 공부의 동기, 생활 습관 변화, 약속 변경, 게임처럼 즐기는 녹음 연습을 담았습니다. 여자 조카(**my niece**) 관계는 사용자가 확인했으며, 그 밖의 인물 관계·약속 시간 해석은 [일기 원문·전체 첨삭](../diary/2026-10-17.md)의 메모를 참고합니다.
+
+### 자율 학습 수행 기록
+
+- 원본 영상 **20:16–24:20 (4분 4초)** 구간 읽기 녹음 완료 (사용자 보고).
+- 영어 일기 작성·첨삭 완료.
+- 실제 녹음 길이·배속·녹음 제출·공책 필사·추가 낭독 여부는 미확인입니다.
 
 ## 8. 다음 주로 연결하기
 

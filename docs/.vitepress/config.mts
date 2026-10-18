@@ -11,7 +11,7 @@ export default defineConfig({
       { text: '홈', link: '/' },
       { text: '학습 달력', link: '/calendar' },
       { text: '문장에서 단어 추출 · 발음 연습', link: '/pronunciation/word-practice' },
-      { text: '오늘의 기록', link: '/daily/2026-10-17' },
+      { text: '오늘의 기록', link: '/daily/2026-10-16' },
       { text: 'JoyTalk', link: 'https://projects-joytalk.vercel.app/', target: '_blank', rel: 'noopener noreferrer' }
     ],
     sidebar: [
@@ -21,7 +21,6 @@ export default defineConfig({
         { text: 'Claude로 나만의 AI 영어 튜터 만들기', link: '/guides/claude-ai-english-tutor' }
       ] },
       { text: '수업 기록', collapsed: true, items: [
-        { text: '10월 17일 · 생활 표현과 꿈 녹음', link: '/daily/2026-10-17' },
         { text: '10월 16일 · 감사·인물과 프로그램 소개', link: '/daily/2026-10-16' },
         { text: '10월 15일 · 시제·생활 표현과 직업', link: '/daily/2026-10-15' },
         { text: '10월 14일 · 질문 패턴과 음식 표현', link: '/daily/2026-10-14' },

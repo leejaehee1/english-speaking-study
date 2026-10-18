@@ -13,7 +13,9 @@ listeningLang: en-US
 - **자료:** 앞 대화에서 제공된 1~5번 통합 영어 대본. 시간표시 없이 처음부터 끝까지 이어 읽을 수 있도록 보존했습니다.
 - 실제 녹음 오디오 파일은 제공되지 않았습니다. 실제 녹음 길이·배속·제출 여부는 확인되지 않았습니다.
 
-[원본 영상 · 20:16부터](https://www.youtube.com/watch?v=v07kPyPkLYw&t=1216s) · [오늘 학습 기록](../daily/2026-10-17.md) · [녹음 자료 목록](./index.md)
+[원본 영상 · 20:16부터](https://www.youtube.com/watch?v=v07kPyPkLYw&t=1216s) · [오늘의 영어 일기](../diary/2026-10-17.md) · [녹음 자료 목록](./index.md)
+
+[10월 17일 자율 학습 복습](../review/week-01.md#weekend-oct17)
 
 ## 연속 녹음용 전체 대본
 
