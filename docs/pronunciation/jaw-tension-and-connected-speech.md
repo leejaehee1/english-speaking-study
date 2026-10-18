@@ -83,7 +83,11 @@ title: 영어 발음 훈련 — 턱의 긴장과 연결 발화
 
 짧은 단어가 이어지면 의미 덩어리와 중요한 단어의 강세를 먼저 잡습니다. `Let me SEE / if it WORKS.`의 슬래시는 연습용 구분이며 실제 말할 때 반드시 멈추라는 뜻은 아닙니다. 상세한 약화·자음 연결은 [기존 8개 연결 설명](./connected-speech-expanded.md#집중-훈련할-연결-발음-8개)을 참고합니다.
 
-## 4. English 발음과 조음 협응
+## 4. 내가 말하기 어려운 단어 · English, really, delicious
+
+2026-10-18 사용자 보고: **English, really, delicious**를 말할 때 어렵게 느낍니다. 실제 음성을 평가한 결과는 아니므로, 아래 포인트를 녹음과 비교해 연습합니다.
+
+### English · 혀 뒤쪽에서 /l/로 이동
 
 **English /ˈɪŋ.ɡlɪʃ/**: 첫 음절에 강세를 두는 두 음절 단어입니다. [Cambridge 사전의 UK·US 원음](https://dictionary.cambridge.org/dictionary/english/english)을 듣고 비교합니다.
 
@@ -93,6 +97,38 @@ title: 영어 발음 훈련 — 턱의 긴장과 연결 발화
 4. /ɪʃ/: 짧은 모음 뒤에 /ʃ/ 마찰로 마칩니다. 끝에 ‘이’를 덧붙이지 않습니다.
 
 `/ɪŋ/` → `/ɪŋɡ/` → `English` → `I speak English.` 순서로 연결합니다. 조각 연습 후에는 반드시 두 음절 전체로 돌아옵니다. 턱을 한 위치에 붙잡기보다 혀 뒤쪽 접촉과 혀끝 이동의 타이밍을 느린 속도로 맞춥니다.
+
+### really · /r/에서 /l/로 이동
+
+**뜻:** 정말, 아주. 첫 음절에 강세를 둡니다. 발음은 방언과 속도에 따라 달라질 수 있으므로 한 가지 한글 독음으로 고정하지 않습니다.
+
+- 시작 /r/에서는 혀끝을 윗잇몸에 붙이지 않고, 뒤의 /l/에서는 혀끝이 윗잇몸 쪽에 닿도록 이동합니다.
+- 혀를 억지로 말거나 턱에 힘을 주기보다 /r/과 /l/의 접촉 차이를 천천히 확인합니다.
+- 마지막 소리를 길고 강하게 늘이기보다 첫 음절의 강세를 살립니다.
+
+**really** → **really good** → **I really like it.**
+
+[really 사전·원음](https://dictionary.cambridge.org/dictionary/english/really)을 듣고 내 녹음과 비교합니다.
+
+### delicious · 가운데 음절 강세와 /ʃ/ 연결
+
+**delicious /dɪˈlɪʃəs/** — 맛있는. 세 음절 중 가운데 음절에 강세가 있습니다.
+
+- 첫 음절은 가볍게, 가운데 /lɪ/를 더 두드러지게 말합니다. 모든 음절에 같은 힘을 주지 않습니다.
+- /l/은 혀끝을 윗잇몸 쪽에 대고 시작합니다. 뒤의 /ɪ/를 지나 /ʃ/의 마찰로 이어 갑니다.
+- 마지막 /əs/는 약하게 마칩니다. 끝 /s/ 뒤에 별도 모음을 붙여 음절을 늘리지 않습니다.
+
+**delicious** → **It's delicious.** → **This soup is delicious.**
+
+[delicious 사전·원음](https://dictionary.cambridge.org/dictionary/english/delicious)을 듣고 강세 위치를 확인합니다.
+
+### 세 단어를 문장으로 연결하기
+
+1. **I practice English every day.** — 매일 영어를 연습해요.
+2. **I really enjoy learning English.** — 영어 배우는 걸 정말 즐겨요.
+3. **This food is really delicious.** — 이 음식은 정말 맛있어요.
+
+단어를 천천히 세 번 → 짧은 구절 → 문장 순서로 연습합니다. 세 단어를 녹음한 뒤 **English의 불필요한 모음 / really의 r과 l / delicious의 가운데 강세**를 하나씩 확인합니다. 정확하게 말하기 편해진 뒤 속도를 올립니다. 사전 원음과 내 발음을 번갈아 듣고, 실제로 어려웠던 부분을 따로 메모합니다.
 
 ## 5. 편안하게 연습하는 방법
 
