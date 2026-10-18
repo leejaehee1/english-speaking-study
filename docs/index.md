@@ -62,6 +62,8 @@
 
 ## 학습 가이드
 
+[Claude로 나만의 AI 영어 튜터 만들기](./guides/claude-ai-english-tutor.md) — 프로젝트에 넣는 전체 프롬프트와 사용 방법
+
 [외국어 학습법 · 소리와 표현 쌓기](./guides/language-learning-method.md) — 소리 훈련·한영 훈련·영상 선택과 우리 스터디 적용 루틴
 
 [영어 수준과 학습 시간 · CEFR](./guides/cefr-levels.md) — A1부터 C2까지의 능력과 누적 학습 시간, 우리 스터디 목표

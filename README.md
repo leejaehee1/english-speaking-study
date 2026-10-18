@@ -31,6 +31,8 @@
 
 ## 학습 가이드
 
+- [Claude로 나만의 AI 영어 튜터 만들기](docs/guides/claude-ai-english-tutor.md)
+
 - [외국어 학습법 · 소리와 표현 쌓기](docs/guides/language-learning-method.md)
 - [영어 수준과 학습 시간 · CEFR](docs/guides/cefr-levels.md)
 
