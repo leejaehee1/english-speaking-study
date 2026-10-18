@@ -91,6 +91,8 @@ export default defineConfig({
       ] },
       { text: '영화 자막', collapsed: true, items: [
         { text: '영화별 목록', link: '/movies/' },
+        { text: 'Greenland 1 · 시청용', link: '/movies/greenland-1' },
+        { text: 'Greenland 1 · 상세 복습', link: '/movies/greenland-1-review' },
         { text: 'Dead of Winter · 시청용', link: '/movies/dead-of-winter' },
         { text: 'Dead of Winter · 상세 복습', link: '/movies/dead-of-winter-review' },
         { text: 'Greenland 2 · 시청용', link: '/movies/greenland-2' },

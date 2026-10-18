@@ -8,6 +8,12 @@ title: "영화 자막"
 
 ## 영화별 자료
 
+### Greenland (2020) · 1편
+
+- [시청용 · 시간과 짧은 뜻](./greenland-1.md) — 137개 chunk, 영어 SRT 원본 시간 기준
+- [상세 복습 · 축약·연음과 구동사](./greenland-1-review.md) — 원문 자막·한국어 뜻·듣기 포인트
+- [누적 학습 CSV](/downloads/movies/greenland-1-chunks.csv) — 자막 번호·원본 시간·복습 기록
+
 ### Greenland 2: Migration
 
 - [시청용 · 시간과 짧은 뜻](./greenland-2.md) — 전체 영화의 129개 표현과 반복 표현 1개. 54:07 이후 +1분 35초 보정.
