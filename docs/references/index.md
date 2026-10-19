@@ -16,7 +16,7 @@
 
 ## 녹음 숙제 자료
 
-- [2026-10-19 · Morning Routines 녹음](./2026-10-19-morning-routines-reading.md) — 1:08부터 마지막 5:05 자막 문장 끝까지 · 녹음 예정 · 전체 대본·핵심 표현
+- [2026-10-19 · Morning Routines 녹음](./2026-10-19-morning-routines-reading.md) — 1:02부터 마지막 5:05 자막 문장 끝까지 · 녹음 예정 · 전체 대본·핵심 표현
 
 - [2026-10-18 · 표현 복습과 마무리](./2026-10-18-review-and-encouragement-reading.md) — 24:20–29:18 · 핵심 표현·말하기 질문·전체 녹음 대본
 
