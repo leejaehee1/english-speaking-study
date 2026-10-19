@@ -28,6 +28,7 @@ export default defineConfig({
         { text: '10월 12일', link: '/daily/2026-10-12' }
       ] },
       { text: '녹음 숙제', collapsed: true, items: [
+        { text: '10월 19일 · Morning Routines (녹음 예정)', link: '/references/2026-10-19-morning-routines-reading' },
         { text: '10월 18일 · 표현 복습과 마무리', link: '/references/2026-10-18-review-and-encouragement-reading' },
         { text: '10월 17일 · Common English Phrases & Dreams', link: '/references/2026-10-17-common-phrases-dreams-reading' },
         { text: '10월 16일 · Learning English 녹음', link: '/references/2026-10-16-english-learning-reading' },
