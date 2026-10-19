@@ -4,6 +4,8 @@
 
 ## 수업 자료
 
+- [2026-10-20 · 주문하기 — 수업 예정](./2026-10-20-ordering-food-and-drinks.md) — Coffee Shops & Fast Food · B1 중심, 일부 B2 응용
+
 - [2026-10-19 · 수업 준비](./2026-10-19-class-preparation.md) — 연말 계획 또는 추억
 
 - [2026-10-12 · 코스트코 기사](./2026-10-12-costco-reading.md) — 10월 13일 수업 전
