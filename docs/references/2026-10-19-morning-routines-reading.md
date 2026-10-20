@@ -8,11 +8,11 @@ listeningLang: en-US
 ## 녹음 구간과 자료
 
 - **숙제 날짜:** 2026-10-19 (월)
-- **영상:** Improve Your English Just by Listening | 40 Minutes of Real English Listening Practice(B1–B2)
+- **영상:** Improve Your English Just by Listening | 40 Minutes of Real English Listening Practice (B1–B2)
 - **녹음 범위:** 제공 대본의 첫 문장 **Alice, can I ask you something personal?**부터 마지막 **It's simple, but it's true.**까지.
 - **시간 기준:** 첫 자막 1:02부터 마지막 자막 5:05에 시작하는 문장이 끝날 때까지. 5:05는 종료 시각이 아닙니다. 다음 Part의 챕터 경계는 5:10입니다.
 - **분량:** 원본 약 4분. 실제 녹음 길이는 읽는 속도에 따라 달라집니다.
-- **상태:** 녹음 예정 · 대본 정리. 녹음 완료·카카오톡 제출 여부는 확인되지 않았습니다.
+- **상태:** 사용자 수행 보고 완료 — 2026-10-20 대화에서 “어제 위 내용처럼 숙제했는데”라고 보고했습니다. 녹음 파일 검토·카카오톡 제출 여부는 확인되지 않았습니다.
 - **대본 편집:** 사용자가 제공한 전체 구간의 발화를 유지하고 타임스탬프·[laughter]·[music] 표시만 제거했습니다. 읽기 편하게 문장부호·문단을 정리했습니다. 화자 표시는 원문에 없어 임의로 붙이지 않았습니다.
 
 [원본 영상 · 1:02부터](https://www.youtube.com/watch?v=ZlO3xUl7Kdg&t=62s) · [녹음 자료 목록](./index.md) · [학습 달력](../calendar.md)
