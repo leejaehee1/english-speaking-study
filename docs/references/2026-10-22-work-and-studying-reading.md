@@ -8,16 +8,18 @@ listeningLang: en-US
 ## 녹음 구간과 자료
 
 - **영상:** Improve Your English Just by Listening | 40 Minutes of Real English Listening Practice (B1–B2)
-- **범위:** 13:49에 시작하는 **That's a deep question. Yes, I do most of the time.**부터 마지막 제공 자막 묶음의 **That's right.**까지.
+- **범위:** 13:44 자막 묶음의 **Alice, do you enjoy your work?**부터 마지막 제공 자막 묶음의 **That's right.**까지.
 - **시간 기준:** 마지막 제공 자막은 17:37에 시작합니다. 17:37은 정확한 종료 시각이 아니며, 해당 묶음의 마지막 문장이 끝날 때까지 읽습니다.
-- **연속 구간:** [2026-10-21 · Travel](./2026-10-21-travel-reading.md)의 9:47~13:44 자막 구간에 이어지는 같은 영상의 다음 부분입니다. 다시 제공된 13:44의 **Alice, do you enjoy your work?**는 전날 대본의 마지막 질문이므로 아래 대본은 Alice의 답변부터 시작합니다.
+- **연속 구간:** [2026-10-21 · Travel](./2026-10-21-travel-reading.md)의 9:47~13:44 자막 구간에 이어지는 같은 영상의 다음 부분입니다. 첫 질문 **Alice, do you enjoy your work?**는 전날 대본의 마지막 문장과 겹치지만, 질문과 답변을 이어 읽을 수 있도록 이번 대본에도 포함했습니다.
 - **상태:** 2026-10-22 녹음 숙제 자료. 실제 녹음 완료·제출 여부는 미확인입니다.
 - **편집:** 타임스탬프와 [laughter] 등 비언어 표시를 제거하고 줄바꿈을 문장 단위로 연결했습니다. **Work life balance**는 **Work-life balance**로 표기하고, **H I think**의 불명확한 **H**는 제외했습니다. 반복 표현과 철자 읽기는 보존했습니다.
-- **화자:** 첫 답변은 앞선 호명에 따라 Alice, 뒤의 응답은 David로 구분했습니다. 이후 발화는 음성 확인 없이 화자를 단정하지 않고, 질문·응답과 낭독 호흡에 따라 문단만 나눴습니다.
+- **화자:** 첫 질문은 David, 첫 답변은 호명에 따라 Alice, 뒤의 응답은 David로 구분했습니다. 이후 발화는 음성 확인 없이 화자를 단정하지 않고, 질문·응답과 낭독 호흡에 따라 문단만 나눴습니다.
 
-[원본 영상 · 13:49부터](https://www.youtube.com/watch?v=ZlO3xUl7Kdg&t=829s) · [녹음 숙제 자료 목록](./index.md)
+[원본 영상 · 13:44부터](https://www.youtube.com/watch?v=ZlO3xUl7Kdg&t=824s) · [녹음 숙제 자료 목록](./index.md)
 
 ## 전체 녹음 대본
+
+**David:** Alice, do you enjoy your work?
 
 **Alice:** That's a deep question. Yes, I do most of the time. What about you?
 
