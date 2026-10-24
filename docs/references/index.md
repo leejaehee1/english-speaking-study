@@ -16,7 +16,7 @@
 
 ## 녹음 숙제 자료
 
-- [2026-10-23 · Health & Well-being 녹음 숙제 자료](./2026-10-23-health-and-well-being-reading.md) — 17:37~22:21 제공 자막 · 경계 문장과 잘린 마지막 문장 보존 · 전체 대본·핵심 표현
+- [2026-10-23 · Health & Well-being 녹음 숙제 자료](./2026-10-23-health-and-well-being-reading.md) — 17:44부터 22:15 자막 묶음의 We all say that.까지 · 전체 대본·핵심 표현
 
 - [2026-10-22 · Work & Studying 녹음 숙제 자료](./2026-10-22-work-and-studying-reading.md) — 13:44 자막의 첫 질문부터 마지막 17:37 자막 묶음 끝까지 · 전날 Travel의 연속 구간 · 녹음·제출 여부 미확인
 
