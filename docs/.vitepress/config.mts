@@ -44,6 +44,7 @@ export default defineConfig({
         { text: '10월 12일 · 아침 대화', link: '/references/2026-10-12-morning-conversation' }
       ] },
       { text: '영어 일기', collapsed: true, items: [
+        { text: '10월 25일 · 주말농장 가꾸기와 영어 회화 모임', link: '/diary/2026-10-25' },
         { text: '10월 24일 · 시험과 강의를 마친 안도감과 감사', link: '/diary/2026-10-24' },
         { text: '10월 23일 · 시험과 AI 로봇 팔 과정 마무리', link: '/diary/2026-10-23' },
         { text: '10월 22일 · AI 프로젝트 마감과 마지막 시험', link: '/diary/2026-10-22' },
