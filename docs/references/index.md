@@ -16,6 +16,8 @@
 
 ## 녹음 숙제 자료
 
+- [2026-10-26 · English Learning Tips 녹음 숙제 자료](./2026-10-26-english-learning-tips-reading.md) — 28:37 시작부터 마지막 33:10 자막 묶음 끝까지 · 전체 대본·영어 학습 팁·말하기 연습
+
 - [2026-10-25 · Technology 녹음 숙제 자료](./2026-10-25-technology-reading.md) — 25:33 질문부터 마지막 28:37 자막 묶음 끝까지 · 전체 대본·기술 어휘·말하기 연습
 
 - [2026-10-24 · Feelings & Emotions 녹음 숙제 자료](./2026-10-24-feelings-and-emotions-reading.md) — 22:15 질문부터 마지막 25:33 자막 묶음 끝까지 · 전체 대본·감정 표현·말하기 연습

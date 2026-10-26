@@ -29,6 +29,7 @@ export default defineConfig({
         { text: '10월 12일', link: '/daily/2026-10-12' }
       ] },
       { text: '녹음 숙제', collapsed: true, items: [
+        { text: '10월 26일 · English Learning Tips (녹음 숙제 자료)', link: '/references/2026-10-26-english-learning-tips-reading' },
         { text: '10월 25일 · Technology (녹음 숙제 자료)', link: '/references/2026-10-25-technology-reading' },
         { text: '10월 24일 · Feelings & Emotions (녹음 숙제 자료)', link: '/references/2026-10-24-feelings-and-emotions-reading' },
         { text: '10월 23일 · Health & Well-being (녹음 숙제 자료)', link: '/references/2026-10-23-health-and-well-being-reading' },
