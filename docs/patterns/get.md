@@ -65,3 +65,55 @@ listen: true
 - **I get home at six.** — 6시에 집에 도착해요. home 앞에는 to를 쓰지 않습니다.
 
 [10월 14일 수업 기록](../daily/2026-10-14.md)
+
+
+## get told · 누구를 닮았다는 말을 듣다
+
+**I get told I look like [이름] a lot.** — 나 [이름] 닮았다는 말을 많이 들어.
+
+- 직역: 나는 말을 들어 / 내가 [이름]처럼 보인다고 / 자주.
+- **get told + 문장**: “~라는 말을 듣다”. **tell → told**는 과거분사이고, **get told**는 말을 듣는 사람을 주어로 하는 수동 표현입니다.
+- **look like + 사람**: “~를 닮다”. **a lot**은 여기서 “자주, 많이”라는 뜻입니다.
+
+### 지금도 듣는 말과 예전에 들었던 말
+
+아래 이름은 바꿔 말하기 위한 예시입니다.
+
+- **I get told I look like IU a lot.** — 나 아이유 닮았다는 말을 많이 들어. (평소에도 듣는 말)
+- **I used to get told I looked like IU a lot.** — 나 예전에 아이유 닮았다는 말을 많이 들었어. (예전에는 자주 그랬다는 뜻)
+- **I got told I looked like IU a lot in high school.** — 나 고등학교 때 아이유 닮았다는 말을 많이 들었어. (끝난 과거 시기)
+
+**I get that a lot.** — 그 말 많이 들어.
+
+상대가 먼저 **You look like IU.**(너 아이유 닮았어.)라고 말했을 때 이렇게 짧게 답할 수 있습니다. **that**은 앞에서 들은 말을 가리키므로, 누구를 닮았는지 처음 설명할 때는 **I get told I look like … a lot.**처럼 말합니다.
+
+### 한글 직역 → 영어로 말하기
+
+한글만 보고 먼저 소리 내어 말한 뒤 영어 정답을 확인하세요.
+
+나는 말을 들어 / 내가 아이유처럼 보인다고 / 자주.
+
+<details>
+<summary>영어 정답 보기 / 숨기기</summary>
+
+**I get told I look like IU a lot.**
+
+</details>
+
+나는 예전에 말을 듣곤 했어 / 내가 아이유처럼 보인다고 / 자주.
+
+<details>
+<summary>영어 정답 보기 / 숨기기</summary>
+
+**I used to get told I looked like IU a lot.**
+
+</details>
+
+나는 그 말을 들어 / 자주. (상대가 누구를 닮았다고 말한 뒤)
+
+<details>
+<summary>영어 정답 보기 / 숨기기</summary>
+
+**I get that a lot.**
+
+</details>
