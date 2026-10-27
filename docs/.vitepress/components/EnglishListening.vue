@@ -22,7 +22,7 @@ function capture() {
 }
 function clickPhrase(event) {
   if (!frontmatter.value.listen || !supported.value || !window.getSelection()?.isCollapsed) return
-  const strong = event.target.closest?.('.vp-doc strong')
+  const strong = event.target.closest?.('.vp-doc strong') || event.target.closest?.('.vp-doc td')?.querySelector('strong')
   if (!strong || strong.closest('a, button')) return
   const chosen = strong.textContent.replace(/\s*✅\s*$/, '').trim()
   if (isEnglish(chosen)) { text.value = chosen; speak() }
