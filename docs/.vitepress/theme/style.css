@@ -1,1 +1,11 @@
 .VPDoc:has(.listening-hint) .vp-doc strong { cursor: pointer; }
+
+.VPSidebarItem.level-1.collapsible > .item > .text {
+  color: var(--vp-c-brand-1);
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.VPSidebarItem.level-1.collapsible > .item:hover > .text {
+  color: var(--vp-c-brand-2);
+}

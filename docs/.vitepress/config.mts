@@ -1,4 +1,72 @@
-import { defineConfig } from 'vitepress'
+import { defineConfig, type DefaultTheme } from 'vitepress'
+
+const RECENT_SIDEBAR_LIMIT = 7
+const STUDY_START_UTC = Date.UTC(2026, 9, 12) // 2026-10-12 (월) · 1주차 시작
+const DAY_MS = 86_400_000
+
+function parseItemDateUTC(item: DefaultTheme.SidebarItem): number | null {
+  const linkMatch = item.link?.match(/(2026)-(\d{2})-(\d{2})/)
+  if (linkMatch) {
+    return Date.UTC(Number(linkMatch[1]), Number(linkMatch[2]) - 1, Number(linkMatch[3]))
+  }
+  const textMatch = item.text?.match(/(\d{1,2})월\s*(\d{1,2})일/)
+  if (textMatch) {
+    return Date.UTC(2026, Number(textMatch[1]) - 1, Number(textMatch[2]))
+  }
+  return null
+}
+
+function formatMonthDay(utcMs: number): string {
+  const d = new Date(utcMs)
+  return `${d.getUTCMonth() + 1}/${d.getUTCDate()}`
+}
+
+function groupByRecentAndWeek(
+  items: DefaultTheme.SidebarItem[],
+  recentLimit = RECENT_SIDEBAR_LIMIT
+): DefaultTheme.SidebarItem[] {
+  if (items.length <= recentLimit) return items
+
+  const recent = items.slice(0, recentLimit)
+  const older = items.slice(recentLimit)
+
+  const weekMap = new Map<number, DefaultTheme.SidebarItem[]>()
+  const fallback: DefaultTheme.SidebarItem[] = []
+
+  for (const item of older) {
+    const utc = parseItemDateUTC(item)
+    if (utc === null) {
+      fallback.push(item)
+      continue
+    }
+    const weekNum = Math.max(1, Math.floor((utc - STUDY_START_UTC) / (7 * DAY_MS)) + 1)
+    const list = weekMap.get(weekNum) ?? []
+    list.push(item)
+    weekMap.set(weekNum, list)
+  }
+
+  const weekGroups: DefaultTheme.SidebarItem[] = Array.from(weekMap.entries())
+    .sort((a, b) => b[0] - a[0])
+    .map(([weekNum, groupItems]) => {
+      const weekStart = STUDY_START_UTC + (weekNum - 1) * 7 * DAY_MS
+      const weekEnd = weekStart + 6 * DAY_MS
+      return {
+        text: `${weekNum}주차 (${formatMonthDay(weekStart)}–${formatMonthDay(weekEnd)})`,
+        collapsed: true,
+        items: groupItems
+      }
+    })
+
+  if (fallback.length > 0) {
+    weekGroups.push({
+      text: '이전 기록',
+      collapsed: true,
+      items: fallback
+    })
+  }
+
+  return [...recent, ...weekGroups]
+}
 
 export default defineConfig({
   lang: 'ko-KR',
@@ -20,15 +88,15 @@ export default defineConfig({
         { text: '외국어 학습법 · 소리와 표현 쌓기', link: '/guides/language-learning-method' },
         { text: 'Claude로 나만의 AI 영어 튜터 만들기', link: '/guides/claude-ai-english-tutor' }
       ] },
-      { text: '수업 기록', collapsed: true, items: [
+      { text: '수업 기록', collapsed: true, items: groupByRecentAndWeek([
         { text: '10월 26일 · 비교급과 as … as 말하기', link: '/daily/2026-10-26' },
         { text: '10월 16일 · 감사·인물과 프로그램 소개', link: '/daily/2026-10-16' },
         { text: '10월 15일 · 시제·생활 표현과 직업', link: '/daily/2026-10-15' },
         { text: '10월 14일 · 질문 패턴과 음식 표현', link: '/daily/2026-10-14' },
         { text: '10월 13일 · 여행과 표현', link: '/daily/2026-10-13' },
         { text: '10월 12일', link: '/daily/2026-10-12' }
-      ] },
-      { text: '녹음 숙제', collapsed: true, items: [
+      ]) },
+      { text: '녹음 숙제', collapsed: true, items: groupByRecentAndWeek([
         { text: '10월 26일 · English Learning Tips (녹음 숙제 자료)', link: '/references/2026-10-26-english-learning-tips-reading' },
         { text: '10월 25일 · Technology (녹음 숙제 자료)', link: '/references/2026-10-25-technology-reading' },
         { text: '10월 24일 · Feelings & Emotions (녹음 숙제 자료)', link: '/references/2026-10-24-feelings-and-emotions-reading' },
@@ -44,8 +112,8 @@ export default defineConfig({
         { text: '10월 14일 · 세 토픽 읽기 녹음', link: '/references/2026-10-14-travel-food-reading' },
         { text: '10월 13일 · 습관 대화', link: '/references/2026-10-13-daily-habits' },
         { text: '10월 12일 · 아침 대화', link: '/references/2026-10-12-morning-conversation' }
-      ] },
-      { text: '영어 일기', collapsed: true, items: [
+      ]) },
+      { text: '영어 일기', collapsed: true, items: groupByRecentAndWeek([
         { text: '10월 26일 · 오랜만에 찾은 스터디룸과 비교급 공부', link: '/diary/2026-10-26' },
         { text: '10월 25일 · 주말농장 가꾸기와 영어 회화 모임', link: '/diary/2026-10-25' },
         { text: '10월 24일 · 시험과 강의를 마친 안도감과 감사', link: '/diary/2026-10-24' },
@@ -61,18 +129,18 @@ export default defineConfig({
         { text: '10월 14일 · 스터디룸과 듣기 전략', link: '/diary/2026-10-14' },
         { text: '10월 13일 · 비 오는 날', link: '/diary/2026-10-13' },
         { text: '10월 12일 · 공부 시작', link: '/diary/2026-10-12' }
-      ] },
-      { text: '영작 숙제', collapsed: true, items: [
+      ]) },
+      { text: '영작 숙제', collapsed: true, items: groupByRecentAndWeek([
         { text: '10월 13일 · go through', link: '/writing/2026-10-13-go-through' },
         { text: '10월 12일 · Think', link: '/writing/2026-10-12-think' }
-      ] },
-      { text: '수업 자료', collapsed: true, items: [
+      ]) },
+      { text: '수업 자료', collapsed: true, items: groupByRecentAndWeek([
         { text: '10월 20일 · 주문하기 (수업 예정)', link: '/references/2026-10-20-ordering-food-and-drinks' },
         { text: '10월 19일 · 한국의 술 문화', link: '/patterns/korean-drinking-culture' },
         { text: '10월 19일 · 유튜브 A2-B2 스크립트', link: '/references/everyday-english-full-script' },
         { text: '10월 19일 · 수업 준비', link: '/references/2026-10-19-class-preparation' },
         { text: '10월 12일 · 코스트코 읽기', link: '/references/2026-10-12-costco-reading' }
-      ] },
+      ]) },
       { text: '주간 복습', collapsed: true, items: [
         { text: '1주차 · 10월 12–16일', link: '/review/week-01' }
       ] },
