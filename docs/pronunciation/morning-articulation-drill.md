@@ -10,19 +10,19 @@ listeningLang: en-US
 
 ## 전체 드릴 · 작은 목소리로 편안하게
 
-**pie · bee · me · we**
+**pie** · **bee** · **me** · **we**
 
-**fan · van**
+**fan** · **van**
 
-**thin · this**
+**thin** · **this**
 
-**tea · day · see · zoo · no · low**
+**tea** · **day** · **see** · **zoo** · **no** · **low**
 
-**red · she · beige · chew · Joe**
+**red** · **she** · **beige** · **chew** · **Joe**
 
 **yes**
 
-**key · go · sing**
+**key** · **go** · **sing**
 
 **hi**
 

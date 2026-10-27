@@ -9,7 +9,7 @@ const speaking = ref(false)
 const message = ref('')
 let utterance
 let revision = 0
-const isEnglish = value => /[a-z]/i.test(value) && !/[^\x00-\x7F\u2010-\u201F\u2026\u00A0]/.test(value) && value.length <= 600
+const isEnglish = value => /[a-z]/i.test(value) && !/[^\x00-\x7F\u00A0\u00B7\u2010-\u201F\u2026]/.test(value) && value.length <= 600
 function capture() {
   if (!frontmatter.value.listen || !supported.value) return
   const selection = window.getSelection()
@@ -37,7 +37,7 @@ function speak() {
   if (!text.value || !supported.value) return
   stop()
   const current = revision
-  utterance = new SpeechSynthesisUtterance(text.value)
+  utterance = new SpeechSynthesisUtterance(text.value.replace(/\s*·\s*/g, ', '))
   const voices = window.speechSynthesis.getVoices()
   const preferredLang = frontmatter.value.listeningLang || 'en-CA'
   const voice = voices.find(v => v.lang === preferredLang) || voices.find(v => v.lang === 'en-US') || voices.find(v => v.lang.startsWith('en'))
