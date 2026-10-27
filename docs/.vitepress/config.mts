@@ -132,7 +132,7 @@ export default defineConfig({
       ]) },
       { text: '영작 숙제', collapsed: true, items: groupByRecentAndWeek([
         { text: '10월 13일 · go through', link: '/writing/2026-10-13-go-through' },
-        { text: '10월 12일 · Think', link: '/writing/2026-10-12-think' }
+        { text: '10월 12일 · think', link: '/writing/2026-10-12-think' }
       ]) },
       { text: '수업 자료', collapsed: true, items: groupByRecentAndWeek([
         { text: '10월 20일 · 주문하기 (수업 예정)', link: '/references/2026-10-20-ordering-food-and-drinks' },
