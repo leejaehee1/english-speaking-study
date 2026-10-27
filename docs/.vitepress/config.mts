@@ -74,6 +74,20 @@ export default defineConfig({
   title: 'English Speaking Study',
   description: '2개월 평일 영어회화 학습 기록과 나만의 표현집',
   base: '/english-speaking-study/',
+  markdown: {
+    config(md) {
+      md.core.ruler.before('inline', 'korean-bold-after-punct', (state) => {
+        for (const token of state.tokens) {
+          if (token.type === 'inline' && token.content.includes('**')) {
+            token.content = token.content.replace(
+              /\*\*([^\n*]+?[^\s*])\*\*(?=[가-힣])/g,
+              '<strong>$1</strong>'
+            )
+          }
+        }
+      })
+    }
+  },
   themeConfig: {
     nav: [
       { text: '홈', link: '/' },
