@@ -182,12 +182,12 @@ export default defineConfig({
       ] },
       { text: '발음과 교정', collapsed: true, items: [
         { text: '발음하기 어려운 표현 60개 · 연결 발화 확장', link: '/pronunciation/connected-speech-expanded' },
+        { text: '아침 회화 전 · 5분 발음 연습', link: '/pronunciation/morning-practice' },
+        { text: '아침 입 풀기 · 입술에서 목까지', link: '/pronunciation/morning-articulation-drill' },
         { text: '턱의 긴장·해부학과 연결 발화', link: '/pronunciation/jaw-tension-and-connected-speech' },
         { text: '음소 학습 시리즈 · 소리튠영어', link: '/pronunciation/pronunciation-notes#phoneme-series' },
         { text: '모음 음소 · 여덟 가지 소리', link: '/pronunciation/vowel-phonemes' },
         { text: '자음 음소 · B/P, D/T, G/K, V/F, S/Z, J/CH', link: '/pronunciation/consonant-phonemes' },
-        { text: '아침 회화 전 · 5분 발음 연습', link: '/pronunciation/morning-practice' },
-        { text: '아침 입 풀기 · 입술에서 목까지', link: '/pronunciation/morning-articulation-drill' },
         { text: '문장에서 단어 추출 · 발음 연습', link: '/pronunciation/word-practice' }
       ] },
       { text: '영화 자막', collapsed: true, items: [
