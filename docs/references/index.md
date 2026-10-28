@@ -18,6 +18,8 @@
 
 ## 녹음 숙제 자료
 
+- [2026-10-28 · Key Phrases Review & English Is a Muscle 녹음 숙제 자료](./2026-10-28-key-phrases-review-reading.md) — 36:18부터 마지막 37:53 자막 묶음 끝까지 · 전체 대본·핵심 구절 총정리·말하기 연습
+
 - [2026-10-27 · Dreams & Goals 녹음 숙제 자료](./2026-10-27-dreams-and-goals-reading.md) — 33:16 질문부터 마지막 36:26 자막 묶음 끝까지 · 전체 대본·꿈과 목표 표현·말하기 연습
 
 - [2026-10-26 · English Learning Tips 녹음 숙제 자료](./2026-10-26-english-learning-tips-reading.md) — 28:37 시작부터 마지막 33:10 자막 묶음 끝까지 · 전체 대본·영어 학습 팁·말하기 연습
