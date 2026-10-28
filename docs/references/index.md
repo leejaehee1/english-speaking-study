@@ -18,6 +18,8 @@
 
 ## 녹음 숙제 자료
 
+- [2026-10-30 · Affirmations & Proud of My Progress 녹음 숙제 자료](./2026-10-30-affirmations-and-progress-reading.md) — 39:50부터 마지막 41:45 자막 묶음 끝까지 · 전체 대본·6대 영어 학습 다짐 문장
+
 - [2026-10-29 · Practice Questions & Speaking Out Loud 녹음 숙제 자료](./2026-10-29-practice-questions-reading.md) — 37:58부터 마지막 39:50 자막 묶음 끝까지 · 전체 대본·5개 실전 질문 답변 틀·말하기 연습
 
 - [2026-10-28 · Key Phrases Review & English Is a Muscle 녹음 숙제 자료](./2026-10-28-key-phrases-review-reading.md) — 36:18부터 마지막 37:53 자막 묶음 끝까지 · 전체 대본·핵심 구절 총정리·말하기 연습

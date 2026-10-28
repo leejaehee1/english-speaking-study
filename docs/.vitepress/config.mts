@@ -113,6 +113,7 @@ export default defineConfig({
         { text: '10월 12일', link: '/daily/2026-10-12' }
       ]) },
       { text: '녹음 숙제', collapsed: true, items: groupByRecentAndWeek([
+        { text: '10월 30일 · Affirmations & Progress (녹음 숙제 자료)', link: '/references/2026-10-30-affirmations-and-progress-reading' },
         { text: '10월 29일 · Practice Questions (녹음 숙제 자료)', link: '/references/2026-10-29-practice-questions-reading' },
         { text: '10월 28일 · Key Phrases Review (녹음 숙제 자료)', link: '/references/2026-10-28-key-phrases-review-reading' },
         { text: '10월 27일 · Dreams & Goals (녹음 숙제 자료)', link: '/references/2026-10-27-dreams-and-goals-reading' },
