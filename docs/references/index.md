@@ -18,6 +18,8 @@
 
 ## 녹음 숙제 자료
 
+- [2026-10-31 · Final Encouragement & Closing 녹음 숙제 자료 (영상 완주)](./2026-10-31-final-encouragement-and-closing-reading.md) — 41:45부터 마지막 43:49 끝까지 · 전체 대본·마무리 격려 표현·말하기 연습
+
 - [2026-10-30 · Affirmations & Proud of My Progress 녹음 숙제 자료](./2026-10-30-affirmations-and-progress-reading.md) — 39:50부터 마지막 41:45 자막 묶음 끝까지 · 전체 대본·6대 영어 학습 다짐 문장
 
 - [2026-10-29 · Practice Questions & Speaking Out Loud 녹음 숙제 자료](./2026-10-29-practice-questions-reading.md) — 37:58부터 마지막 39:50 자막 묶음 끝까지 · 전체 대본·5개 실전 질문 답변 틀·말하기 연습
