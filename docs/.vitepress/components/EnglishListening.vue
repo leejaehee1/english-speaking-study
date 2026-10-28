@@ -9,7 +9,7 @@ const speaking = ref(false)
 const message = ref('')
 let utterance
 let revision = 0
-const isEnglish = value => /[a-z]/i.test(value) && !/[^\x00-\x7F\u00A0\u00B7\u2010-\u201F\u2026]/.test(value) && value.length <= 600
+const isEnglish = value => /[a-z]/i.test(value) && !/[^\x00-\x7F\u00A0\u00B7\u00C0-\u00FF\u2010-\u201F\u2026]/.test(value) && value.length <= 600
 function capture() {
   if (!frontmatter.value.listen || !supported.value) return
   const selection = window.getSelection()

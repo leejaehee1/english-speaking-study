@@ -152,6 +152,7 @@ export default defineConfig({
         { text: '10월 12일 · think', link: '/writing/2026-10-12-think' }
       ]) },
       { text: '수업 자료', collapsed: true, items: groupByRecentAndWeek([
+        { text: '10월 28일 · 추수감사절 여행·날씨 기사', link: '/references/2026-10-28-thanksgiving-travel-weather' },
         { text: '10월 20일 · 주문하기 (수업 예정)', link: '/references/2026-10-20-ordering-food-and-drinks' },
         { text: '10월 19일 · 한국의 술 문화', link: '/patterns/korean-drinking-culture' },
         { text: '10월 19일 · 유튜브 A2-B2 스크립트', link: '/references/everyday-english-full-script' },

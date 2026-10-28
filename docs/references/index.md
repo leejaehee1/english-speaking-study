@@ -4,6 +4,8 @@
 
 ## 수업 자료
 
+- [2026-10-28 · 추수감사절 여행과 날씨 기사 (Thanksgiving Travel & Weather)](./2026-10-28-thanksgiving-travel-weather.md) — 연속 읽기 원문·문장별 영한 대조·핵심 표현
+
 - [2026-10-20 · 주문하기 — 수업 예정](./2026-10-20-ordering-food-and-drinks.md) — Coffee Shops & Fast Food · B1 중심, 일부 B2 응용
 
 - [2026-10-19 · 수업 준비](./2026-10-19-class-preparation.md) — 연말 계획 또는 추억
