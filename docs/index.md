@@ -20,7 +20,8 @@
 
 - [영화 자막](./movies/index.md) — Greenland 2 시청용·상세 복습·누적 학습
 
-- [오늘의 기록 · 10월 27일](./daily/2026-10-27.md) — 원어민 핵심 회화 Chunk (`a big fan of`, `into it`, `When it comes to`, `It depends`)와 부사 6개
+- [오늘의 기록 · 10월 28일](./daily/2026-10-28.md) — 패러프레이징·콜로케이션, `cannot … enough` 강조·감사 패턴과 발음 영상
+- [10월 27일 기록](./daily/2026-10-27.md) — 원어민 핵심 회화 Chunk (`a big fan of`, `into it`, `When it comes to`, `It depends`)와 부사 6개
 - [10월 26일 기록](./daily/2026-10-26.md) — 오랜만의 수업 · 비교급·as … as·even/way·한글 → 영어 말하기
 - [10월 16일 기록](./daily/2026-10-16.md) — 감사 억양·존경하는 사람·쇼핑·프로그램 소개와 고유명사
 - [10월 15일 기록](./daily/2026-10-15.md) — 시제·Small Talk·생활 표현·직업과 발음
