@@ -163,6 +163,7 @@ export default defineConfig({
         { text: '1주차 · 10월 12–16일', link: '/review/week-01' }
       ] },
       { text: '표현집', collapsed: true, items: [
+        { text: '기본 회화 질문·답변 50선', link: '/patterns/basic-qa-50' },
         { text: '자주 쓰는 표현', link: '/patterns/useful-expressions' },
         { text: 'Someone I Admire · 존경하는 사람', link: '/patterns/someone-i-admire' },
         { text: 'Feelings & Emotions · 감정 표현', link: '/patterns/feelings-and-emotions' },

@@ -6,6 +6,8 @@ listen: true
 
 문장이 막힐 때도 대화를 이어갈 수 있는 표현부터 익힙니다.
 
+[기본 회화 질문·답변 50선](./basic-qa-50.md) — 일상 대화·프리토킹 필수 질문과 답변 50세트 암기 및 한영 말하기
+
 [Feelings & Emotions · 감정 표현](./feelings-and-emotions.md) — 긍정·부정 감정 형용사, 핵심 20개 표현과 회화 연습
 
 [Someone I Admire · 존경하는 사람](./someone-i-admire.md) — 존경하는 이유와 나에게 준 영향 말하기
