@@ -133,6 +133,7 @@ export default defineConfig({
         { text: '10월 12일 · 아침 대화', link: '/references/2026-10-12-morning-conversation' }
       ]) },
       { text: '영어 일기', collapsed: true, items: groupByRecentAndWeek([
+        { text: '10월 28일 · 입에서 자동으로 나온 표현과 학습법', link: '/diary/2026-10-28' },
         { text: '10월 27일 · 스터디룸 피자 파티와 Claude 도와주기', link: '/diary/2026-10-27' },
         { text: '10월 26일 · 오랜만에 찾은 스터디룸과 비교급 공부', link: '/diary/2026-10-26' },
         { text: '10월 25일 · 주말농장 가꾸기와 영어 회화 모임', link: '/diary/2026-10-25' },
