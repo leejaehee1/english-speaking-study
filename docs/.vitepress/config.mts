@@ -93,7 +93,7 @@ export default defineConfig({
       { text: '홈', link: '/' },
       { text: '학습 달력', link: '/calendar' },
       { text: '문장에서 단어 추출 · 발음 연습', link: '/pronunciation/word-practice' },
-      { text: '오늘의 기록', link: '/daily/2026-10-28' },
+      { text: '오늘의 기록', link: '/daily/2026-10-30' },
       { text: 'JoyTalk', link: 'https://projects-joytalk.vercel.app/', target: '_blank', rel: 'noopener noreferrer' }
     ],
     sidebar: [
@@ -103,6 +103,7 @@ export default defineConfig({
         { text: 'Claude로 나만의 AI 영어 튜터 만들기', link: '/guides/claude-ai-english-tutor' }
       ] },
       { text: '수업 기록', collapsed: true, items: groupByRecentAndWeek([
+        { text: '10월 30일 · 성격·칭찬·예쁨·경치 릴레이 말하기', link: '/daily/2026-10-30' },
         { text: '10월 28일 · 패러프레이징·콜로케이션과 cannot … enough', link: '/daily/2026-10-28' },
         { text: '10월 27일 · 핵심 회화 Chunk와 부사 6개', link: '/daily/2026-10-27' },
         { text: '10월 26일 · 비교급과 as … as 말하기', link: '/daily/2026-10-26' },
