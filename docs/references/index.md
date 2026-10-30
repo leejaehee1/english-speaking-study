@@ -18,6 +18,8 @@
 
 ## 녹음 숙제 자료
 
+- [2026-10-30 · Textbook English vs. Natural English 녹음 숙제 자료](./2026-10-30-textbook-vs-natural-english-reading.md) — 새 에피소드 0:00부터 2:46 끝까지 · 교과서 영어와 실생활 원어민 영어의 차이
+
 - [2026-10-29 · Affirmations & Final Encouragement 녹음 숙제 자료 (영상 완주)](./2026-10-29-affirmations-and-closing-reading.md) — 39:50부터 마지막 43:49 끝까지 · 6대 영어 학습 다짐 문장 + 마무리 격려 통합
 
 - [2026-10-28 · Key Phrases Review & Practice Questions 녹음 숙제 자료](./2026-10-28-key-phrases-review-reading.md) — 36:18부터 39:50 자막 묶음 끝까지 · 핵심 구절 총정리 + 5개 실전 질문 통합
