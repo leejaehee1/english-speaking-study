@@ -18,6 +18,8 @@
 
 ## 녹음 숙제 자료
 
+- [2026-10-31 · Contractions & Filler Words 녹음 숙제 자료](./2026-10-31-contractions-and-filler-words-reading.md) — 2:53부터 8:15 끝까지 · 축약형(`don't`, `I'm`, `you're`)과 추임새(`well`, `I mean`, `you know`)로 자연스럽게 말하기
+
 - [2026-10-30 · Textbook English vs. Natural English 녹음 숙제 자료](./2026-10-30-textbook-vs-natural-english-reading.md) — 새 에피소드 0:00부터 2:46 끝까지 · 교과서 영어와 실생활 원어민 영어의 차이
 
 - [2026-10-29 · Affirmations & Final Encouragement 녹음 숙제 자료 (영상 완주)](./2026-10-29-affirmations-and-closing-reading.md) — 39:50부터 마지막 43:49 끝까지 · 6대 영어 학습 다짐 문장 + 마무리 격려 통합
