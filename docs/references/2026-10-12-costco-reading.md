@@ -14,18 +14,27 @@ listeningLang: en-US
 
 ---
 
-## 기억할 핵심 표현
+## 기억할 핵심 표현과 발음 기호 (IPA)
 
-- **in bulk** — 대량으로 / 대용량으로
-- **worth it** — 그만한 가치가 있는
-- **a good deal / a steal** — 좋은 거래(가성비 좋은 구매) / 거저나 다름없는 특가
-- **stock up on** — 넉넉히 사 두다(쟁여 두다)
-- **hands down** — 단연코, 의심의 여지 없이
-- **go through ~ like crazy** — ~을 엄청나게 빨리 소모하다(다 써버리다)
-- **a no-brainer** — 고민할 필요도 없는 당연한 선택
-- **go stale / go bad** — (빵·과자 등이) 눅눅해지다·신선함을 잃다 / (음식이) 상하다
-- **price per unit** — 단위당 가격
-- **hit or miss** — 복불복인 (좋을 때도 있고 실패할 때도 있는)
+| 영어 표현 (클릭 시 음성 재생) | 발음 기호 (미국식 IPA) | 한국어 뜻 |
+| :--- | :--- | :--- |
+| **in bulk** | `/ɪn bʌlk/` | 대량으로 / 대용량으로 |
+| **worth it** | `/wɜːrθ ɪt/` | 그만한 가치가 있는 |
+| **a good deal** · **a steal** | `/ə ɡʊd diːl/` · `/ə stiːl/` | 가성비 좋은 구매 · 거저나 다름없는 특가 |
+| **stock up on** | `/stɑːk ʌp ɑːn/` | 넉넉히 사 두다(쟁여 두다) |
+| **hands down** | `/hændz daʊn/` | 단연코, 의심의 여지 없이 |
+| **rotisserie chicken** | `/roʊˈtɪs.ər.i ˈtʃɪk.ɪn/` | 로티세리 통닭구이 |
+| **a no-brainer** | `/ə ˌnoʊˈbreɪ.nər/` | 고민할 필요도 없는 당연한 선택 |
+| **charcuterie board** | `/ʃɑːrˌkuː.təˈriː bɔːrd/` | 샤퀴테리 보드 (치즈·햄 와인 안주 플래터) |
+| **for a fraction of the price** | `/fɔːr ə ˈfræk.ʃən ʌv ðə praɪs/` | 원래 가격의 일부에 불과한 저렴한 값에 |
+| **over-the-counter meds** | `/ˌoʊ.vər.ðəˈkaʊn.tər medz/` | 처방전 없이 사는 일반의약품 |
+| **ibuprofen** | `/ˌaɪ.bjuːˈproʊ.fən/` | 이부프로펜 (소염진통제) |
+| **go stale** · **go bad** | `/ɡoʊ steɪl/` · `/ɡoʊ bæd/` | (빵·과자 등이) 눅눅해지다 · (음식이) 상하다 |
+| **oregano** | `/əˈreɡ.ə.noʊ/` | 오레가노 (허브 향신료) |
+| **price per unit** | `/praɪs pɜːr ˈjuː.nɪt/` | 단위당 가격 |
+| **hit or miss** | `/hɪt ɔːr mɪs/` | 복불복인 (좋을 때도 있고 실패할 때도 있는) |
+| **condiments** | `/ˈkɑːn.dɪ.mənts/` | 소스·양념류 (케첩, 마요네즈, 머스터드 등) |
+| **diapers** | `/ˈdaɪ.pərz/` | 기저귀 |
 
 ---
 

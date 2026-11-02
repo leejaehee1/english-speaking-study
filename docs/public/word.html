@@ -12,7 +12,8 @@
   select { font-size: 14px; padding: 6px; max-width: 100%; }
   ul { list-style: none; padding: 0; }
   li { display: flex; gap: 12px; align-items: flex-start; background: #fff; border: 1px solid #e3e3e3; border-radius: 8px; padding: 10px; margin-bottom: 8px; }
-  li button { background: #fff; border: 1px solid #ccc; border-radius: 6px; font-size: 18px; min-width: 120px; text-align: left; flex-shrink: 0; }
+  li button { background: #fff; border: 1px solid #ccc; border-radius: 6px; font-size: 18px; min-width: 145px; text-align: left; flex-shrink: 0; }
+  li button .ipa { display: block; font-size: 12px; color: #3b6fd8; font-weight: 400; margin-top: 2px; }
   li button:hover { background: #e8f0ff; border-color: #6a8fd8; }
   li button.playing { background: #cfe0ff; }
   .meaning { font-size: 15px; line-height: 1.5; }
@@ -106,9 +107,17 @@ async function fetchKorean(word) {
   } catch { if (el) el.textContent = '(뜻을 불러오지 못함)'; }
 }
 
-// 영어 정의 (사전 API 응답에서 첫 번째 정의)
+// 영어 정의 및 발음기호 (사전 API 응답에서 첫 번째 정의와 IPA)
 function showEnglishDef(word, data) {
   const el = cell(word, 'en');
+  const ipaEl = document.querySelector(`li[data-word="${CSS.escape(word)}"] .ipa`);
+  if (ipaEl && Array.isArray(data)) {
+    const phonetics = data.flatMap(d => d.phonetics || []);
+    const usIpa = phonetics.find(p => p.text && /-us\.mp3$/i.test(p.audio || ''))?.text;
+    const anyIpa = data.find(d => d.phonetic)?.phonetic || phonetics.find(p => p.text)?.text;
+    const ipaText = usIpa || anyIpa || '';
+    if (ipaText) ipaEl.textContent = ipaText;
+  }
   if (!el) return;
   const m = Array.isArray(data) && data[0].meanings && data[0].meanings[0];
   const def = m && m.definitions[0] && m.definitions[0].definition;
@@ -136,7 +145,7 @@ $('extract').onclick = () => {
   words.forEach(w => {
     const li = document.createElement('li');
     li.dataset.word = w;
-    li.innerHTML = `<button>🔊 ${esc(w)}</button><div class="meaning"><div class="ko">…</div><div class="en"></div></div>`;
+    li.innerHTML = `<button>🔊 ${esc(w)}<span class="ipa"></span></button><div class="meaning"><div class="ko">…</div><div class="en"></div></div>`;
     const b = li.querySelector('button');
     b.onclick = () => play(w, b);
     $('list').appendChild(li);
