@@ -114,6 +114,11 @@ export default defineConfig({
         { text: '10월 12일', link: '/daily/2026-10-12' }
       ]) },
       { text: '녹음 숙제', collapsed: true, items: groupByRecentAndWeek([
+        { text: '11월 6일 · Day 7 (5/5) Food Culture & Closing', link: '/references/2026-11-06-food-culture-and-closing-reading' },
+        { text: '11월 5일 · Day 7 (4/5) 7 Food Idioms & Practice', link: '/references/2026-11-05-food-idioms-and-sentence-practice-reading' },
+        { text: '11월 4일 · Day 7 (3/5) Restaurant Dialogue & Compliments', link: '/references/2026-11-04-restaurant-dialogue-and-compliments-reading' },
+        { text: '11월 3일 · Day 7 (2/5) Preferences & Ordering', link: '/references/2026-11-03-food-preferences-and-ordering-reading' },
+        { text: '11월 2일 · Day 7 (1/5) Food Vocab & 8 Tastes', link: '/references/2026-11-02-food-vocabulary-and-tastes-reading' },
         { text: '10월 31일 · Contractions & Filler Words', link: '/references/2026-10-31-contractions-and-filler-words-reading' },
         { text: '10월 30일 · Textbook vs. Natural English', link: '/references/2026-10-30-textbook-vs-natural-english-reading' },
         { text: '10월 29일 · Affirmations & Closing (영상 완주)', link: '/references/2026-10-29-affirmations-and-closing-reading' },

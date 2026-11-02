@@ -18,6 +18,16 @@
 
 ## 녹음 숙제 자료
 
+- [2026-11-06 · Day 7 (Part 5/5 · 완주) · Food Culture, 5 Questions & Closing](./2026-11-06-food-culture-and-closing-reading.md) — 33:47부터 42:34 끝까지 · 음식 문화 소개 3대 패턴·성찰 질문 5개·전체 마무리
+
+- [2026-11-05 · Day 7 (Part 4/5) · 7 Food Idioms, Review & Sentence Practice](./2026-11-05-food-idioms-and-sentence-practice-reading.md) — 24:12부터 33:47까지 · 음식 관용구 7선·단어 복습·감정 살려 6문장 따라 말하기
+
+- [2026-11-04 · Day 7 (Part 3/5) · Restaurant Dialogue & 5 Ways to Compliment Food](./2026-11-04-restaurant-dialogue-and-compliments-reading.md) — 17:30부터 24:12까지 · 식당 실전 롤플레이 대화·요리 극찬 5대 표현
+
+- [2026-11-03 · Day 7 (Part 2/5) · Food Preferences, Dietary Needs & Ordering](./2026-11-03-food-preferences-and-ordering-reading.md) — 9:25부터 17:30까지 · 음식 호불호·알레르기/식단·식당 입장부터 계산까지
+
+- [2026-11-02 · Day 7 (Part 1/5) · Food Vocabulary & 8 Taste Words](./2026-11-02-food-vocabulary-and-tastes-reading.md) — 0:00부터 9:25까지 · 음식 스몰토크 도입부·핵심 맛/식감 형용사 8선
+
 - [2026-10-31 · Contractions & Filler Words 녹음 숙제 자료](./2026-10-31-contractions-and-filler-words-reading.md) — 2:53부터 8:15 끝까지 · 축약형(`don't`, `I'm`, `you're`)과 추임새(`well`, `I mean`, `you know`)로 자연스럽게 말하기
 
 - [2026-10-30 · Textbook English vs. Natural English 녹음 숙제 자료](./2026-10-30-textbook-vs-natural-english-reading.md) — 새 에피소드 0:00부터 2:46 끝까지 · 교과서 영어와 실생활 원어민 영어의 차이
