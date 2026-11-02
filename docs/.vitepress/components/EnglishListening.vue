@@ -4,6 +4,7 @@ import { useData } from 'vitepress'
 const { frontmatter, page } = useData()
 const supported = ref(false)
 const text = ref('')
+const customInput = ref('')
 const rate = ref(0.85)
 const speaking = ref(false)
 const message = ref('')
@@ -205,6 +206,14 @@ function speakCustom(targetText) {
 function speak() {
   speakCustom(text.value)
 }
+function submitCustomCompare() {
+  const cleaned = customInput.value.trim().replace(/\s+/g, ' ')
+  if (!cleaned) return
+  text.value = cleaned
+  message.value = ''
+  updatePhonetics(cleaned)
+  speakCustom(cleaned)
+}
 function close() {
   stop()
   text.value = ''
@@ -226,7 +235,19 @@ onBeforeUnmount(() => {
 
 <template>
   <div v-if="frontmatter.listen" class="listening-hint">
-    <span v-if="supported">굵은 영어 표현을 누르거나, 영어 단어·문장을 선택한 뒤 듣기를 누르세요. (클릭 시 발음 기호도 함께 표시됩니다)</span>
+    <div v-if="supported" class="hint-bar">
+      <span>굵은 영어 표현을 누르거나, 비교하고 싶은 단어를 직접 입력해 발음·발음기호(IPA)를 확인하세요.</span>
+      <form class="quick-compare-form" @submit.prevent="submitCustomCompare">
+        <input
+          v-model="customInput"
+          type="text"
+          class="quick-compare-input"
+          placeholder="비교할 단어 입력 (예: glove, globe)"
+          aria-label="비교할 영어 단어 직접 입력"
+        />
+        <button type="submit" class="quick-compare-btn">🔊 발음·기호 비교</button>
+      </form>
+    </div>
     <span v-else>음성 읽기는 지원되는 브라우저에서 사용할 수 있습니다.</span>
   </div>
   <aside v-if="frontmatter.listen && supported && text" class="listening-panel" aria-label="영어 발음 듣기">
@@ -261,6 +282,11 @@ onBeforeUnmount(() => {
 
 <style scoped>
 .listening-hint { margin: 16px 0; font-size: 13px; color: var(--vp-c-text-2); }
+.hint-bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; padding: 8px 12px; background: var(--vp-c-bg-soft); border: 1px solid var(--vp-c-divider); border-radius: 8px; }
+.quick-compare-form { display: flex; align-items: center; gap: 6px; flex: 1 1 260px; max-width: 380px; }
+.quick-compare-input { flex: 1; min-width: 140px; padding: 4px 9px; font-size: 13px; border: 1px solid var(--vp-c-divider); border-radius: 6px; background: var(--vp-c-bg); color: var(--vp-c-text-1); }
+.quick-compare-input:focus { outline: 2px solid var(--vp-c-brand-1); }
+.quick-compare-btn { padding: 4px 10px; font-size: 12.5px; font-weight: 600; white-space: nowrap; background: var(--vp-c-brand-1); color: #fff; border: 1px solid var(--vp-c-brand-1); border-radius: 6px; cursor: pointer; }
 .listening-panel { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); z-index: 100; width: min(620px, calc(100vw - 24px)); max-height: 46vh; overflow: auto; padding: 14px 16px; background: var(--vp-c-bg); border: 1px solid var(--vp-c-divider); border-radius: 12px; box-shadow: 0 6px 24px #0002; }
 .selected-text { margin: 0 0 8px; font-size: 15px; font-weight: 600; max-height: 68px; overflow: auto; }
 .ipa-container { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; max-height: 110px; overflow-y: auto; padding: 6px 8px; background: var(--vp-c-bg-soft); border-radius: 8px; border: 1px solid var(--vp-c-divider); }
