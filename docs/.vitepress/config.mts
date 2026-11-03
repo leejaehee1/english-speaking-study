@@ -141,6 +141,7 @@ export default defineConfig({
         { text: '10월 12일 · 아침 대화', link: '/references/2026-10-12-morning-conversation' }
       ]) },
       { text: '영어 일기', collapsed: true, items: groupByRecentAndWeek([
+        { text: '11월 3일 · 긴 문장 통역 성공과 바이브 코딩 도와주기', link: '/diary/2026-11-03' },
         { text: '11월 2일 · 인제 해발 450m 별장과 삼 형제 주말', link: '/diary/2026-11-02' },
         { text: '10월 30일 · 형용사 총출동과 강원도 여행 예고', link: '/diary/2026-10-30' },
         { text: '10월 29일 · 잠실 닭갈비 모임과 영어 자신감', link: '/diary/2026-10-29' },
