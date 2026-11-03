@@ -178,6 +178,7 @@ export default defineConfig({
         { text: '1주차 · 10월 12–16일', link: '/review/week-01' }
       ] },
       { text: '표현집', collapsed: true, items: [
+        { text: '기상 현상과 온도 표현 · Weather & Temp', link: '/patterns/weather-and-temperature' },
         { text: '외국 집 구조와 공간 명칭 · House & Rooms', link: '/patterns/house-rooms-and-spaces' },
         { text: '기본 회화 질문·답변 50선', link: '/patterns/basic-qa-50' },
         { text: '자주 쓰는 표현', link: '/patterns/useful-expressions' },
