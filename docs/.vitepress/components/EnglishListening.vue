@@ -4,9 +4,12 @@ import { useData } from 'vitepress'
 const { frontmatter, page } = useData()
 const supported = ref(false)
 const text = ref('')
+const panelOpen = ref(false)
 const customInput = ref('')
 const rate = ref(0.85)
 const speaking = ref(false)
+const sequencePlaying = ref(false)
+const activeChipWord = ref('')
 const message = ref('')
 const wordIpaList = ref([])
 const loadingIpa = ref(false)
@@ -48,13 +51,13 @@ const ipaCache = { ...BUILTIN_IPA }
 function extractIpaFromApiData(data) {
   if (!Array.isArray(data)) return ''
   for (const entry of data) {
-    if (entry.phonetic) return entry.phonetic
     if (Array.isArray(entry.phonetics)) {
       const us = entry.phonetics.find(p => p.text && /-us\.mp3$/i.test(p.audio || ''))
       if (us?.text) return us.text
       const anyText = entry.phonetics.find(p => p.text)
       if (anyText?.text) return anyText.text
     }
+    if (entry.phonetic) return entry.phonetic
   }
   return ''
 }
@@ -118,7 +121,6 @@ async function updatePhonetics(inputText) {
     return
   }
   const tokens = inputText.match(/[A-Za-z]+(?:['’-][A-Za-z]+)*/g) || []
-  // 최대 30단어까지 표시 (중복은 순서 유지하되 한 번만 표시)
   const seen = new Set()
   const uniqueTokens = []
   for (const t of tokens) {
@@ -159,10 +161,10 @@ function capture() {
   const chosen = selection.toString().trim().replace(/\s+/g, ' ')
   if (isEnglish(chosen)) {
     text.value = chosen
+    customInput.value = chosen
+    panelOpen.value = true
     message.value = ''
     updatePhonetics(chosen)
-  } else {
-    close()
   }
 }
 function clickPhrase(event) {
@@ -172,19 +174,27 @@ function clickPhrase(event) {
   const chosen = strong.textContent.replace(/\s*✅\s*$/, '').trim()
   if (isEnglish(chosen)) {
     text.value = chosen
+    customInput.value = chosen
+    panelOpen.value = true
     updatePhonetics(chosen)
     speak()
   }
 }
 function stop() {
   revision++
+  sequencePlaying.value = false
+  activeChipWord.value = ''
   if (supported.value) window.speechSynthesis.cancel()
   speaking.value = false
   utterance = undefined
 }
-function speakCustom(targetText) {
-  if (!targetText || !supported.value) return
-  stop()
+function speakCustom(targetText, onFinish) {
+  if (!targetText || !supported.value) {
+    if (onFinish) onFinish()
+    return
+  }
+  revision++
+  if (supported.value) window.speechSynthesis.cancel()
   const current = revision
   utterance = new SpeechSynthesisUtterance(targetText.replace(/\s*·\s*/g, ', '))
   const voices = window.speechSynthesis.getVoices()
@@ -193,29 +203,74 @@ function speakCustom(targetText) {
   utterance.lang = voice?.lang || 'en-US'
   if (voice) utterance.voice = voice
   utterance.rate = Number(rate.value)
-  utterance.onend = () => { if (current === revision) speaking.value = false }
+  utterance.onend = () => {
+    if (current === revision) {
+      speaking.value = false
+      if (onFinish) onFinish()
+    }
+  }
   utterance.onerror = event => {
     if (current !== revision) return
     speaking.value = false
-    if (!['canceled', 'interrupted'].includes(event.error)) message.value = '음성 재생이 지원되지 않거나 영어 음성이 없습니다. 원본 영상 링크를 이용해주세요.'
+    if (!['canceled', 'interrupted'].includes(event.error)) {
+      message.value = '음성 재생이 지원되지 않거나 영어 음성이 없습니다. 원본 영상 링크를 이용해주세요.'
+    }
+    if (onFinish) onFinish()
   }
   message.value = ''
   speaking.value = true
   window.speechSynthesis.speak(utterance)
 }
 function speak() {
+  sequencePlaying.value = false
+  activeChipWord.value = ''
   speakCustom(text.value)
+}
+function speakSingleWord(word) {
+  sequencePlaying.value = false
+  activeChipWord.value = word
+  speakCustom(word, () => {
+    activeChipWord.value = ''
+  })
+}
+async function playWordSequence() {
+  if (!wordIpaList.value.length) return
+  stop()
+  sequencePlaying.value = true
+  const seqRev = revision
+  for (const item of wordIpaList.value) {
+    if (!sequencePlaying.value || seqRev !== revision) break
+    activeChipWord.value = item.word
+    await new Promise(resolve => {
+      speakCustom(item.word, resolve)
+      revision = seqRev
+    })
+    if (!sequencePlaying.value || seqRev !== revision) break
+    await new Promise(r => setTimeout(r, 380))
+  }
+  sequencePlaying.value = false
+  activeChipWord.value = ''
 }
 function submitCustomCompare() {
   const cleaned = customInput.value.trim().replace(/\s+/g, ' ')
   if (!cleaned) return
   text.value = cleaned
+  panelOpen.value = true
   message.value = ''
   updatePhonetics(cleaned)
-  speakCustom(cleaned)
+  speak()
+}
+function openEmptyPanel() {
+  panelOpen.value = true
+  if (!text.value) {
+    customInput.value = 'glove, globe'
+    text.value = 'glove, globe'
+    updatePhonetics('glove, globe')
+  }
 }
 function close() {
   stop()
+  panelOpen.value = false
   text.value = ''
   wordIpaList.value = []
   message.value = ''
@@ -235,38 +290,62 @@ onBeforeUnmount(() => {
 
 <template>
   <div v-if="frontmatter.listen" class="listening-hint">
-    <div v-if="supported" class="hint-bar">
-      <span>굵은 영어 표현을 누르거나, 비교하고 싶은 단어를 직접 입력해 발음·발음기호(IPA)를 확인하세요.</span>
-      <form class="quick-compare-form" @submit.prevent="submitCustomCompare">
-        <input
-          v-model="customInput"
-          type="text"
-          class="quick-compare-input"
-          placeholder="비교할 단어 입력 (예: glove, globe)"
-          aria-label="비교할 영어 단어 직접 입력"
-        />
-        <button type="submit" class="quick-compare-btn">🔊 발음·기호 비교</button>
-      </form>
-    </div>
+    <span v-if="supported">굵은 영어 표현을 누르거나, 영어 단어·문장을 선택한 뒤 듣기를 누르세요.</span>
     <span v-else>음성 읽기는 지원되는 브라우저에서 사용할 수 있습니다.</span>
   </div>
-  <aside v-if="frontmatter.listen && supported && text" class="listening-panel" aria-label="영어 발음 듣기">
-    <p class="selected-text">{{ text }}</p>
+
+  <!-- 하단 패널이 닫혀 있을 때 언제든 열 수 있는 작은 하단 플로팅 버튼 -->
+  <button
+    v-if="frontmatter.listen && supported && !panelOpen && !text"
+    type="button"
+    class="listening-launcher"
+    aria-label="하단 발음·발음기호 비교 창 열기"
+    @click="openEmptyPanel"
+  >
+    🔤 단어 입력 · 발음기호 비교
+  </button>
+
+  <!-- 통합 하단 UI: 선택한 문장/단어 듣기 + 직접 단어 입력·발음기호 비교 -->
+  <aside
+    v-if="frontmatter.listen && supported && (panelOpen || text)"
+    class="listening-panel"
+    aria-label="영어 발음 듣기 및 단어 발음기호 비교"
+  >
+    <form class="bottom-compare-form" @submit.prevent="submitCustomCompare">
+      <input
+        v-model="customInput"
+        type="text"
+        class="bottom-compare-input"
+        placeholder="비교·듣기할 영어 단어나 문장 입력 (예: glove, globe)"
+        aria-label="비교하거나 들어볼 영어 단어 직접 입력"
+      />
+      <button type="submit" class="bottom-compare-btn">🔊 발음·기호 보기</button>
+    </form>
+
     <div v-if="wordIpaList.length" class="ipa-container" aria-label="단어별 발음 기호">
       <button
         v-for="item in wordIpaList"
         :key="item.word"
         type="button"
         class="ipa-chip"
+        :class="{ active: activeChipWord.toLowerCase() === item.word.toLowerCase() }"
         :title="`${item.word} 단어만 발음 듣기`"
-        @click="speakCustom(item.word)"
+        @click="speakSingleWord(item.word)"
       >
         <span class="ipa-word">{{ item.word }}</span>
         <span v-if="item.ipa" class="ipa-symbol">{{ item.ipa }}</span>
       </button>
     </div>
+
     <div class="controls">
-      <button type="button" @click="speak">{{ speaking ? '다시 듣기' : '🔊 전체 듣기' }}</button>
+      <button type="button" @click="speak">{{ speaking && !sequencePlaying ? '다시 듣기' : '🔊 전체 듣기' }}</button>
+      <button
+        v-if="wordIpaList.length > 1"
+        type="button"
+        @click="playWordSequence"
+      >
+        {{ sequencePlaying ? '🔊 연속 재생 중…' : '▶️ 단어별 연속 비교' }}
+      </button>
       <label>속도
         <select v-model="rate" @change="stop">
           <option :value="0.7">느리게</option><option :value="0.85">조금 느리게</option><option :value="1">보통</option>
@@ -276,22 +355,107 @@ onBeforeUnmount(() => {
       <button type="button" @click="close" aria-label="발음 듣기 닫기">닫기</button>
     </div>
     <p v-if="message" role="status">{{ message }}</p>
-    <small>단어 칩을 누르면 해당 단어만 따로 들을 수 있어요 · 기기의 영어 음성</small>
+    <small>직접 단어를 입력하거나 단어 칩을 눌러 발음·발음기호(IPA)를 비교해 보세요.</small>
   </aside>
 </template>
 
 <style scoped>
 .listening-hint { margin: 16px 0; font-size: 13px; color: var(--vp-c-text-2); }
-.hint-bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; padding: 8px 12px; background: var(--vp-c-bg-soft); border: 1px solid var(--vp-c-divider); border-radius: 8px; }
-.quick-compare-form { display: flex; align-items: center; gap: 6px; flex: 1 1 260px; max-width: 380px; }
-.quick-compare-input { flex: 1; min-width: 140px; padding: 4px 9px; font-size: 13px; border: 1px solid var(--vp-c-divider); border-radius: 6px; background: var(--vp-c-bg); color: var(--vp-c-text-1); }
-.quick-compare-input:focus { outline: 2px solid var(--vp-c-brand-1); }
-.quick-compare-btn { padding: 4px 10px; font-size: 12.5px; font-weight: 600; white-space: nowrap; background: var(--vp-c-brand-1); color: #fff; border: 1px solid var(--vp-c-brand-1); border-radius: 6px; cursor: pointer; }
-.listening-panel { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); z-index: 100; width: min(620px, calc(100vw - 24px)); max-height: 46vh; overflow: auto; padding: 14px 16px; background: var(--vp-c-bg); border: 1px solid var(--vp-c-divider); border-radius: 12px; box-shadow: 0 6px 24px #0002; }
-.selected-text { margin: 0 0 8px; font-size: 15px; font-weight: 600; max-height: 68px; overflow: auto; }
-.ipa-container { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 10px; max-height: 110px; overflow-y: auto; padding: 6px 8px; background: var(--vp-c-bg-soft); border-radius: 8px; border: 1px solid var(--vp-c-divider); }
-.ipa-chip { display: inline-flex; align-items: baseline; gap: 4px; padding: 2px 7px; font-size: 12px; border-radius: 6px; border: 1px solid var(--vp-c-divider); background: var(--vp-c-bg); cursor: pointer; transition: border-color 0.15s, background-color 0.15s; }
-.ipa-chip:hover { border-color: var(--vp-c-brand-1); background: var(--vp-c-brand-soft); }
+.listening-launcher {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 99;
+  padding: 8px 14px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--vp-c-text-1);
+  background: var(--vp-c-bg);
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 999px;
+  box-shadow: 0 4px 16px #0002;
+  cursor: pointer;
+}
+.listening-launcher:hover {
+  border-color: var(--vp-c-brand-1);
+  color: var(--vp-c-brand-1);
+}
+.listening-panel {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 100;
+  width: min(640px, calc(100vw - 24px));
+  max-height: 48vh;
+  overflow: auto;
+  padding: 14px 16px;
+  background: var(--vp-c-bg);
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 12px;
+  box-shadow: 0 6px 24px #0002;
+}
+.bottom-compare-form {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+.bottom-compare-input {
+  flex: 1;
+  min-width: 140px;
+  padding: 6px 10px;
+  font-size: 14px;
+  font-weight: 500;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 7px;
+  background: var(--vp-c-bg-soft);
+  color: var(--vp-c-text-1);
+}
+.bottom-compare-input:focus {
+  outline: 2px solid var(--vp-c-brand-1);
+  background: var(--vp-c-bg);
+}
+.bottom-compare-btn {
+  padding: 6px 12px;
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+  background: var(--vp-c-brand-1);
+  color: #fff;
+  border: 1px solid var(--vp-c-brand-1);
+  border-radius: 7px;
+  cursor: pointer;
+}
+.ipa-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 10px;
+  max-height: 115px;
+  overflow-y: auto;
+  padding: 6px 8px;
+  background: var(--vp-c-bg-soft);
+  border-radius: 8px;
+  border: 1px solid var(--vp-c-divider);
+}
+.ipa-chip {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 4px;
+  padding: 3px 8px;
+  font-size: 12.5px;
+  border-radius: 6px;
+  border: 1px solid var(--vp-c-divider);
+  background: var(--vp-c-bg);
+  cursor: pointer;
+  transition: border-color 0.15s, background-color 0.15s;
+}
+.ipa-chip:hover,
+.ipa-chip.active {
+  border-color: var(--vp-c-brand-1);
+  background: var(--vp-c-brand-soft);
+}
 .ipa-word { font-weight: 600; color: var(--vp-c-text-1); }
 .ipa-symbol { font-family: ui-sans-serif, system-ui, -apple-system, sans-serif; color: var(--vp-c-brand-1); font-size: 12px; }
 .controls { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; font-size: 13px; }
