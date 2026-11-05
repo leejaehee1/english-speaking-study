@@ -7,13 +7,13 @@ listeningLang: en-US
 
 ## 녹음 구간과 자료
 
-- **영상:** Day 7: How to Talk About Food in English Like a Local | English Listening Practice (B1–B2)
+- **영상:** [Day 7: How to Talk About Food in English Like a Local | English Listening Practice (B1–B2)](https://www.youtube.com/watch?v=pywd-0rJJjg&t=1050s)
 - **구간 구성:** 전체 `42:34` 분량을 5일(Part 1~5)로 나눈 **세 번째 구간(Part 3/5)** 입니다.
 - **범위:** `17:30`의 식당 실전 롤플레이(**Okay, everyone. Dialogue time.**)부터 `24:12`의 음식 극찬 표현 5가지 마무리(**Say it with conviction like you mean it. Because you do.**)까지.
 - **연속 구간:** [2026-11-03 (화) · Part 2/5](./2026-11-03-food-preferences-and-ordering-reading.md)에 이어지며, [2026-11-05 (목) · Part 4/5](./2026-11-05-food-idioms-and-sentence-practice-reading.md)로 이어집니다.
 - **편집:** 타임스탬프와 음악·웃음 표시(`[music]`, `[laughter]`)를 제거하고 자막 줄바꿈을 자연스러운 문장 단위로 연결했습니다. 자동 자막의 요리 이름 철자 오류인 `risoto`는 **`risotto`**, `tiramisil`은 **`tiramisu`** 로 바로잡았습니다.
 
-[이전 구간 · Part 2 (11월 3일)](./2026-11-03-food-preferences-and-ordering-reading.md) · [녹음 숙제 자료 목록](./index.md) · [다음 구간 · Part 4 (11월 5일)](./2026-11-05-food-idioms-and-sentence-practice-reading.md)
+[원본 영상 · 17:30부터](https://www.youtube.com/watch?v=pywd-0rJJjg&t=1050s) · [이전 구간 · Part 2 (11월 3일)](./2026-11-03-food-preferences-and-ordering-reading.md) · [다음 구간 · Part 4 (11월 5일)](./2026-11-05-food-idioms-and-sentence-practice-reading.md)
 
 ## 전체 녹음 대본
 
@@ -169,4 +169,4 @@ listeningLang: en-US
 4. **I love what you've done with this. Is that a hint of [재료] I taste?** — 이 요리를 이렇게 특별하게 살리신 게 정말 좋네요. 살짝 [재료] 향이 나는 것 맞나요? (`a hint of ~`: 은은하게 살짝 느껴지는 ~의 맛·향)
 5. **I'm going to need this recipe!** — 이 레시피 저한테 꼭 알려 주셔야 해요!
 
-[이전 구간 · Part 2 (11월 3일)](./2026-11-03-food-preferences-and-ordering-reading.md) · [녹음 숙제 자료 목록](./index.md) · [다음 구간 · Part 4 (11월 5일)](./2026-11-05-food-idioms-and-sentence-practice-reading.md)
+[원본 영상 · 17:30부터](https://www.youtube.com/watch?v=pywd-0rJJjg&t=1050s) · [이전 구간 · Part 2 (11월 3일)](./2026-11-03-food-preferences-and-ordering-reading.md) · [다음 구간 · Part 4 (11월 5일)](./2026-11-05-food-idioms-and-sentence-practice-reading.md)

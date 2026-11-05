@@ -114,4 +114,4 @@ listeningLang: en-US
 - **when it comes to Thanksgiving** — 추수감사절에 관해서라면 (10월 27일 수업 핵심 표현!)
 - **reduce the odds (for/of …)** — (…가 발생할) 가능성·확률을 낮추다
 
-[녹음 숙제·수업 자료 목록](./index.md) · [10월 27일 수업 기록](../daily/2026-10-27.md)
+[10월 27일 수업 기록](../daily/2026-10-27.md)

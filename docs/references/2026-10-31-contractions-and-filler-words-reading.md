@@ -15,7 +15,7 @@ listeningLang: en-US
 - **편집:** 타임스탬프, 음악 표시(`[music]`), 구간 구분 표시(`PART 3`)를 제거하고 자막 줄바꿈을 자연스러운 문장 단위로 연결했습니다. 원문 대화 순서와 따라 말하기 반복 구간을 그대로 보존했습니다.
 - **화자:** 이름으로 호명되거나(`Okay, David. Next topic.`) 역할이 지정된 구간(`Listeners, I will say something like a robot... Then, David will say it like a real person.`)을 기준으로 David/Alice를 표시하고, 나머지는 낭독 호흡에 따라 문단을 나눴습니다.
 
-[녹음 숙제 자료 목록](./index.md) · [전날 녹음 숙제 자료](./2026-10-30-textbook-vs-natural-english-reading.md)
+[전날 녹음 숙제 자료](./2026-10-30-textbook-vs-natural-english-reading.md)
 
 ## 전체 녹음 대본
 
@@ -168,4 +168,4 @@ Okay, this next section is really... *(다음 구간으로 이어짐)*
 - **Well, let me explain. / Well, that's a good question.** — 음, 설명해 드릴게요. / 음, 좋은 질문이네요. (생각할 시간을 1~2초 벌어주는 가장 유용한 단어)
 - **Neither is wrong.** — 둘 중 어느 쪽도 틀린 것은 아닙니다.
 
-[녹음 숙제 자료 목록](./index.md) · [전날 녹음 숙제 자료](./2026-10-30-textbook-vs-natural-english-reading.md)
+[전날 녹음 숙제 자료](./2026-10-30-textbook-vs-natural-english-reading.md)

@@ -14,7 +14,7 @@ listeningLang: en-US
 - **편집:** 타임스탬프와 음악 표시(`[music]`)를 제거하고 자막 줄바꿈을 자연스러운 문장 단위로 연결했습니다. 원문 대화 순서와 맞장구 반복 구간을 그대로 보존했습니다.
 - **화자:** 이름으로 호명되는 질문·발화(`Okay, Alice...`, `Okay, David...`, `Great question, Alice.`)와 그에 이어지는 첫 답변에 David/Alice를 표시하고, 나머지는 낭독 호흡에 따라 문단을 나눴습니다.
 
-[녹음 숙제 자료 목록](./index.md) · [전날 녹음 숙제 자료](./2026-10-29-affirmations-and-closing-reading.md)
+[전날 녹음 숙제 자료](./2026-10-29-affirmations-and-closing-reading.md)
 
 ## 전체 녹음 대본
 
@@ -105,4 +105,4 @@ I love that. Okay. So let's get into the specific things, the things we can actu
 2. **`Nothing is wrong with ~, but ...`** 패턴으로 말해 보세요:
    - **Nothing is wrong with textbook English, but I want to sound more natural.** — 교과서 영어가 틀린 건 아니지만, 나는 더 자연스럽게 말하고 싶어요.
 
-[녹음 숙제 자료 목록](./index.md) · [전날 녹음 숙제 자료](./2026-10-29-affirmations-and-closing-reading.md)
+[전날 녹음 숙제 자료](./2026-10-29-affirmations-and-closing-reading.md)

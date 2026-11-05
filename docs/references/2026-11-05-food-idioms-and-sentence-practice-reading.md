@@ -7,13 +7,13 @@ listeningLang: en-US
 
 ## 녹음 구간과 자료
 
-- **영상:** Day 7: How to Talk About Food in English Like a Local | English Listening Practice (B1–B2)
+- **영상:** [Day 7: How to Talk About Food in English Like a Local | English Listening Practice (B1–B2)](https://www.youtube.com/watch?v=pywd-0rJJjg&t=1465s)
 - **구간 구성:** 전체 `42:34` 분량을 5일(Part 1~5)로 나눈 **네 번째 구간(Part 4/5)** 입니다.
 - **범위:** `24:12`의 음식 관용구 7가지(**Oh, now it is time for one of my favorite parts, food idioms and expressions.**)부터 단어 총복습을 거쳐 `33:47`의 6문장 따라 말하기 마무리(**Keep saying them. Keep practicing until they feel completely natural.**)까지.
 - **연속 구간:** [2026-11-04 (수) · Part 3/5](./2026-11-04-restaurant-dialogue-and-compliments-reading.md)에 이어지며, [2026-11-06 (금) · Part 5/5 (완주)](./2026-11-06-food-culture-and-closing-reading.md)로 이어집니다.
 - **편집:** 타임스탬프와 음악·웃음 표시(`[music]`, `[laughter]`)를 제거하고 자막 줄바꿈을 자연스러운 문장 단위로 연결했습니다. `30:09`의 자동 자막 오타인 `Word five. Savory. Seo, three syllables`는 **`Word five. Savory. Savory, three syllables`** 로 바로잡았습니다.
 
-[이전 구간 · Part 3 (11월 4일)](./2026-11-04-restaurant-dialogue-and-compliments-reading.md) · [녹음 숙제 자료 목록](./index.md) · [다음 구간 · Part 5 (11월 6일 · 완주)](./2026-11-06-food-culture-and-closing-reading.md)
+[원본 영상 · 24:25부터](https://www.youtube.com/watch?v=pywd-0rJJjg&t=1465s) · [이전 구간 · Part 3 (11월 4일)](./2026-11-04-restaurant-dialogue-and-compliments-reading.md) · [다음 구간 · Part 5 (11월 6일 · 완주)](./2026-11-06-food-culture-and-closing-reading.md)
 
 ## 전체 녹음 대본
 
@@ -183,4 +183,4 @@ Say it: "In a nutshell, the restaurant was amazing. Great food, great service, g
 | 06 | **food for thought** | 깊이 생각해 볼 만한 거리(화두) | **Her speech was real food for thought.** |
 | 07 | **in a nutshell** | 한마디로 요약하자면 | **In a nutshell, the restaurant was amazing.** |
 
-[이전 구간 · Part 3 (11월 4일)](./2026-11-04-restaurant-dialogue-and-compliments-reading.md) · [녹음 숙제 자료 목록](./index.md) · [다음 구간 · Part 5 (11월 6일 · 완주)](./2026-11-06-food-culture-and-closing-reading.md)
+[원본 영상 · 24:25부터](https://www.youtube.com/watch?v=pywd-0rJJjg&t=1465s) · [이전 구간 · Part 3 (11월 4일)](./2026-11-04-restaurant-dialogue-and-compliments-reading.md) · [다음 구간 · Part 5 (11월 6일 · 완주)](./2026-11-06-food-culture-and-closing-reading.md)

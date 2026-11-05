@@ -164,4 +164,4 @@ listeningLang: en-US
 
 ---
 
-[오늘의 Daily](../daily/2026-10-12.md) · [수업 자료 목록](./index.md)
+[오늘의 Daily](../daily/2026-10-12.md)

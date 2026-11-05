@@ -8,7 +8,7 @@ listen: true
 
 [영상 보기 · 4:23부터](https://www.youtube.com/watch?v=v07kPyPkLYw&t=263s)
 
-- 자료: 30 Minutes of Real English Conversation You'll Actually Use (A2-B2)
+- 자료: [30 Minutes of Real English Conversation You'll Actually Use (A2-B2)](https://www.youtube.com/watch?v=v07kPyPkLYw&t=263s)
 - 추천 구간: **4:22–6:38 · 약 2분 16초**
 - 실제 대본: **4:23부터 마지막 “Slowly but surely.”까지**. 4:22의 `perfectly.`는 어제 문장의 끝이므로 제외하고, 6:38부터 시작하는 다음 주제도 제외합니다.
 - 내용: 침대 정리 → 잠들기 전 독서 → 꾸준한 영어 연습 → 아침 휴대폰 습관
@@ -129,4 +129,4 @@ listen: true
 
 전체 듣기 → 한 문장씩 따라 하기 → 두 역할 녹음 순서로 연습하고, 끝에 내 습관 두 문장을 말합니다. 녹음 파일은 따로 보관하지 않습니다.
 
-[10월 13일 수업 기록](../daily/2026-10-13.md) · [녹음 숙제·수업 자료 목록](./index.md) · [표현집](../patterns/useful-expressions.md) · [아침 발음 연습](../pronunciation/morning-practice.md)
+[10월 13일 수업 기록](../daily/2026-10-13.md) · [표현집](../patterns/useful-expressions.md) · [아침 발음 연습](../pronunciation/morning-practice.md)

@@ -7,13 +7,13 @@ listeningLang: en-US
 
 ## 녹음 구간과 자료
 
-- **영상:** Day 7: How to Talk About Food in English Like a Local | English Listening Practice (B1–B2)
+- **영상:** [Day 7: How to Talk About Food in English Like a Local | English Listening Practice (B1–B2)](https://www.youtube.com/watch?v=pywd-0rJJjg&t=565s)
 - **구간 구성:** 전체 `42:34` 분량을 5일(Part 1~5)로 나눈 **두 번째 구간(Part 2/5)** 입니다.
 - **범위:** `9:25`의 음식 취향 표현(**Okay. Now, let's learn how to talk about what you like and don't like...**)부터 `17:30`의 식당 주문·계산 설명 마무리(**Full and happy. The best combination.**)까지.
 - **연속 구간:** [2026-11-02 (월) · Part 1/5](./2026-11-02-food-vocabulary-and-tastes-reading.md)에 이어지며, [2026-11-04 (수) · Part 3/5](./2026-11-04-restaurant-dialogue-and-compliments-reading.md)로 이어집니다.
 - **편집:** 타임스탬프와 음악·웃음 표시(`[music]`, `[laughter]`)를 제거하고 자막 줄바꿈을 자연스러운 문장 단위로 연결했습니다. `10:36`의 자동 자막 오타인 `And freeze too`는 문맥(`Phrase one`에 이어지는 두 번째 구문)에 맞게 **`And phrase two`** 로 교정했습니다.
 
-[이전 구간 · Part 1 (11월 2일)](./2026-11-02-food-vocabulary-and-tastes-reading.md) · [녹음 숙제 자료 목록](./index.md) · [다음 구간 · Part 3 (11월 4일)](./2026-11-04-restaurant-dialogue-and-compliments-reading.md)
+[원본 영상 · 9:25부터](https://www.youtube.com/watch?v=pywd-0rJJjg&t=565s) · [이전 구간 · Part 1 (11월 2일)](./2026-11-02-food-vocabulary-and-tastes-reading.md) · [다음 구간 · Part 3 (11월 4일)](./2026-11-04-restaurant-dialogue-and-compliments-reading.md)
 
 ## 전체 녹음 대본
 
@@ -163,4 +163,4 @@ listeningLang: en-US
 - **Could we have the bill (또는 check), please?** — 계산서 좀 주시겠어요?
 - **Will you be paying together or separately?** — 한꺼번에 계산하시나요, 따로 계산하시나요?
 
-[이전 구간 · Part 1 (11월 2일)](./2026-11-02-food-vocabulary-and-tastes-reading.md) · [녹음 숙제 자료 목록](./index.md) · [다음 구간 · Part 3 (11월 4일)](./2026-11-04-restaurant-dialogue-and-compliments-reading.md)
+[원본 영상 · 9:25부터](https://www.youtube.com/watch?v=pywd-0rJJjg&t=565s) · [이전 구간 · Part 1 (11월 2일)](./2026-11-02-food-vocabulary-and-tastes-reading.md) · [다음 구간 · Part 3 (11월 4일)](./2026-11-04-restaurant-dialogue-and-compliments-reading.md)

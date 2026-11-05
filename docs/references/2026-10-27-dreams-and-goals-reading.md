@@ -7,7 +7,7 @@ listeningLang: en-US
 
 ## 녹음 구간과 자료
 
-- **영상:** Improve Your English Just by Listening | 40 Minutes of Real English Listening Practice (B1–B2)
+- **영상:** [Improve Your English Just by Listening | 40 Minutes of Real English Listening Practice (B1–B2)](https://www.youtube.com/watch?v=ZlO3xUl7Kdg&t=1996s)
 - **범위:** 33:16 자막 묶음의 **Alice, what is your biggest dream?**부터 마지막 36:26 자막 묶음의 **We have daily routines, food, travel, work, health, technology, English learning, dreams.**까지.
 - **시간 기준:** 36:26은 마지막 자막 묶음의 시작 시각이며 정확한 종료 시각이 아닙니다. 해당 묶음의 마지막 문장이 끝날 때까지 읽습니다.
 - **연속 구간:** [2026-10-26 · English Learning Tips](./2026-10-26-english-learning-tips-reading.md)의 **Now, let's continue.** 다음 질문부터 이어집니다.
@@ -15,7 +15,7 @@ listeningLang: en-US
 - **편집:** 타임스탬프와 음악·웃음 표시(`[music]`, `[laughter]`)를 제거하고 자막 줄바꿈을 연결했습니다. 원문 대화 순서와 따라 말하기 반복 구간을 그대로 보존했습니다.
 - **화자:** 이름으로 호명되는 질문·발화와 그에 이어지는 첫 답변만 David/Alice로 표시했습니다. 나머지는 음성 확인 없이 화자를 단정하지 않고 낭독 호흡에 따라 문단을 나눴습니다.
 
-[원본 영상 · 33:16부터](https://www.youtube.com/watch?v=ZlO3xUl7Kdg&t=1996s) · [녹음 숙제 자료 목록](./index.md)
+[원본 영상 · 33:16부터](https://www.youtube.com/watch?v=ZlO3xUl7Kdg&t=1996s)
 
 ## 전체 녹음 대본
 

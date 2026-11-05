@@ -7,13 +7,13 @@ listeningLang: en-US
 
 ## 녹음 구간과 자료
 
-- **영상:** Improve Your English Just by Listening | 40 Minutes of Real English Listening Practice (B1–B2)
+- **영상:** [Improve Your English Just by Listening | 40 Minutes of Real English Listening Practice (B1–B2)](https://www.youtube.com/watch?v=ZlO3xUl7Kdg&t=587s)
 - **범위:** 9:47에 시작하는 **Great job. Those are very useful words in the kitchen. Alice, if you could go anywhere in the world right now, where would you go?**부터 **Alice, do you enjoy your work?**까지.
 - **시간 기준:** 마지막 제공 자막은 13:44에 시작합니다. 13:44는 정확한 종료 시각이 아니며, 마지막 문장이 끝날 때까지 읽습니다.
 - **상태:** 2026-10-21 녹음 숙제 자료. 실제 녹음 완료·제출 여부는 미확인입니다.
 - **편집:** 타임스탬프와 비언어 표시를 제거하고 발화 순서, 반복, 철자 읽기를 보존했습니다. 화자는 호명과 질문·응답 문맥으로 배정했습니다. 제공 자막에 화자 표기가 없어 특히 어휘 설명·따라 말하기 부분의 화자 전환은 음성 대조 전까지 추정입니다.
 
-[원본 영상 · 9:47부터](https://www.youtube.com/watch?v=ZlO3xUl7Kdg&t=587s) · [녹음 숙제 자료 목록](./index.md)
+[원본 영상 · 9:47부터](https://www.youtube.com/watch?v=ZlO3xUl7Kdg&t=587s)
 
 ## 전체 녹음 대본
 

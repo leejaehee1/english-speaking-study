@@ -7,7 +7,7 @@ listeningLang: en-US
 
 ## 녹음 구간과 자료
 
-- **영상:** Improve Your English Just by Listening | 40 Minutes of Real English Listening Practice (B1–B2)
+- **영상:** [Improve Your English Just by Listening | 40 Minutes of Real English Listening Practice (B1–B2)](https://www.youtube.com/watch?v=ZlO3xUl7Kdg&t=1064s)
 - **범위:** 17:44 자막의 **David, let me ask you something.**부터 22:15 자막 묶음의 **We all say that.**까지.
 - **시간 기준:** 22:15는 마지막 포함 문장이 속한 자막 묶음의 시작 시각이며 정확한 종료 시각이 아닙니다.
 - **연속 구간:** [2026-10-22 · Work & Studying](./2026-10-22-work-and-studying-reading.md)에 이어지는 건강 주제 대화입니다.
@@ -15,7 +15,7 @@ listeningLang: en-US
 - **편집:** 타임스탬프와 음악·웃음 표시를 제거하고 자막 줄바꿈을 연결했습니다. 반복과 원문 순서를 보존했습니다. 명백한 철자 오류 **health rellated**만 **health-related**로 고쳤습니다.
 - **화자:** 이름으로 확인되는 질문·답변의 시작에만 Alice/David를 표시했습니다. 나머지는 화자를 추정하지 않고 문장 단위로 나눴습니다.
 
-[원본 영상 · 17:44부터](https://www.youtube.com/watch?v=ZlO3xUl7Kdg&t=1064s) · [녹음 숙제 자료 목록](./index.md)
+[원본 영상 · 17:44부터](https://www.youtube.com/watch?v=ZlO3xUl7Kdg&t=1064s)
 
 ## 전체 녹음 대본
 

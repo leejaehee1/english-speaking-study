@@ -7,13 +7,13 @@ listeningLang: en-US
 
 ## 녹음 구간과 자료
 
-- **영상:** Day 7: How to Talk About Food in English Like a Local | English Listening Practice (B1–B2)
+- **영상:** [Day 7: How to Talk About Food in English Like a Local | English Listening Practice (B1–B2)](https://www.youtube.com/watch?v=pywd-0rJJjg)
 - **구간 구성:** 전체 `42:34` 분량을 5일(Part 1~5)로 나눈 **첫 번째 구간(Part 1/5)** 입니다.
 - **범위:** `0:00` 시작 인사(**Hey everyone, welcome back to the channel.**)부터 `9:25`의 8번째 맛·식감 형용사 마무리(**Exactly.**)까지.
 - **다음 구간:** [2026-11-03 (화) · Part 2/5 · Food Preferences & Ordering at a Restaurant](./2026-11-03-food-preferences-and-ordering-reading.md)로 이어집니다.
 - **편집:** 타임스탬프와 효과음·음악 표시(`[music]`, `[sighs]`, `[laughter]`, `[clears throat]`)를 제거하고 자막 줄바꿈을 자연스러운 문장 단위로 연결했습니다. 원문 대화 순서와 따라 말하기 반복 구간을 모두 그대로 보존했습니다.
 
-[녹음 숙제 자료 목록](./index.md) · [다음 구간 · Part 2 (11월 3일)](./2026-11-03-food-preferences-and-ordering-reading.md)
+[원본 영상 · 0:00부터](https://www.youtube.com/watch?v=pywd-0rJJjg) · [다음 구간 · Part 2 (11월 3일)](./2026-11-03-food-preferences-and-ordering-reading.md)
 
 ## 전체 녹음 대본
 
@@ -176,4 +176,4 @@ listeningLang: en-US
 | 07 | **tender** (↔ **tough**) | (고기가) 부드럽고 연한 | **This steak was so tender, it melted in my mouth.** |
 | 08 | **refreshing** | 상쾌하고 청량한 | **This lemonade is so refreshing on a hot day.** |
 
-[녹음 숙제 자료 목록](./index.md) · [다음 구간 · Part 2 (11월 3일)](./2026-11-03-food-preferences-and-ordering-reading.md)
+[원본 영상 · 0:00부터](https://www.youtube.com/watch?v=pywd-0rJJjg) · [다음 구간 · Part 2 (11월 3일)](./2026-11-03-food-preferences-and-ordering-reading.md)

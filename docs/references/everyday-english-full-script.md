@@ -8277,7 +8277,7 @@ listeningLang: en-US
 
 </details>
 
-[녹음 숙제·수업 자료 목록](./index.md) · [외국어 학습법 · 소리와 표현 쌓기](../guides/language-learning-method.md)
+[외국어 학습법 · 소리와 표현 쌓기](../guides/language-learning-method.md)
 
 <style scoped>
 .literal-translation {

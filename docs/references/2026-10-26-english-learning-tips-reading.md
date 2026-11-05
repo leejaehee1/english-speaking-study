@@ -7,7 +7,7 @@ listeningLang: en-US
 
 ## 녹음 구간과 자료
 
-- **영상:** Improve Your English Just by Listening | 40 Minutes of Real English Listening Practice (B1–B2)
+- **영상:** [Improve Your English Just by Listening | 40 Minutes of Real English Listening Practice (B1–B2)](https://www.youtube.com/watch?v=ZlO3xUl7Kdg&t=1717s)
 - **범위:** 28:37 자막 묶음의 **Okay, Alice, let's talk about something very important for our listeners.**부터 마지막 33:10 자막 묶음의 **Now, let's continue.**까지.
 - **시간 기준:** 33:10은 마지막 자막 묶음의 시작 시각이며 정확한 종료 시각이 아닙니다. 해당 묶음의 마지막 문장이 끝날 때까지 읽습니다.
 - **연속 구간:** [2026-10-25 · Technology](./2026-10-25-technology-reading.md)의 **Or the opposite.** 다음 문장부터 이어집니다.
@@ -15,7 +15,7 @@ listeningLang: en-US
 - **편집:** 타임스탬프와 음악 표시(`[music]`)를 제거하고 자막 줄바꿈을 연결했습니다. 원문 대화 순서와 철자 읽기(`C O N S I S T E N C Y`, `E X P O S U R E`)를 보존했습니다. **So speak talk to people.**은 호흡에 맞춰 **So speak, talk to people.**로 쉼표를 보완했으며, **comfortable**의 강세를 설명하는 구절(**Come for not comfortable. It's comfortable.**)은 원문 표기를 유지하고 아래 발음 메모에 설명을 덧붙였습니다.
 - **화자:** 이름으로 확인되는 첫 발화만 David로 표시했습니다. 나머지는 음성 확인 없이 화자를 단정하지 않고 낭독 호흡에 따라 나눴습니다.
 
-[원본 영상 · 28:37부터](https://www.youtube.com/watch?v=ZlO3xUl7Kdg&t=1717s) · [녹음 숙제 자료 목록](./index.md)
+[원본 영상 · 28:37부터](https://www.youtube.com/watch?v=ZlO3xUl7Kdg&t=1717s)
 
 ## 전체 녹음 대본
 

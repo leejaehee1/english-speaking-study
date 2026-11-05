@@ -7,13 +7,13 @@ listeningLang: en-US
 
 ## 녹음 구간과 자료
 
-- **영상:** Day 7: How to Talk About Food in English Like a Local | English Listening Practice (B1–B2)
+- **영상:** [Day 7: How to Talk About Food in English Like a Local | English Listening Practice (B1–B2)](https://www.youtube.com/watch?v=pywd-0rJJjg&t=2027s)
 - **구간 구성:** 전체 `42:34` 분량을 5일(Part 1~5)로 나눈 **마지막 다섯 번째 구간(Part 5/5 · Day 7 완주)** 입니다.
 - **범위:** `33:47`의 음식과 문화 이야기(**Okay, let's go a little deeper because food is not just food. Food is culture.**)부터 5가지 성찰 질문과 전체 요약·마무리 인사(`42:34` **Bye-bye. Go eat something wonderful.**)까지.
 - **연속 구간:** [2026-11-05 (목) · Part 4/5](./2026-11-05-food-idioms-and-sentence-practice-reading.md)에 이어지며 이 구간으로 Day 7 전체 대본을 완주합니다.
 - **편집:** 타임스탬프와 음악·웃음 표시(`[music]`, `[laughter]`)를 제거하고 자막 줄바꿈을 자연스러운 문장 단위로 연결했습니다. `35:30`에서 모로코의 라마단 전통 수프인 `harira soup`가 자동 자막에 `her soup`로 적힌 부분은 원문 표시와 함께 아래 교정 메모에 설명을 덧붙였습니다.
 
-[이전 구간 · Part 4 (11월 5일)](./2026-11-05-food-idioms-and-sentence-practice-reading.md) · [녹음 숙제 자료 목록](./index.md)
+[원본 영상 · 33:47부터](https://www.youtube.com/watch?v=pywd-0rJJjg&t=2027s) · [이전 구간 · Part 4 (11월 5일)](./2026-11-05-food-idioms-and-sentence-practice-reading.md)
 
 ## 전체 녹음 대본
 
@@ -168,4 +168,4 @@ listeningLang: en-US
 3. **You have to try it sometime!**
    - **There's a great dakgalbi place in Jamsil. You have to try it sometime!** (잠실에 정말 맛있는 닭갈비 집이 있어요. 다음에 꼭 한번 드셔 보셔야 해요!)
 
-[이전 구간 · Part 4 (11월 5일)](./2026-11-05-food-idioms-and-sentence-practice-reading.md) · [녹음 숙제 자료 목록](./index.md)
+[원본 영상 · 33:47부터](https://www.youtube.com/watch?v=pywd-0rJJjg&t=2027s) · [이전 구간 · Part 4 (11월 5일)](./2026-11-05-food-idioms-and-sentence-practice-reading.md)

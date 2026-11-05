@@ -12,7 +12,7 @@ listeningLang: en-US
 - **기록:** 사용자가 오늘 녹음 분량으로 제공한 스크립트를 정리했습니다. 녹음 완료·제출 여부와 실제 녹음 길이는 확인되지 않았습니다.
 - **대본:** 제공된 구간 전체를 포함하며 시간·음악 표시를 제거했습니다. 반복 발화는 유지하고, 명백한 자막 오류와 일부 문법만 다듬었습니다. 화자 구분은 원문에 없어 임의로 붙이지 않았습니다.
 
-[원본 영상 · 24:20부터](https://www.youtube.com/watch?v=v07kPyPkLYw&t=1460s) · [전날 녹음 자료](./2026-10-17-common-phrases-dreams-reading.md) · [녹음 자료 목록](./index.md) · [학습 달력](../calendar.md)
+[원본 영상 · 24:20부터](https://www.youtube.com/watch?v=v07kPyPkLYw&t=1460s) · [전날 녹음 자료](./2026-10-17-common-phrases-dreams-reading.md) · [학습 달력](../calendar.md)
 
 ## 내용 정리
 

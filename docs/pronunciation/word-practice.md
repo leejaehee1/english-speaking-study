@@ -18,4 +18,4 @@ import { withBase } from 'vitepress'
 
 <iframe :src="withBase('/word.html')" title="영어 단어 추출과 발음 연습" style="width:100%; height:900px; border:1px solid var(--vp-c-divider); border-radius:8px; margin-top:16px;"></iframe>
 
-[발음 노트](./pronunciation-notes.md) · [영작 숙제](../writing/index.md) · [영어 일기](../diary/index.md) · [녹음 자료](../references/index.md)
+[발음 노트](./pronunciation-notes.md) · [영작 숙제](../writing/index.md) · [영어 일기](../diary/index.md)

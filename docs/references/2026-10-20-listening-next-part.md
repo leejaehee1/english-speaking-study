@@ -7,14 +7,14 @@ listeningLang: en-US
 
 ## 녹음 구간과 자료
 
-- **영상:** Improve Your English Just by Listening | 40 Minutes of Real English Listening Practice (B1–B2)
+- **영상:** [Improve Your English Just by Listening | 40 Minutes of Real English Listening Practice (B1–B2)](https://www.youtube.com/watch?v=ZlO3xUl7Kdg&t=310s)
 - **녹음 범위:** **David, I'm hungry.**부터 **Those are very useful words in the kitchen.**까지. 마지막 문장 앞의 **Great job.**도 포함합니다.
 - **시간 기준:** 첫 자막 **5:10**부터 **9:47에 시작하는 마지막 자막 묶음**의 문장이 모두 끝날 때까지입니다. 9:47은 종료 시각이 아닙니다. 정확한 종료 초와 다음 Part 경계는 제공 대본만으로 확인되지 않았습니다.
 - **분량:** 마지막 자막 시작까지 4분 37초이며, 실제 구간은 그 뒤 마지막 문장 끝까지입니다. 녹음 길이는 읽는 속도에 따라 달라집니다.
 - **상태:** 사용자 제공 대본으로 녹음 범위·첫 문장·끝 문장을 확정했습니다. 실제 녹음 완료·제출 여부는 미확인입니다. 앞서 적은 ‘5:10부터 약 4~5분, 끝 문장 미확정’ 추천 계획을 이 범위로 갱신합니다.
 - **대본 편집:** 타임스탬프와 [music]·[laughter] 표시를 제거하고 문장·문단을 연결했습니다. 영어 발화와 철자 읽기는 보존했습니다. 화자를 임의로 나누지 않았으며, 어색한 자막 표현의 교정은 아래 메모에서 구분합니다.
 
-[원본 영상 · 5:10부터](https://www.youtube.com/watch?v=ZlO3xUl7Kdg&t=310s) · [녹음 자료 목록](./index.md)
+[원본 영상 · 5:10부터](https://www.youtube.com/watch?v=ZlO3xUl7Kdg&t=310s)
 
 ## 내용 정리
 
@@ -95,4 +95,4 @@ Great job. Those are very useful words in the kitchen.
 
 **2026-10-19 (월)** 숙제는 **Alice, can I ask you something personal?**부터 **It's simple, but it's true.**까지입니다. 첫 자막은 **1:02**, 마지막 문장은 **5:05에 시작**하며 실제 종료는 그 뒤입니다. 다음 Part 시작은 **5:10**입니다. 사용자는 전날 숙제를 수행했다고 보고했으며 제출 여부는 미확인입니다.
 
-[10월 19일 전체 대본·숙제 기록](./2026-10-19-morning-routines-reading.md) · [녹음 숙제·수업 자료](./index.md)
+[10월 19일 전체 대본·숙제 기록](./2026-10-19-morning-routines-reading.md)

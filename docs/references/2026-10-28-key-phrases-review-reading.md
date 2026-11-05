@@ -7,7 +7,7 @@ listeningLang: en-US
 
 ## 녹음 구간과 자료
 
-- **영상:** Improve Your English Just by Listening | 40 Minutes of Real English Listening Practice (B1–B2)
+- **영상:** [Improve Your English Just by Listening | 40 Minutes of Real English Listening Practice (B1–B2)](https://www.youtube.com/watch?v=ZlO3xUl7Kdg&t=2178s)
 - **범위:** 36:18 자막 묶음의 **Alice, we've talked about so many things today.**부터 39:50 자막 묶음의 **Worth it.**까지 (핵심 표현 복습 + 5개 실전 질문 파트 통합).
 - **시간 기준:** 39:50은 마지막 자막 묶음의 시작 시각이며 정확한 종료 시각이 아닙니다. 해당 묶음의 마지막 문장(**Worth it.**)이 끝날 때까지 읽습니다.
 - **연속 구간:** [2026-10-27 · Dreams & Goals](./2026-10-27-dreams-and-goals-reading.md)의 마지막 두 문장(**Alice, we've talked about so many things today. We have daily routines, ...**)과 겹쳐서 시작하며, 흐름이 이어지도록 이번 대본에도 그대로 포함했습니다.
@@ -15,7 +15,7 @@ listeningLang: en-US
 - **편집:** 타임스탬프와 음악·웃음 표시(`[music]`, `[laughter]`)를 제거하고 자막 줄바꿈을 연결했습니다. 원문 대화 순서와 핵심 구절 따라 말하기(repeat), 질문 1~5번의 답변 시작 틀을 그대로 보존했습니다. **Where is the nearest Where is the nearest?**는 첫 구절 끝에 물음표를 보완해 **Where is the nearest? / Where is the nearest?**로 나눴고, **beautiful.**은 문장 시작 대문자 **Beautiful.**로 보완했습니다.
 - **화자:** 이름으로 호명되는 첫 발화만 David로 표시했습니다. 나머지는 음성 확인 없이 화자를 단정하지 않고 낭독 호흡과 따라 말하기 순서에 따라 문단을 나눴습니다.
 
-[원본 영상 · 36:18부터](https://www.youtube.com/watch?v=ZlO3xUl7Kdg&t=2178s) · [녹음 숙제 자료 목록](./index.md)
+[원본 영상 · 36:18부터](https://www.youtube.com/watch?v=ZlO3xUl7Kdg&t=2178s)
 
 ## 전체 녹음 대본
 

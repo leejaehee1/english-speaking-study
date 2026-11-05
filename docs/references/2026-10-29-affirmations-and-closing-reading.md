@@ -7,7 +7,7 @@ listeningLang: en-US
 
 ## 녹음 구간과 자료
 
-- **영상:** Improve Your English Just by Listening | 40 Minutes of Real English Listening Practice (B1–B2)
+- **영상:** [Improve Your English Just by Listening | 40 Minutes of Real English Listening Practice (B1–B2)](https://www.youtube.com/watch?v=ZlO3xUl7Kdg&t=2390s)
 - **범위:** 39:50 자막 묶음의 **Okay, let's now do something special.**부터 영상의 마지막 43:49 자막 묶음의 **Goodbye. Take care everyone.**까지 (6대 다짐 문장 반복 + 마무리 격려 통합 · 영상 전체 완주 구간).
 - **시간 기준:** 43:49는 마지막 자막 묶음의 시작 시각이며, 해당 묶음의 끝과 함께 40분 전체 듣기·낭독 영상이 마무리됩니다.
 - **연속 구간:** [2026-10-28 · Key Phrases Review & Practice Questions](./2026-10-28-key-phrases-review-reading.md)의 **Worth it.** 다음 문장부터 이어집니다.
@@ -15,7 +15,7 @@ listeningLang: en-US
 - **편집:** 타임스탬프와 음악 표시(`[music]`)를 제거하고 자막 줄바꿈을 연결했습니다. 원문의 4단계 따라 말하기(선창 → Alice 반복 → Together → Your turn) 구조와 반복 횟수를 보존했습니다. **any topic,**은 문장 시작 대문자 **Any topic,**으로 고쳤고, 댓글 작성 틀을 설명하는 **I want you to talk about Blink.**에서 자동 자막 오류인 **Blink**는 빈칸을 뜻하는 **blank**로 바로잡고 아래 메모에 기록했습니다.
 - **화자:** `I will say the phrase, Alice will repeat it` 안내와 이름 호명(`Alice, this was such a wonderful conversation today.`)으로 확인되는 구간에 David/Alice를 표시하고, 나머지는 낭독 호흡에 따라 문단으로 구분했습니다.
 
-[원본 영상 · 39:50부터](https://www.youtube.com/watch?v=ZlO3xUl7Kdg&t=2390s) · [녹음 숙제 자료 목록](./index.md)
+[원본 영상 · 39:50부터](https://www.youtube.com/watch?v=ZlO3xUl7Kdg&t=2390s)
 
 ## 전체 녹음 대본
 
