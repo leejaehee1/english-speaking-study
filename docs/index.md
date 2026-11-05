@@ -20,7 +20,8 @@
 
 - [영화 자막](./movies/index.md) — Greenland 2 시청용·상세 복습·누적 학습
 
-- [오늘의 기록 · 11월 4일](./daily/2026-11-04.md) — `Not that I'm aware of` (제가 알기로는 아닌데요)와 `As far as I'm aware` 표현
+- [오늘의 기록 · 11월 5일](./daily/2026-11-05.md) — 뉴욕 거리 인터뷰 (금융·투자) 스크립트와 `check on`, `help set up`, `get a grip on`, `in the long run`
+- [11월 4일 기록](./daily/2026-11-04.md) — `Not that I'm aware of` (제가 알기로는 아닌데요)와 `As far as I'm aware` 표현
 - [11월 3일 기록](./daily/2026-11-03.md) — `silver lining` (힘든 상황 속 희망적인 면·전화위복)과 `Look on the bright side`
 - [10월 30일 기록](./daily/2026-10-30.md) — 성격 20개·대단하다 20개·예쁘다 12개·경치 15개·맛없는 음식 20개 릴레이 말하기
 - [10월 28일 기록](./daily/2026-10-28.md) — 패러프레이징·콜로케이션, `cannot … enough` 강조·감사 패턴과 발음 영상

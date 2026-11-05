@@ -93,7 +93,7 @@ export default defineConfig({
       { text: '홈', link: '/' },
       { text: '학습 달력', link: '/calendar' },
       { text: '문장에서 단어 추출 · 발음 연습', link: '/pronunciation/word-practice' },
-      { text: '오늘의 기록', link: '/daily/2026-11-04' },
+      { text: '오늘의 기록', link: '/daily/2026-11-05' },
       { text: 'JoyTalk', link: 'https://projects-joytalk.vercel.app/', target: '_blank', rel: 'noopener noreferrer' }
     ],
     sidebar: [
@@ -103,6 +103,7 @@ export default defineConfig({
         { text: 'Claude로 나만의 AI 영어 튜터 만들기', link: '/guides/claude-ai-english-tutor' }
       ] },
       { text: '수업 기록', collapsed: true, items: groupByRecentAndWeek([
+        { text: '11월 5일 · 뉴욕 거리 인터뷰 (금융·투자) 표현과 스크립트', link: '/daily/2026-11-05' },
         { text: '11월 4일 · Not that I\'m aware of와 인지 표현', link: '/daily/2026-11-04' },
         { text: '11월 3일 · silver lining과 긍정 전환 표현', link: '/daily/2026-11-03' },
         { text: '10월 30일 · 성격·칭찬·예쁨·경치 릴레이 말하기', link: '/daily/2026-10-30' },
@@ -172,6 +173,7 @@ export default defineConfig({
         { text: '10월 12일 · think', link: '/writing/2026-10-12-think' }
       ]) },
       { text: '수업 자료', collapsed: true, items: groupByRecentAndWeek([
+        { text: '11월 5일 · 뉴욕 거리 인터뷰 (금융·투자) 스크립트', link: '/daily/2026-11-05' },
         { text: '10월 28일 · 추수감사절 여행·날씨 기사', link: '/references/2026-10-28-thanksgiving-travel-weather' },
         { text: '10월 20일 · 주문하기 (수업 예정)', link: '/references/2026-10-20-ordering-food-and-drinks' },
         { text: '10월 19일 · 한국의 술 문화', link: '/patterns/korean-drinking-culture' },
