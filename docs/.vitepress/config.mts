@@ -117,6 +117,8 @@ export default defineConfig({
         { text: '10월 12일', link: '/daily/2026-10-12' }
       ]) },
       { text: '녹음 숙제', collapsed: true, items: groupByRecentAndWeek([
+        { text: '11월 8일 · Cooking in English (2/2) Soup & Idioms', link: '/references/2026-11-08-cooking-in-english-soup-and-idioms-reading' },
+        { text: '11월 7일 · Cooking in English (1/2) Prep & Verbs', link: '/references/2026-11-07-cooking-in-english-prep-and-verbs-reading' },
         { text: '11월 6일 · Day 7 (5/5) Food Culture & Closing', link: '/references/2026-11-06-food-culture-and-closing-reading' },
         { text: '11월 5일 · Day 7 (4/5) 7 Food Idioms & Practice', link: '/references/2026-11-05-food-idioms-and-sentence-practice-reading' },
         { text: '11월 4일 · Day 7 (3/5) Restaurant Dialogue & Compliments', link: '/references/2026-11-04-restaurant-dialogue-and-compliments-reading' },
