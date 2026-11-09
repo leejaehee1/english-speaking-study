@@ -18,6 +18,7 @@ title: 음소 학습 시리즈 · 소리튠영어
 
 ## 함께 볼 자료
 
+- [주아쌤 10일 프로젝트 · 소리 블록 챌린지 (1~10일차 총정리)](./sound-block-10day-challenge.md) — 시작 블록 5종(`wanna`, `gonna`, `have to`, `I'll/won't`, `Did you/used to`)과 코어 블록 5대 기본동사(`do, make, get, take, have`) 소리·리듬 총정리.
 - [모음 음소 · 여덟 가지 소리](./vowel-phonemes.md) — 입 모양·혀 위치와 헷갈리는 모음 비교.
 - [자음 음소 · 여섯 가지 소리 쌍](./consonant-phonemes.md) — B/P, D/T, G/K, V/F, S/Z, J/CH 비교.
 - [아침 회화 전 · 5분 발음 연습](./morning-practice.md) — 평일 5분, 주말 하루 복습과 하루 휴식.

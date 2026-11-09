@@ -214,6 +214,7 @@ export default defineConfig({
         { text: 'GO', link: '/patterns/go' }
       ] },
       { text: '발음과 교정', collapsed: true, items: [
+        { text: '주아쌤 10일 프로젝트 · 소리 블록 챌린지', link: '/pronunciation/sound-block-10day-challenge' },
         { text: '발음하기 어려운 표현 60개 · 연결 발화 확장', link: '/pronunciation/connected-speech-expanded' },
         { text: '아침 회화 전 · 5분 발음 연습', link: '/pronunciation/morning-practice' },
         { text: '아침 입 풀기 · 입술에서 목까지', link: '/pronunciation/morning-articulation-drill' },

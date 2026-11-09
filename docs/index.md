@@ -58,6 +58,8 @@
 
 ## 단어별 발음 연습
 
+**[주아쌤 10일 프로젝트 · 소리 블록 챌린지 (1~10일차 총정리)](./pronunciation/sound-block-10day-challenge.md)** — 시작 블록(`wanna`, `gonna`, `have to`, `I'll`, `Did you`)과 코어 블록(`do, make, get, take, have`) 소리·리듬 훈련
+
 **[음소 학습 시리즈 · 주아쌤 소리튠영어](./pronunciation/pronunciation-notes.md#phoneme-series)** — 음소 연습을 시작할 때 볼 영상·재생목록
 
 [모음 음소 · 여덟 가지 소리](./pronunciation/vowel-phonemes.md) — bad/bed, cap/cup, fool/full, ship/sheep 비교
