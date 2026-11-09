@@ -146,6 +146,7 @@ export default defineConfig({
         { text: '10월 12일 · 아침 대화', link: '/references/2026-10-12-morning-conversation' }
       ]) },
       { text: '영어 일기', collapsed: true, items: groupByRecentAndWeek([
+        { text: '11월 9일 · 겨울옷 꺼내 입기와 음식 퀴즈·바이브 UI', link: '/diary/2026-11-09' },
         { text: '11월 8일 · 당근 모임 동생과의 오랜만의 만남과 배려', link: '/diary/2026-11-08' },
         { text: '11월 6일 · 바이브 코딩 기획서와 음식 회화 목표', link: '/diary/2026-11-06' },
         { text: '11월 5일 · 국기원 태권도 시범과 바이브 코딩 개강', link: '/diary/2026-11-05' },
