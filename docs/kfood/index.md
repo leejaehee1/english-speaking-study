@@ -20,10 +20,10 @@ listeningLang: en-US
 
 유튜브 스튜디오(`studio.youtube.com` → **맞춤설정** → **브랜딩**)에 바로 업로드하실 수 있도록 유튜브 공식 권장 규격(**로고 `1024×1024px`**, **배너 `2560×1440px` 중앙 안전 영역 배치**)에 맞춰 제작했습니다.
 
-| 1. 유튜브 프로필 사진 (`1024×1024px`) | 2. 유튜브 상단 배너 이미지 (`2560×1440px`) |
-| :---: | :---: |
-| ![SoundBlock K-Cooking Logo](/images/kfood/channel-logo.jpg) | ![SoundBlock K-Cooking Banner](/images/kfood/channel-banner.jpg) |
-| <a href="../images/kfood/channel-logo.jpg" download="SoundBlock-KCooking-Logo.jpg">⬇️ **프로필 로고 다운로드 (`channel-logo.jpg`)**</a> | <a href="../images/kfood/channel-banner.jpg" download="SoundBlock-KCooking-Banner.jpg">⬇️ **채널 배너 다운로드 (`channel-banner.jpg`)**</a> |
+| 1. 유튜브 프로필 사진 (`1024×1024px`) | 2. 유튜브 상단 배너 이미지 (`2560×1440px`) | 3. 1화 김치찌개 유튜브 썸네일 (`16:9`) |
+| :---: | :---: | :---: |
+| ![SoundBlock K-Cooking Logo](/images/kfood/channel-logo.jpg) | ![SoundBlock K-Cooking Banner](/images/kfood/channel-banner.jpg) | ![EP.01 Kimchi Stew Thumbnail](/images/kfood/ep1-thumb.jpg) |
+| <a href="../images/kfood/channel-logo.jpg" download="SoundBlock-KCooking-Logo.jpg">⬇️ **프로필 로고 다운로드**</a> | <a href="../images/kfood/channel-banner.jpg" download="SoundBlock-KCooking-Banner.jpg">⬇️ **채널 배너 다운로드**</a> | <a href="../images/kfood/ep1-thumb.jpg" download="EP01-Kimchi-Stew-Thumbnail.jpg">⬇️ **1화 썸네일 다운로드**</a> |
 
 ---
 
