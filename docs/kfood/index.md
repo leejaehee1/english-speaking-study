@@ -12,35 +12,33 @@ listeningLang: en-US
 
 ---
 
-## 1. 유튜브 채널 네이밍 & 브랜딩 추천 (수익화 타깃별)
+## 1. 공식 채널 브랜딩 · `소리블록 K-쿠킹 · SoundBlock K-Cooking` (`@SoundBlockKCooking`)
 
-국내 영어 회화 초보 학습자(30~60대)와 글로벌 K-Food 관심층을 동시에 사로잡을 수 있는 **3가지 컨셉의 채널 이름 후보** 입니다.
+유튜브 스튜디오(`studio.youtube.com` → **맞춤설정** → **기본 정보**)에 바로 복사해서 붙여넣을 수 있는 공식 채널 소개글과 채널 키워드입니다.
 
-### 컨셉 ① 직관적 ‘블록 영어 + 요리’ 강조형 (가장 추천 ⭐)
-> 단어 암기 없이 레고 블록처럼 조립해 요리 영어를 말한다는 차별점을 채널명에서 바로 보여주는 이름입니다.
+### 📋 채널 설명란 (Description) 복사본
 
-| 추천 채널명 (국/영문 병기) | 추천 핸들 (`@`) | 채널 한 줄 슬로건 |
-| :--- | :--- | :--- |
-| **블록 키친 영어 · Block Kitchen English** | `@BlockKitchenEnglish` | 레고처럼 조립해 0.1초 만에 입이 트이는 한식 요리 영어 |
-| **소리블록 K-쿠킹 · SoundBlock K-Cooking** | `@SoundBlockKCooking` | 중학교 단어로 김치찌개부터 불고기까지 영어로 말하기 |
-| **3블록 집밥 영어 · 3-Block K-Food English** | `@3BlockKFood` | 딱 3덩어리로 끝내는 가장 쉬운 한국 집밥 영어 회화 |
+```text
+안녕하세요! [소리블록 K-쿠킹 · SoundBlock K-Cooking]에 오신 것을 환영합니다 🍲🇰🇷
 
-### 컨셉 ② 친근한 ‘집밥·부엌 혼잣말’ 브이로그형
-> 일상 속 부엌에서 영어로 혼잣말하며 성장하는 친근한 느낌을 주는 이름입니다.
+"김치찌개 끓일게", "고기 30분 재워 둬야 해", "상추에 싸 드세요!"
+매일 먹는 한국 집밥, 영어로 어떻게 말할지 막막하셨나요?
 
-| 추천 채널명 (국/영문 병기) | 추천 핸들 (`@`) | 채널 한 줄 슬로건 |
-| :--- | :--- | :--- |
-| **방구석 셰프 영어 · Cozy K-Chef English** | `@CozyKChefEnglish` | 오늘 저녁 메뉴를 영어로 말해보는 가장 맛있는 영어 습관 |
-| **김치 스튜 잉글리시 · Kimchi Stew English** | `@KimchiStewEnglish` | 한국인이 매일 먹는 집밥으로 배우는 찐 생활 영어 |
-| **이지 K-키친 · Easy K-Kitchen Talk** | `@EasyKKitchenTalk` | 요리도 영어도 초보 눈높이에서 쉽게 떠먹여 주는 채널 |
+단어 하나씩 외우지 마세요!
+① 시작 블록 (I'm gonna / You have to / I'll)
+② 요리 코어 블록 (make Kimchi stew / slice the tofu / take a sip)
+③ 디테일 블록 (today / right now / for 10 minutes)
 
-### 컨셉 ③ 글로벌 K-Food + 쉬운 영어(Easy English) 타깃형
-> 해외 시청자 유입(달러 광고 단가 RPM 상승)까지 노릴 때 유리한 영문 중심 이름입니다.
+레고처럼 딱 3개의 소리 블록만 조립하면 영어 회화 초보자도 0.1초 만에 한식 요리 영어가 입에서 툭 튀어나옵니다.
 
-| 추천 채널명 (국/영문 병기) | 추천 핸들 (`@`) | 채널 한 줄 슬로건 |
-| :--- | :--- | :--- |
-| **Easy K-Food English (이지 K-푸드 잉글리시)** | `@EasyKFoodEnglish` | Cook Real Korean Food & Learn Easy Everyday English! |
-| **Speak & Cook Korean (스피크 앤 쿡 코리안)** | `@SpeakAndCookKorean` | Learn Spoken English with Simple Korean Home Cooking |
+Welcome to SoundBlock K-Cooking (@SoundBlockKCooking)!
+Learn how to cook authentic Korean home-cooked meals (Kimchi Stew, Bulgogi, Kimchi Fried Rice, K-Ramen, and more) in super easy, bite-sized English sound blocks!
+```
+
+### 🏷️ 유튜브 스튜디오 설정용 ‘채널 키워드’ (복사해서 붙여넣기)
+```text
+소리블록 K-쿠킹, SoundBlock K-Cooking, 요리 영어, 한식 영어로 설명하기, 영어회화 초보, 소리블록 영어, 생활영어, 엄마표 영어, 영어 혼잣말, K-Food recipe in easy English, Korean cooking English, how to make kimchi stew
+```
 
 ---
 

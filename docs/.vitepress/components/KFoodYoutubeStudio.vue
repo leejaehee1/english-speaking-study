@@ -249,7 +249,7 @@ interface CookingEpisode {
   scenes: CookingScene[]
 }
 
-const channelName = ref('K-Food Block English')
+const channelName = ref('소리블록 K-쿠킹 · @SoundBlockKCooking')
 const aspectRatio = ref<'16:9' | '9:16'>('16:9')
 const isCleanMode = ref(false)
 const showPronGuide = ref(true)
@@ -844,7 +844,7 @@ async function copyEpisodeScript() {
       (s, i) =>
         `0${i}:00 ${s.stepTitle}\n- EN: ${s.fullEn}\n- 블록: ${s.blocks.map((b) => `[${b.en}]`).join(' + ')}\n- 발음: ${s.fullPron}\n- 뜻: ${s.fullKo}\n`
     ),
-    '#영어회화초보 #요리영어 #소리블록 #한식영어 #KFood #EnglishSpeaking #KimchiStew'
+    '#소리블록K쿠킹 #SoundBlockKCooking #영어회화초보 #요리영어 #소리블록 #한식영어 #KFood #EnglishSpeaking #KimchiStew'
   ]
   try {
     await navigator.clipboard.writeText(lines.join('\n'))
