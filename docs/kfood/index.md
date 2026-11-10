@@ -16,6 +16,17 @@ listeningLang: en-US
 
 - **공식 유튜브 채널 주소**: [https://www.youtube.com/@SoundBlockKCooking](https://www.youtube.com/@SoundBlockKCooking)
 
+### 🎨 공식 채널 프로필 로고 & 상단 배너 이미지 (유튜브 규격 완벽 맞춤)
+
+유튜브 스튜디오(`studio.youtube.com` → **맞춤설정** → **브랜딩**)에 바로 업로드하실 수 있도록 유튜브 공식 권장 규격(**로고 `1024×1024px`**, **배너 `2560×1440px` 중앙 안전 영역 배치**)에 맞춰 제작했습니다.
+
+| 1. 유튜브 프로필 사진 (`1024×1024px`) | 2. 유튜브 상단 배너 이미지 (`2560×1440px`) |
+| :---: | :---: |
+| ![SoundBlock K-Cooking Logo](/images/kfood/channel-logo.jpg) | ![SoundBlock K-Cooking Banner](/images/kfood/channel-banner.jpg) |
+| <a href="../images/kfood/channel-logo.jpg" download="SoundBlock-KCooking-Logo.jpg">⬇️ **프로필 로고 다운로드 (`channel-logo.jpg`)**</a> | <a href="../images/kfood/channel-banner.jpg" download="SoundBlock-KCooking-Banner.jpg">⬇️ **채널 배너 다운로드 (`channel-banner.jpg`)**</a> |
+
+---
+
 유튜브 스튜디오(`studio.youtube.com` → **맞춤설정** → **기본 정보**)에 바로 복사해서 붙여넣을 수 있는 공식 채널 소개글과 채널 키워드입니다.
 
 ### 📋 채널 설명란 (Description) 복사본
