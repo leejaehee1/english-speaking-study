@@ -92,11 +92,15 @@ export default defineConfig({
     nav: [
       { text: '홈', link: '/' },
       { text: '학습 달력', link: '/calendar' },
+      { text: '🎬 K-Food 유튜브 스튜디오', link: '/kfood/' },
       { text: '문장에서 단어 추출 · 발음 연습', link: '/pronunciation/word-practice' },
       { text: '오늘의 기록', link: '/daily/2026-11-05' },
       { text: 'JoyTalk', link: 'https://projects-joytalk.vercel.app/', target: '_blank', rel: 'noopener noreferrer' }
     ],
     sidebar: [
+      { text: '🎬 K-Food 영어 유튜브 스튜디오', collapsed: false, items: [
+        { text: '한식 소리 블록 스튜디오 (김치찌개·볶음밥·라면·불고기)', link: '/kfood/' }
+      ] },
       { text: '학습 가이드', collapsed: true, items: [
         { text: '영어 수준과 학습 시간', link: '/guides/cefr-levels' },
         { text: '외국어 학습법 · 소리와 표현 쌓기', link: '/guides/language-learning-method' },

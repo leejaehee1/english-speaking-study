@@ -58,6 +58,8 @@
 
 ## 단어별 발음 연습
 
+**[🎬 K-Food 소리 블록 유튜브 스튜디오 (김치찌개·김치볶음밥·라면·불고기)](./kfood/index.md)** — 한국 대표 요리 만드는 법을 소리 블록으로 연습하고 16:9 본편 / 9:16 쇼츠 유튜브 영상으로 바로 녹화하는 스튜디오
+
 **[주아쌤 10일 프로젝트 · 소리 블록 챌린지 (1~10일차 총정리)](./pronunciation/sound-block-10day-challenge.md)** — 시작 블록(`wanna`, `gonna`, `have to`, `I'll`, `Did you`)과 코어 블록(`do, make, get, take, have`) 소리·리듬 훈련
 
 **[음소 학습 시리즈 · 주아쌤 소리튠영어](./pronunciation/pronunciation-notes.md#phoneme-series)** — 음소 연습을 시작할 때 볼 영상·재생목록
