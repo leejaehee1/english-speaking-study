@@ -12,7 +12,9 @@ listeningLang: en-US
 
 ---
 
-## 1. 공식 채널 브랜딩 · `소리블록 K-쿠킹 · SoundBlock K-Cooking` (`@SoundBlockKCooking`)
+## 1. 공식 채널 브랜딩 · [소리블록 K-쿠킹 · SoundBlock K-Cooking (`@SoundBlockKCooking`)](https://www.youtube.com/@SoundBlockKCooking)
+
+- **공식 유튜브 채널 주소**: [https://www.youtube.com/@SoundBlockKCooking](https://www.youtube.com/@SoundBlockKCooking)
 
 유튜브 스튜디오(`studio.youtube.com` → **맞춤설정** → **기본 정보**)에 바로 복사해서 붙여넣을 수 있는 공식 채널 소개글과 채널 키워드입니다.
 

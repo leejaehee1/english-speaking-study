@@ -3,7 +3,15 @@
     <!-- 상단 컨트롤 바 -->
     <div class="kf-topbar">
       <div class="kf-topbar-left">
-        <span class="kf-studio-badge">🎬 K-FOOD YOUTUBE STUDIO</span>
+        <a
+          href="https://www.youtube.com/@SoundBlockKCooking"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="kf-studio-badge"
+          title="유튜브 채널 바로가기"
+        >
+          ▶️ @SoundBlockKCooking
+        </a>
         <div class="kf-ep-selector">
           <button
             v-for="ep in episodes"

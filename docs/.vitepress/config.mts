@@ -241,6 +241,9 @@ export default defineConfig({
     search: { provider: 'local' },
     outline: { label: '이 페이지', level: [2, 3] },
     docFooter: { prev: '이전', next: '다음' },
-    socialLinks: [{ icon: 'github', link: 'https://github.com/leejaehee1/english-speaking-study' }]
+    socialLinks: [
+      { icon: 'youtube', link: 'https://www.youtube.com/@SoundBlockKCooking' },
+      { icon: 'github', link: 'https://github.com/leejaehee1/english-speaking-study' }
+    ]
   }
 })
