@@ -1,7 +1,16 @@
 <template>
-  <div class="kf-studio" :class="{ 'clean-record-mode': isCleanMode }" @click.stop>
-    <!-- 상단 컨트롤 바 -->
-    <div class="kf-topbar">
+  <div
+    ref="studioRoot"
+    class="kf-studio-v2"
+    :class="{
+      'clean-record-mode': isCleanMode,
+      'theater-fullscreen': isFullscreenMode
+    }"
+    @click.stop
+    @mousemove="onMouseMoveInStudio"
+  >
+    <!-- 상단 컨트롤 바 (클린/전체화면 모드에서는 마우스 올릴 때만 슬라이드 다운) -->
+    <div class="kf-topbar" :class="{ 'auto-hide-bar': (isCleanMode || isFullscreenMode) && !showFloatingControls }">
       <div class="kf-topbar-left">
         <a
           href="https://www.youtube.com/@SoundBlockKCooking"
@@ -10,7 +19,7 @@
           class="kf-studio-badge"
           title="유튜브 채널 바로가기"
         >
-          ▶️ @SoundBlockKCooking
+          ▶️ @SoundBlockKCooking V2
         </a>
         <div class="kf-ep-selector">
           <button
@@ -34,7 +43,7 @@
             :class="{ active: aspectRatio === '16:9' }"
             @click="aspectRatio = '16:9'"
           >
-            📺 16:9 유튜브 가로형
+            📺 16:9 가로형 (Full HD)
           </button>
           <button
             type="button"
@@ -45,147 +54,316 @@
             📱 9:16 쇼츠 세로형
           </button>
         </div>
+
         <button
           type="button"
-          class="kf-mode-btn kf-clean-btn"
-          :class="{ active: isCleanMode }"
-          @click="isCleanMode = !isCleanMode"
+          class="kf-mode-btn kf-fullscreen-btn"
+          :class="{ active: isFullscreenMode }"
+          @click="toggleFullscreenBroadcast"
         >
-          {{ isCleanMode ? '⚙️ 편집 컨트롤 보이기' : '🎥 화면 녹화 클린 모드' }}
+          {{ isFullscreenMode ? '✕ 전체화면 방송 종료 (ESC)' : '🖥️ 1080p 풀스크린 방송 모드' }}
         </button>
       </div>
     </div>
 
-    <!-- 메인 스튜디오 캔버스 영역 -->
+    <!-- ==========================================================
+         메인 16:9 / 9:16 방송 캔버스 (Full-Bleed Broadcast Screen)
+         ========================================================== -->
     <div class="kf-canvas-wrapper" :class="aspectRatio === '9:16' ? 'is-shorts' : 'is-wide'">
-      <div class="kf-screen" :class="aspectRatio === '9:16' ? 'screen-shorts' : 'screen-wide'">
-        <!-- 상단 채널 워터마크 & 씬 진행 바 -->
-        <div class="kf-screen-header">
-          <div class="kf-channel-tag">
-            <span class="kf-channel-dot"></span>
-            <span>{{ channelName }} · {{ currentEpisode.epNumber }}</span>
-          </div>
-          <div class="kf-step-counter">
-            STEP {{ sceneIndex + 1 }} / {{ currentEpisode.scenes.length }}
+      <div class="kf-broadcast-screen" :class="aspectRatio === '9:16' ? 'screen-shorts' : 'screen-wide'">
+        <!-- ----------------------------------------------------
+             CASE A: INTRO 슬라이드 (오프닝 훅 화면)
+             ---------------------------------------------------- -->
+        <div v-if="slideCursor === -1" class="kf-special-slide intro-slide">
+          <img
+            :src="withBase('/images/kfood/ep1-thumb.jpg')"
+            alt="Episode Intro Background"
+            class="kf-bg-full ken-burns"
+          />
+          <div class="kf-special-backdrop"></div>
+
+          <div class="kf-intro-content">
+            <div class="kf-intro-top-pill">
+              <img :src="withBase('/images/kfood/channel-logo.jpg')" alt="Logo" class="kf-mini-logo" />
+              <span>소리블록 K-쿠킹 · SoundBlock K-Cooking</span>
+            </div>
+
+            <div class="kf-intro-ep-badge">{{ currentEpisode.epNumber }} · K-FOOD SPEAKING RECIPE</div>
+            <h2 class="kf-intro-title">{{ currentEpisode.title }}</h2>
+            <p class="kf-intro-sub">
+              단어 하나씩 외우지 마세요! 레고처럼 <strong>딱 3개의 소리 블록</strong>만 조립하면 입이 트입니다.
+            </p>
+
+            <div class="kf-intro-formula">
+              <span class="f-pill bb">① 시작 블록 (I'm gonna / You have to)</span>
+              <span class="f-plus">+</span>
+              <span class="f-pill core">② 요리 코어 블록 (make Kimchi stew)</span>
+              <span class="f-plus">+</span>
+              <span class="f-pill db">③ 디테일 블록 (today)</span>
+            </div>
+
+            <div class="kf-intro-cta" @click="startEpisodeFromBeginning">
+              ▶️ 지금 바로 소리 내어 시작해 볼까요? (Let's get cooking!)
+            </div>
           </div>
         </div>
 
-        <div class="kf-progress-dots">
-          <span
-            v-for="(sc, idx) in currentEpisode.scenes"
-            :key="idx"
-            class="kf-dot"
-            :class="{ active: idx === sceneIndex, done: idx < sceneIndex }"
-            @click="goToScene(idx)"
-          ></span>
-        </div>
-
-        <!-- 비주얼 스테이지 (고화질 일러스트 / 사용자 업로드 사진 / 기본 카드) -->
-        <div class="kf-visual-stage" :style="{ background: currentScene.bgGradient }">
+        <!-- ----------------------------------------------------
+             CASE B: 본편 요리 장면 (Scene 1 ~ Scene N) — 풀블리드 오버레이
+             ---------------------------------------------------- -->
+        <div v-else-if="slideCursor >= 0 && slideCursor < currentEpisode.scenes.length" class="kf-main-scene">
+          <!-- 1) 100% 풀블리드 배경 이미지 / 일러스트 -->
           <template v-if="activeSceneImage">
             <img
               :key="sceneKey"
               :src="activeSceneImage"
               :alt="currentScene.stepTitle"
-              class="kf-scene-img ken-burns"
+              class="kf-bg-full ken-burns"
             />
-            <div class="kf-img-overlay-bottom">
-              <span class="kf-overlay-step">{{ currentScene.stepTitle }}</span>
-              <span class="kf-overlay-note">{{ currentScene.actionNote }}</span>
-            </div>
+            <div class="kf-scrim-gradient"></div>
           </template>
           <template v-else>
-            <div class="kf-illust-card">
-              <div class="kf-illust-emojis">{{ currentScene.visualEmojis }}</div>
-              <div class="kf-illust-step-badge">{{ currentScene.stepTitle }}</div>
-              <div class="kf-illust-action">{{ currentScene.actionNote }}</div>
+            <div class="kf-bg-fallback" :style="{ background: currentScene.bgGradient }">
+              <div class="kf-fallback-center">
+                <div class="kf-fallback-emojis">{{ currentScene.visualEmojis }}</div>
+                <div class="kf-fallback-action">{{ currentScene.actionNote }}</div>
+              </div>
             </div>
+            <div class="kf-scrim-gradient"></div>
           </template>
 
-          <!-- 우측 상단 핵심 요리 동사 배지 -->
-          <div class="kf-verb-floating">
-            <span class="verb-label">핵심 표현</span>
-            <strong>{{ currentScene.keyVocab }}</strong>
+          <!-- 2) 상단 HUD 바 (채널 로고 + 장면 번호 + 진행 게이지 + 핵심 어휘 배지) -->
+          <div class="kf-hud-top">
+            <div class="kf-hud-left">
+              <img :src="withBase('/images/kfood/channel-logo.jpg')" alt="Logo" class="kf-hud-logo" />
+              <div class="kf-hud-brand">
+                <span class="hud-ch-name">소리블록 K-쿠킹</span>
+                <span class="hud-ep-step">{{ currentEpisode.epNumber }} · {{ currentScene.stepTitle }}</span>
+              </div>
+            </div>
+
+            <div class="kf-hud-right">
+              <div class="kf-hud-vocab">
+                <span class="vocab-tag">KEY EXPRESSION</span>
+                <strong>{{ currentScene.keyVocab }}</strong>
+              </div>
+            </div>
           </div>
 
-          <!-- 따라 말하기(Shadowing) 타임 배너 -->
-          <div v-if="isShadowingTurn" class="kf-your-turn-banner">
-            <div class="yt-turn-top">
-              🎤 <strong>YOUR TURN!</strong> 소리 블록 3개로 크게 따라 말해 보세요!
+          <!-- 상단 씬 프로그레스 도트 바 -->
+          <div class="kf-hud-progress">
+            <span
+              class="hud-dot"
+              :class="{ active: slideCursor === -1, done: slideCursor > -1 }"
+              title="오프닝 인트로"
+              @click="goToSlide(-1)"
+            ></span>
+            <span
+              v-for="(sc, idx) in currentEpisode.scenes"
+              :key="idx"
+              class="hud-dot"
+              :class="{ active: idx === slideCursor, done: idx < slideCursor }"
+              :title="sc.stepTitle"
+              @click="goToSlide(idx)"
+            ></span>
+            <span
+              class="hud-dot"
+              :class="{ active: slideCursor === currentEpisode.scenes.length }"
+              title="전체 복습 아웃트로"
+              @click="goToSlide(currentEpisode.scenes.length)"
+            ></span>
+          </div>
+
+          <!-- 3) 중앙 상단: 한국어 코칭 버블 or 🎤 YOUR TURN 따라 말하기 배너 -->
+          <transition name="kf-pop">
+            <div v-if="isShadowingTurn" class="kf-center-turn-modal">
+              <div class="turn-header">
+                <span class="turn-mic-icon">🎤</span>
+                <div class="turn-texts">
+                  <strong>YOUR TURN! 큰 소리로 따라 말해 보세요!</strong>
+                  <span>소리 블록 3개를 리듬에 맞춰 한 호흡으로 뱉어 보세요</span>
+                </div>
+                <span class="turn-sec-badge">{{ Math.ceil((100 - shadowingProgress) * 0.04) }}초</span>
+              </div>
+              <div class="turn-progress-track">
+                <div class="turn-progress-bar" :style="{ width: shadowingProgress + '%' }"></div>
+              </div>
             </div>
-            <div class="yt-turn-bar">
-              <div class="yt-turn-fill" :style="{ width: shadowingProgress + '%' }"></div>
+
+            <div v-else-if="showCoachBubble && currentScene.coachKo" class="kf-coach-banner">
+              <span class="coach-icon">💡 요리 상황 코칭</span>
+              <span class="coach-text">{{ currentScene.coachKo }}</span>
+            </div>
+          </transition>
+
+          <!-- 4) 하단 글래스모피즘 방송 자막 독 (Broadcast Lower-Third Caption Dock) -->
+          <div class="kf-lower-third">
+            <!-- 소리 블록 3단 캡슐 -->
+            <div class="kf-blocks-row">
+              <div
+                v-for="(blk, bIdx) in currentScene.blocks"
+                :key="bIdx"
+                class="kf-glass-block"
+                :class="[blk.role, { active: activeBlockIdx === bIdx }]"
+                @click="speakSingleBlock(blk.en, bIdx)"
+              >
+                <div class="gblk-top">
+                  <span class="gblk-badge">
+                    {{ blk.role === 'bb' ? '① 시작 블록' : blk.role === 'core' ? '② 코어 블록' : '③ 디테일 블록' }}
+                  </span>
+                  <span v-if="showPronGuide" class="gblk-pron">[{{ blk.pron }}]</span>
+                </div>
+                <div class="gblk-en">{{ blk.en }}</div>
+              </div>
+            </div>
+
+            <!-- 완성 문장 & 한글 리듬 & 번역 바 -->
+            <div class="kf-sentence-banner" @click="speakSceneSentence(1.0)">
+              <div class="kf-main-en">
+                <span class="play-hint-icon">🔊</span>
+                {{ currentScene.fullEn }}
+              </div>
+              <div class="kf-sub-meta">
+                <span v-if="showPronGuide" class="kf-meta-pron">
+                  🗣️ <strong>{{ currentScene.fullPron }}</strong>
+                </span>
+                <span v-if="showKoSub" class="kf-meta-ko">
+                  🇰🇷 {{ currentScene.fullKo }}
+                </span>
+              </div>
             </div>
           </div>
         </div>
 
-        <!-- 하단 소리 블록 자막 영역 (유튜브 캡션 스타일) -->
-        <div class="kf-caption-stage">
-          <!-- 소리 블록 조각 체인 -->
-          <div class="kf-block-pills">
-            <div
-              v-for="(blk, bIdx) in currentScene.blocks"
-              :key="bIdx"
-              class="kf-block-pill"
-              :class="[blk.role, { speaking: activeBlockIdx === bIdx }]"
-              @click="speakText(blk.en, 0.92)"
-            >
-              <span class="blk-role-label">
-                {{ blk.role === 'bb' ? '① 시작 블록' : blk.role === 'core' ? '② 코어 블록' : '③ 디테일 블록' }}
-              </span>
-              <strong class="blk-en">{{ blk.en }}</strong>
-              <span v-if="showPronGuide" class="blk-pron">[{{ blk.pron }}]</span>
+        <!-- ----------------------------------------------------
+             CASE C: OUTRO 슬라이드 (전체 8문장 복습 & 구독 유도)
+             ---------------------------------------------------- -->
+        <div v-else class="kf-special-slide outro-slide">
+          <img
+            :src="withBase('/images/kfood/ep1-s8.jpg')"
+            alt="Episode Outro Background"
+            class="kf-bg-full"
+          />
+          <div class="kf-special-backdrop outro-backdrop"></div>
+
+          <div class="kf-outro-content">
+            <div class="kf-outro-header">
+              <span class="outro-badge">🎉 MISSION COMPLETE · 오늘의 소리 블록 총정리</span>
+              <h2 class="outro-title">{{ currentEpisode.title }} 핵심 문장 복습</h2>
+            </div>
+
+            <div class="kf-review-grid">
+              <div
+                v-for="(sc, idx) in currentEpisode.scenes"
+                :key="idx"
+                class="kf-review-item"
+                @click="speakText(sc.fullEn, 1.0)"
+              >
+                <span class="rev-num">0{{ idx + 1 }}</span>
+                <div class="rev-body">
+                  <div class="rev-en">{{ sc.fullEn }}</div>
+                  <div class="rev-ko">{{ sc.fullKo }} · <em>({{ sc.fullPron }})</em></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="kf-outro-footer">
+              <div class="outro-cta-box">
+                <img :src="withBase('/images/kfood/channel-logo.jpg')" alt="Logo" class="kf-mini-logo" />
+                <div>
+                  <strong>구독(Subscribe) &amp; 좋아요(Like)</strong>를 누르고 다음 한국 요리도 영어로 말해 봐요!
+                  <div class="outro-handle">YouTube · @SoundBlockKCooking</div>
+                </div>
+              </div>
             </div>
           </div>
+        </div>
 
-          <!-- 완성 문장 & 한글 리듬 & 번역 -->
-          <div class="kf-full-sentence" @click="speakSceneSentence(1.0)">
-            {{ currentScene.fullEn }}
-          </div>
-          <div v-if="showPronGuide" class="kf-pron-line">
-            🗣️ 리듬 가이드: <strong>{{ currentScene.fullPron }}</strong>
-          </div>
-          <div v-if="showKoSub" class="kf-ko-line">
-            {{ currentScene.fullKo }}
-          </div>
+        <!-- 풀스크린 방송 모드일 때 우측 상단 미니 리모컨 (마우스 움직일 때만 표시) -->
+        <div
+          v-if="isFullscreenMode || isCleanMode"
+          class="kf-floating-remote"
+          :class="{ visible: showFloatingControls }"
+        >
+          <button type="button" class="rem-btn" @click="prevSlide">◀ 이전</button>
+          <button
+            type="button"
+            class="rem-btn rem-primary"
+            :class="{ playing: isAutoPlaying }"
+            @click="toggleAutoShow"
+          >
+            {{ isAutoPlaying ? '⏹️ 방송 정지' : '▶️ 전체 자동 방송 시작' }}
+          </button>
+          <button type="button" class="rem-btn" @click="playCurrentSlideSequence">🔁 현재 장면 재생</button>
+          <button type="button" class="rem-btn" @click="nextSlide">다음 ▶</button>
+          <button v-if="isFullscreenMode" type="button" class="rem-btn rem-exit" @click="exitFullscreen">
+            ✕ 나가기
+          </button>
         </div>
       </div>
     </div>
 
     <!-- 하단 플레이어 & 녹음 컨트롤 바 -->
-    <div class="kf-controls-panel">
+    <div v-if="!isFullscreenMode" class="kf-controls-panel">
       <div class="kf-nav-group">
-        <button type="button" class="kf-ctrl-btn" @click="prevScene">◀ 이전 장면</button>
-        <button type="button" class="kf-ctrl-btn kf-btn-primary" @click="speakSceneSentence(1.0)">
-          🔊 원어민 음성 (1.0x)
-        </button>
-        <button type="button" class="kf-ctrl-btn" @click="speakSceneSentence(0.8)">
-          🐢 천천히 (0.8x)
-        </button>
-        <button type="button" class="kf-ctrl-btn kf-btn-step" @click="speakBlocksSequentially">
-          🔁 블록별 끊어→이어 듣기
-        </button>
+        <button type="button" class="kf-ctrl-btn" @click="goToSlide(-1)">🎬 인트로</button>
+        <button type="button" class="kf-ctrl-btn" @click="prevSlide">◀ 이전</button>
+
         <button
           type="button"
-          class="kf-ctrl-btn"
+          class="kf-ctrl-btn kf-btn-broadcast"
           :class="{ 'kf-btn-playing': isAutoPlaying }"
           @click="toggleAutoShow"
         >
-          {{ isAutoPlaying ? '⏹️ 자동 쇼 중지' : '▶️ 전체 장면 자동 재생 (유튜브 녹화용)' }}
+          {{ isAutoPlaying ? '⏹️ 자동 방송 중지' : '▶️ 전체 장면 자동 방송 (인트로~아웃트로 원테이크 녹화)' }}
         </button>
-        <button type="button" class="kf-ctrl-btn" @click="nextScene">다음 장면 ▶</button>
+
+        <button type="button" class="kf-ctrl-btn kf-btn-step" @click="playCurrentSlideSequence">
+          🔁 이 장면 풀 시퀀스 재생 (코칭→블록→따라말하기)
+        </button>
+
+        <button type="button" class="kf-ctrl-btn kf-btn-primary" @click="speakSceneSentence(1.0)">
+          🔊 영어 문장만 (1.0x)
+        </button>
+
+        <button type="button" class="kf-ctrl-btn" @click="nextSlide">다음 ▶</button>
+        <button type="button" class="kf-ctrl-btn" @click="goToSlide(currentEpisode.scenes.length)">
+          🏁 아웃트로
+        </button>
       </div>
 
-      <!-- 내 목소리 녹음 & 사진 교체 & 자막 옵션 (클린 모드에서는 숨김) -->
+      <!-- 방송 연출 세부 옵션 (효과음, 한국어 코칭 음성, 따라 말하기 타이머, 사진 업로드) -->
       <div v-if="!isCleanMode" class="kf-extra-tools">
+        <div class="kf-custom-tools">
+          <label class="kf-chk">
+            <input v-model="enableKoreanCoachVoice" type="checkbox" /> 🇰🇷 한국어 상황 코칭 음성 켜기
+          </label>
+          <label class="kf-chk">
+            <input v-model="enableSoundEffects" type="checkbox" /> 🔔 방송 효과음(딩동·전환음) 켜기
+          </label>
+          <label class="kf-chk">
+            <input v-model="includeShadowingPause" type="checkbox" /> 🎤 따라 말하기(4초) 구간 포함
+          </label>
+          <label class="kf-chk">
+            <input v-model="showCoachBubble" type="checkbox" /> 💡 상단 코칭 배너 표시
+          </label>
+          <label class="kf-chk">
+            <input v-model="showPronGuide" type="checkbox" /> 한글 발음 표시
+          </label>
+        </div>
+
         <div class="kf-voice-recorder">
+          <label v-if="slideCursor >= 0 && slideCursor < currentEpisode.scenes.length" class="kf-upload-label">
+            📷 내 요리 사진 넣기
+            <input type="file" accept="image/*" hidden @change="onUploadSceneImage" />
+          </label>
           <button
             type="button"
             class="kf-ctrl-btn"
             :class="{ 'kf-btn-rec': isRecording }"
             @click="toggleRecording"
           >
-            {{ isRecording ? '⏹️ 녹음 완료하기' : '🎙️ 내 목소리로 따라 녹음하기' }}
+            {{ isRecording ? '⏹️ 녹음 완료' : '🎙️ 내 목소리 테스트 녹음' }}
           </button>
           <audio
             v-if="recordedAudioMap[sceneKey]"
@@ -193,30 +371,6 @@
             controls
             class="kf-audio-player"
           ></audio>
-        </div>
-
-        <div class="kf-custom-tools">
-          <label class="kf-upload-label">
-            📷 이 장면에 내 요리 사진 넣기
-            <input type="file" accept="image/*" hidden @change="onUploadSceneImage" />
-          </label>
-          <button
-            v-if="customMediaMap[sceneKey]"
-            type="button"
-            class="kf-ctrl-btn-sm"
-            @click="removeSceneImage"
-          >
-            기본 일러스트로 복원
-          </button>
-          <label class="kf-chk">
-            <input v-model="includeShadowingPause" type="checkbox" /> 자동 재생 시 ‘따라 말하기(4초)’ 포함
-          </label>
-          <label class="kf-chk">
-            <input v-model="showPronGuide" type="checkbox" /> 한글 발음 표시
-          </label>
-          <label class="kf-chk">
-            <input v-model="showKoSub" type="checkbox" /> 한국어 뜻 표시
-          </label>
         </div>
       </div>
 
@@ -248,7 +402,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onBeforeUnmount } from 'vue'
+import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
 import { withBase } from 'vitepress'
 
 interface SoundBlockPiece {
@@ -262,6 +416,7 @@ interface CookingScene {
   visualEmojis: string
   imagePath?: string
   actionNote: string
+  coachKo: string
   keyVocab: string
   bgGradient: string
   blocks: SoundBlockPiece[]
@@ -278,20 +433,31 @@ interface CookingEpisode {
   title: string
   ytTitle: string
   thumbnailText: string
+  introNarrationKo: string
+  outroNarrationKo: string
   scenes: CookingScene[]
 }
 
-const channelName = ref('소리블록 K-쿠킹 · @SoundBlockKCooking')
+const studioRoot = ref<HTMLElement | null>(null)
 const aspectRatio = ref<'16:9' | '9:16'>('16:9')
 const isCleanMode = ref(false)
+const isFullscreenMode = ref(false)
+const showFloatingControls = ref(true)
+
+const enableKoreanCoachVoice = ref(true)
+const enableSoundEffects = ref(true)
+const includeShadowingPause = ref(true)
+const showCoachBubble = ref(true)
 const showPronGuide = ref(true)
 const showKoSub = ref(true)
-const includeShadowingPause = ref(true)
 const showYtMeta = ref(false)
 const copySuccess = ref(false)
 
 const isShadowingTurn = ref(false)
 const shadowingProgress = ref(0)
+
+// slideCursor: -1 = INTRO, 0..(scenes.length-1) = SCENES, scenes.length = OUTRO
+const slideCursor = ref(0)
 
 const episodes: CookingEpisode[] = [
   // ==========================================
@@ -302,17 +468,20 @@ const episodes: CookingEpisode[] = [
     epNumber: 'EP.01',
     emoji: '🍲',
     shortTitle: '1화 · 김치찌개',
-    title: '영어로 김치찌개 끓이기 (Kimchi Stew)',
-    ytTitle: '[소리 블록 요리 영어 #1] 중학교 단어로 김치찌개 끓이기 🍲 | How to Make Kimchi Stew in Easy English',
+    title: '중학교 단어로 김치찌개 끓이기 (Kimchi Stew)',
+    ytTitle: '[소리블록 요리영어 #1] 중학교 단어로 김치찌개 끓이기 🍲 | How to Make Kimchi Stew in Easy English',
     thumbnailText: '"김치찌개 끓일게!" → [I\'m gonna] + [make Kimchi stew]',
+    introNarrationKo: '안녕하세요, 소리블록 케이쿠킹입니다! 오늘은 한국인의 소울푸드 김치찌개 끓이는 법을 딱 세 개의 영어 소리 블록으로 조립해 말해 볼게요.',
+    outroNarrationKo: '오늘 배운 김치찌개 소리 블록 여덟 문장, 입에 착 붙으셨나요? 구독과 좋아요를 누르고 다음 요리도 함께 입으로 뱉어 봐요!',
     scenes: [
       {
         stepTitle: 'SCENE 1 · 오늘의 요리 소개',
         visualEmojis: '👨‍🍳 🍲 🇰🇷',
         imagePath: '/images/kfood/ep1-s1.jpg',
         actionNote: '앞치마를 입고 부엌에서 밝게 인사하는 오프닝',
+        coachKo: '첫 번째 장면입니다. "오늘 김치찌개 끓일 거야!"라고 말할 때, "~할 거야"는 I\'m gonna, "김치찌개를 만들다"는 make Kimchi stew를 붙여 보세요.',
         keyVocab: 'Kimchi stew (김치찌개)',
-        bgGradient: 'linear-gradient(135deg, #fff1f2 0%, #ffe4e6 100%)',
+        bgGradient: 'linear-gradient(135deg, #1e293b 0%, #334155 100%)',
         blocks: [
           { role: 'bb', en: "I'm gonna", pron: '암거너' },
           { role: 'core', en: 'make Kimchi stew', pron: '메익 김치 스튜' },
@@ -327,8 +496,9 @@ const episodes: CookingEpisode[] = [
         visualEmojis: '🥬 ✨ 😋',
         imagePath: '/images/kfood/ep1-s2.jpg',
         actionNote: '잘 익은 신김치를 보여주며 핵심 비법 설명',
-        keyVocab: 'sour (aged) kimchi (신김치)',
-        bgGradient: 'linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%)',
+        coachKo: '김치찌개의 생명은 잘 익은 신김치죠! "꼭 ~해야 해"는 You have to, "신김치를 쓰다"는 use sour kimchi입니다.',
+        keyVocab: 'sour kimchi (신김치)',
+        bgGradient: 'linear-gradient(135deg, #450a0a 0%, #7f1d1d 100%)',
         blocks: [
           { role: 'bb', en: 'You have to', pron: '유 해프터' },
           { role: 'core', en: 'use sour kimchi', pron: '유즈 사워 김치' },
@@ -343,8 +513,9 @@ const episodes: CookingEpisode[] = [
         visualEmojis: '🔪 🥩 🥬',
         imagePath: '/images/kfood/ep1-s3.jpg',
         actionNote: '도마 위에서 김치와 돼지고기를 한 입 크기로 큼직하게 썰기',
+        coachKo: '이제 재료를 큼직하게 썰어 볼까요? 큼직하게 썰다는 chop, "한 입 크기로"는 into bite-sized pieces라고 표현합니다.',
         keyVocab: 'chop / bite-sized pieces',
-        bgGradient: 'linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%)',
+        bgGradient: 'linear-gradient(135deg, #431407 0%, #7c2d12 100%)',
         blocks: [
           { role: 'bb', en: "I'm gonna", pron: '암거너' },
           { role: 'core', en: 'chop the pork and kimchi', pron: '찹 더 포크 앤 김치' },
@@ -359,8 +530,9 @@ const episodes: CookingEpisode[] = [
         visualEmojis: '⬜ 🌱 🔪',
         imagePath: '/images/kfood/ep1-s4.jpg',
         actionNote: '두부는 납작하게 썰고(slice), 대파는 송송 썰어 준비',
+        coachKo: '두부처럼 납작하게 썰 때는 slice를 씁니다. "내가 ~할게"라는 시작 블록 I\'ll 뒤에 slice the tofu를 붙여 보세요!',
         keyVocab: 'slice the tofu (두부를 썰다)',
-        bgGradient: 'linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%)',
+        bgGradient: 'linear-gradient(135deg, #052e16 0%, #14532d 100%)',
         blocks: [
           { role: 'bb', en: "I'll", pron: '아을(올)' },
           { role: 'core', en: 'slice the tofu', pron: '슬라이스 더 토푸' },
@@ -375,8 +547,9 @@ const episodes: CookingEpisode[] = [
         visualEmojis: '🍲 🔥 🧄',
         imagePath: '/images/kfood/ep1-s5.jpg',
         actionNote: '달궈진 냄비에 돼지고기, 김치, 다진 마늘을 넣고 지글지글 볶기',
-        keyVocab: 'fry / sauté (기름에 볶다)',
-        bgGradient: 'linear-gradient(135deg, #fefce8 0%, #fef08a 100%)',
+        coachKo: '다진 마늘을 넣고 고기와 김치를 먼저 볶아 줘야 국물이 진해지죠! "같이 볶다"는 fry them together입니다.',
+        keyVocab: 'fry them together (함께 볶다)',
+        bgGradient: 'linear-gradient(135deg, #422006 0%, #713f12 100%)',
         blocks: [
           { role: 'bb', en: 'We have to', pron: '위 해프터' },
           { role: 'core', en: 'fry them together', pron: '프라이 뎀 투게더' },
@@ -391,8 +564,9 @@ const episodes: CookingEpisode[] = [
         visualEmojis: '💧 🥣 🌶️',
         imagePath: '/images/kfood/ep1-s6.jpg',
         actionNote: '물을 붓고 감칠맛의 핵심인 김치 국물(kimchi juice) 한 국자 추가!',
+        coachKo: '물을 붓고 빠질 수 없는 비법, 김치 국물을 넣을 차례입니다! 김치 국물은 영어로 귀엽게 kimchi juice라고 부릅니다.',
         keyVocab: 'kimchi juice (김치 국물)',
-        bgGradient: 'linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%)',
+        bgGradient: 'linear-gradient(135deg, #172554 0%, #1e3a8a 100%)',
         blocks: [
           { role: 'bb', en: "I'm gonna", pron: '암거너' },
           { role: 'core', en: 'pour some water', pron: '포어 썸 워러' },
@@ -407,8 +581,9 @@ const episodes: CookingEpisode[] = [
         visualEmojis: '♨️ 🍲 ⏲️',
         imagePath: '/images/kfood/ep1-s7.jpg',
         actionNote: '센 불에 팔팔 끓인 뒤 중약불로 줄여 10분간 뭉근히 끓이기',
+        coachKo: '센 불에 팔팔 끓이다는 bring it to the boil, 불을 줄여 뭉근히 푹 끓게 두다는 let it simmer입니다!',
         keyVocab: 'bring it to the boil / simmer',
-        bgGradient: 'linear-gradient(135deg, #fff1f2 0%, #fecdd3 100%)',
+        bgGradient: 'linear-gradient(135deg, #4c0519 0%, #881337 100%)',
         blocks: [
           { role: 'bb', en: "We're gonna", pron: '워거너' },
           { role: 'core', en: 'bring it to the boil', pron: '브링 잇 투 더 보일' },
@@ -423,8 +598,9 @@ const episodes: CookingEpisode[] = [
         visualEmojis: '🥄 🍚 😍',
         imagePath: '/images/kfood/ep1-s8.jpg',
         actionNote: '국물 한 모금(take a sip) 맛보고 따뜻한 흰쌀밥과 한 입!',
-        keyVocab: 'take a sip / take a bite',
-        bgGradient: 'linear-gradient(135deg, #fdf4ff 0%, #fae8ff 100%)',
+        coachKo: '드디어 완성입니다! 뜨거운 국물을 후후 불어 한 모금 맛볼 때는 take a sip 소리 블록을 씁니다.',
+        keyVocab: 'take a sip (한 모금 맛보다)',
+        bgGradient: 'linear-gradient(135deg, #3b0764 0%, #581c87 100%)',
         blocks: [
           { role: 'bb', en: 'I wanna', pron: '아이 워너' },
           { role: 'core', en: 'take a sip', pron: '테이커 씹' },
@@ -445,16 +621,20 @@ const episodes: CookingEpisode[] = [
     epNumber: 'EP.02',
     emoji: '🍳',
     shortTitle: '2화 · 김치볶음밥',
-    title: '영어로 김치볶음밥 & 계란프라이 만들기 (Kimchi Fried Rice)',
-    ytTitle: '[소리 블록 요리 영어 #2] 5분 완성 김치볶음밥 영어로 설명하기 🍳 | Kimchi Fried Rice in Easy English',
+    title: '5분 완성 김치볶음밥 & 계란프라이 만들기 (Kimchi Fried Rice)',
+    ytTitle: '[소리블록 요리영어 #2] 5분 완성 김치볶음밥 영어로 설명하기 🍳 | Kimchi Fried Rice in Easy English',
     thumbnailText: '"계란프라이 올릴게!" → [I\'ll] + [put a fried egg] + [on top]',
+    introNarrationKo: '안녕하세요, 소리블록 케이쿠킹입니다! 오늘은 5분 만에 뚝딱 만드는 김치볶음밥과 반숙 계란프라이를 소리 블록으로 말해 볼게요.',
+    outroNarrationKo: '오늘 배운 김치볶음밥 소리 블록 여섯 문장도 정말 쉽죠? 구독과 좋아요 누르고 다음 영상에서 또 만나요!',
     scenes: [
       {
         stepTitle: 'SCENE 1 · 김치볶음밥 시작하기',
         visualEmojis: '🍚 🥬 🍳',
+        imagePath: '/images/kfood/ep1-s1.jpg',
         actionNote: '찬밥과 잘게 썬 김치를 준비하며 인사',
+        coachKo: '점심 메뉴로 김치볶음밥을 만들 때, I\'m gonna 뒤에 make Kimchi fried rice를 붙여 보세요!',
         keyVocab: 'Kimchi fried rice (김치볶음밥)',
-        bgGradient: 'linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%)',
+        bgGradient: 'linear-gradient(135deg, #431407 0%, #7c2d12 100%)',
         blocks: [
           { role: 'bb', en: "I'm gonna", pron: '암거너' },
           { role: 'core', en: 'make Kimchi fried rice', pron: '메익 김치 프라이드 라이스' },
@@ -467,9 +647,11 @@ const episodes: CookingEpisode[] = [
       {
         stepTitle: 'SCENE 2 · 김치와 베이컨 잘게 썰기',
         visualEmojis: '🔪 🥓 🥬',
+        imagePath: '/images/kfood/ep1-s3.jpg',
         actionNote: '볶음밥용으로 김치와 베이컨(또는 스팸)을 잘게 다지듯 썰기',
+        coachKo: '볶음밥용 김치는 잘게 썰어야 맛있죠! "잘게 썰다"는 chop finely라고 표현합니다.',
         keyVocab: 'chop finely (잘게 썰다)',
-        bgGradient: 'linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%)',
+        bgGradient: 'linear-gradient(135deg, #450a0a 0%, #7f1d1d 100%)',
         blocks: [
           { role: 'bb', en: 'You have to', pron: '유 해프터' },
           { role: 'core', en: 'chop the kimchi finely', pron: '찹 더 김치 파인리' },
@@ -482,9 +664,11 @@ const episodes: CookingEpisode[] = [
       {
         stepTitle: 'SCENE 3 · 고추장 한 스푼 넣고 볶기',
         visualEmojis: '🍳 🔥 🌶️',
+        imagePath: '/images/kfood/ep1-s5.jpg',
         actionNote: '팬에 김치와 고추장/간장을 넣고 센 불에 달달 볶기',
+        coachKo: '주걱으로 저어가며 센 불에 달달 볶는 건 stir-fry라고 합니다!',
         keyVocab: 'stir-fry (센 불에 저으며 볶다)',
-        bgGradient: 'linear-gradient(135deg, #fefce8 0%, #fef08a 100%)',
+        bgGradient: 'linear-gradient(135deg, #422006 0%, #713f12 100%)',
         blocks: [
           { role: 'bb', en: "We're gonna", pron: '워거너' },
           { role: 'core', en: 'stir-fry the kimchi', pron: '스터-프라이 더 김치' },
@@ -497,9 +681,11 @@ const episodes: CookingEpisode[] = [
       {
         stepTitle: 'SCENE 4 · 밥 넣고 참기름 두르기',
         visualEmojis: '🍚 🫗 ✨',
+        imagePath: '/images/kfood/ep1-s2.jpg',
         actionNote: '밥을 넣고 골고루 섞은 뒤 마지막에 고소한 참기름 한 바퀴!',
+        coachKo: '밥을 넣고 비빈 뒤 고소한 참기름, sesame oil을 한 바퀴 둘러 줍니다!',
         keyVocab: 'sesame oil (참기름)',
-        bgGradient: 'linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%)',
+        bgGradient: 'linear-gradient(135deg, #052e16 0%, #14532d 100%)',
         blocks: [
           { role: 'bb', en: "I'll", pron: '아을' },
           { role: 'core', en: 'mix in the rice', pron: '믹스 인 더 라이스' },
@@ -512,9 +698,11 @@ const episodes: CookingEpisode[] = [
       {
         stepTitle: 'SCENE 5 · 반숙 계란프라이 올리기',
         visualEmojis: '🥚 🍳 👑',
-        actionNote: '노른자가 살아 있는 반숙 계란프라이(sunny-side-up egg)를 맨 위에 얹기',
-        keyVocab: 'fried egg / on top',
-        bgGradient: 'linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%)',
+        imagePath: '/images/kfood/ep1-s7.jpg',
+        actionNote: '노른자가 살아 있는 반숙 계란프라이를 맨 위에 얹기',
+        coachKo: '김치볶음밥의 화룡점정! 계란프라이를 맨 위에 딱 올릴 때는 put a fried egg right on top!',
+        keyVocab: 'put a fried egg right on top',
+        bgGradient: 'linear-gradient(135deg, #172554 0%, #1e3a8a 100%)',
         blocks: [
           { role: 'bb', en: "I'm gonna", pron: '암거너' },
           { role: 'core', en: 'put a fried egg', pron: '풋 어 프라이드 에그' },
@@ -527,9 +715,11 @@ const episodes: CookingEpisode[] = [
       {
         stepTitle: 'SCENE 6 · 노른자 터뜨려 한 입 먹기',
         visualEmojis: '🥄 😋 👍',
+        imagePath: '/images/kfood/ep1-s8.jpg',
         actionNote: '숟가락으로 노른자를 톡 터뜨려 밥과 함께 한 입!',
-        keyVocab: 'pop the yolk / take a bite',
-        bgGradient: 'linear-gradient(135deg, #fdf4ff 0%, #fae8ff 100%)',
+        coachKo: '음식을 한 입 크게 먹어 볼래? 하고 물어볼 때는 Do you wanna take a bite?를 씁니다.',
+        keyVocab: 'take a bite (한 입 먹다)',
+        bgGradient: 'linear-gradient(135deg, #3b0764 0%, #581c87 100%)',
         blocks: [
           { role: 'bb', en: 'Do you wanna', pron: '두유워너' },
           { role: 'core', en: 'take a bite', pron: '테이커 바이트' },
@@ -551,15 +741,19 @@ const episodes: CookingEpisode[] = [
     emoji: '🍜',
     shortTitle: '3화 · K-라면 끓이기',
     title: '영어로 K-라면 꼬들꼬들하게 끓이기 (Korean Instant Noodles)',
-    ytTitle: '[소리 블록 요리 영어 #3] 외국인 친구에게 K-라면 끓이는 법 영어로 말하기 🍜 | How to Cook Korean Ramen',
+    ytTitle: '[소리블록 요리영어 #3] 외국인 친구에게 K-라면 끓이는 법 영어로 말하기 🍜 | How to Cook Korean Ramen',
     thumbnailText: '"스프부터 넣어야 해!" → [You have to] + [put the soup base first]',
+    introNarrationKo: '안녕하세요, 소리블록 케이쿠킹입니다! 오늘은 전 세계가 사랑하는 한국 라면 맛있게 끓이는 법을 영어 소리 블록으로 배워 볼게요.',
+    outroNarrationKo: '라면 끓이면서 혼자 영어로 중얼거려 보면 절대 안 까먹습니다! 구독과 좋아요 부탁드려요!',
     scenes: [
       {
         stepTitle: 'SCENE 1 · 출출한 밤, 라면 끓이기',
         visualEmojis: '🌙 🍜 🔥',
+        imagePath: '/images/kfood/ep1-s1.jpg',
         actionNote: '냄비와 라면 한 봉지를 들고 시작',
-        keyVocab: 'make ramen (라면을 끓이다)',
-        bgGradient: 'linear-gradient(135deg, #fff1f2 0%, #ffe4e6 100%)',
+        coachKo: '오늘 밤 라면 끓여 먹을 거야! I\'m gonna + make Korean ramen + tonight으로 가볍게 시작해 볼까요?',
+        keyVocab: 'make Korean ramen (라면 끓이다)',
+        bgGradient: 'linear-gradient(135deg, #450a0a 0%, #7f1d1d 100%)',
         blocks: [
           { role: 'bb', en: "I'm gonna", pron: '암거너' },
           { role: 'core', en: 'make Korean ramen', pron: '메익 코리안 라면' },
@@ -572,9 +766,11 @@ const episodes: CookingEpisode[] = [
       {
         stepTitle: 'SCENE 2 · 물 정량 맞춰 끓이기',
         visualEmojis: '💧 🍲 ♨️',
+        imagePath: '/images/kfood/ep1-s6.jpg',
         actionNote: '냄비에 물 550ml를 붓고 센 불에 끓이기',
+        coachKo: '라면의 생명은 물 정량이죠! 먼저 물을 끓여야 해는 First, we have to + boil the water입니다.',
         keyVocab: 'boil the water (물을 끓이다)',
-        bgGradient: 'linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%)',
+        bgGradient: 'linear-gradient(135deg, #172554 0%, #1e3a8a 100%)',
         blocks: [
           { role: 'bb', en: 'First, we have to', pron: '퍼스트, 위 해프터' },
           { role: 'core', en: 'boil the water', pron: '보일 더 워러' },
@@ -587,9 +783,11 @@ const episodes: CookingEpisode[] = [
       {
         stepTitle: 'SCENE 3 · K-라면 꿀팁: 스프 먼저 넣기!',
         visualEmojis: '🌶️ 🥣 💡',
-        actionNote: '면보다 분말 스프와 건더기 스프를 먼저 넣는 한국식 꿀팁 설명',
-        keyVocab: 'soup base / flakes (분말·건더기 스프)',
-        bgGradient: 'linear-gradient(135deg, #fefce8 0%, #fef08a 100%)',
+        imagePath: '/images/kfood/ep1-s5.jpg',
+        actionNote: '면보다 분말 스프를 먼저 넣는 한국식 꿀팁 설명',
+        coachKo: '라면 분말 스프는 영어로 soup base라고 합니다! 면보다 스프를 먼저 넣을게요!',
+        keyVocab: 'soup base (라면 분말 스프)',
+        bgGradient: 'linear-gradient(135deg, #422006 0%, #713f12 100%)',
         blocks: [
           { role: 'bb', en: "I'll", pron: '아을' },
           { role: 'core', en: 'put the soup base', pron: '풋 더 숩 베이스' },
@@ -602,9 +800,11 @@ const episodes: CookingEpisode[] = [
       {
         stepTitle: 'SCENE 4 · 면 넣고 계란 하나 톡 깨 넣기',
         visualEmojis: '🍜 🥚 🌱',
-        actionNote: '면을 넣고 3분 끓인 뒤 계란을 깨 넣고(crack an egg) 대파 얹기',
+        imagePath: '/images/kfood/ep1-s7.jpg',
+        actionNote: '면을 넣고 끓인 뒤 계란을 깨 넣고(crack an egg) 대파 얹기',
+        coachKo: '계란 껍데기를 톡 깨서 넣는 동작은 break보다 crack an egg를 훨씬 많이 씁니다!',
         keyVocab: 'crack an egg (계란을 깨 넣다)',
-        bgGradient: 'linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%)',
+        bgGradient: 'linear-gradient(135deg, #052e16 0%, #14532d 100%)',
         blocks: [
           { role: 'bb', en: "I'm gonna", pron: '암거너' },
           { role: 'core', en: 'crack an egg', pron: '크랙 언 에그' },
@@ -615,11 +815,13 @@ const episodes: CookingEpisode[] = [
         fullKo: '냄비에 계란을 하나 톡 깨 넣을 거예요.'
       },
       {
-        stepTitle: 'SCENE 5 · 면발을 들었다 놨다 (꼬들면 비법)',
+        stepTitle: 'SCENE 5 · 신김치 얹어서 한 입 먹기',
         visualEmojis: '🥢 💨 😋',
-        actionNote: '젓가락으로 면을 공기와 접촉시켜 쫄깃하게(chewy) 만들기',
-        keyVocab: 'chewy noodles (쫄깃한 면발)',
-        bgGradient: 'linear-gradient(135deg, #fdf4ff 0%, #fae8ff 100%)',
+        imagePath: '/images/kfood/ep1-s8.jpg',
+        actionNote: '꼬들꼬들한 면발 위에 김치 한 점 올려 후루룩!',
+        coachKo: '잘 익은 김치랑 같이 한 입 먹어 볼래요? Do you wanna + take a bite + with kimchi?',
+        keyVocab: 'take a bite with kimchi',
+        bgGradient: 'linear-gradient(135deg, #3b0764 0%, #581c87 100%)',
         blocks: [
           { role: 'bb', en: 'Do you wanna', pron: '두유워너' },
           { role: 'core', en: 'take a bite', pron: '테이커 바이트' },
@@ -641,15 +843,19 @@ const episodes: CookingEpisode[] = [
     emoji: '🥩',
     shortTitle: '4화 · 불고기 & 쌈',
     title: '영어로 불고기 재우기 & 상추쌈 싸 먹는 법 설명하기 (Bulgogi)',
-    ytTitle: '[소리 블록 요리 영어 #4] 불고기 양념 재우기부터 상추쌈(Ssam)까지 영어로! 🥩 | Korean Bulgogi',
+    ytTitle: '[소리블록 요리영어 #4] 불고기 양념 재우기부터 상추쌈(Ssam)까지 영어로! 🥩 | Korean Bulgogi',
     thumbnailText: '"상추에 싸 드세요!" → [You have to] + [wrap it in lettuce]',
+    introNarrationKo: '안녕하세요, 소리블록 케이쿠킹입니다! 외국인 친구들이 가장 좋아하는 불고기와 상추쌈 싸 먹는 법을 소리 블록으로 배워 볼게요.',
+    outroNarrationKo: '불고기와 상추쌈 영어 표현까지 완벽히 마스터하셨습니다! 구독과 좋아요 잊지 마세요!',
     scenes: [
       {
         stepTitle: 'SCENE 1 · 단짠단짠 불고기 소개',
         visualEmojis: '🥩 🧄 🍯',
+        imagePath: '/images/kfood/ep1-s1.jpg',
         actionNote: '얇게 썬 소고기와 간장 양념 재료 소개',
-        keyVocab: 'sweet and savory (단짠단짠)',
-        bgGradient: 'linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%)',
+        coachKo: '오늘 저녁엔 한국식 불고기를 만들 거예요! We\'re gonna는 워거너로 가볍게 발음하세요.',
+        keyVocab: 'make Korean Bulgogi',
+        bgGradient: 'linear-gradient(135deg, #431407 0%, #7c2d12 100%)',
         blocks: [
           { role: 'bb', en: "We're gonna", pron: '워거너' },
           { role: 'core', en: 'make Korean Bulgogi', pron: '메익 코리안 불고기' },
@@ -662,9 +868,11 @@ const episodes: CookingEpisode[] = [
       {
         stepTitle: 'SCENE 2 · 고기를 양념에 재우다 (Marinate)',
         visualEmojis: '🥣 🥩 ⏲️',
+        imagePath: '/images/kfood/ep1-s3.jpg',
         actionNote: '간장, 설탕, 마늘, 참기름 양념에 고기를 30분간 재워 두기',
+        coachKo: '고기를 양념에 재워 두다는 영어로 marinate라고 합니다! 30분 동안 소고기를 재워 둬야 해요.',
         keyVocab: 'marinate the beef (고기를 재우다)',
-        bgGradient: 'linear-gradient(135deg, #fefce8 0%, #fef08a 100%)',
+        bgGradient: 'linear-gradient(135deg, #422006 0%, #713f12 100%)',
         blocks: [
           { role: 'bb', en: 'You have to', pron: '유 해프터' },
           { role: 'core', en: 'marinate the beef', pron: '매리네잇 더 비프' },
@@ -675,11 +883,13 @@ const episodes: CookingEpisode[] = [
         fullKo: '30분 동안 소고기를 양념에 재워 둬야 해요.'
       },
       {
-        stepTitle: 'SCENE 3 · 양파·버섯과 함께 볶기',
+        stepTitle: 'SCENE 3 · 센 불에서 빠르게 굽기',
         visualEmojis: '🍳 🧅 🍄',
+        imagePath: '/images/kfood/ep1-s5.jpg',
         actionNote: '달궈진 팬에 양념된 고기와 양파, 버섯을 넣고 빠르게 볶기',
-        keyVocab: 'cook on high heat (센 불에 익히다)',
-        bgGradient: 'linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%)',
+        coachKo: '센 불에서 빠르게 구워야 육즙이 살아 있죠! 센 불에는 on high heat이라고 합니다.',
+        keyVocab: 'on high heat (센 불에)',
+        bgGradient: 'linear-gradient(135deg, #450a0a 0%, #7f1d1d 100%)',
         blocks: [
           { role: 'bb', en: "I'm gonna", pron: '암거너' },
           { role: 'core', en: 'cook the meat', pron: '쿡 더 밋' },
@@ -692,9 +902,11 @@ const episodes: CookingEpisode[] = [
       {
         stepTitle: 'SCENE 4 · 한국식 상추쌈(Ssam) 싸 먹기',
         visualEmojis: '🥬 🥩 👍',
+        imagePath: '/images/kfood/ep1-s8.jpg',
         actionNote: '손바닥 위 상추에 고기, 밥, 쌈장을 올려 한 입에 쏙!',
-        keyVocab: 'wrap it in lettuce (상추에 싸다)',
-        bgGradient: 'linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%)',
+        coachKo: '한국 고기 요리의 하이라이트, 상추에 고기를 싸 먹다는 wrap the meat in fresh lettuce!',
+        keyVocab: 'wrap the meat in fresh lettuce',
+        bgGradient: 'linear-gradient(135deg, #052e16 0%, #14532d 100%)',
         blocks: [
           { role: 'bb', en: "I'll", pron: '아을' },
           { role: 'core', en: 'wrap the meat', pron: '랩 더 밋' },
@@ -709,7 +921,6 @@ const episodes: CookingEpisode[] = [
 ]
 
 const currentEpId = ref(episodes[0].id)
-const sceneIndex = ref(0)
 const activeBlockIdx = ref<number | null>(null)
 const isAutoPlaying = ref(false)
 const customMediaMap = ref<Record<string, string>>({})
@@ -720,16 +931,26 @@ let mediaRecorder: MediaRecorder | null = null
 let audioChunks: Blob[] = []
 let autoPlayTimers: number[] = []
 let shadowingInterval: number | null = null
+let hideControlsTimer: number | null = null
+let audioCtx: AudioContext | null = null
 
 const currentEpisode = computed(
   () => episodes.find((e) => e.id === currentEpId.value) || episodes[0]
 )
 
+const safeSceneIndex = computed(() => {
+  if (slideCursor.value < 0) return 0
+  if (slideCursor.value >= currentEpisode.value.scenes.length) {
+    return currentEpisode.value.scenes.length - 1
+  }
+  return slideCursor.value
+})
+
 const currentScene = computed(
-  () => currentEpisode.value.scenes[sceneIndex.value] || currentEpisode.value.scenes[0]
+  () => currentEpisode.value.scenes[safeSceneIndex.value] || currentEpisode.value.scenes[0]
 )
 
-const sceneKey = computed(() => `${currentEpId.value}-${sceneIndex.value}`)
+const sceneKey = computed(() => `${currentEpId.value}-${safeSceneIndex.value}`)
 
 const activeSceneImage = computed(() => {
   if (customMediaMap.value[sceneKey.value]) {
@@ -741,112 +962,252 @@ const activeSceneImage = computed(() => {
   return ''
 })
 
-function selectEpisode(id: string) {
-  stopAutoShow()
-  currentEpId.value = id
-  sceneIndex.value = 0
-}
-
-function goToScene(idx: number) {
-  stopAutoShow()
-  sceneIndex.value = idx
-}
-
-function prevScene() {
-  stopAutoShow()
-  if (sceneIndex.value > 0) {
-    sceneIndex.value--
-  } else {
-    sceneIndex.value = currentEpisode.value.scenes.length - 1
+// ---------------------------------------------------------
+// Web Audio API 방송용 효과음 합성기 (외부 mp3 파일 불필요)
+// ---------------------------------------------------------
+function getAudioContext(): AudioContext | null {
+  if (typeof window === 'undefined') return null
+  if (!audioCtx) {
+    const Ctx = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext
+    if (Ctx) audioCtx = new Ctx()
   }
+  if (audioCtx && audioCtx.state === 'suspended') {
+    audioCtx.resume().catch(() => {})
+  }
+  return audioCtx
 }
 
-function nextScene() {
-  stopAutoShow()
-  if (sceneIndex.value < currentEpisode.value.scenes.length - 1) {
-    sceneIndex.value++
-  } else {
-    sceneIndex.value = 0
-  }
+function playTone(freq: number, durationMs: number, type: OscillatorType = 'sine', gainVal = 0.08, delayMs = 0) {
+  if (!enableSoundEffects.value) return
+  const ctx = getAudioContext()
+  if (!ctx) return
+  const startAt = ctx.currentTime + delayMs / 1000
+  const osc = ctx.createOscillator()
+  const gain = ctx.createGain()
+  osc.type = type
+  osc.frequency.setValueAtTime(freq, startAt)
+  gain.gain.setValueAtTime(0.001, startAt)
+  gain.gain.exponentialRampToValueAtTime(gainVal, startAt + 0.02)
+  gain.gain.exponentialRampToValueAtTime(0.0001, startAt + durationMs / 1000)
+  osc.connect(gain)
+  gain.connect(ctx.destination)
+  osc.start(startAt)
+  osc.stop(startAt + durationMs / 1000 + 0.02)
+}
+
+function playTransitionChime() {
+  // 부드러운 방송 전환 코드 (C5 -> E5 -> G5)
+  playTone(523.25, 160, 'triangle', 0.06, 0)
+  playTone(659.25, 220, 'triangle', 0.06, 90)
+}
+
+function playBlockPop(idx: number) {
+  const freqs = [440, 554.37, 659.25]
+  playTone(freqs[idx % 3], 110, 'sine', 0.05, 0)
+}
+
+function playDingDongYourTurn() {
+  // 딩-동! (G5 -> E5) 따라 말하기 시작 신호
+  playTone(783.99, 220, 'sine', 0.09, 0)
+  playTone(659.25, 380, 'sine', 0.09, 180)
+}
+
+function playSuccessBell() {
+  playTone(587.33, 120, 'triangle', 0.06, 0)
+  playTone(880.0, 280, 'triangle', 0.07, 110)
+}
+
+// ---------------------------------------------------------
+// 음성 합성 (Promise 기반 한국어/영어 순차 발화)
+// ---------------------------------------------------------
+function speakAsync(text: string, lang: 'en-US' | 'ko-KR', rate = 1.0): Promise<void> {
+  return new Promise((resolve) => {
+    if (typeof window === 'undefined' || !('speechSynthesis' in window)) {
+      resolve()
+      return
+    }
+    const synth = window.speechSynthesis
+    synth.cancel()
+
+    const utter = new SpeechSynthesisUtterance(text)
+    utter.lang = lang
+    utter.rate = rate
+
+    const voices = synth.getVoices()
+    if (lang === 'en-US') {
+      const usVoice =
+        voices.find((v) => v.lang === 'en-US' && /Samantha|Ava|Alex|Google|Natural|Siri/i.test(v.name)) ||
+        voices.find((v) => v.lang.startsWith('en-US')) ||
+        voices.find((v) => v.lang.startsWith('en'))
+      if (usVoice) utter.voice = usVoice
+    } else {
+      const koVoice =
+        voices.find((v) => v.lang.startsWith('ko') && /Yuna|Flo|Eddy|Google|Natural|Siri/i.test(v.name)) ||
+        voices.find((v) => v.lang.startsWith('ko'))
+      if (koVoice) utter.voice = koVoice
+    }
+
+    let settled = false
+    const finish = () => {
+      if (!settled) {
+        settled = true
+        resolve()
+      }
+    }
+    // 안전 타임아웃 (브라우저 TTS가 onend를 누락할 경우 대비)
+    const fallbackMs = Math.max(2200, text.length * 110)
+    const safetyTimer = window.setTimeout(finish, fallbackMs)
+
+    utter.onend = () => {
+      window.clearTimeout(safetyTimer)
+      finish()
+    }
+    utter.onerror = () => {
+      window.clearTimeout(safetyTimer)
+      finish()
+    }
+    synth.speak(utter)
+  })
 }
 
 function speakText(text: string, rate = 1.0) {
-  if (typeof window === 'undefined' || !('speechSynthesis' in window)) return
-  const synth = window.speechSynthesis
-  synth.cancel()
-  const utter = new SpeechSynthesisUtterance(text)
-  utter.lang = 'en-US'
-  utter.rate = rate
-  const voices = synth.getVoices()
-  const usVoice =
-    voices.find((v) => v.lang === 'en-US' && /Samantha|Alex|Google|Natural|Siri/i.test(v.name)) ||
-    voices.find((v) => v.lang.startsWith('en-US')) ||
-    voices.find((v) => v.lang.startsWith('en'))
-  if (usVoice) utter.voice = usVoice
-  synth.speak(utter)
+  speakAsync(text, 'en-US', rate)
+}
+
+function speakSingleBlock(text: string, idx: number) {
+  activeBlockIdx.value = idx
+  playBlockPop(idx)
+  speakAsync(text, 'en-US', 0.92).then(() => {
+    activeBlockIdx.value = null
+  })
 }
 
 function speakSceneSentence(rate = 1.0) {
   activeBlockIdx.value = null
   isShadowingTurn.value = false
-  speakText(currentScene.value.fullEn, rate)
+  speakAsync(currentScene.value.fullEn, 'en-US', rate)
 }
 
+// ---------------------------------------------------------
+// 슬라이드 이동 & 전체 자동 방송 시퀀스
+// ---------------------------------------------------------
+let sequenceToken = 0
+
 function clearTimers() {
+  sequenceToken++
   autoPlayTimers.forEach((id) => window.clearTimeout(id))
   autoPlayTimers = []
   if (shadowingInterval !== null) {
     window.clearInterval(shadowingInterval)
     shadowingInterval = null
   }
+  if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
+    window.speechSynthesis.cancel()
+  }
   activeBlockIdx.value = null
   isShadowingTurn.value = false
   shadowingProgress.value = 0
 }
 
-function startShadowingWindow(durationMs = 4000) {
-  isShadowingTurn.value = true
-  shadowingProgress.value = 0
-  const start = Date.now()
-  shadowingInterval = window.setInterval(() => {
-    const elapsed = Date.now() - start
-    shadowingProgress.value = Math.min(100, Math.round((elapsed / durationMs) * 100))
-    if (elapsed >= durationMs) {
-      if (shadowingInterval !== null) {
-        window.clearInterval(shadowingInterval)
-        shadowingInterval = null
-      }
-      isShadowingTurn.value = false
-    }
-  }, 60)
+function waitMs(ms: number, token: number): Promise<boolean> {
+  return new Promise((resolve) => {
+    const t = window.setTimeout(() => {
+      resolve(token === sequenceToken)
+    }, ms)
+    autoPlayTimers.push(t)
+  })
 }
 
-function speakBlocksSequentially() {
-  clearTimers()
-  const blocks = currentScene.value.blocks
-  let delay = 0
+function runShadowingCountdown(durationMs: number, token: number): Promise<boolean> {
+  return new Promise((resolve) => {
+    if (token !== sequenceToken) {
+      resolve(false)
+      return
+    }
+    playDingDongYourTurn()
+    isShadowingTurn.value = true
+    shadowingProgress.value = 0
+    const start = Date.now()
 
-  blocks.forEach((blk, idx) => {
-    const t = window.setTimeout(() => {
-      activeBlockIdx.value = idx
-      speakText(blk.en, 0.9)
-    }, delay)
-    autoPlayTimers.push(t)
-    delay += 1350
+    shadowingInterval = window.setInterval(() => {
+      if (token !== sequenceToken) {
+        if (shadowingInterval !== null) window.clearInterval(shadowingInterval)
+        shadowingInterval = null
+        isShadowingTurn.value = false
+        resolve(false)
+        return
+      }
+      const elapsed = Date.now() - start
+      shadowingProgress.value = Math.min(100, Math.round((elapsed / durationMs) * 100))
+      if (elapsed >= durationMs) {
+        if (shadowingInterval !== null) window.clearInterval(shadowingInterval)
+        shadowingInterval = null
+        isShadowingTurn.value = false
+        playSuccessBell()
+        resolve(true)
+      }
+    }, 50)
   })
+}
 
-  const finalT = window.setTimeout(() => {
-    activeBlockIdx.value = null
-    speakText(currentScene.value.fullEn, 1.0)
-  }, delay + 200)
-  autoPlayTimers.push(finalT)
+async function playCurrentSlideSequence(): Promise<boolean> {
+  clearTimers()
+  const myToken = sequenceToken
+  playTransitionChime()
 
-  if (includeShadowingPause.value) {
-    const shadowT = window.setTimeout(() => {
-      startShadowingWindow(4000)
-    }, delay + 2400)
-    autoPlayTimers.push(shadowT)
+  // 1) 인트로 슬라이드일 때
+  if (slideCursor.value === -1) {
+    if (enableKoreanCoachVoice.value) {
+      await speakAsync(currentEpisode.value.introNarrationKo, 'ko-KR', 1.03)
+      if (myToken !== sequenceToken) return false
+    }
+    await speakAsync("Let's get cooking!", 'en-US', 1.0)
+    return myToken === sequenceToken
   }
+
+  // 2) 아웃트로 슬라이드일 때
+  if (slideCursor.value >= currentEpisode.value.scenes.length) {
+    if (enableKoreanCoachVoice.value) {
+      await speakAsync(currentEpisode.value.outroNarrationKo, 'ko-KR', 1.03)
+      if (myToken !== sequenceToken) return false
+    }
+    await speakAsync('See you in the next video!', 'en-US', 1.0)
+    return myToken === sequenceToken
+  }
+
+  // 3) 본편 요리 장면 (Scene 1 ~ N)
+  const sc = currentScene.value
+
+  // Step A: 한국어 상황 코칭 내레이션
+  if (enableKoreanCoachVoice.value && sc.coachKo) {
+    await speakAsync(sc.coachKo, 'ko-KR', 1.05)
+    if (myToken !== sequenceToken) return false
+    if (!(await waitMs(350, myToken))) return false
+  }
+
+  // Step B: 소리 블록 1 -> 2 -> 3 순차 발화
+  for (let i = 0; i < sc.blocks.length; i++) {
+    if (myToken !== sequenceToken) return false
+    activeBlockIdx.value = i
+    playBlockPop(i)
+    await speakAsync(sc.blocks[i].en, 'en-US', 0.92)
+    if (!(await waitMs(260, myToken))) return false
+  }
+
+  // Step C: 전체 문장 자연스러운 속도로 1회 발화
+  activeBlockIdx.value = null
+  if (!(await waitMs(220, myToken))) return false
+  await speakAsync(sc.fullEn, 'en-US', 1.0)
+  if (myToken !== sequenceToken) return false
+
+  // Step D: YOUR TURN 따라 말하기 4초 카운트다운
+  if (includeShadowingPause.value) {
+    if (!(await waitMs(300, myToken))) return false
+    const ok = await runShadowingCountdown(4000, myToken)
+    if (!ok) return false
+  }
+
+  return myToken === sequenceToken
 }
 
 function stopAutoShow() {
@@ -854,32 +1215,127 @@ function stopAutoShow() {
   clearTimers()
 }
 
-function toggleAutoShow() {
+async function toggleAutoShow() {
   if (isAutoPlaying.value) {
     stopAutoShow()
     return
   }
   isAutoPlaying.value = true
-  sceneIndex.value = 0
-  runAutoShowStep(0)
+  // 만약 마지막 슬라이드에 있었다면 인트로(-1)부터 시작
+  if (slideCursor.value >= currentEpisode.value.scenes.length) {
+    slideCursor.value = -1
+  }
+
+  while (isAutoPlaying.value && slideCursor.value <= currentEpisode.value.scenes.length) {
+    const completed = await playCurrentSlideSequence()
+    if (!completed || !isAutoPlaying.value) break
+
+    const myToken = sequenceToken
+    const ok = await waitMs(650, myToken)
+    if (!ok || !isAutoPlaying.value) break
+
+    if (slideCursor.value < currentEpisode.value.scenes.length) {
+      slideCursor.value++
+    } else {
+      isAutoPlaying.value = false
+      break
+    }
+  }
 }
 
-function runAutoShowStep(idx: number) {
-  if (!isAutoPlaying.value) return
-  if (idx >= currentEpisode.value.scenes.length) {
-    isAutoPlaying.value = false
+function startEpisodeFromBeginning() {
+  slideCursor.value = -1
+  toggleAutoShow()
+}
+
+function selectEpisode(id: string) {
+  stopAutoShow()
+  currentEpId.value = id
+  slideCursor.value = 0
+}
+
+function goToSlide(idx: number) {
+  stopAutoShow()
+  slideCursor.value = idx
+}
+
+function prevSlide() {
+  stopAutoShow()
+  if (slideCursor.value > -1) {
+    slideCursor.value--
+  } else {
+    slideCursor.value = currentEpisode.value.scenes.length
+  }
+}
+
+function nextSlide() {
+  stopAutoShow()
+  if (slideCursor.value < currentEpisode.value.scenes.length) {
+    slideCursor.value++
+  } else {
+    slideCursor.value = -1
+  }
+}
+
+// ---------------------------------------------------------
+// 1080p 전체화면 방송 모드 & 마우스 자동 숨김
+// ---------------------------------------------------------
+async function toggleFullscreenBroadcast() {
+  if (isFullscreenMode.value) {
+    await exitFullscreen()
     return
   }
-  sceneIndex.value = idx
-  speakBlocksSequentially()
-
-  const stepDuration = includeShadowingPause.value ? 10800 : 6800
-  const nextT = window.setTimeout(() => {
-    if (isAutoPlaying.value) {
-      runAutoShowStep(idx + 1)
+  isFullscreenMode.value = true
+  if (studioRoot.value && studioRoot.value.requestFullscreen) {
+    try {
+      await studioRoot.value.requestFullscreen()
+    } catch {
+      // 브라우저 정책으로 거부될 경우 CSS 전체화면 폴백 유지
     }
-  }, stepDuration)
-  autoPlayTimers.push(nextT)
+  }
+}
+
+async function exitFullscreen() {
+  isFullscreenMode.value = false
+  if (typeof document !== 'undefined' && document.fullscreenElement) {
+    try {
+      await document.exitFullscreen()
+    } catch {
+      // ignore
+    }
+  }
+}
+
+function onFullscreenChange() {
+  if (typeof document !== 'undefined' && !document.fullscreenElement) {
+    isFullscreenMode.value = false
+  }
+}
+
+function onMouseMoveInStudio() {
+  showFloatingControls.value = true
+  if (hideControlsTimer !== null) {
+    window.clearTimeout(hideControlsTimer)
+  }
+  hideControlsTimer = window.setTimeout(() => {
+    if (isFullscreenMode.value || isCleanMode.value) {
+      showFloatingControls.value = false
+    }
+  }, 2400)
+}
+
+function onKeyDown(e: KeyboardEvent) {
+  if (!isFullscreenMode.value) return
+  if (e.key === 'ArrowRight') {
+    e.preventDefault()
+    nextSlide()
+  } else if (e.key === 'ArrowLeft') {
+    e.preventDefault()
+    prevSlide()
+  } else if (e.key === ' ') {
+    e.preventDefault()
+    playCurrentSlideSequence()
+  }
 }
 
 function onUploadSceneImage(e: Event) {
@@ -888,10 +1344,6 @@ function onUploadSceneImage(e: Event) {
   if (!file) return
   const url = URL.createObjectURL(file)
   customMediaMap.value[sceneKey.value] = url
-}
-
-function removeSceneImage() {
-  delete customMediaMap.value[sceneKey.value]
 }
 
 async function toggleRecording() {
@@ -944,19 +1396,47 @@ async function copyEpisodeScript() {
   }
 }
 
+onMounted(() => {
+  if (typeof document !== 'undefined') {
+    document.addEventListener('fullscreenchange', onFullscreenChange)
+    window.addEventListener('keydown', onKeyDown)
+  }
+})
+
 onBeforeUnmount(() => {
   stopAutoShow()
+  if (typeof document !== 'undefined') {
+    document.removeEventListener('fullscreenchange', onFullscreenChange)
+    window.removeEventListener('keydown', onKeyDown)
+  }
 })
 </script>
 
 <style scoped>
-.kf-studio {
-  margin: 1.4rem 0 2.2rem;
+.kf-studio-v2 {
+  margin: 1.4rem 0 2.4rem;
   border: 1px solid var(--vp-c-divider);
   border-radius: 18px;
-  background: var(--vp-c-bg-soft);
+  background: #0b0f19;
   overflow: hidden;
-  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.07);
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.16);
+  position: relative;
+}
+
+/* 전체화면 방송 모드 (1080p Full HD 꽉 찬 화면) */
+.kf-studio-v2.theater-fullscreen {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  margin: 0;
+  border-radius: 0;
+  border: none;
+  width: 100vw;
+  height: 100vh;
+  background: #000;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .kf-topbar {
@@ -964,29 +1444,46 @@ onBeforeUnmount(() => {
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  gap: 0.75rem;
-  padding: 0.9rem 1.25rem;
+  gap: 0.65rem;
+  padding: 0.75rem 1.15rem;
   background: var(--vp-c-bg);
   border-bottom: 1px solid var(--vp-c-divider);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.theater-fullscreen .kf-topbar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 40;
+  background: rgba(15, 23, 42, 0.9);
+  border-bottom-color: rgba(255, 255, 255, 0.12);
+}
+
+.kf-topbar.auto-hide-bar {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-100%);
 }
 
 .kf-topbar-left,
 .kf-topbar-right {
   display: flex;
   align-items: center;
-  gap: 0.55rem;
+  gap: 0.5rem;
   flex-wrap: wrap;
 }
 
 .kf-studio-badge {
   font-size: 0.72rem;
   font-weight: 800;
-  padding: 0.22rem 0.6rem;
+  padding: 0.24rem 0.65rem;
   border-radius: 999px;
   background: #ef4444;
   color: #fff !important;
   text-decoration: none !important;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.03em;
 }
 
 .kf-ep-selector,
@@ -998,8 +1495,8 @@ onBeforeUnmount(() => {
 
 .kf-ep-btn,
 .kf-mode-btn {
-  padding: 0.38rem 0.75rem;
-  font-size: 0.8rem;
+  padding: 0.36rem 0.72rem;
+  font-size: 0.78rem;
   font-weight: 700;
   border-radius: 8px;
   border: 1px solid var(--vp-c-divider);
@@ -1016,323 +1513,670 @@ onBeforeUnmount(() => {
   color: #fff;
 }
 
-.kf-clean-btn.active {
+.kf-fullscreen-btn {
   background: #10b981;
   border-color: #10b981;
+  color: #fff;
 }
 
-/* 스튜디오 캔버스 */
+/* ===================================================
+   방송 캔버스 래퍼 & 정밀 16:9 / 9:16 비율 고정
+   =================================================== */
 .kf-canvas-wrapper {
-  padding: 1.25rem;
+  width: 100%;
   display: flex;
   justify-content: center;
-  background: #0f172a;
+  align-items: center;
+  background: #050811;
+  padding: 0;
 }
 
-.kf-screen {
-  background: #1e293b;
-  border-radius: 16px;
+.theater-fullscreen .kf-canvas-wrapper {
+  height: 100vh;
+}
+
+.kf-broadcast-screen {
+  position: relative;
   overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  border: 2px solid rgba(255, 255, 255, 0.12);
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
+  background: #0f172a;
+  user-select: none;
 }
 
 .screen-wide {
   width: 100%;
-  max-width: 840px;
-  min-height: 520px;
+  aspect-ratio: 16 / 9;
+  max-height: 100vh;
 }
 
 .screen-shorts {
-  width: 375px;
-  min-height: 660px;
+  height: 680px;
+  aspect-ratio: 9 / 16;
+  margin: 1rem auto;
+  border-radius: 18px;
+  box-shadow: 0 18px 48px rgba(0, 0, 0, 0.65);
 }
 
-.kf-screen-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0.7rem 1.1rem 0.4rem;
-  color: #e2e8f0;
-  font-size: 0.78rem;
-  font-weight: 700;
+.theater-fullscreen .screen-shorts {
+  height: 94vh;
 }
 
-.kf-channel-tag {
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-}
-
-.kf-channel-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #ef4444;
-  display: inline-block;
-}
-
-.kf-progress-dots {
-  display: flex;
-  gap: 0.35rem;
-  padding: 0 1.1rem 0.65rem;
-}
-
-.kf-dot {
-  flex: 1;
-  height: 5px;
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.2);
-  cursor: pointer;
-}
-
-.kf-dot.done {
-  background: rgba(16, 185, 129, 0.7);
-}
-
-.kf-dot.active {
-  background: #38bdf8;
-}
-
-.kf-visual-stage {
-  position: relative;
-  flex: 1;
-  margin: 0 1rem;
-  border-radius: 14px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 270px;
-  overflow: hidden;
-}
-
-.kf-scene-img {
+/* 풀블리드 배경 이미지 & Ken Burns 애니메이션 */
+.kf-main-scene,
+.kf-special-slide {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
-  max-height: 310px;
-  object-fit: cover;
-  display: block;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
-@keyframes kenBurnsZoom {
+.kf-bg-full {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+
+@keyframes kenBurnsBroadcast {
   0% {
-    transform: scale(1);
+    transform: scale(1) translate(0, 0);
   }
   100% {
-    transform: scale(1.06);
+    transform: scale(1.08) translate(-1%, -1%);
   }
 }
 
 .ken-burns {
-  animation: kenBurnsZoom 8s ease-out forwards;
+  animation: kenBurnsBroadcast 11s ease-out forwards;
 }
 
-.kf-img-overlay-bottom {
+/* 방송용 다크 스크림 그라데이션 (위쪽 HUD와 아래쪽 자막 가독성 100% 보장) */
+.kf-scrim-gradient {
   position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  padding: 0.65rem 0.95rem;
-  background: linear-gradient(to top, rgba(15, 23, 42, 0.92), rgba(15, 23, 42, 0));
-  color: #fff;
+  inset: 0;
+  z-index: 2;
+  background: linear-gradient(
+    to bottom,
+    rgba(9, 13, 24, 0.72) 0%,
+    rgba(9, 13, 24, 0.08) 24%,
+    rgba(9, 13, 24, 0.18) 54%,
+    rgba(9, 13, 24, 0.88) 78%,
+    rgba(9, 13, 24, 0.96) 100%
+  );
+}
+
+.kf-bg-fallback {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.kf-fallback-center {
+  text-align: center;
+  transform: translateY(-15%);
+}
+
+.kf-fallback-emojis {
+  font-size: 4.5rem;
+  margin-bottom: 0.6rem;
+}
+
+.kf-fallback-action {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #e2e8f0;
+}
+
+/* 상단 HUD */
+.kf-hud-top {
+  position: relative;
+  z-index: 10;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 0.5rem;
-  flex-wrap: wrap;
+  padding: 0.9rem 1.35rem 0.35rem;
+  gap: 0.75rem;
 }
 
-.kf-overlay-step {
-  font-size: 0.75rem;
-  font-weight: 800;
-  padding: 0.15rem 0.6rem;
+.kf-hud-left {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(8px);
+  padding: 0.35rem 0.85rem 0.35rem 0.45rem;
   border-radius: 999px;
-  background: #3b82f6;
-  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.16);
 }
 
-.kf-overlay-note {
+.kf-hud-logo {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.kf-hud-brand {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+}
+
+.hud-ch-name {
+  font-size: 0.68rem;
+  font-weight: 800;
+  color: #facc15;
+}
+
+.hud-ep-step {
   font-size: 0.8rem;
-  color: #e2e8f0;
-  font-weight: 600;
-}
-
-.kf-illust-card {
-  text-align: center;
-  color: #1e293b;
-  padding: 1.5rem;
-}
-
-.kf-illust-emojis {
-  font-size: 3.3rem;
-  margin-bottom: 0.5rem;
-  line-height: 1.1;
-}
-
-.kf-illust-step-badge {
-  display: inline-block;
-  font-size: 0.78rem;
   font-weight: 800;
-  padding: 0.2rem 0.75rem;
-  border-radius: 999px;
-  background: rgba(15, 23, 42, 0.85);
   color: #fff;
-  margin-bottom: 0.45rem;
 }
 
-.kf-illust-action {
-  font-size: 0.92rem;
-  font-weight: 700;
-  color: #334155;
-}
-
-.kf-verb-floating {
-  position: absolute;
-  top: 0.75rem;
-  right: 0.75rem;
-  background: rgba(15, 23, 42, 0.88);
-  color: #fff;
-  padding: 0.35rem 0.75rem;
-  border-radius: 10px;
+.kf-hud-vocab {
+  background: rgba(15, 23, 42, 0.82);
+  backdrop-filter: blur(8px);
+  padding: 0.35rem 0.85rem;
+  border-radius: 12px;
+  border: 1px solid rgba(56, 189, 248, 0.45);
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-  backdrop-filter: blur(4px);
-}
-
-.verb-label {
-  font-size: 0.64rem;
-  color: #38bdf8;
-  font-weight: 700;
-}
-
-.kf-verb-floating strong {
-  font-size: 0.84rem;
-}
-
-.kf-your-turn-banner {
-  position: absolute;
-  top: 0.75rem;
-  left: 0.75rem;
-  background: rgba(16, 185, 129, 0.95);
   color: #fff;
-  padding: 0.45rem 0.85rem;
-  border-radius: 10px;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
-  min-width: 240px;
 }
 
-.yt-turn-top {
+.vocab-tag {
+  font-size: 0.6rem;
+  font-weight: 800;
+  color: #38bdf8;
+  letter-spacing: 0.05em;
+}
+
+.kf-hud-vocab strong {
+  font-size: 0.88rem;
+  color: #fff;
+}
+
+.kf-hud-progress {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  gap: 0.35rem;
+  padding: 0 1.35rem;
+}
+
+.hud-dot {
+  flex: 1;
+  height: 4px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.25);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.hud-dot.done {
+  background: #10b981;
+}
+
+.hud-dot.active {
+  background: #facc15;
+  transform: scaleY(1.4);
+}
+
+/* 중앙 코칭 배너 & YOUR TURN 모달 */
+.kf-coach-banner {
+  position: relative;
+  z-index: 10;
+  align-self: center;
+  max-width: 88%;
+  margin: auto 1rem 0.4rem;
+  background: rgba(15, 23, 42, 0.84);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(250, 204, 21, 0.45);
+  border-radius: 999px;
+  padding: 0.42rem 1.05rem;
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  color: #f8fafc;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+.coach-icon {
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+  background: #facc15;
+  color: #0f172a;
+  white-space: nowrap;
+}
+
+.coach-text {
+  font-size: 0.86rem;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.kf-center-turn-modal {
+  position: relative;
+  z-index: 12;
+  align-self: center;
+  width: min(86%, 560px);
+  margin: auto 1rem 0.5rem;
+  background: linear-gradient(135deg, rgba(5, 150, 105, 0.95), rgba(16, 185, 129, 0.95));
+  border: 2px solid #fde047;
+  border-radius: 16px;
+  padding: 0.75rem 1.15rem;
+  color: #fff;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
+}
+
+.turn-header {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin-bottom: 0.45rem;
+}
+
+.turn-mic-icon {
+  font-size: 1.5rem;
+}
+
+.turn-texts {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.turn-texts strong {
+  font-size: 0.98rem;
+  color: #fef08a;
+}
+
+.turn-texts span {
   font-size: 0.78rem;
-  margin-bottom: 0.3rem;
+  opacity: 0.95;
 }
 
-.yt-turn-bar {
-  height: 5px;
+.turn-sec-badge {
+  font-size: 0.9rem;
+  font-weight: 900;
+  padding: 0.2rem 0.6rem;
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.3);
+}
+
+.turn-progress-track {
+  height: 6px;
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.3);
   overflow: hidden;
 }
 
-.yt-turn-fill {
+.turn-progress-bar {
   height: 100%;
   background: #fde047;
   transition: width 0.06s linear;
 }
 
-/* 캡션 스테이지 */
-.kf-caption-stage {
-  padding: 1rem 1.15rem 1.2rem;
-  color: #fff;
-}
-
-.kf-block-pills {
+/* ===================================================
+   하단 글래스모피즘 자막 바 (Broadcast Lower-Third)
+   =================================================== */
+.kf-lower-third {
+  position: relative;
+  z-index: 10;
+  padding: 0.5rem 1.35rem 1.15rem;
   display: flex;
-  gap: 0.45rem;
-  flex-wrap: wrap;
-  margin-bottom: 0.75rem;
+  flex-direction: column;
+  gap: 0.55rem;
 }
 
-.kf-block-pill {
-  flex: 1 1 130px;
-  padding: 0.5rem 0.75rem;
-  border-radius: 10px;
+.kf-blocks-row {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.kf-glass-block {
+  flex: 1 1 140px;
+  padding: 0.5rem 0.85rem;
+  border-radius: 12px;
+  backdrop-filter: blur(12px);
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+}
+
+.kf-glass-block.bb {
+  background: rgba(37, 99, 235, 0.45);
+  border-color: rgba(96, 165, 250, 0.75);
+}
+
+.kf-glass-block.core {
+  background: rgba(5, 150, 105, 0.45);
+  border-color: rgba(52, 211, 153, 0.75);
+}
+
+.kf-glass-block.db {
+  background: rgba(217, 119, 6, 0.45);
+  border-color: rgba(251, 191, 36, 0.75);
+}
+
+.kf-glass-block.active {
+  transform: translateY(-4px) scale(1.03);
+  box-shadow: 0 0 0 3px #fde047, 0 10px 24px rgba(0, 0, 0, 0.45);
+}
+
+.gblk-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.35rem;
+  margin-bottom: 0.15rem;
+}
+
+.gblk-badge {
+  font-size: 0.66rem;
+  font-weight: 800;
+  color: #e2e8f0;
+}
+
+.gblk-pron {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #fef08a;
+}
+
+.gblk-en {
+  font-size: 1.12rem;
+  font-weight: 900;
+  color: #fff;
+  letter-spacing: -0.01em;
+}
+
+.kf-sentence-banner {
+  background: rgba(15, 23, 42, 0.82);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 12px;
+  padding: 0.6rem 1rem;
   cursor: pointer;
   display: flex;
   flex-direction: column;
-  border: 2px solid transparent;
-  transition: transform 0.16s ease, box-shadow 0.16s ease;
+  gap: 0.2rem;
 }
 
-.kf-block-pill.speaking {
-  transform: scale(1.04);
-  box-shadow: 0 0 0 3px #facc15;
+.kf-main-en {
+  font-size: 1.32rem;
+  font-weight: 900;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
 }
 
-.kf-block-pill.bb {
-  background: rgba(59, 130, 246, 0.28);
-  border-color: #60a5fa;
+.play-hint-icon {
+  font-size: 1rem;
 }
 
-.kf-block-pill.core {
-  background: rgba(16, 185, 129, 0.28);
-  border-color: #34d399;
+.kf-sub-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  font-size: 0.88rem;
 }
 
-.kf-block-pill.db {
-  background: rgba(245, 158, 11, 0.28);
-  border-color: #fbbf24;
+.kf-meta-pron {
+  color: #38bdf8;
 }
 
-.blk-role-label {
-  font-size: 0.66rem;
+.kf-meta-ko {
+  color: #f1f5f9;
   font-weight: 700;
-  opacity: 0.85;
 }
 
-.blk-en {
-  font-size: 1.05rem;
+/* ===================================================
+   인트로 & 아웃트로 스페셜 슬라이드
+   =================================================== */
+.kf-special-backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: radial-gradient(circle at center, rgba(15, 23, 42, 0.76) 0%, rgba(9, 13, 24, 0.94) 100%);
+}
+
+.outro-backdrop {
+  background: rgba(9, 13, 24, 0.9);
+}
+
+.kf-intro-content,
+.kf-outro-content {
+  position: relative;
+  z-index: 10;
+  margin: auto;
+  padding: 1.5rem;
+  text-align: center;
+  color: #fff;
+  width: min(92%, 740px);
+}
+
+.kf-intro-top-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.3rem 0.9rem 0.3rem 0.4rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  font-size: 0.8rem;
+  font-weight: 700;
+  margin-bottom: 0.8rem;
+}
+
+.kf-mini-logo {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.kf-intro-ep-badge {
+  font-size: 0.78rem;
+  font-weight: 900;
+  color: #facc15;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.35rem;
+}
+
+.kf-intro-title {
+  margin: 0 0 0.5rem !important;
+  font-size: 1.85rem !important;
+  font-weight: 900;
+  color: #fff !important;
+  border: none !important;
+}
+
+.kf-intro-sub {
+  margin: 0 0 1.1rem !important;
+  font-size: 0.95rem;
+  color: #cbd5e1;
+}
+
+.kf-intro-formula {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.35rem;
+}
+
+.f-pill {
+  padding: 0.45rem 0.85rem;
+  border-radius: 10px;
+  font-size: 0.82rem;
+  font-weight: 800;
+}
+
+.f-pill.bb {
+  background: #2563eb;
+}
+.f-pill.core {
+  background: #059669;
+}
+.f-pill.db {
+  background: #d97706;
+}
+
+.f-plus {
+  font-weight: 900;
+  color: #94a3b8;
+}
+
+.kf-intro-cta {
+  display: inline-block;
+  padding: 0.7rem 1.5rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #ef4444, #f97316);
+  color: #fff;
+  font-size: 0.95rem;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(239, 68, 68, 0.4);
+}
+
+/* 아웃트로 복습 그리드 */
+.outro-badge {
+  font-size: 0.74rem;
+  font-weight: 800;
+  color: #34d399;
+}
+
+.outro-title {
+  margin: 0.2rem 0 0.85rem !important;
+  font-size: 1.35rem !important;
+  font-weight: 900;
+  color: #fff !important;
+  border: none !important;
+}
+
+.kf-review-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 0.45rem;
+  text-align: left;
+  margin-bottom: 0.9rem;
+}
+
+.kf-review-item {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.42rem 0.7rem;
+  border-radius: 10px;
+  background: rgba(30, 41, 59, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  cursor: pointer;
+}
+
+.rev-num {
+  font-size: 0.72rem;
+  font-weight: 900;
+  color: #38bdf8;
+}
+
+.rev-en {
+  font-size: 0.82rem;
   font-weight: 800;
   color: #fff;
 }
 
-.blk-pron {
-  font-size: 0.78rem;
-  color: #fef08a;
-  font-weight: 600;
+.rev-ko {
+  font-size: 0.7rem;
+  color: #cbd5e1;
 }
 
-.kf-full-sentence {
-  font-size: 1.35rem;
-  font-weight: 900;
+.outro-cta-box {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.5rem 1.1rem;
+  border-radius: 999px;
+  background: rgba(239, 68, 68, 0.22);
+  border: 1px solid rgba(239, 68, 68, 0.55);
+  font-size: 0.82rem;
+}
+
+.outro-handle {
+  font-size: 0.72rem;
+  color: #fde047;
+  font-weight: 700;
+}
+
+/* 플로팅 리모컨 (풀스크린 방송용) */
+.kf-floating-remote {
+  position: absolute;
+  bottom: 0.75rem;
+  right: 1rem;
+  z-index: 35;
+  display: flex;
+  gap: 0.35rem;
+  background: rgba(15, 23, 42, 0.88);
+  padding: 0.35rem 0.55rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+}
+
+.kf-floating-remote.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.rem-btn {
+  padding: 0.28rem 0.65rem;
+  font-size: 0.74rem;
+  font-weight: 700;
+  border-radius: 999px;
+  border: none;
+  background: rgba(255, 255, 255, 0.12);
   color: #fff;
   cursor: pointer;
-  margin-bottom: 0.25rem;
 }
 
-.kf-pron-line {
-  font-size: 0.9rem;
-  color: #38bdf8;
-  margin-bottom: 0.15rem;
+.rem-primary {
+  background: #10b981;
 }
 
-.kf-ko-line {
-  font-size: 0.92rem;
-  color: #cbd5e1;
-  font-weight: 600;
+.rem-primary.playing {
+  background: #ef4444;
 }
 
-/* 컨트롤 패널 */
+.rem-exit {
+  background: #475569;
+}
+
+/* 하단 컨트롤 패널 */
 .kf-controls-panel {
-  padding: 1rem 1.25rem;
+  padding: 0.95rem 1.25rem;
   background: var(--vp-c-bg);
   border-top: 1px solid var(--vp-c-divider);
   display: flex;
   flex-direction: column;
-  gap: 0.85rem;
+  gap: 0.8rem;
 }
 
 .kf-nav-group,
@@ -1341,7 +2185,7 @@ onBeforeUnmount(() => {
 .kf-custom-tools {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.45rem;
   flex-wrap: wrap;
 }
 
@@ -1352,8 +2196,8 @@ onBeforeUnmount(() => {
 }
 
 .kf-ctrl-btn {
-  padding: 0.45rem 0.85rem;
-  font-size: 0.83rem;
+  padding: 0.42rem 0.8rem;
+  font-size: 0.8rem;
   font-weight: 700;
   border-radius: 8px;
   border: 1px solid var(--vp-c-divider);
@@ -1372,6 +2216,12 @@ onBeforeUnmount(() => {
   cursor: pointer;
 }
 
+.kf-btn-broadcast {
+  background: linear-gradient(135deg, #2563eb, #059669);
+  border: none;
+  color: #fff;
+}
+
 .kf-btn-primary {
   background: var(--vp-c-brand-1);
   border-color: var(--vp-c-brand-1);
@@ -1385,14 +2235,14 @@ onBeforeUnmount(() => {
 
 .kf-btn-playing,
 .kf-btn-rec {
-  background: #ef4444;
-  border-color: #ef4444;
-  color: #fff;
+  background: #ef4444 !important;
+  border-color: #ef4444 !important;
+  color: #fff !important;
 }
 
 .kf-upload-label {
-  padding: 0.38rem 0.75rem;
-  font-size: 0.78rem;
+  padding: 0.35rem 0.7rem;
+  font-size: 0.76rem;
   font-weight: 700;
   border-radius: 8px;
   border: 1px dashed var(--vp-c-brand-1);
@@ -1401,12 +2251,12 @@ onBeforeUnmount(() => {
 }
 
 .kf-audio-player {
-  height: 32px;
-  max-width: 210px;
+  height: 30px;
+  max-width: 190px;
 }
 
 .kf-chk {
-  font-size: 0.78rem;
+  font-size: 0.76rem;
   color: var(--vp-c-text-2);
   display: flex;
   align-items: center;
@@ -1424,8 +2274,8 @@ onBeforeUnmount(() => {
 .kf-yt-package-header {
   display: flex;
   justify-content: space-between;
-  padding: 0.65rem 0.95rem;
-  font-size: 0.84rem;
+  padding: 0.6rem 0.95rem;
+  font-size: 0.82rem;
   cursor: pointer;
 }
 
@@ -1436,7 +2286,7 @@ onBeforeUnmount(() => {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  font-size: 0.83rem;
+  font-size: 0.82rem;
 }
 
 .kf-meta-row {
@@ -1444,5 +2294,15 @@ onBeforeUnmount(() => {
   align-items: center;
   gap: 0.5rem;
   flex-wrap: wrap;
+}
+
+.kf-pop-enter-active,
+.kf-pop-leave-active {
+  transition: all 0.22s ease;
+}
+.kf-pop-enter-from,
+.kf-pop-leave-to {
+  opacity: 0;
+  transform: translateY(6px);
 }
 </style>
