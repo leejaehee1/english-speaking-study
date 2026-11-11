@@ -933,6 +933,7 @@ let autoPlayTimers: number[] = []
 let shadowingInterval: number | null = null
 let hideControlsTimer: number | null = null
 let audioCtx: AudioContext | null = null
+let activeHtmlAudio: HTMLAudioElement | null = null
 
 const currentEpisode = computed(
   () => episodes.find((e) => e.id === currentEpId.value) || episodes[0]
@@ -1018,16 +1019,53 @@ function playSuccessBell() {
 }
 
 // ---------------------------------------------------------
-// 음성 합성 (Promise 기반 한국어/영어 순차 발화)
+// 스튜디오급 Neural AI MP3 재생기 (+ 브라우저 TTS 안전 폴백)
 // ---------------------------------------------------------
+function stopActiveAudio() {
+  if (activeHtmlAudio) {
+    activeHtmlAudio.pause()
+    activeHtmlAudio.currentTime = 0
+    activeHtmlAudio = null
+  }
+  if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
+    window.speechSynthesis.cancel()
+  }
+}
+
+function playMp3Async(relPath: string, playbackRate = 1.0): Promise<boolean> {
+  return new Promise((resolve) => {
+    if (typeof window === 'undefined') {
+      resolve(false)
+      return
+    }
+    stopActiveAudio()
+    const audio = new Audio(withBase(relPath))
+    audio.playbackRate = playbackRate
+    activeHtmlAudio = audio
+
+    let settled = false
+    const finish = (ok: boolean) => {
+      if (!settled) {
+        settled = true
+        if (activeHtmlAudio === audio) activeHtmlAudio = null
+        resolve(ok)
+      }
+    }
+
+    audio.onended = () => finish(true)
+    audio.onerror = () => finish(false)
+    audio.play().catch(() => finish(false))
+  })
+}
+
 function speakAsync(text: string, lang: 'en-US' | 'ko-KR', rate = 1.0): Promise<void> {
   return new Promise((resolve) => {
     if (typeof window === 'undefined' || !('speechSynthesis' in window)) {
       resolve()
       return
     }
+    stopActiveAudio()
     const synth = window.speechSynthesis
-    synth.cancel()
 
     const utter = new SpeechSynthesisUtterance(text)
     utter.lang = lang
@@ -1036,13 +1074,14 @@ function speakAsync(text: string, lang: 'en-US' | 'ko-KR', rate = 1.0): Promise<
     const voices = synth.getVoices()
     if (lang === 'en-US') {
       const usVoice =
-        voices.find((v) => v.lang === 'en-US' && /Samantha|Ava|Alex|Google|Natural|Siri/i.test(v.name)) ||
-        voices.find((v) => v.lang.startsWith('en-US')) ||
+        voices.find((v) => v.lang === 'en-US' && /Samantha|Ava|Allison|Alex|Google/i.test(v.name)) ||
+        voices.find((v) => v.lang.startsWith('en-US') && !/Albert|Bad|Bahh|Bells|Boing|Bubbles|Cellos|Wobble|Eddy|Flo|Grand|Jester|Organ|Superstar|Trinoids|Whisper|Zarvox/i.test(v.name)) ||
         voices.find((v) => v.lang.startsWith('en'))
       if (usVoice) utter.voice = usVoice
     } else {
       const koVoice =
-        voices.find((v) => v.lang.startsWith('ko') && /Yuna|Flo|Eddy|Google|Natural|Siri/i.test(v.name)) ||
+        voices.find((v) => v.lang.startsWith('ko') && /Yuna|Sora|Google|Siri/i.test(v.name)) ||
+        voices.find((v) => v.lang.startsWith('ko') && !/Eddy|Flo|Grand|Reed|Rocko|Sandy|Shelley/i.test(v.name)) ||
         voices.find((v) => v.lang.startsWith('ko'))
       if (koVoice) utter.voice = koVoice
     }
@@ -1054,7 +1093,6 @@ function speakAsync(text: string, lang: 'en-US' | 'ko-KR', rate = 1.0): Promise<
         resolve()
       }
     }
-    // 안전 타임아웃 (브라우저 TTS가 onend를 누락할 경우 대비)
     const fallbackMs = Math.max(2200, text.length * 110)
     const safetyTimer = window.setTimeout(finish, fallbackMs)
 
@@ -1074,18 +1112,25 @@ function speakText(text: string, rate = 1.0) {
   speakAsync(text, 'en-US', rate)
 }
 
-function speakSingleBlock(text: string, idx: number) {
+async function speakSingleBlock(text: string, idx: number) {
   activeBlockIdx.value = idx
   playBlockPop(idx)
-  speakAsync(text, 'en-US', 0.92).then(() => {
-    activeBlockIdx.value = null
-  })
+  const mp3Url = `/audio/kfood/${currentEpId.value}-s${safeSceneIndex.value}-b${idx}.mp3`
+  const ok = await playMp3Async(mp3Url, 1.0)
+  if (!ok) {
+    await speakAsync(text, 'en-US', 0.92)
+  }
+  activeBlockIdx.value = null
 }
 
-function speakSceneSentence(rate = 1.0) {
+async function speakSceneSentence(rate = 1.0) {
   activeBlockIdx.value = null
   isShadowingTurn.value = false
-  speakAsync(currentScene.value.fullEn, 'en-US', rate)
+  const mp3Url = `/audio/kfood/${currentEpId.value}-s${safeSceneIndex.value}-full.mp3`
+  const ok = await playMp3Async(mp3Url, rate)
+  if (!ok) {
+    await speakAsync(currentScene.value.fullEn, 'en-US', rate)
+  }
 }
 
 // ---------------------------------------------------------
@@ -1101,9 +1146,7 @@ function clearTimers() {
     window.clearInterval(shadowingInterval)
     shadowingInterval = null
   }
-  if (typeof window !== 'undefined' && 'speechSynthesis' in window) {
-    window.speechSynthesis.cancel()
-  }
+  stopActiveAudio()
   activeBlockIdx.value = null
   isShadowingTurn.value = false
   shadowingProgress.value = 0
@@ -1153,56 +1196,67 @@ function runShadowingCountdown(durationMs: number, token: number): Promise<boole
 async function playCurrentSlideSequence(): Promise<boolean> {
   clearTimers()
   const myToken = sequenceToken
+  const epId = currentEpId.value
   playTransitionChime()
 
   // 1) 인트로 슬라이드일 때
   if (slideCursor.value === -1) {
     if (enableKoreanCoachVoice.value) {
-      await speakAsync(currentEpisode.value.introNarrationKo, 'ko-KR', 1.03)
+      const ok = await playMp3Async(`/audio/kfood/${epId}-intro-ko.mp3`, 1.0)
+      if (!ok) await speakAsync(currentEpisode.value.introNarrationKo, 'ko-KR', 1.03)
       if (myToken !== sequenceToken) return false
+      if (!(await waitMs(250, myToken))) return false
     }
-    await speakAsync("Let's get cooking!", 'en-US', 1.0)
+    const okEn = await playMp3Async('/audio/kfood/common-lets-cook.mp3', 1.0)
+    if (!okEn) await speakAsync("Let's get cooking!", 'en-US', 1.0)
     return myToken === sequenceToken
   }
 
   // 2) 아웃트로 슬라이드일 때
   if (slideCursor.value >= currentEpisode.value.scenes.length) {
     if (enableKoreanCoachVoice.value) {
-      await speakAsync(currentEpisode.value.outroNarrationKo, 'ko-KR', 1.03)
+      const ok = await playMp3Async(`/audio/kfood/${epId}-outro-ko.mp3`, 1.0)
+      if (!ok) await speakAsync(currentEpisode.value.outroNarrationKo, 'ko-KR', 1.03)
       if (myToken !== sequenceToken) return false
+      if (!(await waitMs(250, myToken))) return false
     }
-    await speakAsync('See you in the next video!', 'en-US', 1.0)
+    const okEn = await playMp3Async('/audio/kfood/common-see-you.mp3', 1.0)
+    if (!okEn) await speakAsync('See you in the next video!', 'en-US', 1.0)
     return myToken === sequenceToken
   }
 
   // 3) 본편 요리 장면 (Scene 1 ~ N)
   const sc = currentScene.value
+  const sIdx = safeSceneIndex.value
 
-  // Step A: 한국어 상황 코칭 내레이션
+  // Step A: 한국어 아나운서 성우(SunHiNeural) 상황 코칭 내레이션
   if (enableKoreanCoachVoice.value && sc.coachKo) {
-    await speakAsync(sc.coachKo, 'ko-KR', 1.05)
+    const okCoach = await playMp3Async(`/audio/kfood/${epId}-s${sIdx}-coach.mp3`, 1.0)
+    if (!okCoach) await speakAsync(sc.coachKo, 'ko-KR', 1.05)
     if (myToken !== sequenceToken) return false
-    if (!(await waitMs(350, myToken))) return false
+    if (!(await waitMs(320, myToken))) return false
   }
 
-  // Step B: 소리 블록 1 -> 2 -> 3 순차 발화
+  // Step B: 원어민 성우(AvaNeural) 소리 블록 1 -> 2 -> 3 순차 발화
   for (let i = 0; i < sc.blocks.length; i++) {
     if (myToken !== sequenceToken) return false
     activeBlockIdx.value = i
     playBlockPop(i)
-    await speakAsync(sc.blocks[i].en, 'en-US', 0.92)
-    if (!(await waitMs(260, myToken))) return false
+    const okBlk = await playMp3Async(`/audio/kfood/${epId}-s${sIdx}-b${i}.mp3`, 1.0)
+    if (!okBlk) await speakAsync(sc.blocks[i].en, 'en-US', 0.92)
+    if (!(await waitMs(240, myToken))) return false
   }
 
   // Step C: 전체 문장 자연스러운 속도로 1회 발화
   activeBlockIdx.value = null
   if (!(await waitMs(220, myToken))) return false
-  await speakAsync(sc.fullEn, 'en-US', 1.0)
+  const okFull = await playMp3Async(`/audio/kfood/${epId}-s${sIdx}-full.mp3`, 1.0)
+  if (!okFull) await speakAsync(sc.fullEn, 'en-US', 1.0)
   if (myToken !== sequenceToken) return false
 
   // Step D: YOUR TURN 따라 말하기 4초 카운트다운
   if (includeShadowingPause.value) {
-    if (!(await waitMs(300, myToken))) return false
+    if (!(await waitMs(280, myToken))) return false
     const ok = await runShadowingCountdown(4000, myToken)
     if (!ok) return false
   }
