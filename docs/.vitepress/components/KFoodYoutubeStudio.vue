@@ -2,10 +2,13 @@
   <div
     ref="studioRoot"
     class="kf-studio-v2"
-    :class="{
-      'clean-record-mode': isCleanMode,
-      'theater-fullscreen': isFullscreenMode
-    }"
+    :class="[
+      'font-' + fontScale,
+      {
+        'clean-record-mode': isCleanMode,
+        'theater-fullscreen': isFullscreenMode
+      }
+    ]"
     @click.stop
     @mousemove="onMouseMoveInStudio"
   >
@@ -19,7 +22,7 @@
           class="kf-studio-badge"
           title="유튜브 채널 바로가기"
         >
-          ▶️ @SoundBlockKCooking V2
+          ▶️ @SoundBlockKCooking
         </a>
         <div class="kf-ep-selector">
           <button
@@ -36,6 +39,18 @@
       </div>
 
       <div class="kf-topbar-right">
+        <!-- 휴대폰/모바일 가독성을 위한 글자 크기 조절기 -->
+        <div class="kf-font-toggle">
+          <button
+            type="button"
+            class="kf-mode-btn kf-font-btn"
+            :title="'글자 크기 변경: 현재 ' + fontScaleLabel"
+            @click="cycleFontScale"
+          >
+            🔠 글자: <strong>{{ fontScaleLabel }}</strong>
+          </button>
+        </div>
+
         <div class="kf-aspect-toggle">
           <button
             type="button"
@@ -91,7 +106,7 @@
             <div class="kf-intro-ep-badge">{{ currentEpisode.epNumber }} · K-FOOD SPEAKING RECIPE</div>
             <h2 class="kf-intro-title">{{ currentEpisode.title }}</h2>
             <p class="kf-intro-sub">
-              단어 하나씩 외우지 마세요! 레고처럼 <strong>딱 3개의 소리 블록</strong>만 조립하면 입이 트입니다.
+              단어 하나씩 외우지 마세요! 레고처럼 <strong>소리 블록을 갈아 끼우고 조립</strong>하면 입이 트입니다.
             </p>
 
             <div class="kf-intro-formula">
@@ -174,14 +189,42 @@
             ></span>
           </div>
 
-          <!-- 3) 중앙 상단: 한국어 코칭 버블 or 🎤 YOUR TURN 따라 말하기 배너 -->
+          <!-- 3) 훈련 단계 탭 (시작 블록 3단 교체 / 실전 자석 합체 미션 / 완성 문장 복습) -->
+          <div class="kf-stage-tabs">
+            <button
+              type="button"
+              class="stage-tab-btn"
+              :class="{ active: activeStage === 'swap' }"
+              @click="setStage('swap')"
+            >
+              🔄 1단계: 시작 블록 3단 교체
+            </button>
+            <button
+              type="button"
+              class="stage-tab-btn"
+              :class="{ active: activeStage === 'quiz' }"
+              @click="setStage('quiz')"
+            >
+              🧲 2단계: 실전 자석 합체
+            </button>
+            <button
+              type="button"
+              class="stage-tab-btn"
+              :class="{ active: activeStage === 'sentence' }"
+              @click="setStage('sentence')"
+            >
+              🎤 3단계: 완성 문장 따라하기
+            </button>
+          </div>
+
+          <!-- 4) 중앙 알림 (코칭 음성 배너 또는 따라 말하기 카운트다운) -->
           <transition name="kf-pop">
             <div v-if="isShadowingTurn" class="kf-center-turn-modal">
               <div class="turn-header">
                 <span class="turn-mic-icon">🎤</span>
                 <div class="turn-texts">
                   <strong>YOUR TURN! 큰 소리로 따라 말해 보세요!</strong>
-                  <span>소리 블록 3개를 리듬에 맞춰 한 호흡으로 뱉어 보세요</span>
+                  <span>소리 블록들을 리듬에 맞춰 한 호흡으로 뱉어 보세요</span>
                 </div>
                 <span class="turn-sec-badge">{{ Math.ceil((100 - shadowingProgress) * 0.04) }}초</span>
               </div>
@@ -190,15 +233,129 @@
               </div>
             </div>
 
-            <div v-else-if="showCoachBubble && currentScene.coachKo" class="kf-coach-banner">
-              <span class="coach-icon">💡 요리 상황 코칭</span>
-              <span class="coach-text">{{ currentScene.coachKo }}</span>
+            <div v-else-if="showCoachBubble && currentCoachText" class="kf-coach-banner">
+              <span class="coach-icon">{{ activeStage === 'quiz' ? '🎯 미션 알림' : '💡 요리 상황 코칭' }}</span>
+              <span class="coach-text">{{ currentCoachText }}</span>
             </div>
           </transition>
 
-          <!-- 4) 하단 글래스모피즘 방송 자막 독 (Broadcast Lower-Third Caption Dock) -->
-          <div class="kf-lower-third">
-            <!-- 소리 블록 3단 캡슐 -->
+          <!-- 5) 메인 무대: 활성 훈련 단계에 따른 독 (Lower-Third Dock) -->
+
+          <!-- ============================================================
+               STAGE 1: 시작 블록 3단 교체 훈련 (Slot Machine Style Swap)
+               ============================================================ -->
+          <div v-if="activeStage === 'swap'" class="kf-lower-third kf-swap-stage">
+            <!-- 고정된 코어 블록 배너 -->
+            <div class="kf-core-anchor" @click="speakCoreBlock">
+              <span class="anchor-label">② 고정 코어 블록 (Core Action)</span>
+              <div class="anchor-body">
+                <span class="anchor-en">{{ currentScene.blocks[1]?.en || currentScene.keyVocab }}</span>
+                <span v-if="showPronGuide" class="anchor-pron">[{{ currentScene.blocks[1]?.pron }}]</span>
+                <span class="anchor-hint">🔊 터치하여 듣기</span>
+              </div>
+            </div>
+
+            <!-- 3가지 시작 블록 갈아 끼우기 카드 목록 -->
+            <div class="kf-combo-grid">
+              <div
+                v-for="(combo, cIdx) in currentScene.combos"
+                :key="cIdx"
+                class="kf-combo-card"
+                :class="{ active: activeComboIdx === cIdx }"
+                @click="playComboCard(cIdx)"
+              >
+                <div class="combo-head">
+                  <span class="combo-num">COMBO {{ cIdx + 1 }}</span>
+                  <span class="combo-bb-badge">{{ combo.bbEn }}</span>
+                  <span class="combo-plus">+</span>
+                  <span class="combo-core-badge">{{ currentScene.blocks[1]?.en }}</span>
+                </div>
+                <div class="combo-sentence">
+                  <span class="combo-en">{{ combo.fullEn }}</span>
+                  <span v-if="showPronGuide" class="combo-pron">[{{ combo.fullPron }}]</span>
+                </div>
+                <div v-if="showKoSub" class="combo-ko">
+                  🇰🇷 {{ combo.ko }}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ============================================================
+               STAGE 2: 실전 자석 합체 미션 (Magnet Snap Quiz)
+               ============================================================ -->
+          <div v-else-if="activeStage === 'quiz'" class="kf-lower-third kf-quiz-stage">
+            <div class="kf-mission-banner" @click="playMissionAudio">
+              <span class="m-badge">🎯 조립 미션</span>
+              <span class="m-text">{{ currentScene.missionKo || currentScene.fullKo }}</span>
+              <span class="m-listen">🔊 미션 다시 듣기</span>
+            </div>
+
+            <!-- 자석으로 중앙에 합체되는 슬롯 -->
+            <div class="kf-snap-target-row" :class="{ snapped: isSnapped }">
+              <div class="snap-slot slot-bb" :class="{ 'is-filled': isSnapped }">
+                <span class="slot-badge">① 시작</span>
+                <span class="slot-word">{{ isSnapped ? currentScene.blocks[0].en : '?' }}</span>
+              </div>
+              <span class="snap-plus">+</span>
+              <div class="snap-slot slot-core" :class="{ 'is-filled': isSnapped }">
+                <span class="slot-badge">② 코어</span>
+                <span class="slot-word">{{ isSnapped ? currentScene.blocks[1].en : '?' }}</span>
+              </div>
+              <span class="snap-plus">+</span>
+              <div class="snap-slot slot-db" :class="{ 'is-filled': isSnapped }">
+                <span class="slot-badge">③ 디테일</span>
+                <span class="slot-word">{{ isSnapped ? currentScene.blocks[2].en : '?' }}</span>
+              </div>
+            </div>
+
+            <!-- 후보 블록 풀 (선택해 보거나 3초 후 자동 철컥 합체) -->
+            <div class="kf-candidate-pool">
+              <div class="cand-group">
+                <span class="cand-label">① 시작 블록 후보:</span>
+                <div class="cand-items">
+                  <button
+                    v-for="(opt, oIdx) in currentScene.quizPool.bbCandidates"
+                    :key="oIdx"
+                    type="button"
+                    class="cand-btn cand-bb"
+                    :class="{ correct: isSnapped && opt === currentScene.blocks[0].en }"
+                    @click="onPickCandidate('bb', opt)"
+                  >
+                    {{ opt }}
+                  </button>
+                </div>
+              </div>
+
+              <div class="cand-group">
+                <span class="cand-label">② 코어 블록 후보:</span>
+                <div class="cand-items">
+                  <button
+                    v-for="(opt, oIdx) in currentScene.quizPool.coreCandidates"
+                    :key="oIdx"
+                    type="button"
+                    class="cand-btn cand-core"
+                    :class="{ correct: isSnapped && opt === currentScene.blocks[1].en }"
+                    @click="onPickCandidate('core', opt)"
+                  >
+                    {{ opt }}
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- 합체 완료 문장 배너 -->
+            <div v-if="isSnapped" class="kf-quiz-complete-bar" @click="speakSceneSentence(1.0)">
+              <div class="qc-en">🧲 철컥 합체 완료: <strong>{{ currentScene.fullEn }}</strong></div>
+              <div class="qc-ko">{{ currentScene.fullKo }} · ({{ currentScene.fullPron }})</div>
+            </div>
+          </div>
+
+          <!-- ============================================================
+               STAGE 3: 완성 문장 따라하기 (Full 3-Block Sentence Standard)
+               ============================================================ -->
+          <div v-else class="kf-lower-third kf-sentence-stage">
+            <!-- 소리 블록 3단 캡슐 (대형 모바일 폰트 지원) -->
             <div class="kf-blocks-row">
               <div
                 v-for="(blk, bIdx) in currentScene.blocks"
@@ -236,7 +393,7 @@
         </div>
 
         <!-- ----------------------------------------------------
-             CASE C: OUTRO 슬라이드 (전체 8문장 복습 & 구독 유도)
+             CASE C: OUTRO 슬라이드 (전체 복습 & 구독 유도)
              ---------------------------------------------------- -->
         <div v-else class="kf-special-slide outro-slide">
           <img
@@ -315,11 +472,11 @@
           :class="{ 'kf-btn-playing': isAutoPlaying }"
           @click="toggleAutoShow"
         >
-          {{ isAutoPlaying ? '⏹️ 자동 방송 중지' : '▶️ 전체 장면 자동 방송 (인트로~아웃트로 원테이크 녹화)' }}
+          {{ isAutoPlaying ? '⏹️ 자동 방송 중지' : '▶️ 전체 장면 자동 방송 (3단교체→자석합체→따라말하기 풀코스)' }}
         </button>
 
         <button type="button" class="kf-ctrl-btn kf-btn-step" @click="playCurrentSlideSequence">
-          🔁 이 장면 풀 시퀀스 재생 (코칭→블록→따라말하기)
+          🔁 현재 장면 풀 시퀀스 재생
         </button>
 
         <button type="button" class="kf-ctrl-btn kf-btn-primary" @click="speakSceneSentence(1.0)">
@@ -336,16 +493,16 @@
       <div v-if="!isCleanMode" class="kf-extra-tools">
         <div class="kf-custom-tools">
           <label class="kf-chk">
-            <input v-model="enableKoreanCoachVoice" type="checkbox" /> 🇰🇷 한국어 상황 코칭 음성 켜기
+            <input v-model="enableKoreanCoachVoice" type="checkbox" /> 🇰🇷 한국어 코칭/미션 음성
           </label>
           <label class="kf-chk">
-            <input v-model="enableSoundEffects" type="checkbox" /> 🔔 방송 효과음(딩동·전환음) 켜기
+            <input v-model="enableSoundEffects" type="checkbox" /> 🔔 방송 효과음(철컥·딩동)
           </label>
           <label class="kf-chk">
-            <input v-model="includeShadowingPause" type="checkbox" /> 🎤 따라 말하기(4초) 구간 포함
+            <input v-model="includeShadowingPause" type="checkbox" /> 🎤 따라 말하기(4초) 구간
           </label>
           <label class="kf-chk">
-            <input v-model="showCoachBubble" type="checkbox" /> 💡 상단 코칭 배너 표시
+            <input v-model="showCoachBubble" type="checkbox" /> 💡 상단 코칭 배너
           </label>
           <label class="kf-chk">
             <input v-model="showPronGuide" type="checkbox" /> 한글 발음 표시
@@ -392,7 +549,7 @@
           <div class="kf-meta-row">
             <strong>전체 대본 &amp; 설명란 복사:</strong>
             <button type="button" class="kf-ctrl-btn-sm" @click="copyEpisodeScript">
-              {{ copySuccess ? '✅ 복사 완료!' : '📄 전체 한/영 대본 & 태그 복사하기' }}
+              {{ copySuccess ? '✅ 복사 완료!' : '📄 전체 대본 & 태그 복사하기' }}
             </button>
           </div>
         </div>
@@ -411,15 +568,30 @@ interface SoundBlockPiece {
   pron: string
 }
 
+interface SwapCombo {
+  bbEn: string
+  fullEn: string
+  fullPron: string
+  ko: string
+}
+
+interface QuizPool {
+  bbCandidates: string[]
+  coreCandidates: string[]
+}
+
 interface CookingScene {
   stepTitle: string
   visualEmojis: string
   imagePath?: string
   actionNote: string
   coachKo: string
+  missionKo: string
   keyVocab: string
   bgGradient: string
   blocks: SoundBlockPiece[]
+  combos: SwapCombo[]
+  quizPool: QuizPool
   fullEn: string
   fullPron: string
   fullKo: string
@@ -444,6 +616,21 @@ const isCleanMode = ref(false)
 const isFullscreenMode = ref(false)
 const showFloatingControls = ref(true)
 
+// 글자 크기 모드 (모바일 사용자 배려): 'large'를 기본으로 설정하여 스마트폰에서도 시원시원하게 보임
+const fontScale = ref<'normal' | 'large' | 'huge'>('large')
+
+const fontScaleLabel = computed(() => {
+  if (fontScale.value === 'large') return '📱 대형(모바일 추천)'
+  if (fontScale.value === 'huge') return '👑 초대형(왕글씨)'
+  return '보통(PC)'
+})
+
+function cycleFontScale() {
+  if (fontScale.value === 'large') fontScale.value = 'huge'
+  else if (fontScale.value === 'huge') fontScale.value = 'normal'
+  else fontScale.value = 'large'
+}
+
 const enableKoreanCoachVoice = ref(true)
 const enableSoundEffects = ref(true)
 const includeShadowingPause = ref(true)
@@ -456,12 +643,17 @@ const copySuccess = ref(false)
 const isShadowingTurn = ref(false)
 const shadowingProgress = ref(0)
 
+// 훈련 단계: 'swap' (시작 블록 3단 교체) | 'quiz' (실전 자석 합체) | 'sentence' (완성 문장)
+const activeStage = ref<'swap' | 'quiz' | 'sentence'>('swap')
+const activeComboIdx = ref<number | null>(null)
+const isSnapped = ref(false)
+
 // slideCursor: -1 = INTRO, 0..(scenes.length-1) = SCENES, scenes.length = OUTRO
 const slideCursor = ref(0)
 
 const episodes: CookingEpisode[] = [
   // ==========================================
-  // EP 1. 김치찌개 (Kimchi Stew) - 8 Scenes with High-Res Illustrations
+  // EP 1. 김치찌개 (Kimchi Stew) - 8 Scenes
   // ==========================================
   {
     id: 'kimchi-stew',
@@ -471,15 +663,16 @@ const episodes: CookingEpisode[] = [
     title: '중학교 단어로 김치찌개 끓이기 (Kimchi Stew)',
     ytTitle: '[소리블록 요리영어 #1] 중학교 단어로 김치찌개 끓이기 🍲 | How to Make Kimchi Stew in Easy English',
     thumbnailText: '"김치찌개 끓일게!" → [I\'m gonna] + [make Kimchi stew]',
-    introNarrationKo: '안녕하세요, 소리블록 케이쿠킹입니다! 오늘은 한국인의 소울푸드 김치찌개 끓이는 법을 딱 세 개의 영어 소리 블록으로 조립해 말해 볼게요.',
-    outroNarrationKo: '오늘 배운 김치찌개 소리 블록 여덟 문장, 입에 착 붙으셨나요? 구독과 좋아요를 누르고 다음 요리도 함께 입으로 뱉어 봐요!',
+    introNarrationKo: '안녕하세요, 소리블록 케이쿠킹입니다! 오늘은 한국인의 소울푸드 김치찌개 끓이는 법을 소리 블록 교체와 조립으로 마스터해 볼게요.',
+    outroNarrationKo: '오늘 배운 김치찌개 소리 블록 조합 훈련, 입에 착 붙으셨나요? 구독과 좋아요를 누르고 다음 요리도 함께 조립해 봐요!',
     scenes: [
       {
         stepTitle: 'SCENE 1 · 오늘의 요리 소개',
         visualEmojis: '👨‍🍳 🍲 🇰🇷',
         imagePath: '/images/kfood/ep1-s1.jpg',
         actionNote: '앞치마를 입고 부엌에서 밝게 인사하는 오프닝',
-        coachKo: '첫 번째 장면입니다. "오늘 김치찌개 끓일 거야!"라고 말할 때, "~할 거야"는 I\'m gonna, "김치찌개를 만들다"는 make Kimchi stew를 붙여 보세요.',
+        coachKo: '첫 번째 코어 블록은, 김치찌개를 만들다, 메익 김치 스튜입니다. 앞의 시작 블록만 세 번 갈아 끼워 볼까요?',
+        missionKo: '실전 조립 미션! 오늘 저는 김치찌개를 끓일 거예요. 블록 세 개를 합쳐 보세요!',
         keyVocab: 'Kimchi stew (김치찌개)',
         bgGradient: 'linear-gradient(135deg, #1e293b 0%, #334155 100%)',
         blocks: [
@@ -487,6 +680,15 @@ const episodes: CookingEpisode[] = [
           { role: 'core', en: 'make Kimchi stew', pron: '메익 김치 스튜' },
           { role: 'db', en: 'today.', pron: '투데이' }
         ],
+        combos: [
+          { bbEn: "I'm gonna", fullEn: "I'm gonna make Kimchi stew.", fullPron: '암거너 메익 김치 스튜', ko: '나 김치찌개 끓일 거야.' },
+          { bbEn: 'I wanna', fullEn: 'I wanna make Kimchi stew.', fullPron: '아이 워너 메익 김치 스튜', ko: '나 김치찌개 끓이고 싶어.' },
+          { bbEn: 'Do you wanna', fullEn: 'Do you wanna make Kimchi stew?', fullPron: '두유 워너 메익 김치 스튜?', ko: '너 김치찌개 끓일래?' }
+        ],
+        quizPool: {
+          bbCandidates: ["I'm gonna", 'You have to', 'Did you'],
+          coreCandidates: ['make Kimchi stew', 'slice the tofu', 'pour some water']
+        },
         fullEn: "I'm gonna make Kimchi stew today.",
         fullPron: '암거너 + 메익 김치 스튜 + 투데이',
         fullKo: '오늘 저는 김치찌개를 끓일 거예요.'
@@ -496,7 +698,8 @@ const episodes: CookingEpisode[] = [
         visualEmojis: '🥬 ✨ 😋',
         imagePath: '/images/kfood/ep1-s2.jpg',
         actionNote: '잘 익은 신김치를 보여주며 핵심 비법 설명',
-        coachKo: '김치찌개의 생명은 잘 익은 신김치죠! "꼭 ~해야 해"는 You have to, "신김치를 쓰다"는 use sour kimchi입니다.',
+        coachKo: '두 번째 코어 블록은, 신김치를 쓰다, 유즈 사워 김치입니다. 시작 블록을 바꿔서 조합해 보세요!',
+        missionKo: '실전 조립 미션! 깊은 맛을 내려면 꼭 신김치를 써야 해요. 어떻게 조립할까요?',
         keyVocab: 'sour kimchi (신김치)',
         bgGradient: 'linear-gradient(135deg, #450a0a 0%, #7f1d1d 100%)',
         blocks: [
@@ -504,6 +707,15 @@ const episodes: CookingEpisode[] = [
           { role: 'core', en: 'use sour kimchi', pron: '유즈 사워 김치' },
           { role: 'db', en: 'for deep flavor.', pron: '포 딥 플레이버' }
         ],
+        combos: [
+          { bbEn: 'You have to', fullEn: 'You have to use sour kimchi.', fullPron: '유 해프터 유즈 사워 김치', ko: '꼭 신김치를 써야만 해.' },
+          { bbEn: "We're gonna", fullEn: "We're gonna use sour kimchi.", fullPron: '워거너 유즈 사워 김치', ko: '우리 신김치를 쓸 거야.' },
+          { bbEn: 'Did you', fullEn: 'Did you use sour kimchi?', fullPron: '디쥬 유즈 사워 김치?', ko: '너 신김치 썼어?' }
+        ],
+        quizPool: {
+          bbCandidates: ['You have to', "I'll", 'Do you wanna'],
+          coreCandidates: ['use sour kimchi', 'chop the pork', 'fry them together']
+        },
         fullEn: 'You have to use sour kimchi for deep flavor.',
         fullPron: '유 해프터 + 유즈 사워 김치 + 포 딥 플레이버',
         fullKo: '깊은 맛을 내려면 꼭 신김치를 써야 해요.'
@@ -513,7 +725,8 @@ const episodes: CookingEpisode[] = [
         visualEmojis: '🔪 🥩 🥬',
         imagePath: '/images/kfood/ep1-s3.jpg',
         actionNote: '도마 위에서 김치와 돼지고기를 한 입 크기로 큼직하게 썰기',
-        coachKo: '이제 재료를 큼직하게 썰어 볼까요? 큼직하게 썰다는 chop, "한 입 크기로"는 into bite-sized pieces라고 표현합니다.',
+        coachKo: '세 번째 코어 블록은, 고기와 김치를 큼직하게 썰다, 찹 더 포크 앤 김치입니다. 시작 블록 세 개를 끼워 볼게요!',
+        missionKo: '실전 조립 미션! 돼지고기와 김치를 한 입 크기로 썰어 줄게요!',
         keyVocab: 'chop / bite-sized pieces',
         bgGradient: 'linear-gradient(135deg, #431407 0%, #7c2d12 100%)',
         blocks: [
@@ -521,6 +734,15 @@ const episodes: CookingEpisode[] = [
           { role: 'core', en: 'chop the pork and kimchi', pron: '찹 더 포크 앤 김치' },
           { role: 'db', en: 'into bite-sized pieces.', pron: '인투 바잇-사이즈드 피시즈' }
         ],
+        combos: [
+          { bbEn: "I'm gonna", fullEn: "I'm gonna chop the pork and kimchi.", fullPron: '암거너 찹 더 포크 앤 김치', ko: '돼지고기와 김치를 썰어 줄게.' },
+          { bbEn: "I'll", fullEn: "I'll chop the pork and kimchi.", fullPron: '아을 찹 더 포크 앤 김치', ko: '내가 돼지고기와 김치 썰어 놓을게.' },
+          { bbEn: "You don't have to", fullEn: "You don't have to chop the pork and kimchi.", fullPron: '유 돈 해프터 찹 더 포크 앤 김치', ko: '너 돼지고기랑 김치 안 썰어도 돼.' }
+        ],
+        quizPool: {
+          bbCandidates: ["I'm gonna", "We're gonna", 'Can you'],
+          coreCandidates: ['chop the pork and kimchi', 'bring it to the boil', 'take a sip']
+        },
         fullEn: "I'm gonna chop the pork and kimchi into bite-sized pieces.",
         fullPron: '암거너 + 찹 더 포크 앤 김치 + 인투 바잇-사이즈드 피시즈',
         fullKo: '돼지고기와 김치를 한 입 크기로 썰어 줄게요.'
@@ -530,14 +752,24 @@ const episodes: CookingEpisode[] = [
         visualEmojis: '⬜ 🌱 🔪',
         imagePath: '/images/kfood/ep1-s4.jpg',
         actionNote: '두부는 납작하게 썰고(slice), 대파는 송송 썰어 준비',
-        coachKo: '두부처럼 납작하게 썰 때는 slice를 씁니다. "내가 ~할게"라는 시작 블록 I\'ll 뒤에 slice the tofu를 붙여 보세요!',
+        coachKo: '네 번째 코어 블록은, 두부를 납작하게 썰다, 슬라이스 더 토푸입니다. 앞 블록만 바꾸면 뜻이 어떻게 달라질까요?',
+        missionKo: '실전 조립 미션! 제가 두부는 납작하게 썰고 대파도 썰어 둘게요!',
         keyVocab: 'slice the tofu (두부를 썰다)',
         bgGradient: 'linear-gradient(135deg, #052e16 0%, #14532d 100%)',
         blocks: [
-          { role: 'bb', en: "I'll", pron: '아을(올)' },
+          { role: 'bb', en: "I'll", pron: '아을' },
           { role: 'core', en: 'slice the tofu', pron: '슬라이스 더 토푸' },
           { role: 'db', en: 'and chop the green onion.', pron: '앤 찹 더 그린 어니언' }
         ],
+        combos: [
+          { bbEn: "I'll", fullEn: "I'll slice the tofu.", fullPron: '아을 슬라이스 더 토푸', ko: '내가 두부 썰어 놓을게.' },
+          { bbEn: "You don't have to", fullEn: "You don't have to slice the tofu.", fullPron: '유 돈 해프터 슬라이스 더 토푸', ko: '너 두부 썰 필요 없어.' },
+          { bbEn: 'Do you wanna', fullEn: 'Do you wanna slice the tofu?', fullPron: '두유 워너 슬라이스 더 토푸?', ko: '너 두부 좀 썰어 볼래?' }
+        ],
+        quizPool: {
+          bbCandidates: ["I'll", 'We have to', 'I used to'],
+          coreCandidates: ['slice the tofu', 'use sour kimchi', 'pour some water']
+        },
         fullEn: "I'll slice the tofu and chop the green onion.",
         fullPron: '아을 + 슬라이스 더 토푸 + 앤 찹 더 그린 어니언',
         fullKo: '제가 두부는 납작하게 썰고 대파도 썰어 둘게요.'
@@ -547,7 +779,8 @@ const episodes: CookingEpisode[] = [
         visualEmojis: '🍲 🔥 🧄',
         imagePath: '/images/kfood/ep1-s5.jpg',
         actionNote: '달궈진 냄비에 돼지고기, 김치, 다진 마늘을 넣고 지글지글 볶기',
-        coachKo: '다진 마늘을 넣고 고기와 김치를 먼저 볶아 줘야 국물이 진해지죠! "같이 볶다"는 fry them together입니다.',
+        coachKo: '다섯 번째 코어 블록은, 재료들을 함께 볶다, 프라이 뎀 투게더입니다. 시작 블록 세 가지를 결합해 볼까요?',
+        missionKo: '실전 조립 미션! 다진 마늘을 넣고 재료들을 함께 볶아 줘야 해요!',
         keyVocab: 'fry them together (함께 볶다)',
         bgGradient: 'linear-gradient(135deg, #422006 0%, #713f12 100%)',
         blocks: [
@@ -555,6 +788,15 @@ const episodes: CookingEpisode[] = [
           { role: 'core', en: 'fry them together', pron: '프라이 뎀 투게더' },
           { role: 'db', en: 'with minced garlic.', pron: '위드 민스트 갈릭' }
         ],
+        combos: [
+          { bbEn: 'We have to', fullEn: 'We have to fry them together.', fullPron: '위 해프터 프라이 뎀 투게더', ko: '재료들을 같이 볶아야 해.' },
+          { bbEn: "I'm gonna", fullEn: "I'm gonna fry them together.", fullPron: '암거너 프라이 뎀 투게더', ko: '재료들을 같이 볶아 줄게.' },
+          { bbEn: 'I used to', fullEn: 'I used to fry them together.', fullPron: '아이 유스투 프라이 뎀 투게더', ko: '예전엔 같이 볶곤 했어.' }
+        ],
+        quizPool: {
+          bbCandidates: ['We have to', "I'm gonna", 'Did you'],
+          coreCandidates: ['fry them together', 'crack an egg', 'make Korean ramen']
+        },
         fullEn: 'We have to fry them together with minced garlic.',
         fullPron: '위 해프터 + 프라이 뎀 투게더 + 위드 민스트 갈릭',
         fullKo: '다진 마늘을 넣고 재료들을 함께 볶아 줘야 해요.'
@@ -564,7 +806,8 @@ const episodes: CookingEpisode[] = [
         visualEmojis: '💧 🥣 🌶️',
         imagePath: '/images/kfood/ep1-s6.jpg',
         actionNote: '물을 붓고 감칠맛의 핵심인 김치 국물(kimchi juice) 한 국자 추가!',
-        coachKo: '물을 붓고 빠질 수 없는 비법, 김치 국물을 넣을 차례입니다! 김치 국물은 영어로 귀엽게 kimchi juice라고 부릅니다.',
+        coachKo: '여섯 번째 코어 블록은, 물을 좀 붓다, 포어 썸 워러입니다. 시작 블록을 차례대로 갈아 끼워 보세요!',
+        missionKo: '실전 조립 미션! 물을 좀 붓고 김치 국물도 넣어 줄게요!',
         keyVocab: 'kimchi juice (김치 국물)',
         bgGradient: 'linear-gradient(135deg, #172554 0%, #1e3a8a 100%)',
         blocks: [
@@ -572,6 +815,15 @@ const episodes: CookingEpisode[] = [
           { role: 'core', en: 'pour some water', pron: '포어 썸 워러' },
           { role: 'db', en: 'and add the kimchi juice.', pron: '앤 애드 더 김치 주스' }
         ],
+        combos: [
+          { bbEn: "I'm gonna", fullEn: "I'm gonna pour some water.", fullPron: '암거너 포어 썸 워러', ko: '물을 좀 부어 줄게요.' },
+          { bbEn: "I'll", fullEn: "I'll pour some water.", fullPron: '아을 포어 썸 워러', ko: '내가 물 좀 부을게.' },
+          { bbEn: 'Did you', fullEn: 'Did you pour some water?', fullPron: '디쥬 포어 썸 워러?', ko: '너 물 좀 부었어?' }
+        ],
+        quizPool: {
+          bbCandidates: ["I'm gonna", 'You have to', 'I wanna'],
+          coreCandidates: ['pour some water', 'slice the tofu', 'take a sip']
+        },
         fullEn: "I'm gonna pour some water and add the kimchi juice.",
         fullPron: '암거너 + 포어 썸 워러 + 앤 애드 더 김치 주스',
         fullKo: '물을 좀 붓고 김치 국물도 넣어 줄게요.'
@@ -581,7 +833,8 @@ const episodes: CookingEpisode[] = [
         visualEmojis: '♨️ 🍲 ⏲️',
         imagePath: '/images/kfood/ep1-s7.jpg',
         actionNote: '센 불에 팔팔 끓인 뒤 중약불로 줄여 10분간 뭉근히 끓이기',
-        coachKo: '센 불에 팔팔 끓이다는 bring it to the boil, 불을 줄여 뭉근히 푹 끓게 두다는 let it simmer입니다!',
+        coachKo: '일곱 번째 코어 블록은, 팔팔 끓이다, 브링 잇 투 더 보일입니다. 시작 블록 세 개와 조합해 볼게요!',
+        missionKo: '실전 조립 미션! 팔팔 끓인 다음에 푹 끓게 둘 거예요!',
         keyVocab: 'bring it to the boil / simmer',
         bgGradient: 'linear-gradient(135deg, #4c0519 0%, #881337 100%)',
         blocks: [
@@ -589,6 +842,15 @@ const episodes: CookingEpisode[] = [
           { role: 'core', en: 'bring it to the boil', pron: '브링 잇 투 더 보일' },
           { role: 'db', en: 'and let it simmer.', pron: '앤 레릿 시머' }
         ],
+        combos: [
+          { bbEn: "We're gonna", fullEn: "We're gonna bring it to the boil.", fullPron: '워거너 브링 잇 투 더 보일', ko: '우린 팔팔 끓여 줄 거예요.' },
+          { bbEn: 'You have to', fullEn: 'You have to bring it to the boil.', fullPron: '유 해프터 브링 잇 투 더 보일', ko: '센 불에 팔팔 끓여야만 해요.' },
+          { bbEn: "I'll", fullEn: "I'll bring it to the boil.", fullPron: '아을 브링 잇 투 더 보일', ko: '내가 팔팔 끓여 놓을게.' }
+        ],
+        quizPool: {
+          bbCandidates: ["We're gonna", "You don't have to", 'Do you wanna'],
+          coreCandidates: ['bring it to the boil', 'marinate the beef', 'fry them together']
+        },
         fullEn: "We're gonna bring it to the boil and let it simmer.",
         fullPron: '워거너 + 브링 잇 투 더 보일 + 앤 레릿 시머',
         fullKo: '팔팔 끓인 다음에 푹(뭉근히) 끓게 둘 거예요.'
@@ -598,7 +860,8 @@ const episodes: CookingEpisode[] = [
         visualEmojis: '🥄 🍚 😍',
         imagePath: '/images/kfood/ep1-s8.jpg',
         actionNote: '국물 한 모금(take a sip) 맛보고 따뜻한 흰쌀밥과 한 입!',
-        coachKo: '드디어 완성입니다! 뜨거운 국물을 후후 불어 한 모금 맛볼 때는 take a sip 소리 블록을 씁니다.',
+        coachKo: '여덟 번째 코어 블록은, 국물 한 모금 마시다, 테이커 씹입니다. 시작 블록을 바꿔가며 말해 보세요!',
+        missionKo: '마지막 조립 미션! 지금 당장 국물 한 모금 마셔 보고 싶네요. 와, 진짜 맛있어요!',
         keyVocab: 'take a sip (한 모금 맛보다)',
         bgGradient: 'linear-gradient(135deg, #3b0764 0%, #581c87 100%)',
         blocks: [
@@ -606,6 +869,15 @@ const episodes: CookingEpisode[] = [
           { role: 'core', en: 'take a sip', pron: '테이커 씹' },
           { role: 'db', en: 'right now. Wow, so good!', pron: '롸잇 나우. 와우 쏘 굿!' }
         ],
+        combos: [
+          { bbEn: 'I wanna', fullEn: 'I wanna take a sip.', fullPron: '아이 워너 테이커 씹', ko: '국물 한 모금 마셔 보고 싶어.' },
+          { bbEn: 'Do you wanna', fullEn: 'Do you wanna take a sip?', fullPron: '두유 워너 테이커 씹?', ko: '국물 한 모금 맛볼래?' },
+          { bbEn: "I'll", fullEn: "I'll take a sip.", fullPron: '아을 테이커 씹', ko: '내가 국물 한 모금 마셔 볼게.' }
+        ],
+        quizPool: {
+          bbCandidates: ['I wanna', 'You have to', "We're gonna"],
+          coreCandidates: ['take a sip', 'make Kimchi stew', 'boil the water']
+        },
         fullEn: 'I wanna take a sip right now. Wow, so good!',
         fullPron: '아이 워너 + 테이커 씹 + 롸잇 나우. 와우, 쏘 굿!',
         fullKo: '지금 당장 국물 한 모금 마셔 보고 싶네요. 와, 진짜 맛있어요!'
@@ -624,15 +896,16 @@ const episodes: CookingEpisode[] = [
     title: '5분 완성 김치볶음밥 & 계란프라이 만들기 (Kimchi Fried Rice)',
     ytTitle: '[소리블록 요리영어 #2] 5분 완성 김치볶음밥 영어로 설명하기 🍳 | Kimchi Fried Rice in Easy English',
     thumbnailText: '"계란프라이 올릴게!" → [I\'ll] + [put a fried egg] + [on top]',
-    introNarrationKo: '안녕하세요, 소리블록 케이쿠킹입니다! 오늘은 5분 만에 뚝딱 만드는 김치볶음밥과 반숙 계란프라이를 소리 블록으로 말해 볼게요.',
-    outroNarrationKo: '오늘 배운 김치볶음밥 소리 블록 여섯 문장도 정말 쉽죠? 구독과 좋아요 누르고 다음 영상에서 또 만나요!',
+    introNarrationKo: '안녕하세요, 소리블록 케이쿠킹입니다! 오늘은 5분 만에 뚝딱 만드는 김치볶음밥을 소리 블록 조합으로 말해 볼게요.',
+    outroNarrationKo: '오늘 배운 김치볶음밥 소리 블록 조합 훈련도 정말 유익하셨죠? 구독과 좋아요 누르고 다음 영상에서 또 만나요!',
     scenes: [
       {
         stepTitle: 'SCENE 1 · 김치볶음밥 시작하기',
         visualEmojis: '🍚 🥬 🍳',
         imagePath: '/images/kfood/ep1-s1.jpg',
         actionNote: '찬밥과 잘게 썬 김치를 준비하며 인사',
-        coachKo: '점심 메뉴로 김치볶음밥을 만들 때, I\'m gonna 뒤에 make Kimchi fried rice를 붙여 보세요!',
+        coachKo: '첫 번째 코어 블록은, 김치볶음밥을 만들다, 메익 김치 프라이드 라이스입니다. 시작 블록 세 개를 갈아 끼워 볼까요?',
+        missionKo: '실전 조립 미션! 점심으로 김치볶음밥을 만들 거예요!',
         keyVocab: 'Kimchi fried rice (김치볶음밥)',
         bgGradient: 'linear-gradient(135deg, #431407 0%, #7c2d12 100%)',
         blocks: [
@@ -640,6 +913,15 @@ const episodes: CookingEpisode[] = [
           { role: 'core', en: 'make Kimchi fried rice', pron: '메익 김치 프라이드 라이스' },
           { role: 'db', en: 'for lunch.', pron: '포 런치' }
         ],
+        combos: [
+          { bbEn: "I'm gonna", fullEn: "I'm gonna make Kimchi fried rice.", fullPron: '암거너 메익 김치 프라이드 라이스', ko: '김치볶음밥을 만들 거야.' },
+          { bbEn: 'I wanna', fullEn: 'I wanna make Kimchi fried rice.', fullPron: '아이 워너 메익 김치 프라이드 라이스', ko: '김치볶음밥 만들고 싶어.' },
+          { bbEn: 'Do you wanna', fullEn: 'Do you wanna make Kimchi fried rice?', fullPron: '두유 워너 메익 김치 프라이드 라이스?', ko: '김치볶음밥 만들래?' }
+        ],
+        quizPool: {
+          bbCandidates: ["I'm gonna", 'You have to', 'Did you'],
+          coreCandidates: ['make Kimchi fried rice', 'marinate the beef', 'slice the tofu']
+        },
         fullEn: "I'm gonna make Kimchi fried rice for lunch.",
         fullPron: '암거너 + 메익 김치 프라이드 라이스 + 포 런치',
         fullKo: '점심으로 김치볶음밥을 만들 거예요.'
@@ -648,8 +930,9 @@ const episodes: CookingEpisode[] = [
         stepTitle: 'SCENE 2 · 김치와 베이컨 잘게 썰기',
         visualEmojis: '🔪 🥓 🥬',
         imagePath: '/images/kfood/ep1-s3.jpg',
-        actionNote: '볶음밥용으로 김치와 베이컨(또는 스팸)을 잘게 다지듯 썰기',
-        coachKo: '볶음밥용 김치는 잘게 썰어야 맛있죠! "잘게 썰다"는 chop finely라고 표현합니다.',
+        actionNote: '볶음밥용으로 김치와 베이컨을 잘게 다지듯 썰기',
+        coachKo: '두 번째 코어 블록은, 김치를 잘게 썰다, 찹 더 김치 파인리입니다. 앞 블록을 바꿔서 조합해 보세요!',
+        missionKo: '실전 조립 미션! 베이컨과 함께 김치를 잘게 썰어 줘야 해요!',
         keyVocab: 'chop finely (잘게 썰다)',
         bgGradient: 'linear-gradient(135deg, #450a0a 0%, #7f1d1d 100%)',
         blocks: [
@@ -657,6 +940,15 @@ const episodes: CookingEpisode[] = [
           { role: 'core', en: 'chop the kimchi finely', pron: '찹 더 김치 파인리' },
           { role: 'db', en: 'with some bacon.', pron: '위드 썸 베이컨' }
         ],
+        combos: [
+          { bbEn: 'You have to', fullEn: 'You have to chop the kimchi finely.', fullPron: '유 해프터 찹 더 김치 파인리', ko: '김치를 잘게 썰어야만 해.' },
+          { bbEn: "I'll", fullEn: "I'll chop the kimchi finely.", fullPron: '아을 찹 더 김치 파인리', ko: '내가 김치 잘게 썰어 놓을게.' },
+          { bbEn: "You don't have to", fullEn: "You don't have to chop the kimchi finely.", fullPron: '유 돈 해프터 찹 더 김치 파인리', ko: '김치 안 잘게 썰어도 돼.' }
+        ],
+        quizPool: {
+          bbCandidates: ['You have to', "I'm gonna", 'Can you'],
+          coreCandidates: ['chop the kimchi finely', 'boil the water', 'take a bite']
+        },
         fullEn: 'You have to chop the kimchi finely with some bacon.',
         fullPron: '유 해프터 + 찹 더 김치 파인리 + 위드 썸 베이컨',
         fullKo: '베이컨과 함께 김치를 잘게 썰어 줘야 해요.'
@@ -666,7 +958,8 @@ const episodes: CookingEpisode[] = [
         visualEmojis: '🍳 🔥 🌶️',
         imagePath: '/images/kfood/ep1-s5.jpg',
         actionNote: '팬에 김치와 고추장/간장을 넣고 센 불에 달달 볶기',
-        coachKo: '주걱으로 저어가며 센 불에 달달 볶는 건 stir-fry라고 합니다!',
+        coachKo: '세 번째 코어 블록은, 김치를 센 불에 볶다, 스터 프라이 더 김치입니다. 시작 블록 세 개와 결합해 볼게요!',
+        missionKo: '실전 조립 미션! 고추장을 넣고 김치를 센 불에 볶을 거예요!',
         keyVocab: 'stir-fry (센 불에 저으며 볶다)',
         bgGradient: 'linear-gradient(135deg, #422006 0%, #713f12 100%)',
         blocks: [
@@ -674,6 +967,15 @@ const episodes: CookingEpisode[] = [
           { role: 'core', en: 'stir-fry the kimchi', pron: '스터-프라이 더 김치' },
           { role: 'db', en: 'with chili paste.', pron: '위드 칠리 페이스트' }
         ],
+        combos: [
+          { bbEn: "We're gonna", fullEn: "We're gonna stir-fry the kimchi.", fullPron: '워거너 스터 프라이 더 김치', ko: '김치를 센 불에 볶을 거예요.' },
+          { bbEn: "I'm gonna", fullEn: "I'm gonna stir-fry the kimchi.", fullPron: '암거너 스터 프라이 더 김치', ko: '내가 김치를 볶을게.' },
+          { bbEn: 'You have to', fullEn: 'You have to stir-fry the kimchi.', fullPron: '유 해프터 스터 프라이 더 김치', ko: '김치를 센 불에 볶아야 해.' }
+        ],
+        quizPool: {
+          bbCandidates: ["We're gonna", "I'll", 'Did you'],
+          coreCandidates: ['stir-fry the kimchi', 'pour some water', 'slice the tofu']
+        },
         fullEn: "We're gonna stir-fry the kimchi with chili paste.",
         fullPron: '워거너 + 스터-프라이 더 김치 + 위드 칠리 페이스트',
         fullKo: '고추장을 넣고 김치를 센 불에 볶을 거예요.'
@@ -683,7 +985,8 @@ const episodes: CookingEpisode[] = [
         visualEmojis: '🍚 🫗 ✨',
         imagePath: '/images/kfood/ep1-s2.jpg',
         actionNote: '밥을 넣고 골고루 섞은 뒤 마지막에 고소한 참기름 한 바퀴!',
-        coachKo: '밥을 넣고 비빈 뒤 고소한 참기름, sesame oil을 한 바퀴 둘러 줍니다!',
+        coachKo: '네 번째 코어 블록은, 밥을 넣고 섞다, 믹스 인 더 라이스입니다. 앞 블록을 차례대로 갈아 끼워 보세요!',
+        missionKo: '실전 조립 미션! 밥을 넣고 섞은 다음 참기름을 두를게요!',
         keyVocab: 'sesame oil (참기름)',
         bgGradient: 'linear-gradient(135deg, #052e16 0%, #14532d 100%)',
         blocks: [
@@ -691,6 +994,15 @@ const episodes: CookingEpisode[] = [
           { role: 'core', en: 'mix in the rice', pron: '믹스 인 더 라이스' },
           { role: 'db', en: 'and add sesame oil.', pron: '앤 애드 세서미 오일' }
         ],
+        combos: [
+          { bbEn: "I'll", fullEn: "I'll mix in the rice.", fullPron: '아을 믹스 인 더 라이스', ko: '내가 밥을 넣고 섞을게.' },
+          { bbEn: "I'm gonna", fullEn: "I'm gonna mix in the rice.", fullPron: '암거너 믹스 인 더 라이스', ko: '밥을 넣고 섞어 줄게.' },
+          { bbEn: 'Did you', fullEn: 'Did you mix in the rice?', fullPron: '디쥬 믹스 인 더 라이스?', ko: '밥 넣고 섞었어?' }
+        ],
+        quizPool: {
+          bbCandidates: ["I'll", 'We have to', 'Do you wanna'],
+          coreCandidates: ['mix in the rice', 'put the soup base', 'cook the meat']
+        },
         fullEn: "I'll mix in the rice and add sesame oil.",
         fullPron: '아을 + 믹스 인 더 라이스 + 앤 애드 세서미 오일',
         fullKo: '밥을 넣고 섞은 다음 참기름을 두를게요.'
@@ -700,7 +1012,8 @@ const episodes: CookingEpisode[] = [
         visualEmojis: '🥚 🍳 👑',
         imagePath: '/images/kfood/ep1-s7.jpg',
         actionNote: '노른자가 살아 있는 반숙 계란프라이를 맨 위에 얹기',
-        coachKo: '김치볶음밥의 화룡점정! 계란프라이를 맨 위에 딱 올릴 때는 put a fried egg right on top!',
+        coachKo: '다섯 번째 코어 블록은, 계란프라이를 올리다, 풋 어 프라이드 에그입니다. 시작 블록 세 개를 바꿔 볼까요?',
+        missionKo: '실전 조립 미션! 맨 위에 계란프라이를 딱 얹어 줄 거예요!',
         keyVocab: 'put a fried egg right on top',
         bgGradient: 'linear-gradient(135deg, #172554 0%, #1e3a8a 100%)',
         blocks: [
@@ -708,6 +1021,15 @@ const episodes: CookingEpisode[] = [
           { role: 'core', en: 'put a fried egg', pron: '풋 어 프라이드 에그' },
           { role: 'db', en: 'right on top.', pron: '롸잇 온 탑' }
         ],
+        combos: [
+          { bbEn: "I'm gonna", fullEn: "I'm gonna put a fried egg.", fullPron: '암거너 풋 어 프라이드 에그', ko: '계란프라이를 올릴 거야.' },
+          { bbEn: 'I wanna', fullEn: 'I wanna put a fried egg.', fullPron: '아이 워너 풋 어 프라이드 에그', ko: '계란프라이 올리고 싶어.' },
+          { bbEn: 'Do you wanna', fullEn: 'Do you wanna put a fried egg?', fullPron: '두유 워너 풋 어 프라이드 에그?', ko: '계란프라이 올릴래?' }
+        ],
+        quizPool: {
+          bbCandidates: ["I'm gonna", "I'll", 'You have to'],
+          coreCandidates: ['put a fried egg', 'crack an egg', 'chop the pork']
+        },
         fullEn: "I'm gonna put a fried egg right on top.",
         fullPron: '암거너 + 풋 어 프라이드 에그 + 롸잇 온 탑',
         fullKo: '맨 위에 계란프라이를 딱 얹어 줄 거예요.'
@@ -717,7 +1039,8 @@ const episodes: CookingEpisode[] = [
         visualEmojis: '🥄 😋 👍',
         imagePath: '/images/kfood/ep1-s8.jpg',
         actionNote: '숟가락으로 노른자를 톡 터뜨려 밥과 함께 한 입!',
-        coachKo: '음식을 한 입 크게 먹어 볼래? 하고 물어볼 때는 Do you wanna take a bite?를 씁니다.',
+        coachKo: '여섯 번째 코어 블록은, 한 입 먹다, 테이커 바이트입니다. 시작 블록을 바꿔가며 말해 보세요!',
+        missionKo: '마지막 조립 미션! 지금 당장 한 입 먹어 볼래요?',
         keyVocab: 'take a bite (한 입 먹다)',
         bgGradient: 'linear-gradient(135deg, #3b0764 0%, #581c87 100%)',
         blocks: [
@@ -725,6 +1048,15 @@ const episodes: CookingEpisode[] = [
           { role: 'core', en: 'take a bite', pron: '테이커 바이트' },
           { role: 'db', en: 'right now?', pron: '롸잇 나우?' }
         ],
+        combos: [
+          { bbEn: 'Do you wanna', fullEn: 'Do you wanna take a bite?', fullPron: '두유 워너 테이커 바이트?', ko: '한 입 먹어 볼래?' },
+          { bbEn: 'I wanna', fullEn: 'I wanna take a bite.', fullPron: '아이 워너 테이커 바이트', ko: '나 한 입 먹고 싶어.' },
+          { bbEn: "I'll", fullEn: "I'll take a bite.", fullPron: '아을 테이커 바이트', ko: '내가 한 입 먹어 볼게.' }
+        ],
+        quizPool: {
+          bbCandidates: ['Do you wanna', "I'm gonna", 'You have to'],
+          coreCandidates: ['take a bite', 'take a sip', 'use sour kimchi']
+        },
         fullEn: 'Do you wanna take a bite right now?',
         fullPron: '두유워너 + 테이커 바이트 + 롸잇 나우?',
         fullKo: '지금 당장 한 입 먹어 볼래요?'
@@ -743,7 +1075,7 @@ const episodes: CookingEpisode[] = [
     title: '영어로 K-라면 꼬들꼬들하게 끓이기 (Korean Instant Noodles)',
     ytTitle: '[소리블록 요리영어 #3] 외국인 친구에게 K-라면 끓이는 법 영어로 말하기 🍜 | How to Cook Korean Ramen',
     thumbnailText: '"스프부터 넣어야 해!" → [You have to] + [put the soup base first]',
-    introNarrationKo: '안녕하세요, 소리블록 케이쿠킹입니다! 오늘은 전 세계가 사랑하는 한국 라면 맛있게 끓이는 법을 영어 소리 블록으로 배워 볼게요.',
+    introNarrationKo: '안녕하세요, 소리블록 케이쿠킹입니다! 오늘은 전 세계가 사랑하는 한국 라면 맛있게 끓이는 법을 소리 블록으로 배워 볼게요.',
     outroNarrationKo: '라면 끓이면서 혼자 영어로 중얼거려 보면 절대 안 까먹습니다! 구독과 좋아요 부탁드려요!',
     scenes: [
       {
@@ -751,7 +1083,8 @@ const episodes: CookingEpisode[] = [
         visualEmojis: '🌙 🍜 🔥',
         imagePath: '/images/kfood/ep1-s1.jpg',
         actionNote: '냄비와 라면 한 봉지를 들고 시작',
-        coachKo: '오늘 밤 라면 끓여 먹을 거야! I\'m gonna + make Korean ramen + tonight으로 가볍게 시작해 볼까요?',
+        coachKo: '첫 번째 코어 블록은, 한국 라면을 끓이다, 메익 코리안 라면입니다. 시작 블록 세 개를 갈아 끼워 볼까요?',
+        missionKo: '실전 조립 미션! 오늘 밤엔 한국 라면을 끓여 먹을 거예요!',
         keyVocab: 'make Korean ramen (라면 끓이다)',
         bgGradient: 'linear-gradient(135deg, #450a0a 0%, #7f1d1d 100%)',
         blocks: [
@@ -759,6 +1092,15 @@ const episodes: CookingEpisode[] = [
           { role: 'core', en: 'make Korean ramen', pron: '메익 코리안 라면' },
           { role: 'db', en: 'tonight.', pron: '투나잇' }
         ],
+        combos: [
+          { bbEn: "I'm gonna", fullEn: "I'm gonna make Korean ramen.", fullPron: '암거너 메익 코리안 라면', ko: '한국 라면 끓일 거야.' },
+          { bbEn: 'I wanna', fullEn: 'I wanna make Korean ramen.', fullPron: '아이 워너 메익 코리안 라면', ko: '한국 라면 끓이고 싶어.' },
+          { bbEn: 'Do you wanna', fullEn: 'Do you wanna make Korean ramen?', fullPron: '두유 워너 메익 코리안 라면?', ko: '한국 라면 끓일래?' }
+        ],
+        quizPool: {
+          bbCandidates: ["I'm gonna", 'First, we have to', 'Did you'],
+          coreCandidates: ['make Korean ramen', 'slice the tofu', 'wrap the meat']
+        },
         fullEn: "I'm gonna make Korean ramen tonight.",
         fullPron: '암거너 + 메익 코리안 라면 + 투나잇',
         fullKo: '오늘 밤엔 한국 라면을 끓여 먹을 거예요.'
@@ -768,7 +1110,8 @@ const episodes: CookingEpisode[] = [
         visualEmojis: '💧 🍲 ♨️',
         imagePath: '/images/kfood/ep1-s6.jpg',
         actionNote: '냄비에 물 550ml를 붓고 센 불에 끓이기',
-        coachKo: '라면의 생명은 물 정량이죠! 먼저 물을 끓여야 해는 First, we have to + boil the water입니다.',
+        coachKo: '두 번째 코어 블록은, 물을 끓이다, 보일 더 워러입니다. 시작 블록을 바꿔서 조합해 보세요!',
+        missionKo: '실전 조립 미션! 먼저 작은 냄비에 물을 끓여야 해요!',
         keyVocab: 'boil the water (물을 끓이다)',
         bgGradient: 'linear-gradient(135deg, #172554 0%, #1e3a8a 100%)',
         blocks: [
@@ -776,6 +1119,15 @@ const episodes: CookingEpisode[] = [
           { role: 'core', en: 'boil the water', pron: '보일 더 워러' },
           { role: 'db', en: 'in a small pot.', pron: '인 어 스몰 팟' }
         ],
+        combos: [
+          { bbEn: 'First, we have to', fullEn: 'First, we have to boil the water.', fullPron: '퍼스트 위 해프터 보일 더 워러', ko: '먼저 물을 끓여야만 해.' },
+          { bbEn: "I'm gonna", fullEn: "I'm gonna boil the water.", fullPron: '암거너 보일 더 워러', ko: '내가 물을 끓일게.' },
+          { bbEn: 'Did you', fullEn: 'Did you boil the water?', fullPron: '디쥬 보일 더 워러?', ko: '너 물 끓였어?' }
+        ],
+        quizPool: {
+          bbCandidates: ['First, we have to', "I'll", 'You have to'],
+          coreCandidates: ['boil the water', 'fry them together', 'crack an egg']
+        },
         fullEn: 'First, we have to boil the water in a small pot.',
         fullPron: '퍼스트, 위 해프터 + 보일 더 워러 + 인 어 스몰 팟',
         fullKo: '먼저 작은 냄비에 물을 끓여야 해요.'
@@ -785,7 +1137,8 @@ const episodes: CookingEpisode[] = [
         visualEmojis: '🌶️ 🥣 💡',
         imagePath: '/images/kfood/ep1-s5.jpg',
         actionNote: '면보다 분말 스프를 먼저 넣는 한국식 꿀팁 설명',
-        coachKo: '라면 분말 스프는 영어로 soup base라고 합니다! 면보다 스프를 먼저 넣을게요!',
+        coachKo: '세 번째 코어 블록은, 라면 스프를 넣다, 풋 더 숩 베이스입니다. 시작 블록 세 개와 결합해 볼게요!',
+        missionKo: '실전 조립 미션! 면보다 스프를 먼저 넣을게요!',
         keyVocab: 'soup base (라면 분말 스프)',
         bgGradient: 'linear-gradient(135deg, #422006 0%, #713f12 100%)',
         blocks: [
@@ -793,6 +1146,15 @@ const episodes: CookingEpisode[] = [
           { role: 'core', en: 'put the soup base', pron: '풋 더 숩 베이스' },
           { role: 'db', en: 'before the noodles.', pron: '비포 더 누들즈' }
         ],
+        combos: [
+          { bbEn: "I'll", fullEn: "I'll put the soup base.", fullPron: '아을 풋 더 숩 베이스', ko: '내가 스프 먼저 넣을게.' },
+          { bbEn: "I'm gonna", fullEn: "I'm gonna put the soup base.", fullPron: '암거너 풋 더 숩 베이스', ko: '스프를 먼저 넣을 거야.' },
+          { bbEn: 'You have to', fullEn: 'You have to put the soup base.', fullPron: '유 해프터 풋 더 숩 베이스', ko: '스프를 꼭 먼저 넣어야 해.' }
+        ],
+        quizPool: {
+          bbCandidates: ["I'll", "We're gonna", 'Do you wanna'],
+          coreCandidates: ['put the soup base', 'chop the pork', 'marinate the beef']
+        },
         fullEn: "I'll put the soup base before the noodles.",
         fullPron: '아을 + 풋 더 숩 베이스 + 비포 더 누들즈',
         fullKo: '면보다 스프를 먼저 넣을게요.'
@@ -801,8 +1163,9 @@ const episodes: CookingEpisode[] = [
         stepTitle: 'SCENE 4 · 면 넣고 계란 하나 톡 깨 넣기',
         visualEmojis: '🍜 🥚 🌱',
         imagePath: '/images/kfood/ep1-s7.jpg',
-        actionNote: '면을 넣고 끓인 뒤 계란을 깨 넣고(crack an egg) 대파 얹기',
-        coachKo: '계란 껍데기를 톡 깨서 넣는 동작은 break보다 crack an egg를 훨씬 많이 씁니다!',
+        actionNote: '면을 넣고 끓인 뒤 계란을 깨 넣고 대파 얹기',
+        coachKo: '네 번째 코어 블록은, 계란을 톡 깨 넣다, 크랙 언 에그입니다. 앞 블록을 차례대로 갈아 끼워 보세요!',
+        missionKo: '실전 조립 미션! 냄비에 계란을 하나 톡 깨 넣을 거예요!',
         keyVocab: 'crack an egg (계란을 깨 넣다)',
         bgGradient: 'linear-gradient(135deg, #052e16 0%, #14532d 100%)',
         blocks: [
@@ -810,6 +1173,15 @@ const episodes: CookingEpisode[] = [
           { role: 'core', en: 'crack an egg', pron: '크랙 언 에그' },
           { role: 'db', en: 'into the pot.', pron: '인투 더 팟' }
         ],
+        combos: [
+          { bbEn: "I'm gonna", fullEn: "I'm gonna crack an egg.", fullPron: '암거너 크랙 언 에그', ko: '계란 하나 톡 깨 넣을게.' },
+          { bbEn: 'Do you wanna', fullEn: 'Do you wanna crack an egg?', fullPron: '두유 워너 크랙 언 에그?', ko: '계란 하나 깨 넣을래?' },
+          { bbEn: "You don't have to", fullEn: "You don't have to crack an egg.", fullPron: '유 돈 해프터 크랙 언 에그', ko: '계란 안 깨 넣어도 돼.' }
+        ],
+        quizPool: {
+          bbCandidates: ["I'm gonna", 'We have to', 'I used to'],
+          coreCandidates: ['crack an egg', 'use sour kimchi', 'take a sip']
+        },
         fullEn: "I'm gonna crack an egg into the pot.",
         fullPron: '암거너 + 크랙 언 에그 + 인투 더 팟',
         fullKo: '냄비에 계란을 하나 톡 깨 넣을 거예요.'
@@ -819,7 +1191,8 @@ const episodes: CookingEpisode[] = [
         visualEmojis: '🥢 💨 😋',
         imagePath: '/images/kfood/ep1-s8.jpg',
         actionNote: '꼬들꼬들한 면발 위에 김치 한 점 올려 후루룩!',
-        coachKo: '잘 익은 김치랑 같이 한 입 먹어 볼래요? Do you wanna + take a bite + with kimchi?',
+        coachKo: '다섯 번째 코어 블록은, 한 입 먹다, 테이커 바이트입니다. 시작 블록을 바꿔가며 말해 보세요!',
+        missionKo: '마지막 조립 미션! 김치 얹어서 한 입 드셔 보실래요?',
         keyVocab: 'take a bite with kimchi',
         bgGradient: 'linear-gradient(135deg, #3b0764 0%, #581c87 100%)',
         blocks: [
@@ -827,6 +1200,15 @@ const episodes: CookingEpisode[] = [
           { role: 'core', en: 'take a bite', pron: '테이커 바이트' },
           { role: 'db', en: 'with kimchi?', pron: '위드 김치?' }
         ],
+        combos: [
+          { bbEn: 'Do you wanna', fullEn: 'Do you wanna take a bite?', fullPron: '두유 워너 테이커 바이트?', ko: '한 입 드셔 보실래요?' },
+          { bbEn: 'I wanna', fullEn: 'I wanna take a bite.', fullPron: '아이 워너 테이커 바이트', ko: '나 한 입 먹고 싶어.' },
+          { bbEn: "I'll", fullEn: "I'll take a bite.", fullPron: '아을 테이커 바이트', ko: '내가 한 입 먹어 볼게.' }
+        ],
+        quizPool: {
+          bbCandidates: ['Do you wanna', "I'm gonna", 'You have to'],
+          coreCandidates: ['take a bite', 'pour some water', 'slice the tofu']
+        },
         fullEn: 'Do you wanna take a bite with kimchi?',
         fullPron: '두유워너 + 테이커 바이트 + 위드 김치?',
         fullKo: '김치 얹어서 한 입 드셔 보실래요?'
@@ -853,7 +1235,8 @@ const episodes: CookingEpisode[] = [
         visualEmojis: '🥩 🧄 🍯',
         imagePath: '/images/kfood/ep1-s1.jpg',
         actionNote: '얇게 썬 소고기와 간장 양념 재료 소개',
-        coachKo: '오늘 저녁엔 한국식 불고기를 만들 거예요! We\'re gonna는 워거너로 가볍게 발음하세요.',
+        coachKo: '첫 번째 코어 블록은, 한국식 불고기를 만들다, 메익 코리안 불고기입니다. 시작 블록 세 개를 갈아 끼워 볼까요?',
+        missionKo: '실전 조립 미션! 저녁으로 한국식 불고기를 만들 거예요!',
         keyVocab: 'make Korean Bulgogi',
         bgGradient: 'linear-gradient(135deg, #431407 0%, #7c2d12 100%)',
         blocks: [
@@ -861,6 +1244,15 @@ const episodes: CookingEpisode[] = [
           { role: 'core', en: 'make Korean Bulgogi', pron: '메익 코리안 불고기' },
           { role: 'db', en: 'for dinner.', pron: '포 디너' }
         ],
+        combos: [
+          { bbEn: "We're gonna", fullEn: "We're gonna make Korean Bulgogi.", fullPron: '워거너 메익 코리안 불고기', ko: '한국식 불고기를 만들 거예요.' },
+          { bbEn: "I'm gonna", fullEn: "I'm gonna make Korean Bulgogi.", fullPron: '암거너 메익 코리안 불고기', ko: '내가 불고기를 만들게.' },
+          { bbEn: 'Do you wanna', fullEn: 'Do you wanna make Korean Bulgogi?', fullPron: '두유 워너 메익 코리안 불고기?', ko: '한국식 불고기 만들래?' }
+        ],
+        quizPool: {
+          bbCandidates: ["We're gonna", "I'll", 'Did you'],
+          coreCandidates: ['make Korean Bulgogi', 'boil the water', 'take a sip']
+        },
         fullEn: "We're gonna make Korean Bulgogi for dinner.",
         fullPron: '워거너 + 메익 코리안 불고기 + 포 디너',
         fullKo: '저녁으로 한국식 불고기를 만들 거예요.'
@@ -870,7 +1262,8 @@ const episodes: CookingEpisode[] = [
         visualEmojis: '🥣 🥩 ⏲️',
         imagePath: '/images/kfood/ep1-s3.jpg',
         actionNote: '간장, 설탕, 마늘, 참기름 양념에 고기를 30분간 재워 두기',
-        coachKo: '고기를 양념에 재워 두다는 영어로 marinate라고 합니다! 30분 동안 소고기를 재워 둬야 해요.',
+        coachKo: '두 번째 코어 블록은, 소고기를 양념에 재우다, 매리네잇 더 비프입니다. 시작 블록을 바꿔서 조합해 보세요!',
+        missionKo: '실전 조립 미션! 30분 동안 소고기를 양념에 재워 둬야 해요!',
         keyVocab: 'marinate the beef (고기를 재우다)',
         bgGradient: 'linear-gradient(135deg, #422006 0%, #713f12 100%)',
         blocks: [
@@ -878,6 +1271,15 @@ const episodes: CookingEpisode[] = [
           { role: 'core', en: 'marinate the beef', pron: '매리네잇 더 비프' },
           { role: 'db', en: 'for 30 minutes.', pron: '포 써리 미닛츠' }
         ],
+        combos: [
+          { bbEn: 'You have to', fullEn: 'You have to marinate the beef.', fullPron: '유 해프터 매리네잇 더 비프', ko: '소고기를 꼭 재워 둬야 해.' },
+          { bbEn: "I'm gonna", fullEn: "I'm gonna marinate the beef.", fullPron: '암거너 매리네잇 더 비프', ko: '소고기를 양념에 재워 둘게.' },
+          { bbEn: 'Did you', fullEn: 'Did you marinate the beef?', fullPron: '디쥬 매리네잇 더 비프?', ko: '소고기 양념에 재워 뒀어?' }
+        ],
+        quizPool: {
+          bbCandidates: ['You have to', "I'll", 'We have to'],
+          coreCandidates: ['marinate the beef', 'slice the tofu', 'crack an egg']
+        },
         fullEn: 'You have to marinate the beef for 30 minutes.',
         fullPron: '유 해프터 + 매리네잇 더 비프 + 포 써리 미닛츠',
         fullKo: '30분 동안 소고기를 양념에 재워 둬야 해요.'
@@ -887,7 +1289,8 @@ const episodes: CookingEpisode[] = [
         visualEmojis: '🍳 🧅 🍄',
         imagePath: '/images/kfood/ep1-s5.jpg',
         actionNote: '달궈진 팬에 양념된 고기와 양파, 버섯을 넣고 빠르게 볶기',
-        coachKo: '센 불에서 빠르게 구워야 육즙이 살아 있죠! 센 불에는 on high heat이라고 합니다.',
+        coachKo: '세 번째 코어 블록은, 고기를 굽다, 쿡 더 밋입니다. 시작 블록 세 개와 결합해 볼게요!',
+        missionKo: '실전 조립 미션! 센 불에서 고기를 빠르게 구워 줄게요!',
         keyVocab: 'on high heat (센 불에)',
         bgGradient: 'linear-gradient(135deg, #450a0a 0%, #7f1d1d 100%)',
         blocks: [
@@ -895,6 +1298,15 @@ const episodes: CookingEpisode[] = [
           { role: 'core', en: 'cook the meat', pron: '쿡 더 밋' },
           { role: 'db', en: 'on high heat.', pron: '온 하이 힛' }
         ],
+        combos: [
+          { bbEn: "I'm gonna", fullEn: "I'm gonna cook the meat.", fullPron: '암거너 쿡 더 밋', ko: '고기를 구워 줄게.' },
+          { bbEn: 'We have to', fullEn: 'We have to cook the meat.', fullPron: '위 해프터 쿡 더 밋', ko: '고기를 센 불에 구워야 해.' },
+          { bbEn: "I'll", fullEn: "I'll cook the meat.", fullPron: '아을 쿡 더 밋', ko: '내가 고기 구울게.' }
+        ],
+        quizPool: {
+          bbCandidates: ["I'm gonna", "We're gonna", 'Do you wanna'],
+          coreCandidates: ['cook the meat', 'fry them together', 'pour some water']
+        },
         fullEn: "I'm gonna cook the meat on high heat.",
         fullPron: '암거너 + 쿡 더 밋 + 온 하이 힛',
         fullKo: '센 불에서 고기를 빠르게 구워 줄게요.'
@@ -904,7 +1316,8 @@ const episodes: CookingEpisode[] = [
         visualEmojis: '🥬 🥩 👍',
         imagePath: '/images/kfood/ep1-s8.jpg',
         actionNote: '손바닥 위 상추에 고기, 밥, 쌈장을 올려 한 입에 쏙!',
-        coachKo: '한국 고기 요리의 하이라이트, 상추에 고기를 싸 먹다는 wrap the meat in fresh lettuce!',
+        coachKo: '네 번째 코어 블록은, 고기를 싸다, 랩 더 밋입니다. 시작 블록을 바꿔가며 말해 보세요!',
+        missionKo: '마지막 조립 미션! 신선한 상추에 고기를 싸서 먹어 볼게요!',
         keyVocab: 'wrap the meat in fresh lettuce',
         bgGradient: 'linear-gradient(135deg, #052e16 0%, #14532d 100%)',
         blocks: [
@@ -912,6 +1325,15 @@ const episodes: CookingEpisode[] = [
           { role: 'core', en: 'wrap the meat', pron: '랩 더 밋' },
           { role: 'db', en: 'in fresh lettuce.', pron: '인 프레쉬 레터스' }
         ],
+        combos: [
+          { bbEn: "I'll", fullEn: "I'll wrap the meat.", fullPron: '아을 랩 더 밋', ko: '상추에 고기를 싸 먹을게.' },
+          { bbEn: 'You have to', fullEn: 'You have to wrap the meat.', fullPron: '유 해프터 랩 더 밋', ko: '상추에 고기를 싸서 먹어야 해.' },
+          { bbEn: 'Do you wanna', fullEn: 'Do you wanna wrap the meat?', fullPron: '두유 워너 랩 더 밋?', ko: '상추에 고기 싸서 먹어 볼래?' }
+        ],
+        quizPool: {
+          bbCandidates: ["I'll", "I'm gonna", 'Did you'],
+          coreCandidates: ['wrap the meat', 'take a bite', 'stir-fry the kimchi']
+        },
         fullEn: "I'll wrap the meat in fresh lettuce.",
         fullPron: '아을 + 랩 더 밋 + 인 프레쉬 레터스',
         fullKo: '신선한 상추에 고기를 싸서 먹어 볼게요.'
@@ -953,6 +1375,11 @@ const currentScene = computed(
 
 const sceneKey = computed(() => `${currentEpId.value}-${safeSceneIndex.value}`)
 
+const currentCoachText = computed(() => {
+  if (activeStage.value === 'quiz') return currentScene.value.missionKo
+  return currentScene.value.coachKo
+})
+
 const activeSceneImage = computed(() => {
   if (customMediaMap.value[sceneKey.value]) {
     return customMediaMap.value[sceneKey.value]
@@ -963,8 +1390,15 @@ const activeSceneImage = computed(() => {
   return ''
 })
 
+function setStage(stage: 'swap' | 'quiz' | 'sentence') {
+  activeStage.value = stage
+  if (stage === 'quiz') {
+    isSnapped.value = false
+  }
+}
+
 // ---------------------------------------------------------
-// Web Audio API 방송용 효과음 합성기 (외부 mp3 파일 불필요)
+// Web Audio API 방송용 효과음 합성기 (자석 철컥, 딩동, 전환음)
 // ---------------------------------------------------------
 function getAudioContext(): AudioContext | null {
   if (typeof window === 'undefined') return null
@@ -997,7 +1431,6 @@ function playTone(freq: number, durationMs: number, type: OscillatorType = 'sine
 }
 
 function playTransitionChime() {
-  // 부드러운 방송 전환 코드 (C5 -> E5 -> G5)
   playTone(523.25, 160, 'triangle', 0.06, 0)
   playTone(659.25, 220, 'triangle', 0.06, 90)
 }
@@ -1008,9 +1441,18 @@ function playBlockPop(idx: number) {
 }
 
 function playDingDongYourTurn() {
-  // 딩-동! (G5 -> E5) 따라 말하기 시작 신호
   playTone(783.99, 220, 'sine', 0.09, 0)
   playTone(659.25, 380, 'sine', 0.09, 180)
+}
+
+function playMagnetSnapSound() {
+  // 자석이 "철컥!" 달라붙는 묵직하고 경쾌한 클릭 사운드
+  if (!enableSoundEffects.value) return
+  const ctx = getAudioContext()
+  if (!ctx) return
+  playTone(280, 70, 'square', 0.08, 0)
+  playTone(880, 140, 'triangle', 0.09, 40)
+  playTone(1320, 220, 'sine', 0.06, 80)
 }
 
 function playSuccessBell() {
@@ -1123,6 +1565,46 @@ async function speakSingleBlock(text: string, idx: number) {
   activeBlockIdx.value = null
 }
 
+async function speakCoreBlock() {
+  const coreBlk = currentScene.value.blocks[1]
+  if (coreBlk) {
+    await speakSingleBlock(coreBlk.en, 1)
+  }
+}
+
+async function playComboCard(cIdx: number) {
+  activeComboIdx.value = cIdx
+  playBlockPop(cIdx)
+  const epId = currentEpId.value
+  const sIdx = safeSceneIndex.value
+  const mp3Url = `/audio/kfood/${epId}-s${sIdx}-c${cIdx}.mp3`
+  const ok = await playMp3Async(mp3Url, 0.96)
+  if (!ok) {
+    const combo = currentScene.value.combos[cIdx]
+    if (combo) await speakAsync(combo.fullEn, 'en-US', 0.95)
+  }
+}
+
+async function playMissionAudio() {
+  const epId = currentEpId.value
+  const sIdx = safeSceneIndex.value
+  const mp3Url = `/audio/kfood/${epId}-s${sIdx}-mission.mp3`
+  const ok = await playMp3Async(mp3Url, 1.0)
+  if (!ok) {
+    await speakAsync(currentScene.value.missionKo, 'ko-KR', 1.05)
+  }
+}
+
+async function onPickCandidate(role: 'bb' | 'core', text: string) {
+  playBlockPop(role === 'bb' ? 0 : 1)
+  await speakAsync(text, 'en-US', 0.95)
+}
+
+async function triggerSnapAnimation() {
+  playMagnetSnapSound()
+  isSnapped.value = true
+}
+
 async function speakSceneSentence(rate = 1.0) {
   activeBlockIdx.value = null
   isShadowingTurn.value = false
@@ -1148,6 +1630,7 @@ function clearTimers() {
   }
   stopActiveAudio()
   activeBlockIdx.value = null
+  activeComboIdx.value = null
   isShadowingTurn.value = false
   shadowingProgress.value = 0
 }
@@ -1229,34 +1712,56 @@ async function playCurrentSlideSequence(): Promise<boolean> {
   const sc = currentScene.value
   const sIdx = safeSceneIndex.value
 
-  // Step A: 한국어 아나운서 성우(SunHiNeural) 상황 코칭 내레이션
+  // [STAGE 1] 시작 블록 3단 교체 훈련
+  activeStage.value = 'swap'
+  activeComboIdx.value = null
+
   if (enableKoreanCoachVoice.value && sc.coachKo) {
     const okCoach = await playMp3Async(`/audio/kfood/${epId}-s${sIdx}-coach.mp3`, 1.0)
     if (!okCoach) await speakAsync(sc.coachKo, 'ko-KR', 1.05)
     if (myToken !== sequenceToken) return false
-    if (!(await waitMs(320, myToken))) return false
+    if (!(await waitMs(300, myToken))) return false
   }
 
-  // Step B: 원어민 성우(AvaNeural) 소리 블록 1 -> 2 -> 3 순차 발화
-  for (let i = 0; i < sc.blocks.length; i++) {
+  // Combos 0, 1, 2 순차 시연
+  for (let c = 0; c < sc.combos.length; c++) {
     if (myToken !== sequenceToken) return false
-    activeBlockIdx.value = i
-    playBlockPop(i)
-    const okBlk = await playMp3Async(`/audio/kfood/${epId}-s${sIdx}-b${i}.mp3`, 1.0)
-    if (!okBlk) await speakAsync(sc.blocks[i].en, 'en-US', 0.92)
-    if (!(await waitMs(240, myToken))) return false
+    activeComboIdx.value = c
+    playBlockPop(c)
+    const okCombo = await playMp3Async(`/audio/kfood/${epId}-s${sIdx}-c${c}.mp3`, 0.95)
+    if (!okCombo) await speakAsync(sc.combos[c].fullEn, 'en-US', 0.95)
+    if (!(await waitMs(280, myToken))) return false
   }
 
-  // Step C: 전체 문장 자연스러운 속도로 1회 발화
-  activeBlockIdx.value = null
-  if (!(await waitMs(220, myToken))) return false
+  activeComboIdx.value = null
+  if (!(await waitMs(400, myToken))) return false
+
+  // [STAGE 2] 실전 자석 합체 미션
+  activeStage.value = 'quiz'
+  isSnapped.value = false
+
+  if (enableKoreanCoachVoice.value && sc.missionKo) {
+    const okMission = await playMp3Async(`/audio/kfood/${epId}-s${sIdx}-mission.mp3`, 1.0)
+    if (!okMission) await speakAsync(sc.missionKo, 'ko-KR', 1.05)
+    if (myToken !== sequenceToken) return false
+    if (!(await waitMs(400, myToken))) return false
+  }
+
+  // 1초 뒤 자석이 철컥 달라붙는 연출
+  if (!(await waitMs(900, myToken))) return false
+  await triggerSnapAnimation()
+  if (myToken !== sequenceToken) return false
+  if (!(await waitMs(300, myToken))) return false
+
+  // 합체된 완성 문장 재생
   const okFull = await playMp3Async(`/audio/kfood/${epId}-s${sIdx}-full.mp3`, 1.0)
   if (!okFull) await speakAsync(sc.fullEn, 'en-US', 1.0)
   if (myToken !== sequenceToken) return false
 
-  // Step D: YOUR TURN 따라 말하기 4초 카운트다운
+  // [STAGE 3] 따라 말하기 (YOUR TURN) 4초
+  activeStage.value = 'sentence'
   if (includeShadowingPause.value) {
-    if (!(await waitMs(280, myToken))) return false
+    if (!(await waitMs(300, myToken))) return false
     const ok = await runShadowingCountdown(4000, myToken)
     if (!ok) return false
   }
@@ -1275,7 +1780,6 @@ async function toggleAutoShow() {
     return
   }
   isAutoPlaying.value = true
-  // 만약 마지막 슬라이드에 있었다면 인트로(-1)부터 시작
   if (slideCursor.value >= currentEpisode.value.scenes.length) {
     slideCursor.value = -1
   }
@@ -1285,7 +1789,7 @@ async function toggleAutoShow() {
     if (!completed || !isAutoPlaying.value) break
 
     const myToken = sequenceToken
-    const ok = await waitMs(650, myToken)
+    const ok = await waitMs(750, myToken)
     if (!ok || !isAutoPlaying.value) break
 
     if (slideCursor.value < currentEpisode.value.scenes.length) {
@@ -1306,11 +1810,13 @@ function selectEpisode(id: string) {
   stopAutoShow()
   currentEpId.value = id
   slideCursor.value = 0
+  activeStage.value = 'swap'
 }
 
 function goToSlide(idx: number) {
   stopAutoShow()
   slideCursor.value = idx
+  activeStage.value = 'swap'
 }
 
 function prevSlide() {
@@ -1320,6 +1826,7 @@ function prevSlide() {
   } else {
     slideCursor.value = currentEpisode.value.scenes.length
   }
+  activeStage.value = 'swap'
 }
 
 function nextSlide() {
@@ -1329,6 +1836,7 @@ function nextSlide() {
   } else {
     slideCursor.value = -1
   }
+  activeStage.value = 'swap'
 }
 
 // ---------------------------------------------------------
@@ -1344,7 +1852,7 @@ async function toggleFullscreenBroadcast() {
     try {
       await studioRoot.value.requestFullscreen()
     } catch {
-      // 브라우저 정책으로 거부될 경우 CSS 전체화면 폴백 유지
+      // CSS fullscreen fallback
     }
   }
 }
@@ -1435,7 +1943,12 @@ async function copyEpisodeScript() {
     '--- [타임스탬프 & 소리 블록 대본] ---',
     ...ep.scenes.map(
       (s, i) =>
-        `0${i}:00 ${s.stepTitle}\n- EN: ${s.fullEn}\n- 블록: ${s.blocks.map((b) => `[${b.en}]`).join(' + ')}\n- 발음: ${s.fullPron}\n- 뜻: ${s.fullKo}\n`
+        `0${i}:00 ${s.stepTitle}
+- EN: ${s.fullEn}
+- 블록: ${s.blocks.map((b) => `[${b.en}]`).join(' + ')}
+- 교체: ${s.combos.map((c) => c.fullEn).join(' / ')}
+- 뜻: ${s.fullKo}
+`
     ),
     '#소리블록K쿠킹 #SoundBlockKCooking #영어회화초보 #요리영어 #소리블록 #한식영어 #KFood #EnglishSpeaking #KimchiStew'
   ]
@@ -1541,7 +2054,8 @@ onBeforeUnmount(() => {
 }
 
 .kf-ep-selector,
-.kf-aspect-toggle {
+.kf-aspect-toggle,
+.kf-font-toggle {
   display: flex;
   gap: 0.35rem;
   flex-wrap: wrap;
@@ -1565,6 +2079,16 @@ onBeforeUnmount(() => {
   background: var(--vp-c-brand-1);
   border-color: var(--vp-c-brand-1);
   color: #fff;
+}
+
+.kf-font-btn {
+  background: rgba(250, 204, 21, 0.12);
+  border-color: rgba(250, 204, 21, 0.45);
+  color: var(--vp-c-text-1);
+}
+
+.kf-font-btn strong {
+  color: #d97706;
 }
 
 .kf-fullscreen-btn {
@@ -1603,7 +2127,7 @@ onBeforeUnmount(() => {
 }
 
 .screen-shorts {
-  height: 680px;
+  height: 720px;
   aspect-ratio: 9 / 16;
   margin: 1rem auto;
   border-radius: 18px;
@@ -1648,18 +2172,18 @@ onBeforeUnmount(() => {
   animation: kenBurnsBroadcast 11s ease-out forwards;
 }
 
-/* 방송용 다크 스크림 그라데이션 (위쪽 HUD와 아래쪽 자막 가독성 100% 보장) */
+/* 방송용 다크 스크림 그라데이션 */
 .kf-scrim-gradient {
   position: absolute;
   inset: 0;
   z-index: 2;
   background: linear-gradient(
     to bottom,
-    rgba(9, 13, 24, 0.72) 0%,
-    rgba(9, 13, 24, 0.08) 24%,
-    rgba(9, 13, 24, 0.18) 54%,
-    rgba(9, 13, 24, 0.88) 78%,
-    rgba(9, 13, 24, 0.96) 100%
+    rgba(9, 13, 24, 0.78) 0%,
+    rgba(9, 13, 24, 0.15) 20%,
+    rgba(9, 13, 24, 0.35) 45%,
+    rgba(9, 13, 24, 0.92) 75%,
+    rgba(9, 13, 24, 0.98) 100%
   );
 }
 
@@ -1695,7 +2219,7 @@ onBeforeUnmount(() => {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.9rem 1.35rem 0.35rem;
+  padding: 0.8rem 1.2rem 0.25rem;
   gap: 0.75rem;
 }
 
@@ -1703,16 +2227,16 @@ onBeforeUnmount(() => {
   display: flex;
   align-items: center;
   gap: 0.6rem;
-  background: rgba(15, 23, 42, 0.75);
+  background: rgba(15, 23, 42, 0.82);
   backdrop-filter: blur(8px);
   padding: 0.35rem 0.85rem 0.35rem 0.45rem;
   border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.16);
+  border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
 .kf-hud-logo {
-  width: 30px;
-  height: 30px;
+  width: 32px;
+  height: 32px;
   border-radius: 50%;
   object-fit: cover;
 }
@@ -1724,23 +2248,23 @@ onBeforeUnmount(() => {
 }
 
 .hud-ch-name {
-  font-size: 0.68rem;
+  font-size: 0.7rem;
   font-weight: 800;
   color: #facc15;
 }
 
 .hud-ep-step {
-  font-size: 0.8rem;
+  font-size: 0.84rem;
   font-weight: 800;
   color: #fff;
 }
 
 .kf-hud-vocab {
-  background: rgba(15, 23, 42, 0.82);
+  background: rgba(15, 23, 42, 0.85);
   backdrop-filter: blur(8px);
   padding: 0.35rem 0.85rem;
   border-radius: 12px;
-  border: 1px solid rgba(56, 189, 248, 0.45);
+  border: 1px solid rgba(56, 189, 248, 0.5);
   display: flex;
   flex-direction: column;
   align-items: flex-end;
@@ -1748,14 +2272,14 @@ onBeforeUnmount(() => {
 }
 
 .vocab-tag {
-  font-size: 0.6rem;
+  font-size: 0.62rem;
   font-weight: 800;
   color: #38bdf8;
   letter-spacing: 0.05em;
 }
 
 .kf-hud-vocab strong {
-  font-size: 0.88rem;
+  font-size: 0.92rem;
   color: #fff;
 }
 
@@ -1764,7 +2288,7 @@ onBeforeUnmount(() => {
   z-index: 10;
   display: flex;
   gap: 0.35rem;
-  padding: 0 1.35rem;
+  padding: 0 1.2rem;
 }
 
 .hud-dot {
@@ -1785,29 +2309,59 @@ onBeforeUnmount(() => {
   transform: scaleY(1.4);
 }
 
+/* 훈련 단계 탭 (상단 배너 바로 아래) */
+.kf-stage-tabs {
+  position: relative;
+  z-index: 12;
+  display: flex;
+  justify-content: center;
+  gap: 0.45rem;
+  padding: 0.45rem 1rem 0;
+}
+
+.stage-tab-btn {
+  padding: 0.32rem 0.85rem;
+  font-size: 0.78rem;
+  font-weight: 800;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(15, 23, 42, 0.78);
+  backdrop-filter: blur(8px);
+  color: #cbd5e1;
+  cursor: pointer;
+  transition: all 0.18s ease;
+}
+
+.stage-tab-btn.active {
+  background: #facc15;
+  color: #0f172a;
+  border-color: #facc15;
+  box-shadow: 0 4px 14px rgba(250, 204, 21, 0.35);
+}
+
 /* 중앙 코칭 배너 & YOUR TURN 모달 */
 .kf-coach-banner {
   position: relative;
   z-index: 10;
   align-self: center;
-  max-width: 88%;
+  max-width: 90%;
   margin: auto 1rem 0.4rem;
-  background: rgba(15, 23, 42, 0.84);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(250, 204, 21, 0.45);
+  background: rgba(15, 23, 42, 0.92);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(250, 204, 21, 0.5);
   border-radius: 999px;
-  padding: 0.42rem 1.05rem;
+  padding: 0.45rem 1.15rem;
   display: flex;
   align-items: center;
   gap: 0.55rem;
   color: #f8fafc;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
 }
 
 .coach-icon {
-  font-size: 0.72rem;
+  font-size: 0.74rem;
   font-weight: 800;
-  padding: 0.15rem 0.55rem;
+  padding: 0.2rem 0.6rem;
   border-radius: 999px;
   background: #facc15;
   color: #0f172a;
@@ -1815,23 +2369,23 @@ onBeforeUnmount(() => {
 }
 
 .coach-text {
-  font-size: 0.86rem;
-  font-weight: 600;
+  font-size: 0.92rem;
+  font-weight: 700;
   line-height: 1.35;
 }
 
 .kf-center-turn-modal {
   position: relative;
-  z-index: 12;
+  z-index: 14;
   align-self: center;
-  width: min(86%, 560px);
+  width: min(88%, 580px);
   margin: auto 1rem 0.5rem;
-  background: linear-gradient(135deg, rgba(5, 150, 105, 0.95), rgba(16, 185, 129, 0.95));
+  background: linear-gradient(135deg, rgba(5, 150, 105, 0.96), rgba(16, 185, 129, 0.96));
   border: 2px solid #fde047;
   border-radius: 16px;
-  padding: 0.75rem 1.15rem;
+  padding: 0.85rem 1.25rem;
   color: #fff;
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 14px 36px rgba(0, 0, 0, 0.55);
 }
 
 .turn-header {
@@ -1842,7 +2396,7 @@ onBeforeUnmount(() => {
 }
 
 .turn-mic-icon {
-  font-size: 1.5rem;
+  font-size: 1.6rem;
 }
 
 .turn-texts {
@@ -1852,21 +2406,21 @@ onBeforeUnmount(() => {
 }
 
 .turn-texts strong {
-  font-size: 0.98rem;
+  font-size: 1.05rem;
   color: #fef08a;
 }
 
 .turn-texts span {
-  font-size: 0.78rem;
+  font-size: 0.84rem;
   opacity: 0.95;
 }
 
 .turn-sec-badge {
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   font-weight: 900;
-  padding: 0.2rem 0.6rem;
+  padding: 0.25rem 0.65rem;
   border-radius: 8px;
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 0.35);
 }
 
 .turn-progress-track {
@@ -1883,17 +2437,324 @@ onBeforeUnmount(() => {
 }
 
 /* ===================================================
-   하단 글래스모피즘 자막 바 (Broadcast Lower-Third)
+   하단 방송 자막 독 (Broadcast Lower-Third)
    =================================================== */
 .kf-lower-third {
   position: relative;
   z-index: 10;
-  padding: 0.5rem 1.35rem 1.15rem;
+  padding: 0.6rem 1.2rem 1.1rem;
   display: flex;
   flex-direction: column;
   gap: 0.55rem;
 }
 
+/* ---------------------------------------------------
+   STAGE 1 · 시작 블록 3단 교체 스타일
+   --------------------------------------------------- */
+.kf-core-anchor {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(5, 150, 105, 0.35);
+  backdrop-filter: blur(10px);
+  border: 2px solid rgba(52, 211, 153, 0.85);
+  border-radius: 12px;
+  padding: 0.45rem 1rem;
+  color: #fff;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+}
+
+.anchor-label {
+  font-size: 0.76rem;
+  font-weight: 800;
+  color: #a7f3d0;
+}
+
+.anchor-body {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.anchor-en {
+  font-size: 1.25rem;
+  font-weight: 900;
+  color: #fff;
+}
+
+.anchor-pron {
+  font-size: 0.88rem;
+  color: #fde047;
+  font-weight: 700;
+}
+
+.anchor-hint {
+  font-size: 0.72rem;
+  color: #cbd5e1;
+}
+
+.kf-combo-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.kf-combo-card {
+  background: rgba(15, 23, 42, 0.88);
+  backdrop-filter: blur(10px);
+  border: 1.5px solid rgba(255, 255, 255, 0.16);
+  border-radius: 12px;
+  padding: 0.55rem 0.95rem;
+  cursor: pointer;
+  transition: all 0.18s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.kf-combo-card.active {
+  background: rgba(37, 99, 235, 0.4);
+  border-color: #fde047;
+  transform: scale(1.015);
+  box-shadow: 0 0 0 2px #fde047, 0 8px 24px rgba(0, 0, 0, 0.5);
+}
+
+.combo-head {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.76rem;
+}
+
+.combo-num {
+  font-weight: 900;
+  color: #38bdf8;
+  font-size: 0.7rem;
+}
+
+.combo-bb-badge {
+  padding: 0.15rem 0.55rem;
+  border-radius: 6px;
+  background: #2563eb;
+  color: #fff;
+  font-weight: 800;
+}
+
+.combo-plus {
+  color: #94a3b8;
+  font-weight: 900;
+}
+
+.combo-core-badge {
+  padding: 0.15rem 0.55rem;
+  border-radius: 6px;
+  background: rgba(5, 150, 105, 0.7);
+  color: #fff;
+  font-weight: 800;
+}
+
+.combo-sentence {
+  display: flex;
+  align-items: baseline;
+  gap: 0.55rem;
+  flex-wrap: wrap;
+}
+
+.combo-en {
+  font-size: 1.25rem;
+  font-weight: 900;
+  color: #fff;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.combo-pron {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #38bdf8;
+}
+
+.combo-ko {
+  font-size: 0.86rem;
+  font-weight: 700;
+  color: #e2e8f0;
+}
+
+/* ---------------------------------------------------
+   STAGE 2 · 실전 자석 합체 미션 스타일
+   --------------------------------------------------- */
+.kf-mission-banner {
+  background: rgba(220, 38, 38, 0.25);
+  backdrop-filter: blur(10px);
+  border: 1.5px solid rgba(239, 68, 68, 0.7);
+  border-radius: 12px;
+  padding: 0.5rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.65rem;
+  color: #fff;
+  cursor: pointer;
+}
+
+.m-badge {
+  font-size: 0.74rem;
+  font-weight: 900;
+  padding: 0.2rem 0.55rem;
+  border-radius: 6px;
+  background: #ef4444;
+}
+
+.m-text {
+  font-size: 1.05rem;
+  font-weight: 800;
+  flex: 1;
+}
+
+.m-listen {
+  font-size: 0.72rem;
+  color: #fde047;
+}
+
+.kf-snap-target-row {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.6rem 0.8rem;
+  background: rgba(15, 23, 42, 0.85);
+  border-radius: 12px;
+  border: 2px dashed rgba(255, 255, 255, 0.25);
+  transition: all 0.3s ease;
+}
+
+.kf-snap-target-row.snapped {
+  border-style: solid;
+  border-color: #fde047;
+  background: rgba(30, 41, 59, 0.95);
+  box-shadow: 0 0 20px rgba(250, 204, 21, 0.35);
+}
+
+.snap-slot {
+  flex: 1;
+  padding: 0.5rem 0.75rem;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.08);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+  transition: all 0.25s ease;
+}
+
+.slot-bb.is-filled {
+  background: #2563eb;
+}
+.slot-core.is-filled {
+  background: #059669;
+}
+.slot-db.is-filled {
+  background: #d97706;
+}
+
+.slot-badge {
+  font-size: 0.68rem;
+  font-weight: 800;
+  opacity: 0.85;
+}
+
+.slot-word {
+  font-size: 1.15rem;
+  font-weight: 900;
+  color: #fff;
+}
+
+.snap-plus {
+  font-weight: 900;
+  color: #fde047;
+  font-size: 1.2rem;
+}
+
+.kf-candidate-pool {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.cand-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.cand-label {
+  font-size: 0.74rem;
+  font-weight: 800;
+  color: #cbd5e1;
+  min-width: 90px;
+}
+
+.cand-items {
+  display: flex;
+  gap: 0.35rem;
+  flex-wrap: wrap;
+}
+
+.cand-btn {
+  padding: 0.32rem 0.75rem;
+  border-radius: 8px;
+  font-size: 0.88rem;
+  font-weight: 800;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(15, 23, 42, 0.85);
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.cand-bb:hover {
+  border-color: #60a5fa;
+  background: rgba(37, 99, 235, 0.3);
+}
+
+.cand-core:hover {
+  border-color: #34d399;
+  background: rgba(5, 150, 105, 0.3);
+}
+
+.cand-btn.correct {
+  border-color: #fde047 !important;
+  background: #facc15 !important;
+  color: #0f172a !important;
+  transform: scale(1.05);
+}
+
+.kf-quiz-complete-bar {
+  background: rgba(16, 185, 129, 0.3);
+  backdrop-filter: blur(10px);
+  border: 1.5px solid #34d399;
+  border-radius: 10px;
+  padding: 0.5rem 0.95rem;
+  cursor: pointer;
+}
+
+.qc-en {
+  font-size: 1.2rem;
+  color: #fff;
+}
+
+.qc-en strong {
+  color: #fde047;
+}
+
+.qc-ko {
+  font-size: 0.86rem;
+  color: #cbd5e1;
+}
+
+/* ---------------------------------------------------
+   STAGE 3 · 완성 문장 & 소리 블록 표준 스타일
+   --------------------------------------------------- */
 .kf-blocks-row {
   display: flex;
   gap: 0.5rem;
@@ -1902,7 +2763,7 @@ onBeforeUnmount(() => {
 
 .kf-glass-block {
   flex: 1 1 140px;
-  padding: 0.5rem 0.85rem;
+  padding: 0.55rem 0.95rem;
   border-radius: 12px;
   backdrop-filter: blur(12px);
   cursor: pointer;
@@ -1911,18 +2772,18 @@ onBeforeUnmount(() => {
 }
 
 .kf-glass-block.bb {
-  background: rgba(37, 99, 235, 0.45);
-  border-color: rgba(96, 165, 250, 0.75);
+  background: rgba(37, 99, 235, 0.5);
+  border-color: rgba(96, 165, 250, 0.8);
 }
 
 .kf-glass-block.core {
-  background: rgba(5, 150, 105, 0.45);
-  border-color: rgba(52, 211, 153, 0.75);
+  background: rgba(5, 150, 105, 0.5);
+  border-color: rgba(52, 211, 153, 0.8);
 }
 
 .kf-glass-block.db {
-  background: rgba(217, 119, 6, 0.45);
-  border-color: rgba(251, 191, 36, 0.75);
+  background: rgba(217, 119, 6, 0.5);
+  border-color: rgba(251, 191, 36, 0.8);
 }
 
 .kf-glass-block.active {
@@ -1939,47 +2800,49 @@ onBeforeUnmount(() => {
 }
 
 .gblk-badge {
-  font-size: 0.66rem;
+  font-size: 0.72rem;
   font-weight: 800;
   color: #e2e8f0;
 }
 
 .gblk-pron {
-  font-size: 0.75rem;
+  font-size: 0.82rem;
   font-weight: 700;
   color: #fef08a;
 }
 
 .gblk-en {
-  font-size: 1.12rem;
+  font-size: 1.25rem;
   font-weight: 900;
   color: #fff;
   letter-spacing: -0.01em;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
 }
 
 .kf-sentence-banner {
-  background: rgba(15, 23, 42, 0.82);
+  background: rgba(15, 23, 42, 0.9);
   backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 12px;
-  padding: 0.6rem 1rem;
+  padding: 0.65rem 1.05rem;
   cursor: pointer;
   display: flex;
   flex-direction: column;
-  gap: 0.2rem;
+  gap: 0.25rem;
 }
 
 .kf-main-en {
-  font-size: 1.32rem;
+  font-size: 1.45rem;
   font-weight: 900;
   color: #fff;
   display: flex;
   align-items: center;
-  gap: 0.4rem;
+  gap: 0.45rem;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.85);
 }
 
 .play-hint-icon {
-  font-size: 1rem;
+  font-size: 1.1rem;
 }
 
 .kf-sub-meta {
@@ -1988,16 +2851,64 @@ onBeforeUnmount(() => {
   align-items: center;
   flex-wrap: wrap;
   gap: 0.5rem;
-  font-size: 0.88rem;
+  font-size: 0.94rem;
 }
 
 .kf-meta-pron {
   color: #38bdf8;
+  font-weight: 800;
 }
 
 .kf-meta-ko {
-  color: #f1f5f9;
-  font-weight: 700;
+  color: #f8fafc;
+  font-weight: 800;
+}
+
+/* ===================================================
+   🔠 대형/초대형 글자 모드 (모바일 및 시인성 최적화)
+   =================================================== */
+.font-large .kf-main-en {
+  font-size: 1.65rem;
+}
+.font-large .gblk-en {
+  font-size: 1.4rem;
+}
+.font-large .combo-en {
+  font-size: 1.35rem;
+}
+.font-large .anchor-en {
+  font-size: 1.38rem;
+}
+.font-large .m-text {
+  font-size: 1.15rem;
+}
+.font-large .slot-word {
+  font-size: 1.25rem;
+}
+
+.font-huge .kf-main-en {
+  font-size: 2rem;
+}
+.font-huge .gblk-en {
+  font-size: 1.65rem;
+}
+.font-huge .combo-en {
+  font-size: 1.55rem;
+}
+.font-huge .anchor-en {
+  font-size: 1.55rem;
+}
+.font-huge .m-text {
+  font-size: 1.3rem;
+}
+.font-huge .slot-word {
+  font-size: 1.4rem;
+}
+.font-huge .kf-meta-pron {
+  font-size: 1.1rem;
+}
+.font-huge .kf-meta-ko {
+  font-size: 1.05rem;
 }
 
 /* ===================================================
@@ -2022,7 +2933,7 @@ onBeforeUnmount(() => {
   padding: 1.5rem;
   text-align: center;
   color: #fff;
-  width: min(92%, 740px);
+  width: min(92%, 760px);
 }
 
 .kf-intro-top-pill {
@@ -2358,5 +3269,71 @@ onBeforeUnmount(() => {
 .kf-pop-leave-to {
   opacity: 0;
   transform: translateY(6px);
+}
+
+/* ===================================================
+   모바일 화면 전용 미디어 쿼리 (@media max-width: 768px)
+   스마트폰에서 글자가 작아서 안 보이는 현상 완벽 해결!
+   =================================================== */
+@media (max-width: 768px) {
+  .kf-broadcast-screen.screen-wide {
+    aspect-ratio: auto;
+    min-height: 480px;
+  }
+
+  .kf-hud-top {
+    padding: 0.6rem 0.8rem 0.2rem;
+  }
+
+  .kf-hud-brand {
+    display: none;
+  }
+
+  .kf-stage-tabs {
+    flex-wrap: wrap;
+    gap: 0.3rem;
+  }
+
+  .stage-tab-btn {
+    font-size: 0.72rem;
+    padding: 0.25rem 0.65rem;
+  }
+
+  .kf-lower-third {
+    padding: 0.4rem 0.8rem 0.8rem;
+  }
+
+  .kf-blocks-row {
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .kf-glass-block {
+    padding: 0.45rem 0.75rem;
+  }
+
+  .gblk-en {
+    font-size: 1.35rem !important;
+  }
+
+  .kf-main-en {
+    font-size: 1.45rem !important;
+  }
+
+  .combo-en {
+    font-size: 1.25rem !important;
+  }
+
+  .anchor-en {
+    font-size: 1.25rem !important;
+  }
+
+  .m-text {
+    font-size: 1rem !important;
+  }
+
+  .slot-word {
+    font-size: 1.1rem !important;
+  }
 }
 </style>
