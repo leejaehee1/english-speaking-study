@@ -99,7 +99,7 @@
          ========================================================== -->
     <div class="kf-canvas-wrapper" :class="aspectRatio === '9:16' ? 'is-shorts' : 'is-wide'">
       <div class="kf-broadcast-screen" :class="aspectRatio === '9:16' ? 'screen-shorts' : 'screen-wide'">
-        <!-- 🎬 풀스크린 복원 & 3초 녹화 준비 카운트다운 오버레이 -->
+        <!-- 🎬 풀스크린 복원 & 5초 녹화 준비 카운트다운 오버레이 -->
         <transition name="kf-pop">
           <div v-if="countdownToRecord !== null" class="kf-record-countdown-overlay">
             <div class="rc-box">
@@ -871,13 +871,13 @@ async function startScreenRecording() {
     // 💡 창 공유 선택 직후: 1) 풀스크린 모드 자동 즉시 복원!
     await enterFullscreen()
 
-    // 💡 2) 3초 카운트다운 (전체화면이 완전하게 자리잡고 사용자가 준비할 수 있는 시간 제공)
-    countdownToRecord.value = 3
+    // 💡 2) 5초 카운트다운 (전체화면이 완전하게 자리잡고 사용자가 준비할 수 있는 여유 시간 제공)
+    countdownToRecord.value = 5
     playTransitionChime()
 
-    for (let c = 3; c >= 1; c--) {
+    for (let c = 5; c >= 1; c--) {
       countdownToRecord.value = c
-      playTone(440 + (3 - c) * 110, 120, 'sine', 0.12, 0)
+      playTone(440 + (5 - c) * 70, 120, 'sine', 0.12, 0)
       await new Promise((resolve) => setTimeout(resolve, 950))
     }
     countdownToRecord.value = null
