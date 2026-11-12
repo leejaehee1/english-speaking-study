@@ -887,13 +887,13 @@ async function startScreenRecording() {
     // 💡 창 공유 선택 직후: 1) 풀스크린 모드 자동 즉시 복원!
     await enterFullscreen()
 
-    // 💡 2) 5초 카운트다운 (전체화면이 완전하게 자리잡고 사용자가 준비할 수 있는 여유 시간 제공)
-    countdownToRecord.value = 5
+    // 💡 2) 4초 카운트다운 (전체화면이 완전하게 자리잡고 사용자가 준비할 수 있는 여유 시간 제공)
+    countdownToRecord.value = 4
     playTransitionChime()
 
-    for (let c = 5; c >= 1; c--) {
+    for (let c = 4; c >= 1; c--) {
       countdownToRecord.value = c
-      playTone(440 + (5 - c) * 70, 120, 'sine', 0.12, 0)
+      playTone(440 + (4 - c) * 70, 120, 'sine', 0.12, 0)
       await new Promise((resolve) => setTimeout(resolve, 950))
     }
     countdownToRecord.value = null
