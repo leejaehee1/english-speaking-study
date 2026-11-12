@@ -2289,23 +2289,23 @@ onBeforeUnmount(() => {
 }
 
 .hud-ch-name {
-  font-size: 0.7rem;
+  font-size: 0.85rem;
   font-weight: 800;
   color: #facc15;
 }
 
 .hud-ep-step {
-  font-size: 0.84rem;
-  font-weight: 800;
+  font-size: 1.15rem;
+  font-weight: 900;
   color: #fff;
 }
 
 .kf-hud-vocab {
-  background: rgba(15, 23, 42, 0.85);
-  backdrop-filter: blur(8px);
-  padding: 0.35rem 0.85rem;
-  border-radius: 12px;
-  border: 1px solid rgba(56, 189, 248, 0.5);
+  background: rgba(15, 23, 42, 0.92);
+  backdrop-filter: blur(10px);
+  padding: 0.5rem 1.15rem;
+  border-radius: 14px;
+  border: 1.5px solid rgba(56, 189, 248, 0.75);
   display: flex;
   flex-direction: column;
   align-items: flex-end;
@@ -2313,14 +2313,15 @@ onBeforeUnmount(() => {
 }
 
 .vocab-tag {
-  font-size: 0.62rem;
-  font-weight: 800;
+  font-size: 0.78rem;
+  font-weight: 900;
   color: #38bdf8;
   letter-spacing: 0.05em;
 }
 
 .kf-hud-vocab strong {
-  font-size: 0.92rem;
+  font-size: 1.25rem;
+  font-weight: 900;
   color: #fff;
 }
 
@@ -2361,14 +2362,14 @@ onBeforeUnmount(() => {
 }
 
 .stage-tab-btn {
-  padding: 0.32rem 0.85rem;
-  font-size: 0.78rem;
-  font-weight: 800;
+  padding: 0.45rem 1.15rem;
+  font-size: 0.95rem;
+  font-weight: 900;
   border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  background: rgba(15, 23, 42, 0.78);
-  backdrop-filter: blur(8px);
-  color: #cbd5e1;
+  border: 1.5px solid rgba(255, 255, 255, 0.28);
+  background: rgba(15, 23, 42, 0.88);
+  backdrop-filter: blur(10px);
+  color: #e2e8f0;
   cursor: pointer;
   transition: all 0.18s ease;
 }
@@ -2385,34 +2386,37 @@ onBeforeUnmount(() => {
   position: relative;
   z-index: 10;
   align-self: center;
-  max-width: 90%;
-  margin: auto 1rem 0.4rem;
-  background: rgba(15, 23, 42, 0.92);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(250, 204, 21, 0.5);
+  max-width: 92%;
+  margin: auto 1rem 0.55rem;
+  background: rgba(10, 15, 30, 0.96);
+  backdrop-filter: blur(14px);
+  border: 2px solid rgba(250, 204, 21, 0.85);
   border-radius: 999px;
-  padding: 0.45rem 1.15rem;
+  padding: 0.55rem 1.45rem;
   display: flex;
   align-items: center;
-  gap: 0.55rem;
-  color: #f8fafc;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+  gap: 0.75rem;
+  color: #ffffff;
+  box-shadow: 0 10px 32px rgba(0, 0, 0, 0.65);
 }
 
 .coach-icon {
-  font-size: 0.74rem;
-  font-weight: 800;
-  padding: 0.2rem 0.6rem;
+  font-size: 0.95rem;
+  font-weight: 900;
+  padding: 0.28rem 0.85rem;
   border-radius: 999px;
   background: #facc15;
   color: #0f172a;
   white-space: nowrap;
+  letter-spacing: -0.01em;
 }
 
 .coach-text {
-  font-size: 0.92rem;
-  font-weight: 700;
-  line-height: 1.35;
+  font-size: 1.25rem;
+  font-weight: 800;
+  line-height: 1.45;
+  color: #ffffff;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.9);
 }
 
 .kf-center-turn-modal {
@@ -2731,28 +2735,28 @@ onBeforeUnmount(() => {
 }
 
 .cand-label {
-  font-size: 0.74rem;
-  font-weight: 800;
-  color: #cbd5e1;
-  min-width: 90px;
+  font-size: 1.05rem;
+  font-weight: 900;
+  color: #f1f5f9;
+  min-width: 130px;
 }
 
 .cand-items {
   display: flex;
-  gap: 0.35rem;
+  gap: 0.55rem;
   flex-wrap: wrap;
 }
 
 .cand-btn {
-  padding: 0.32rem 0.75rem;
-  border-radius: 8px;
-  font-size: 0.88rem;
-  font-weight: 800;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  background: rgba(15, 23, 42, 0.85);
+  padding: 0.45rem 1.15rem;
+  border-radius: 10px;
+  font-size: 1.25rem;
+  font-weight: 900;
+  border: 2px solid rgba(255, 255, 255, 0.28);
+  background: rgba(15, 23, 42, 0.9);
   color: #fff;
   cursor: pointer;
-  transition: all 0.15s ease;
+  transition: all 0.18s ease;
 }
 
 .cand-bb:hover {
@@ -3473,53 +3477,54 @@ onBeforeUnmount(() => {
    유튜브 녹화 시 TV 방송 자막처럼 시원시원하고 굵직하게 출력
    =================================================== */
 .theater-fullscreen .kf-hud-top {
-  padding: 1.2rem 2.2rem 0.4rem;
+  padding: 1.4rem 2.5rem 0.5rem;
 }
 
 .theater-fullscreen .kf-hud-logo {
-  width: 44px;
-  height: 44px;
+  width: 52px;
+  height: 52px;
 }
 
 .theater-fullscreen .hud-ch-name {
-  font-size: 0.95rem;
+  font-size: 1.15rem;
 }
 
 .theater-fullscreen .hud-ep-step {
-  font-size: 1.28rem;
+  font-size: 1.65rem;
 }
 
 .theater-fullscreen .vocab-tag {
-  font-size: 0.82rem;
+  font-size: 1rem;
 }
 
 .theater-fullscreen .kf-hud-vocab strong {
-  font-size: 1.35rem;
+  font-size: 1.75rem;
 }
 
 .theater-fullscreen .kf-stage-tabs {
-  padding: 0.65rem 2rem 0;
-  gap: 0.75rem;
+  padding: 0.85rem 2.5rem 0;
+  gap: 1rem;
 }
 
 .theater-fullscreen .stage-tab-btn {
-  font-size: 1.05rem;
-  padding: 0.45rem 1.25rem;
+  font-size: 1.35rem;
+  padding: 0.65rem 1.75rem;
 }
 
 .theater-fullscreen .kf-coach-banner {
-  padding: 0.6rem 1.65rem;
-  font-size: 1.25rem;
-  margin-bottom: 0.65rem;
+  padding: 0.85rem 2.2rem;
+  margin-bottom: 0.85rem;
+  border-width: 2.5px;
 }
 
 .theater-fullscreen .coach-icon {
-  font-size: 0.95rem;
-  padding: 0.3rem 0.85rem;
+  font-size: 1.25rem;
+  padding: 0.45rem 1.2rem;
 }
 
 .theater-fullscreen .coach-text {
-  font-size: 1.22rem;
+  font-size: 1.75rem;
+  line-height: 1.45;
 }
 
 .theater-fullscreen .kf-center-turn-modal {
@@ -3644,13 +3649,13 @@ onBeforeUnmount(() => {
 }
 
 .theater-fullscreen .cand-label {
-  font-size: 1.15rem;
+  font-size: 1.45rem;
 }
 
 .theater-fullscreen .cand-btn {
-  font-size: 1.5rem;
-  padding: 0.5rem 1.25rem;
-  border-radius: 12px;
+  font-size: 1.85rem;
+  padding: 0.65rem 1.55rem;
+  border-radius: 14px;
 }
 
 .theater-fullscreen .qc-en {
