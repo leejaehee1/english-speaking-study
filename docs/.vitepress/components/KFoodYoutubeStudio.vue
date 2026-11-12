@@ -116,7 +116,7 @@
              ---------------------------------------------------- -->
         <div v-if="slideCursor === -1" class="kf-special-slide intro-slide">
           <img
-            :src="withBase('/images/kfood/ep1-thumb.jpg')"
+            :src="withBase(currentEpisode.thumbnailImage || '/images/kfood/ep1-thumb.jpg')"
             alt="Episode Intro Background"
             class="kf-bg-full ken-burns"
           />
@@ -608,6 +608,18 @@
             <code>{{ currentEpisode.thumbnailText }}</code>
           </div>
           <div class="kf-meta-row">
+            <strong>Thumbnail Image:</strong>
+            <a
+              :href="withBase(currentEpisode.thumbnailImage || '/images/kfood/ep1-thumb.jpg')"
+              :download="`${currentEpisode.id}-thumb.jpg`"
+              target="_blank"
+              class="kf-ctrl-btn-sm"
+              style="display: inline-flex; align-items: center; gap: 0.35rem; text-decoration: none;"
+            >
+              🖼️ Download 1080p Thumbnail (.jpg)
+            </a>
+          </div>
+          <div class="kf-meta-row">
             <strong>Pinned Comment:</strong>
             <code>🍲 SoundBlock K-Cooking Challenge! Which step was your favorite? Let us know below! 👇</code>
           </div>
@@ -676,6 +688,7 @@ interface CookingEpisode {
   title: string
   ytTitle: string
   thumbnailText: string
+  thumbnailImage?: string
   introNarrationKo: string
   outroNarrationKo: string
   scenes: CookingScene[]
@@ -967,6 +980,7 @@ const episodes: CookingEpisode[] = [
     title: 'How to Cook Authentic Kimchi Stew',
     ytTitle: 'How to Cook Authentic Kimchi Stew in Easy English 🍲 | SoundBlock K-Cooking EP.01',
     thumbnailText: 'Cook Kimchi Stew in Easy English! [I\'m gonna] + [make Kimchi stew]',
+    thumbnailImage: '/images/kfood/ep1-thumb.jpg',
     introNarrationKo: '안녕하세요, 소리블록 케이쿠킹입니다! 오늘은 한국인의 소울푸드 김치찌개 끓이는 법을 소리 블록 교체와 조립으로 마스터해 볼게요.',
     outroNarrationKo: '오늘 배운 김치찌개 소리 블록 조합 훈련, 입에 착 붙으셨나요? 구독과 좋아요를 누르고 다음 요리도 함께 조립해 봐요!',
     scenes: [
@@ -1216,6 +1230,7 @@ const episodes: CookingEpisode[] = [
     title: 'How to Make 5-Minute Kimchi Fried Rice',
     ytTitle: 'How to Make 5-Minute Kimchi Fried Rice in Easy English 🍳 | SoundBlock K-Cooking EP.02',
     thumbnailText: '5-Min Kimchi Fried Rice! [I\'ll] + [put a fried egg on top]',
+    thumbnailImage: '/images/kfood/ep2-thumb.jpg',
     introNarrationKo: '안녕하세요, 소리블록 케이쿠킹입니다! 오늘은 5분 만에 뚝딱 만드는 김치볶음밥을 소리 블록 조합으로 말해 볼게요.',
     outroNarrationKo: '오늘 배운 김치볶음밥 소리 블록 조합 훈련도 정말 유익하셨죠? 구독과 좋아요 누르고 다음 영상에서 또 만나요!',
     scenes: [
