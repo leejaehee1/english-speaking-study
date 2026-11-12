@@ -298,10 +298,10 @@
                STAGE 2: 실전 자석 합체 미션 (Magnet Snap Quiz)
                ============================================================ -->
           <div v-else-if="activeStage === 'quiz'" class="kf-lower-third kf-quiz-stage">
-            <!-- 1) 단일 통합 SNAP MISSION 배너 -->
+            <!-- 1) 깔끔하게 통합된 단일 목표 문장 헤더 -->
             <div class="kf-mission-banner" @click="playMissionAudio">
-              <span class="m-badge">🎯 SNAP MISSION</span>
-              <span class="m-text">Snap the blocks for: <strong>"{{ currentScene.fullEn }}"</strong></span>
+              <span class="m-badge">🎯 MISSION</span>
+              <span class="m-text">Assemble: <strong>"{{ currentScene.fullEn }}"</strong></span>
               <span class="m-listen">🔊 Listen</span>
             </div>
 
@@ -3042,18 +3042,18 @@ onBeforeUnmount(() => {
 }
 
 .slot-badge {
-  font-size: 0.85rem;
+  font-size: 1.05rem;
   font-weight: 800;
-  opacity: 0.9;
-  letter-spacing: 0.04em;
+  opacity: 0.95;
+  letter-spacing: 0.05em;
 }
 
 .slot-word {
-  font-size: 1.65rem;
+  font-size: 2.15rem;
   font-weight: 900;
   color: #fff;
   letter-spacing: -0.01em;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
 }
 
 .snap-plus {
@@ -4228,33 +4228,33 @@ onBeforeUnmount(() => {
 }
 
 .theater-fullscreen .slot-badge {
-  font-size: 1.25rem;
+  font-size: 1.35rem;
 }
 
 .theater-fullscreen .slot-word {
-  font-size: 2.75rem;
+  font-size: 3.1rem;
 }
 
 .theater-fullscreen .cand-row {
-  padding: 0.75rem 1.25rem;
-  border-radius: 18px;
-  gap: 1.25rem;
+  padding: 0.95rem 1.5rem;
+  border-radius: 20px;
+  gap: 1.5rem;
 }
 
 .theater-fullscreen .cand-sec-badge {
-  font-size: 1.55rem;
-  padding: 0.65rem 1.55rem;
-  border-radius: 14px;
-}
-
-.theater-fullscreen .cand-btn {
-  font-size: 2.35rem;
-  padding: 0.95rem 1.6rem;
+  font-size: 1.85rem;
+  padding: 0.85rem 1.85rem;
   border-radius: 16px;
 }
 
+.theater-fullscreen .cand-btn {
+  font-size: 2.65rem;
+  padding: 1.15rem 2.0rem;
+  border-radius: 18px;
+}
+
 .theater-fullscreen .qc-en {
-  font-size: 2.85rem;
+  font-size: 3.15rem;
 }
 
 /* STAGE 3: 완성 문장 & 소리 블록 대왕 폰트 */
