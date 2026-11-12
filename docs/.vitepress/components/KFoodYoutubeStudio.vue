@@ -612,6 +612,10 @@
             <code>🍲 SoundBlock K-Cooking Challenge! Which step was your favorite? Let us know below! 👇</code>
           </div>
           <div class="kf-meta-row">
+            <strong>Video Tags (500 chars):</strong>
+            <code>{{ getEpisodeTags(currentEpisode) }}</code>
+          </div>
+          <div class="kf-meta-row">
             <strong>Full Package:</strong>
             <button type="button" class="kf-ctrl-btn-sm" @click="copyEpisodeScript">
               {{ copySuccess ? '✅ Copied All to Clipboard!' : '📄 Copy 100% English Upload Package' }}
@@ -2368,6 +2372,35 @@ async function toggleRecording() {
   }
 }
 
+function getEpisodeTags(ep: CookingEpisode): string {
+  const dish = ep.shortTitle.replace(/^[^\s]+\s*/, '')
+  const specificTagsMap: Record<string, string[]> = {
+    'kimchi-stew': ['kimchi stew', 'how to make kimchi stew', 'authentic kimchi stew recipe', 'kimchi jjigae recipe', 'kimchi soup in english'],
+    'kimchi-fried-rice': ['kimchi fried rice', 'easy kimchi fried rice', 'how to make kimchi fried rice', '5 minute kimchi fried rice', 'bokkeumbap recipe'],
+    'korean-ramen': ['korean ramen', 'korean ramyeon', 'how to cook korean ramen', 'how to cook shin ramen', 'k-ramen recipe'],
+    'bulgogi-bbq': ['korean bulgogi', 'bulgogi beef recipe', 'korean bbq beef', 'how to make bulgogi', 'ssam lettuce wrap']
+  }
+  const dishSpecific = specificTagsMap[ep.id] || [dish.toLowerCase(), `how to cook ${dish.toLowerCase()}`, `${dish.toLowerCase()} recipe`]
+  const globalTags = [
+    'soundblock k-cooking',
+    'soundblock',
+    'sound blocks english',
+    'learn english speaking',
+    'english speaking practice',
+    'comprehensible input english',
+    'easy english conversation',
+    'beginner english speaking',
+    'speak english out loud',
+    'korean cooking in english',
+    'k-food recipe in english',
+    'cooking english expressions',
+    'daily english speaking',
+    'korean food',
+    'kfood'
+  ]
+  return [...dishSpecific, ...globalTags].join(', ')
+}
+
 async function copyEpisodeScript() {
   const ep = currentEpisode.value
   const dishName = ep.shortTitle.replace(/^[^\s]+\s*/, '')
@@ -2408,7 +2441,10 @@ async function copyEpisodeScript() {
     `🔔 Subscribe & Like to cook more delicious K-food in easy English!`,
     `Official Channel · YouTube @SoundBlockKCooking`,
     '',
-    `#SoundBlockKCooking #KFood #${dishName.replace(/\s+/g, '')} #LearnEnglish #EnglishSpeaking #EasyEnglish #KoreanCooking #CookingEnglish`
+    `#SoundBlockKCooking #KFood #${dishName.replace(/\s+/g, '')} #LearnEnglish #EnglishSpeaking #EasyEnglish #KoreanCooking #CookingEnglish`,
+    '',
+    `=== 5. YOUTUBE VIDEO TAGS (Copy & Paste into YouTube Studio 'Tags' box) ===`,
+    getEpisodeTags(ep)
   ]
   try {
     await navigator.clipboard.writeText(lines.join('\n'))
