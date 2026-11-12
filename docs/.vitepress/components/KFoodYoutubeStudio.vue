@@ -51,6 +51,16 @@
           </button>
         </div>
 
+        <!-- 🔴 스튜디오 원클릭 자체 비디오 녹화 (내부 사운드 직통) -->
+        <button
+          type="button"
+          class="kf-mode-btn kf-rec-toggle-btn"
+          :class="{ 'is-rec-active': isScreenRecording }"
+          @click="toggleScreenRecording"
+        >
+          {{ isScreenRecording ? `⏹️ 녹화 완료 & 파일 다운로드 (${formatRecordTime})` : '🔴 1080p 자체 영상 녹화' }}
+        </button>
+
         <div class="kf-aspect-toggle">
           <button
             type="button"
@@ -86,6 +96,11 @@
          ========================================================== -->
     <div class="kf-canvas-wrapper" :class="aspectRatio === '9:16' ? 'is-shorts' : 'is-wide'">
       <div class="kf-broadcast-screen" :class="aspectRatio === '9:16' ? 'screen-shorts' : 'screen-wide'">
+        <!-- 🔴 실시간 녹화 중 배너 (컴퓨터 내부 사운드 직통) -->
+        <div v-if="isScreenRecording" class="kf-rec-status-badge">
+          <span class="rec-pulsing-dot"></span>
+          <span>REC 1080p · 컴퓨터 내부 사운드 직통 녹화 중 ({{ formatRecordTime }})</span>
+        </div>
         <!-- ----------------------------------------------------
              CASE A: INTRO 슬라이드 (오프닝 훅 화면)
              ---------------------------------------------------- -->
@@ -454,6 +469,15 @@
           </button>
           <button type="button" class="rem-btn" @click="playCurrentSlideSequence">🔁 현재 장면 재생</button>
           <button type="button" class="rem-btn" @click="nextSlide">다음 ▶</button>
+          <button
+            type="button"
+            class="rem-btn rem-rec"
+            :class="{ recording: isScreenRecording }"
+            @click="toggleScreenRecording"
+          >
+            {{ isScreenRecording ? `⏹️ 녹화 완료 (${formatRecordTime})` : '🔴 1080p 녹화' }}
+          </button>
+          
           <button v-if="isFullscreenMode" type="button" class="rem-btn rem-exit" @click="exitFullscreen">
             ✕ 나가기
           </button>
@@ -463,6 +487,27 @@
 
     <!-- 하단 플레이어 & 녹음 컨트롤 바 -->
     <div v-if="!isFullscreenMode" class="kf-controls-panel">
+      <!-- 🔴 스튜디오 원클릭 자체 비디오 녹화 패널 -->
+      <div class="kf-studio-recorder-box">
+        <div class="srec-info">
+          <div class="srec-title">
+            <span class="srec-icon">🎥</span>
+            <strong>스튜디오 원클릭 자체 비디오 녹화 (마이크 잡음 0% · 내부 사운드 100% 디지털 원음)</strong>
+          </div>
+          <p class="srec-desc">
+            별도 프로그램 설치 없이, 브라우저가 화면과 AI 성우 목소리를 내부에서 다이렉트로 캡처해 고화질 비디오 파일(<code>.mp4</code>/<code>.webm</code>)로 자동 다운로드해 줍니다. (공유 창에서 '탭 오디오 공유'를 선택하세요)
+          </p>
+        </div>
+        <button
+          type="button"
+          class="kf-ctrl-btn kf-btn-studio-rec"
+          :class="{ 'is-rec-active': isScreenRecording }"
+          @click="toggleScreenRecording"
+        >
+          {{ isScreenRecording ? `⏹️ 녹화 완료 & 파일 다운로드 (${formatRecordTime})` : '🔴 1080p 자체 비디오 녹화 시작' }}
+        </button>
+      </div>
+
       <div class="kf-nav-group">
         <button type="button" class="kf-ctrl-btn" @click="goToSlide(-1)">🎬 인트로</button>
         <button type="button" class="kf-ctrl-btn" @click="prevSlide">◀ 이전</button>
@@ -638,6 +683,129 @@ const showPronGuide = ref(true)
 const showKoSub = ref(true)
 const showYtMeta = ref(false)
 const copySuccess = ref(false)
+
+// 자체 비디오 녹화기 상태 (마이크 잡음 0% 내부 사운드 직통 녹화)
+const isScreenRecording = ref(false)
+const screenRecordSeconds = ref(0)
+let screenMediaRecorder: MediaRecorder | null = null
+let screenVideoChunks: Blob[] = []
+let screenRecordTimer: number | null = null
+let activeDisplayStream: MediaStream | null = null
+
+const formatRecordTime = computed(() => {
+  const m = Math.floor(screenRecordSeconds.value / 60)
+  const s = screenRecordSeconds.value % 60
+  return `${m < 10 ? '0' + m : m}:${s < 10 ? '0' + s : s}`
+})
+
+async function startScreenRecording() {
+  if (typeof navigator === 'undefined' || !navigator.mediaDevices?.getDisplayMedia) {
+    alert('이 브라우저에서는 화면 및 내부 오디오 녹화 기능을 지원하지 않습니다. Chrome 또는 Edge 브라우저를 권장합니다.')
+    return
+  }
+
+  try {
+    const stream = await navigator.mediaDevices.getDisplayMedia({
+      video: {
+        displaySurface: 'browser',
+        frameRate: 60,
+        width: { ideal: 1920 },
+        height: { ideal: 1080 }
+      },
+      audio: {
+        suppressLocalAudioPlayback: false
+      }
+    } as DisplayMediaStreamOptions)
+
+    activeDisplayStream = stream
+    screenVideoChunks = []
+
+    const mimeTypes = [
+      'video/mp4;codecs=avc1,mp4a',
+      'video/mp4',
+      'video/webm;codecs=vp9,opus',
+      'video/webm;codecs=vp8,opus',
+      'video/webm'
+    ]
+    let selectedMime = ''
+    for (const m of mimeTypes) {
+      if (MediaRecorder.isTypeSupported(m)) {
+        selectedMime = m
+        break
+      }
+    }
+
+    const options: MediaRecorderOptions = selectedMime
+      ? { mimeType: selectedMime, videoBitsPerSecond: 8000000 }
+      : { videoBitsPerSecond: 8000000 }
+
+    screenMediaRecorder = new MediaRecorder(stream, options)
+
+    screenMediaRecorder.ondataavailable = (e) => {
+      if (e.data && e.data.size > 0) {
+        screenVideoChunks.push(e.data)
+      }
+    }
+
+    screenMediaRecorder.onstop = () => {
+      const ext = selectedMime.includes('mp4') ? 'mp4' : 'webm'
+      const blob = new Blob(screenVideoChunks, { type: selectedMime || 'video/webm' })
+      const url = URL.createObjectURL(blob)
+
+      // 파일명 자동 생성: [SoundBlock-KCooking]-EP01-Kimchi-Stew-1080p.mp4
+      const filename = `[SoundBlock-KCooking]-${currentEpisode.value.epNumber}-${currentEpisode.value.id}-1080p.${ext}`
+
+      // 자동 다운로드 트리거
+      const a = document.createElement('a')
+      a.href = url
+      a.download = filename
+      document.body.appendChild(a)
+      a.click()
+      document.body.removeChild(a)
+
+      // 스트림 정리
+      if (activeDisplayStream) {
+        activeDisplayStream.getTracks().forEach((track) => track.stop())
+        activeDisplayStream = null
+      }
+      if (screenRecordTimer !== null) {
+        window.clearInterval(screenRecordTimer)
+        screenRecordTimer = null
+      }
+      isScreenRecording.value = false
+    }
+
+    stream.getVideoTracks()[0].onended = () => {
+      if (isScreenRecording.value) {
+        stopScreenRecording()
+      }
+    }
+
+    screenMediaRecorder.start(1000)
+    isScreenRecording.value = true
+    screenRecordSeconds.value = 0
+    screenRecordTimer = window.setInterval(() => {
+      screenRecordSeconds.value++
+    }, 1000)
+  } catch (err) {
+    console.error('Screen recording cancelled or failed:', err)
+    isScreenRecording.value = false
+  }
+}
+
+function stopScreenRecording() {
+  if (screenMediaRecorder && screenMediaRecorder.state !== 'inactive') {
+    screenMediaRecorder.stop()
+  }
+}
+
+function toggleScreenRecording() {
+  if (isScreenRecording.value) {
+    stopScreenRecording()
+  } else {
+    startScreenRecording()
+  }
+}
 
 const isShadowingTurn = ref(false)
 const shadowingProgress = ref(0)
@@ -2013,6 +2181,7 @@ onMounted(() => {
 
 onBeforeUnmount(() => {
   stopAutoShow()
+  stopScreenRecording()
   if (typeof document !== 'undefined') {
     document.removeEventListener('fullscreenchange', onFullscreenChange)
     window.removeEventListener('keydown', onKeyDown)
@@ -3948,6 +4117,131 @@ onBeforeUnmount(() => {
 
 .theater-fullscreen .rev-ko {
   font-size: 1.15rem;
+}
+
+
+/* ===================================================
+   🔴 스튜디오 원클릭 자체 비디오 녹화기 스타일
+   =================================================== */
+.kf-rec-toggle-btn {
+  background: #ef4444;
+  border-color: #ef4444;
+  color: #fff !important;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.kf-rec-toggle-btn.is-rec-active {
+  background: #b91c1c;
+  animation: recPulse 1.2s infinite;
+}
+
+.rem-btn.rem-rec {
+  background: #ef4444;
+}
+
+.rem-btn.rem-rec.recording {
+  background: #b91c1c;
+  animation: recPulse 1.2s infinite;
+}
+
+.kf-rec-status-badge {
+  position: absolute;
+  top: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  background: rgba(220, 38, 38, 0.95);
+  backdrop-filter: blur(8px);
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 900;
+  padding: 0.35rem 1rem;
+  border-radius: 999px;
+  box-shadow: 0 4px 18px rgba(220, 38, 38, 0.6);
+  pointer-events: none;
+}
+
+.rec-pulsing-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #fff;
+  animation: recDotBlink 1s infinite alternate;
+}
+
+@keyframes recDotBlink {
+  from { opacity: 0.3; transform: scale(0.85); }
+  to { opacity: 1; transform: scale(1.2); }
+}
+
+@keyframes recPulse {
+  0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
+  70% { box-shadow: 0 0 0 8px rgba(239, 68, 68, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+}
+
+.kf-studio-recorder-box {
+  background: rgba(239, 68, 68, 0.08);
+  border: 1.5px solid rgba(239, 68, 68, 0.35);
+  border-radius: 14px;
+  padding: 0.85rem 1.25rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.srec-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  flex: 1 1 300px;
+}
+
+.srec-title {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.95rem;
+  color: #ef4444;
+}
+
+.srec-desc {
+  margin: 0 !important;
+  font-size: 0.8rem;
+  color: var(--vp-c-text-2);
+  line-height: 1.4;
+}
+
+.kf-btn-studio-rec {
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+  border: none;
+  color: #fff !important;
+  font-size: 0.92rem;
+  font-weight: 800;
+  padding: 0.65rem 1.35rem;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(239, 68, 68, 0.35);
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.kf-btn-studio-rec:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(239, 68, 68, 0.5);
+}
+
+.kf-btn-studio-rec.is-rec-active {
+  background: #b91c1c;
+  animation: recPulse 1.2s infinite;
 }
 
 </style>
