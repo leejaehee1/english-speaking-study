@@ -3389,86 +3389,316 @@ onBeforeUnmount(() => {
    모바일 화면 전용 미디어 쿼리 (@media max-width: 768px)
    스마트폰에서 글자가 작아서 안 보이는 현상 완벽 해결!
    =================================================== */
+/* ===================================================
+   📱 스마트폰 세로 모드(Portrait) 전용 완벽 대응
+   화면 겹침/잘림 방지 및 모바일 앱(쇼츠/릴스) 스타일 레이아웃
+   =================================================== */
 @media (max-width: 768px) {
-  .kf-broadcast-screen.screen-wide {
-    aspect-ratio: auto;
-    min-height: 520px;
+  .kf-studio-v2 {
+    margin: 0.8rem 0 1.5rem;
+    border-radius: 14px;
   }
 
-  .kf-hud-top {
-    padding: 0.6rem 0.8rem 0.2rem;
-  }
-
-  .kf-hud-brand {
-    display: none;
-  }
-
-  .kf-stage-tabs {
-    flex-wrap: wrap;
-    gap: 0.35rem;
-    padding: 0.3rem 0.6rem 0;
-  }
-
-  .stage-tab-btn {
-    font-size: 0.76rem;
-    padding: 0.28rem 0.7rem;
-  }
-
-  .kf-lower-third {
-    padding: 0.5rem 0.85rem 1rem;
-    gap: 0.65rem;
-  }
-
-  .kf-blocks-row {
-    flex-direction: column;
+  .kf-topbar {
+    padding: 0.55rem 0.75rem;
     gap: 0.4rem;
   }
 
-  .kf-glass-block {
-    padding: 0.55rem 0.85rem;
+  .kf-studio-badge {
+    font-size: 0.68rem;
+    padding: 0.2rem 0.5rem;
   }
 
-  /* 모바일 화면에서 한눈에 들어오는 시원시원한 대왕 글씨 */
-  .gblk-en {
-    font-size: 1.65rem !important;
-    line-height: 1.25;
+  .kf-ep-btn,
+  .kf-mode-btn {
+    padding: 0.28rem 0.55rem;
+    font-size: 0.72rem;
   }
 
-  .kf-main-en {
-    font-size: 1.75rem !important;
-    line-height: 1.3;
+  /* 세로 화면에서는 고정 높이 대신 스마트폰 화면에 맞게 유연하게 확장 */
+  .kf-broadcast-screen.screen-wide {
+    aspect-ratio: auto;
+    min-height: 580px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
   }
 
-  .combo-en {
-    font-size: 1.55rem !important;
-    line-height: 1.3;
+  .kf-main-scene,
+  .kf-special-slide {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    min-height: 580px;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    overflow: visible;
   }
 
-  .combo-ko {
-    font-size: 1.15rem !important;
-    color: #fde047 !important;
+  .kf-bg-full {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 
-  .anchor-en {
-    font-size: 1.55rem !important;
+  .kf-scrim-gradient {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(9, 13, 24, 0.82) 0%,
+      rgba(9, 13, 24, 0.25) 20%,
+      rgba(9, 13, 24, 0.65) 55%,
+      rgba(9, 13, 24, 0.96) 80%,
+      rgba(9, 13, 24, 1) 100%
+    );
   }
 
-  .kf-meta-ko {
-    font-size: 1.25rem !important;
-    color: #fde047 !important;
+  /* 상단 모바일 컴팩트 HUD */
+  .kf-hud-top {
+    padding: 0.65rem 0.85rem 0.25rem;
+    gap: 0.5rem;
   }
 
-  .m-text {
-    font-size: 1.15rem !important;
+  .kf-hud-logo {
+    width: 28px;
+    height: 28px;
   }
 
-  .slot-word {
-    font-size: 1.35rem !important;
+  .hud-ch-name {
+    display: none;
+  }
+
+  .hud-ep-step {
+    font-size: 0.82rem;
+  }
+
+  .kf-hud-vocab {
+    padding: 0.25rem 0.65rem;
+  }
+
+  .vocab-tag {
+    font-size: 0.58rem;
+  }
+
+  .kf-hud-vocab strong {
+    font-size: 0.85rem;
+  }
+
+  .kf-hud-progress {
+    padding: 0 0.85rem;
+  }
+
+  /* 모바일 단계 선택 탭 */
+  .kf-stage-tabs {
+    flex-wrap: wrap;
+    gap: 0.3rem;
+    padding: 0.4rem 0.65rem 0;
+  }
+
+  .stage-tab-btn {
+    font-size: 0.74rem;
+    padding: 0.28rem 0.65rem;
+  }
+
+  /* 중앙 코칭 배너 */
+  .kf-coach-banner {
+    max-width: 94%;
+    margin: 0.5rem auto 0.4rem;
+    padding: 0.4rem 0.85rem;
+    gap: 0.45rem;
+  }
+
+  .coach-icon {
+    font-size: 0.72rem;
+    padding: 0.2rem 0.55rem;
+  }
+
+  .coach-text {
+    font-size: 0.95rem;
+    line-height: 1.35;
+  }
+
+  /* 하단 자막 & 인터랙션 독 */
+  .kf-lower-third {
+    padding: 0.5rem 0.75rem 1rem;
+    gap: 0.55rem;
+  }
+
+  /* STAGE 1: 모바일 세로 콤보 카드 */
+  .kf-core-anchor-bar {
+    padding: 0.3rem 0.85rem;
+    gap: 0.45rem;
+    margin-bottom: 0.2rem;
+  }
+
+  .kf-core-anchor-bar .anchor-badge {
+    font-size: 0.68rem;
+    padding: 0.12rem 0.45rem;
+  }
+
+  .kf-core-anchor-bar .anchor-en {
+    font-size: 1.15rem;
+  }
+
+  .kf-core-anchor-bar .anchor-hint {
+    font-size: 0.68rem;
+  }
+
+  .kf-combo-grid {
+    gap: 0.45rem;
+  }
+
+  .kf-combo-card {
+    padding: 0.55rem 0.75rem;
+    border-radius: 12px;
+  }
+
+  .combo-sentence {
+    gap: 0.35rem;
   }
 
   .combo-block-pill {
+    font-size: 1.25rem !important;
+    padding: 0.25rem 0.65rem !important;
+    border-radius: 8px;
+  }
+
+  /* STAGE 2: 모바일 실전 자석 합체 */
+  .kf-mission-banner {
+    padding: 0.45rem 0.75rem;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+  }
+
+  .m-badge {
+    font-size: 0.68rem;
+  }
+
+  .m-text {
+    font-size: 0.95rem;
+  }
+
+  .m-listen {
+    display: none;
+  }
+
+  .kf-snap-target-row {
+    padding: 0.45rem 0.6rem;
+    gap: 0.35rem;
+  }
+
+  .snap-slot {
+    padding: 0.4rem 0.5rem;
+  }
+
+  .slot-badge {
+    font-size: 0.62rem;
+  }
+
+  .slot-word {
+    font-size: 1.1rem;
+  }
+
+  .cand-group {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+  }
+
+  .cand-label {
+    font-size: 0.75rem;
+    min-width: auto;
+  }
+
+  .cand-items {
+    width: 100%;
+    gap: 0.3rem;
+  }
+
+  .cand-btn {
+    font-size: 0.88rem;
+    padding: 0.3rem 0.65rem;
+  }
+
+  .qc-en {
+    font-size: 1.05rem;
+  }
+
+  /* STAGE 3: 모바일 완성 문장 */
+  .kf-blocks-row {
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .kf-glass-block {
+    padding: 0.45rem 0.75rem;
+  }
+
+  .gblk-badge {
+    font-size: 0.68rem;
+  }
+
+  .gblk-en {
+    font-size: 1.35rem;
+  }
+
+  .kf-sentence-banner {
+    padding: 0.55rem 0.85rem;
+  }
+
+  .kf-main-en {
+    font-size: 1.35rem;
+  }
+
+  .kf-meta-ko {
+    font-size: 1.05rem;
+  }
+
+  /* 인트로 / 아웃트로 모바일 대응 */
+  .kf-intro-content,
+  .kf-outro-content {
+    padding: 1rem 0.85rem;
+  }
+
+  .kf-intro-title {
     font-size: 1.4rem !important;
-    padding: 0.22rem 0.65rem !important;
+  }
+
+  .kf-intro-sub {
+    font-size: 0.85rem;
+  }
+
+  .kf-intro-formula {
+    gap: 0.3rem;
+  }
+
+  .f-pill {
+    font-size: 0.72rem;
+    padding: 0.35rem 0.6rem;
+  }
+
+  .kf-review-grid {
+    grid-template-columns: 1fr;
+    max-height: 280px;
+    overflow-y: auto;
+  }
+
+  .kf-controls-panel {
+    padding: 0.75rem 0.85rem;
+  }
+
+  .kf-nav-group {
+    justify-content: center;
+  }
+
+  .kf-ctrl-btn {
+    font-size: 0.74rem;
+    padding: 0.32rem 0.6rem;
   }
 }
 
