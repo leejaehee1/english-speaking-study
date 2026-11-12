@@ -1422,6 +1422,7 @@ const episodes: CookingEpisode[] = [
     title: 'How to Cook Authentic Korean Ramen',
     ytTitle: 'How to Cook Authentic Korean Ramen in Easy English 🍜 | SoundBlock K-Cooking EP.03',
     thumbnailText: 'Cook K-Ramen Like a Pro! [You have to] + [put the soup base first]',
+    thumbnailImage: '/images/kfood/ep3-thumb.jpg',
     introNarrationKo: '안녕하세요, 소리블록 케이쿠킹입니다! 오늘은 전 세계가 사랑하는 한국 라면 맛있게 끓이는 법을 소리 블록으로 배워 볼게요.',
     outroNarrationKo: '라면 끓이면서 혼자 영어로 중얼거려 보면 절대 안 까먹습니다! 구독과 좋아요 부탁드려요!',
     scenes: [
