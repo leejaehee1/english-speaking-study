@@ -1585,6 +1585,7 @@ const episodes: CookingEpisode[] = [
     title: 'How to Cook Authentic Korean Bulgogi Beef BBQ',
     ytTitle: 'How to Make Delicious Korean Bulgogi Beef BBQ in Easy English 🥩 | SoundBlock K-Cooking EP.04',
     thumbnailText: 'Korean Bulgogi & Ssam! [You have to] + [wrap it in lettuce]',
+    thumbnailImage: '/images/kfood/ep4-thumb.jpg',
     introNarrationKo: '안녕하세요, 소리블록 케이쿠킹입니다! 외국인 친구들이 가장 좋아하는 불고기와 상추쌈 싸 먹는 법을 소리 블록으로 배워 볼게요.',
     outroNarrationKo: '불고기와 상추쌈 영어 표현까지 완벽히 마스터하셨습니다! 구독과 좋아요 잊지 마세요!',
     scenes: [
