@@ -679,20 +679,28 @@ const isCleanMode = ref(false)
 const isFullscreenMode = ref(false)
 const showFloatingControls = ref(true)
 
-// 글자 크기 모드 (모바일 사용자 배려): 'large'를 기본으로 설정하여 스마트폰에서도 시원시원하게 보임
-const fontScale = ref<'normal' | 'large' | 'huge'>('large')
+// 🌟 글자 크기 모드: 초대형(왕글씨, 'huge')을 기본값으로 설정 & 새로고침 시에도 유지되도록 localStorage 연동
+const fontScale = ref<'normal' | 'large' | 'huge'>('huge')
 
 const fontScaleLabel = computed(() => {
-  if (fontScale.value === 'large') return '📱 대형(모바일 추천)'
   if (fontScale.value === 'huge') return '👑 초대형(왕글씨)'
-  return '보통(PC)'
+  if (fontScale.value === 'large') return '📱 대형'
+  return '🖥️ 보통'
 })
 
 function cycleFontScale() {
-  if (fontScale.value === 'large') fontScale.value = 'huge'
-  else if (fontScale.value === 'huge') fontScale.value = 'normal'
-  else fontScale.value = 'large'
+  if (fontScale.value === 'huge') fontScale.value = 'normal'
+  else if (fontScale.value === 'normal') fontScale.value = 'large'
+  else fontScale.value = 'huge'
 }
+
+watch(fontScale, (val) => {
+  if (typeof window !== 'undefined') {
+    try {
+      localStorage.setItem('soundblock_font_scale', val)
+    } catch {}
+  }
+})
 
 const enableKoreanCoachVoice = ref(true)
 const enableSoundEffects = ref(true)
@@ -2386,6 +2394,14 @@ async function copyEpisodeScript() {
 }
 
 onMounted(() => {
+  if (typeof window !== 'undefined') {
+    try {
+      const saved = localStorage.getItem('soundblock_font_scale')
+      if (saved === 'normal' || saved === 'large' || saved === 'huge') {
+        fontScale.value = saved
+      }
+    } catch {}
+  }
   if (typeof document !== 'undefined') {
     document.addEventListener('fullscreenchange', onFullscreenChange)
     window.addEventListener('keydown', onKeyDown)
