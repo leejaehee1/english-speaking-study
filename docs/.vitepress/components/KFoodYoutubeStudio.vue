@@ -2054,16 +2054,13 @@ async function playCurrentSlideSequence(): Promise<boolean> {
   const epId = currentEpId.value
   playTransitionChime()
 
-  // 1) 인트로 슬라이드일 때
+  // 1) 인트로 슬라이드일 때 (intro-ko.mp3 안에 이미 'Let's get cooking!'이 포함되어 있으므로 단 1회만 재생)
   if (slideCursor.value === -1) {
     if (enableKoreanCoachVoice.value) {
       const ok = await playMp3Async(`/audio/kfood/${epId}-intro-ko.mp3`, 1.0)
-      if (!ok) await speakAsync(currentEpisode.value.introNarrationEn || 'Welcome to SoundBlock K-Cooking!', 'en-US', 1.0)
+      if (!ok) await speakAsync(currentEpisode.value.introNarrationEn || "Welcome to SoundBlock K-Cooking! Today, let's cook authentic Korean food using easy sound blocks. Let's get cooking!", 'en-US', 1.0)
       if (myToken !== sequenceToken) return false
-      if (!(await waitMs(250, myToken))) return false
     }
-    const okEn = await playMp3Async('/audio/kfood/common-lets-cook.mp3', 1.0)
-    if (!okEn) await speakAsync("Let's get cooking!", 'en-US', 1.0)
     return myToken === sequenceToken
   }
 
@@ -4176,6 +4173,60 @@ onBeforeUnmount(() => {
 }
 .theater-fullscreen .kf-core-anchor-bar .anchor-en {
   font-size: 1.85rem;
+}
+
+.theater-fullscreen .kf-intro-content {
+  width: min(95%, 1350px);
+  padding: 3rem 2rem;
+}
+
+.theater-fullscreen .kf-intro-top-pill {
+  font-size: 1.55rem;
+  padding: 0.65rem 1.85rem 0.65rem 0.85rem;
+  margin-bottom: 1.6rem;
+}
+
+.theater-fullscreen .kf-mini-logo {
+  width: 48px;
+  height: 48px;
+}
+
+.theater-fullscreen .kf-intro-ep-badge {
+  font-size: 1.75rem;
+  margin-bottom: 0.85rem;
+}
+
+.theater-fullscreen .kf-intro-title {
+  font-size: 4.25rem !important;
+  margin-bottom: 1.25rem !important;
+  line-height: 1.2;
+}
+
+.theater-fullscreen .kf-intro-sub {
+  font-size: 1.85rem;
+  max-width: 1100px;
+  margin-bottom: 2.2rem !important;
+}
+
+.theater-fullscreen .kf-intro-formula {
+  gap: 1.1rem;
+  margin-bottom: 2.6rem;
+}
+
+.theater-fullscreen .f-pill {
+  padding: 1.05rem 2.15rem;
+  border-radius: 18px;
+  font-size: 1.85rem;
+}
+
+.theater-fullscreen .f-plus {
+  font-size: 2.25rem;
+}
+
+.theater-fullscreen .kf-intro-cta {
+  padding: 1.25rem 3.25rem;
+  font-size: 2.15rem;
+  border-radius: 999px;
 }
 
 .theater-fullscreen .kf-combo-grid {
