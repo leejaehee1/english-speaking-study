@@ -349,8 +349,8 @@
                 </div>
                 <div class="cand-items">
                   <button
-                    v-for="(opt, oIdx) in currentScene.quizPool.bbCandidates"
-                    :key="oIdx"
+                    v-for="(opt, oIdx) in (currentQuizBbCandidates.length ? currentQuizBbCandidates : currentScene.quizPool.bbCandidates)"
+                    :key="opt"
                     type="button"
                     class="cand-btn cand-bb"
                     :class="{
@@ -371,8 +371,8 @@
                 </div>
                 <div class="cand-items">
                   <button
-                    v-for="(opt, oIdx) in currentScene.quizPool.coreCandidates"
-                    :key="oIdx"
+                    v-for="(opt, oIdx) in (currentQuizCoreCandidates.length ? currentQuizCoreCandidates : currentScene.quizPool.coreCandidates)"
+                    :key="opt"
                     type="button"
                     class="cand-btn cand-core"
                     :class="{
@@ -620,7 +620,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
+import { ref, computed, watch, onMounted, onBeforeUnmount } from 'vue'
 import { withBase } from 'vitepress'
 
 interface SoundBlockPiece {
@@ -1731,12 +1731,42 @@ function getComboCorePart(combo: SwapCombo): string {
   return combo.fullEn
 }
 
+// 🌟 Step 2 자석 결합 퀴즈 후보 블록 랜덤 셔플 (정답이 항상 1번에 위치하는 현상 해결)
+function shuffleArray<T>(items: T[]): T[] {
+  if (!items || items.length <= 1) return items ? [...items] : []
+  const arr = [...items]
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1))
+    ;[arr[i], arr[j]] = [arr[j], arr[i]]
+  }
+  return arr
+}
+
+const currentQuizBbCandidates = ref<string[]>([])
+const currentQuizCoreCandidates = ref<string[]>([])
+
+function refreshQuizPool() {
+  const pool = currentScene.value?.quizPool
+  if (!pool) return
+  currentQuizBbCandidates.value = shuffleArray(pool.bbCandidates)
+  currentQuizCoreCandidates.value = shuffleArray(pool.coreCandidates)
+}
+
+watch(
+  [currentEpId, safeSceneIndex],
+  () => {
+    refreshQuizPool()
+  },
+  { immediate: true }
+)
+
 function setStage(stage: 'swap' | 'quiz' | 'sentence') {
   activeStage.value = stage
   if (stage === 'quiz') {
     isSnapped.value = false
     pickedBb.value = null
     pickedCore.value = null
+    refreshQuizPool()
   }
 }
 
@@ -2110,6 +2140,9 @@ async function playCurrentSlideSequence(): Promise<boolean> {
   // [STAGE 2] 실전 자석 합체 미션
   activeStage.value = 'quiz'
   isSnapped.value = false
+  pickedBb.value = null
+  pickedCore.value = null
+  refreshQuizPool()
 
   if (enableKoreanCoachVoice.value && sc.missionKo) {
     const okMission = await playMp3Async(`/audio/kfood/${epId}-s${sIdx}-mission.mp3`, 1.0)
@@ -2168,6 +2201,18 @@ async function toggleAutoShow() {
     } else {
       isAutoPlaying.value = false
       break
+    }
+  }
+
+  // 🌟 에피소드 전체(Intro ~ Outro) 방송이 완료되었을 때 녹화 중이라면 1.8초 뒤 자동으로 녹화 종료 & 저장
+  if (slideCursor.value >= currentEpisode.value.scenes.length && isScreenRecording.value) {
+    await new Promise((resolve) => setTimeout(resolve, 1800))
+    if (isScreenRecording.value) {
+      stopScreenRecording()
+      // 전체화면 모드였다면 자연스럽게 복원
+      if (typeof document !== 'undefined' && document.fullscreenElement) {
+        document.exitFullscreen().catch(() => {})
+      }
     }
   }
 }
