@@ -1706,7 +1706,757 @@ const episodes: CookingEpisode[] = [
         fullKo: '신선한 상추에 고기를 싸서 먹어 볼게요.'
       }
     ]
+  },
+  // ==========================================
+  // EP 5. 매콤달콤 치즈 떡볶이 (Spicy Tteokbokki) - 8 Scenes (~5m 30s)
+  // ==========================================
+  {
+    id: 'tteokbokki',
+    epNumber: 'EP.05',
+    emoji: '🍢',
+    shortTitle: '🍢 Spicy Tteokbokki',
+    title: 'How to Make Authentic Korean Tteokbokki with Cheese',
+    ytTitle: 'How to Make Authentic Korean Tteokbokki in Easy English 🍢 | SoundBlock K-Cooking EP.05',
+    thumbnailText: 'Spicy & Chewy Tteokbokki! [I\'m gonna] + [sprinkle mozzarella cheese on top]',
+    thumbnailImage: '/images/kfood/ep5-thumb.jpg',
+    introNarrationKo: "Welcome to SoundBlock K-Cooking! Today, let's make authentic Korean street food, spicy and sweet Tteokbokki with cheese, using simple sound blocks. Let's get cooking!",
+    outroNarrationKo: "Mission complete! You've mastered all the sound blocks for spicy Tteokbokki! Subscribe and like for more delicious K-food. See you in the next video!",
+    scenes: [
+      {
+        stepTitle: 'SCENE 1 · Soak the Rice Cakes',
+        visualEmojis: '🍚 💧 ⏰',
+        imagePath: '/images/kfood/ep5-thumb.jpg',
+        actionNote: '말랑말랑해지도록 떡을 따뜻한 물에 불리기',
+        coachKo: "첫 번째 코어 블록은, 떡을 물에 불리다, 소옥 더 라이스 케익스입니다. 시작 블록을 바꿔 볼까요?",
+        coachEn: "Our core action is 'soak the rice cakes'. Let's swap the starter block!",
+        missionKo: "실전 조립 미션! 따뜻한 물에 떡을 불릴 거예요!",
+        missionEn: "Snap Mission! 'I\'m gonna soak the rice cakes in warm water.' Snap the blocks!",
+        keyVocab: 'soak the rice cakes',
+        bgGradient: 'linear-gradient(135deg, #7c2d12 0%, #b91c1c 100%)',
+        blocks: [
+          { role: 'bb', en: "I'm gonna", pron: '암거너' },
+          { role: 'core', en: 'soak the rice cakes', pron: '소옥 더 라이스 케익스' },
+          { role: 'db', en: 'in warm water.', pron: '인 웜 워터' }
+        ],
+        combos: [
+          { bbEn: "I'm gonna", fullEn: "I'm gonna soak the rice cakes.", fullPron: '암거너 소옥 더 라이스 케익스', ko: '떡을 불릴게.' },
+          { bbEn: "You have to", fullEn: "You have to soak the rice cakes.", fullPron: '유 햅투 소옥 더 라이스 케익스', ko: '떡을 불려야 해.' },
+          { bbEn: "Did you", fullEn: "Did you soak the rice cakes?", fullPron: '디쥬 소옥 더 라이스 케익스?', ko: '떡 불려 뒀어?' }
+        ],
+        quizPool: {
+          bbCandidates: ["I'm gonna", 'You have to', 'Did you'],
+          coreCandidates: ['soak the rice cakes', 'slice the tofu', 'pour some water']
+        },
+        fullEn: "I'm gonna soak the rice cakes in warm water.",
+        fullPron: '암거너 + 소옥 더 라이스 케익스 + 인 웜 워터',
+        fullKo: '따뜻한 물에 떡을 불려 둘게요.'
+      },
+      {
+        stepTitle: 'SCENE 2 · Golden Sweet & Spicy Sauce',
+        visualEmojis: '🌶️ 🍯 🥣',
+        imagePath: '/images/kfood/ep5-thumb.jpg',
+        actionNote: '황금 비율 고추장과 설탕 양념 섞기',
+        coachKo: "두 번째 코어 블록은, 고추장을 섞다, 믹스 레드 칠리 페이스트입니다. 시작 블록을 갈아 끼워 볼까요?",
+        coachEn: "Our core action is 'mix red chili paste'. Let's swap the first block!",
+        missionKo: "실전 조립 미션! 고추장에 설탕을 섞어야 해요!",
+        missionEn: "Snap Mission! 'You have to mix red chili paste with sugar.' Snap the blocks!",
+        keyVocab: 'mix red chili paste',
+        bgGradient: 'linear-gradient(135deg, #991b1b 0%, #dc2626 100%)',
+        blocks: [
+          { role: 'bb', en: 'You have to', pron: '유 햅투' },
+          { role: 'core', en: 'mix red chili paste', pron: '믹스 레드 칠리 페이스트' },
+          { role: 'db', en: 'with sugar.', pron: '위드 슈가' }
+        ],
+        combos: [
+          { bbEn: 'You have to', fullEn: 'You have to mix red chili paste.', fullPron: '유 햅투 믹스 레드 칠리 페이스트', ko: '고추장을 섞어야 해.' },
+          { bbEn: "I'll", fullEn: "I'll mix red chili paste.", fullPron: '아을 믹스 레드 칠리 페이스트', ko: '내가 고추장을 섞을게.' },
+          { bbEn: 'Can you', fullEn: 'Can you mix red chili paste?', fullPron: '캔유 믹스 레드 칠리 페이스트?', ko: '고추장 좀 섞어 줄래?' }
+        ],
+        quizPool: {
+          bbCandidates: ['You have to', "I'll", 'Can you'],
+          coreCandidates: ['mix red chili paste', 'use sour kimchi', 'chop the pork']
+        },
+        fullEn: 'You have to mix red chili paste with sugar.',
+        fullPron: '유 햅투 + 믹스 레드 칠리 페이스트 + 위드 슈가',
+        fullKo: '고추장에 설탕을 잘 섞어 주어야 해요.'
+      },
+      {
+        stepTitle: 'SCENE 3 · Pour the Savory Broth',
+        visualEmojis: '🐟 🫗 🥘',
+        imagePath: '/images/kfood/ep5-thumb.jpg',
+        actionNote: '멸치 다시마 육수를 냄비에 붓기',
+        coachKo: "세 번째 코어 블록은, 멸치 육수를 붓다, 포어 디 앤초비 브로스입니다. 시작 블록을 바꿔 볼까요?",
+        coachEn: "Our core action is 'pour the anchovy broth'. Let's swap the first block!",
+        missionKo: "실전 조립 미션! 팬에 멸치 육수를 부을 거예요!",
+        missionEn: "Snap Mission! 'We\'re gonna pour the anchovy broth into the pan.' Snap!",
+        keyVocab: 'pour the anchovy broth',
+        bgGradient: 'linear-gradient(135deg, #1e3a8a 0%, #1d4ed8 100%)',
+        blocks: [
+          { role: 'bb', en: "We're gonna", pron: '웨어 거너' },
+          { role: 'core', en: 'pour the anchovy broth', pron: '포어 디 앤초비 브로스' },
+          { role: 'db', en: 'into the pan.', pron: '인투 더 팬' }
+        ],
+        combos: [
+          { bbEn: "We're gonna", fullEn: "We're gonna pour the anchovy broth.", fullPron: '웨어 거너 포어 디 앤초비 브로스', ko: '멸치 육수를 부을 거야.' },
+          { bbEn: "I'm gonna", fullEn: "I'm gonna pour the anchovy broth.", fullPron: '암거너 포어 디 앤초비 브로스', ko: '내가 멸치 육수를 부을게.' },
+          { bbEn: 'Did you', fullEn: 'Did you pour the anchovy broth?', fullPron: '디쥬 포어 디 앤초비 브로스?', ko: '멸치 육수 부었어?' }
+        ],
+        quizPool: {
+          bbCandidates: ["We're gonna", "I'm gonna", 'Did you'],
+          coreCandidates: ['pour the anchovy broth', 'boil the noodles', 'slice the onion']
+        },
+        fullEn: "We're gonna pour the anchovy broth into the pan.",
+        fullPron: '웨어 거너 + 포어 디 앤초비 브로스 + 인투 더 팬',
+        fullKo: '냄비에 멸치 육수를 부어 줄 거예요.'
+      },
+      {
+        stepTitle: 'SCENE 4 · Dissolve the Sauce',
+        visualEmojis: '🔥 🥄 🫧',
+        imagePath: '/images/kfood/ep5-thumb.jpg',
+        actionNote: '끓어오를 때까지 양념을 잘 풀기',
+        coachKo: "네 번째 코어 블록은, 양념을 풀다, 디졸브 더 소오스입니다. 시작 블록을 갈아 끼워 볼까요?",
+        coachEn: "Our core action is 'dissolve the sauce'. Let's swap the starter block!",
+        missionKo: "실전 조립 미션! 끓어오를 때까지 양념을 풀게요!",
+        missionEn: "Snap Mission! 'I\'ll dissolve the sauce until it boils.' Snap!",
+        keyVocab: 'dissolve the sauce',
+        bgGradient: 'linear-gradient(135deg, #b45309 0%, #ea580c 100%)',
+        blocks: [
+          { role: 'bb', en: "I'll", pron: '아을' },
+          { role: 'core', en: 'dissolve the sauce', pron: '디졸브 더 소오스' },
+          { role: 'db', en: 'until it boils.', pron: '언틸 잇 보일스' }
+        ],
+        combos: [
+          { bbEn: "I'll", fullEn: "I'll dissolve the sauce.", fullPron: '아을 디졸브 더 소오스', ko: '양념을 풀게.' },
+          { bbEn: 'You have to', fullEn: 'You have to dissolve the sauce.', fullPron: '유 햅투 디졸브 더 소오스', ko: '양념을 풀어야 해.' },
+          { bbEn: 'Can you', fullEn: 'Can you dissolve the sauce?', fullPron: '캔유 디졸브 더 소오스?', ko: '양념 좀 풀어 줄래?' }
+        ],
+        quizPool: {
+          bbCandidates: ["I'll", 'You have to', 'Can you'],
+          coreCandidates: ['dissolve the sauce', 'fry them together', 'take a sip']
+        },
+        fullEn: "I'll dissolve the sauce until it boils.",
+        fullPron: '아을 + 디졸브 더 소오스 + 언틸 잇 보일스',
+        fullKo: '육수가 끓어오를 때까지 양념을 잘 풀어 줄게요.'
+      },
+      {
+        stepTitle: 'SCENE 5 · Add Rice Cakes and Fish Cakes',
+        visualEmojis: '🍢 🍥 🍲',
+        imagePath: '/images/kfood/ep5-thumb.jpg',
+        actionNote: '불린 떡과 어묵 넣기',
+        coachKo: "다섯 번째 코어 블록은, 떡을 넣다, 애드 더 라이스 케익스입니다. 시작 블록을 바꿔 볼까요?",
+        coachEn: "Our core action is 'add the rice cakes'. Let's swap!",
+        missionKo: "실전 조립 미션! 떡과 썬 어묵을 넣을 수 있어요!",
+        missionEn: "Snap Mission! 'You can add the rice cakes and sliced fish cakes.' Snap!",
+        keyVocab: 'add the rice cakes',
+        bgGradient: 'linear-gradient(135deg, #15803d 0%, #16a34a 100%)',
+        blocks: [
+          { role: 'bb', en: 'You can', pron: '유 캔' },
+          { role: 'core', en: 'add the rice cakes', pron: '애드 더 라이스 케익스' },
+          { role: 'db', en: 'and sliced fish cakes.', pron: '앤 슬라이스드 피쉬 케익스' }
+        ],
+        combos: [
+          { bbEn: 'You can', fullEn: 'You can add the rice cakes.', fullPron: '유 캔 애드 더 라이스 케익스', ko: '떡을 넣으시면 돼요.' },
+          { bbEn: "We're gonna", fullEn: "We're gonna add the rice cakes.", fullPron: '웨어 거너 애드 더 라이스 케익스', ko: '떡을 넣을 거야.' },
+          { bbEn: 'Did you', fullEn: 'Did you add the rice cakes?', fullPron: '디쥬 애드 더 라이스 케익스?', ko: '떡 넣었어?' }
+        ],
+        quizPool: {
+          bbCandidates: ['You can', "We're gonna", 'Did you'],
+          coreCandidates: ['add the rice cakes', 'wrap the meat', 'chop the kimchi']
+        },
+        fullEn: 'You can add the rice cakes and sliced fish cakes.',
+        fullPron: '유 캔 + 애드 더 라이스 케익스 + 앤 슬라이스드 피쉬 케익스',
+        fullKo: '떡과 어묵을 넣고 함께 끓여 줍니다.'
+      },
+      {
+        stepTitle: 'SCENE 6 · Simmer until Thick',
+        visualEmojis: '♨️ ⏳ 🥘',
+        imagePath: '/images/kfood/ep5-thumb.jpg',
+        actionNote: '국물이 걸쭉해질 때까지 중불로 졸이기',
+        coachKo: "여섯 번째 코어 블록은, 중불에 졸이다, 시머 온 미디엄 히이트입니다. 시작 블록을 바꿔 볼까요?",
+        coachEn: "Our core action is 'simmer on medium heat'. Let's swap!",
+        missionKo: "실전 조립 미션! 걸쭉해질 때까지 중불에 졸여야 해요!",
+        missionEn: "Snap Mission! 'We have to simmer on medium heat until thick.' Snap!",
+        keyVocab: 'simmer on medium heat',
+        bgGradient: 'linear-gradient(135deg, #9a3412 0%, #c2410c 100%)',
+        blocks: [
+          { role: 'bb', en: 'We have to', pron: '위 햅투' },
+          { role: 'core', en: 'simmer on medium heat', pron: '시머 온 미디엄 히이트' },
+          { role: 'db', en: 'until thick.', pron: '언틸 띡' }
+        ],
+        combos: [
+          { bbEn: 'We have to', fullEn: 'We have to simmer on medium heat.', fullPron: '위 햅투 시머 온 미디엄 히이트', ko: '중불로 졸여야 해.' },
+          { bbEn: 'You should', fullEn: 'You should simmer on medium heat.', fullPron: '유 슈드 시머 온 미디엄 히이트', ko: '중불로 졸여 주는 게 좋아.' },
+          { bbEn: "I'm gonna", fullEn: "I'm gonna simmer on medium heat.", fullPron: '암거너 시머 온 미디엄 히이트', ko: '중불로 졸일게.' }
+        ],
+        quizPool: {
+          bbCandidates: ['We have to', 'You should', "I'm gonna"],
+          coreCandidates: ['simmer on medium heat', 'mix with vinegar', 'rinse in cold water']
+        },
+        fullEn: 'We have to simmer on medium heat until thick.',
+        fullPron: '위 햅투 + 시머 온 미디엄 히이트 + 언틸 띡',
+        fullKo: '국물이 자작하고 걸쭉해질 때까지 중불로 졸여야 해요.'
+      },
+      {
+        stepTitle: 'SCENE 7 · Melted Cheese Topping',
+        visualEmojis: '🧀 ✨ 🤤',
+        imagePath: '/images/kfood/ep5-thumb.jpg',
+        actionNote: '피자 모짜렐라 치즈 듬뿍 뿌리기',
+        coachKo: "일곱 번째 코어 블록은, 모짜렐라 치즈를 뿌리다, 스프링클 모짜렐라 치즈입니다. 시작 블록을 바꿔 볼까요?",
+        coachEn: "Our core action is 'sprinkle mozzarella cheese'. Let's swap!",
+        missionKo: "실전 조립 미션! 바로 위에 모짜렐라 치즈를 뿌릴 거예요!",
+        missionEn: "Snap Mission! 'I\'m gonna sprinkle mozzarella cheese right on top.' Snap!",
+        keyVocab: 'sprinkle mozzarella cheese',
+        bgGradient: 'linear-gradient(135deg, #eab308 0%, #ca8a04 100%)',
+        blocks: [
+          { role: 'bb', en: "I'm gonna", pron: '암거너' },
+          { role: 'core', en: 'sprinkle mozzarella cheese', pron: '스프링클 모짜렐라 치즈' },
+          { role: 'db', en: 'right on top.', pron: '롸잇 온 탑' }
+        ],
+        combos: [
+          { bbEn: "I'm gonna", fullEn: "I'm gonna sprinkle mozzarella cheese.", fullPron: '암거너 스프링클 모짜렐라 치즈', ko: '모짜렐라 치즈를 뿌릴게.' },
+          { bbEn: 'You have to', fullEn: 'You have to sprinkle mozzarella cheese.', fullPron: '유 햅투 스프링클 모짜렐라 치즈', ko: '모짜렐라 치즈를 뿌려야 해.' },
+          { bbEn: 'Do you wanna', fullEn: 'Do you wanna sprinkle mozzarella cheese?', fullPron: '두유 워너 스프링클 모짜렐라 치즈?', ko: '모짜렐라 치즈 뿌려 줄까?' }
+        ],
+        quizPool: {
+          bbCandidates: ["I'm gonna", 'You have to', 'Do you wanna'],
+          coreCandidates: ['sprinkle mozzarella cheese', 'put a fried egg', 'add the kimchi juice']
+        },
+        fullEn: "I'm gonna sprinkle mozzarella cheese right on top.",
+        fullPron: '암거너 + 스프링클 모짜렐라 치즈 + 롸잇 온 탑',
+        fullKo: '떡볶이 바로 위에 모짜렐라 치즈를 듬뿍 뿌려 줄게요.'
+      },
+      {
+        stepTitle: 'SCENE 8 · Chewy & Spicy Reaction',
+        visualEmojis: '🔥 😋 ❤️',
+        imagePath: '/images/kfood/ep5-thumb.jpg',
+        actionNote: '치즈가 쭈욱 늘어나는 떡볶이 한 입 먹방 리액션',
+        coachKo: "여덟 번째 코어 리액션은, 쫄깃하고 매콤하다, 츄이 앤 스파이시입니다! 소리를 느껴 보세요!",
+        coachEn: "Our core reaction is 'chewy and spicy'. Wow, listen to that!",
+        missionKo: "마지막 실전 조립! 치즈 덕분에 쫄깃하고 매콤해요!",
+        missionEn: "Final Snap Mission! 'It\'s so chewy and spicy with melted cheese!' Snap!",
+        keyVocab: 'chewy and spicy',
+        bgGradient: 'linear-gradient(135deg, #991b1b 0%, #ef4444 100%)',
+        blocks: [
+          { role: 'bb', en: "It's so", pron: '잇츠 쏘' },
+          { role: 'core', en: 'chewy and spicy', pron: '츄이 앤 스파이시' },
+          { role: 'db', en: 'with melted cheese!', pron: '위드 멜티드 치즈' }
+        ],
+        combos: [
+          { bbEn: "It's so", fullEn: "It's so chewy and spicy.", fullPron: '잇츠 쏘 츄이 앤 스파이시', ko: '진짜 쫄깃하고 매콤해.' },
+          { bbEn: 'This is', fullEn: 'This is so chewy and spicy.', fullPron: '디스 이즈 쏘 츄이 앤 스파이시', ko: '이거 완전 쫄깃하고 매콤하다.' },
+          { bbEn: 'Is it', fullEn: 'Is it so chewy and spicy?', fullPron: '이즈 잇 쏘 츄이 앤 스파이시?', ko: '그렇게 쫄깃하고 매콤해?' }
+        ],
+        quizPool: {
+          bbCandidates: ["It's so", 'This is', 'Is it'],
+          coreCandidates: ['chewy and spicy', 'crispy and savory', 'rich and comforting']
+        },
+        fullEn: "It's so chewy and spicy with melted cheese!",
+        fullPron: '잇츠 쏘 + 츄이 앤 스파이시 + 위드 멜티드 치즈!',
+        fullKo: '녹아내린 치즈 덕분에 정말 쫄깃하고 맛있게 매콤해요!'
+      }
+    ]
+  },
+
+  // ==========================================
+  // EP 6. 겉바속촉 해물파전 (Crispy Korean Seafood Pancake) - 8 Scenes (~5m 30s)
+  // ==========================================
+  {
+    id: 'korean-pancake',
+    epNumber: 'EP.06',
+    emoji: '🥞',
+    shortTitle: '🥞 Crispy K-Pancake',
+    title: 'How to Make Ultra-Crispy Korean Seafood Pancake',
+    ytTitle: 'How to Make Ultra-Crispy Korean Seafood Pancake in Easy English 🥞 | SoundBlock K-Cooking EP.06',
+    thumbnailText: 'Super Crispy Korean Pancake! [It\'s so] + [crispy on the outside]',
+    thumbnailImage: '/images/kfood/ep6-thumb.jpg',
+    introNarrationKo: "Welcome to SoundBlock K-Cooking! Today, let's make ultra-crispy Korean seafood pancakes using simple sound blocks. Let's get cooking!",
+    outroNarrationKo: "Mission complete! You've mastered all the sound blocks for crispy Korean pancakes! Subscribe and like for more delicious K-food. See you in the next video!",
+    scenes: [
+      {
+        stepTitle: 'SCENE 1 · Introduction to Crispy Pancakes',
+        visualEmojis: '🌧️ 🥞 🥢',
+        imagePath: '/images/kfood/ep6-thumb.jpg',
+        actionNote: '비 오는 날 최고의 소울푸드 전 부치기 소개',
+        coachKo: "첫 번째 코어 블록은, 바삭한 한국식 전을 만들다, 메익 크리스피 코리안 팬케익스입니다. 시작 블록을 바꿔 볼까요?",
+        coachEn: "Our core action is 'make crispy Korean pancakes'. Let's swap the starter block!",
+        missionKo: "실전 조립 미션! 비 오는 날 바삭한 한국식 전을 부칠 거예요!",
+        missionEn: "Snap Mission! 'I\'m gonna make crispy Korean pancakes for a rainy day.' Snap!",
+        keyVocab: 'make crispy Korean pancakes',
+        bgGradient: 'linear-gradient(135deg, #1e293b 0%, #334155 100%)',
+        blocks: [
+          { role: 'bb', en: "I'm gonna", pron: '암거너' },
+          { role: 'core', en: 'make crispy Korean pancakes', pron: '메익 크리스피 코리안 팬케익스' },
+          { role: 'db', en: 'for a rainy day.', pron: '포어 어 레이니 데이' }
+        ],
+        combos: [
+          { bbEn: "I'm gonna", fullEn: "I'm gonna make crispy Korean pancakes.", fullPron: '암거너 메익 크리스피 코리안 팬케익스', ko: '바삭한 전을 부칠게.' },
+          { bbEn: 'You have to', fullEn: 'You have to make crispy Korean pancakes.', fullPron: '유 햅투 메익 크리스피 코리안 팬케익스', ko: '바삭한 전을 부쳐야 해.' },
+          { bbEn: 'Do you wanna', fullEn: 'Do you wanna make crispy Korean pancakes?', fullPron: '두유 워너 메익 크리스피 코리안 팬케익스?', ko: '바삭한 전 부쳐 먹을래?' }
+        ],
+        quizPool: {
+          bbCandidates: ["I'm gonna", 'You have to', 'Do you wanna'],
+          coreCandidates: ['make crispy Korean pancakes', 'cook Korean ramen', 'slice the green onion']
+        },
+        fullEn: "I'm gonna make crispy Korean pancakes for a rainy day.",
+        fullPron: '암거너 + 메익 크리스피 코리안 팬케익스 + 포어 어 레이니 데이',
+        fullKo: '비 오는 날엔 역시 바삭한 한국식 파전을 부쳐야죠.'
+      },
+      {
+        stepTitle: 'SCENE 2 · Ice-Cold Water Secret',
+        visualEmojis: '🧊 💧 ⚡',
+        imagePath: '/images/kfood/ep6-thumb.jpg',
+        actionNote: '바삭함의 비결인 얼음물로 반죽하기',
+        coachKo: "두 번째 코어 블록은, 얼음물을 쓰다, 유즈 아이스콜드 워터입니다. 바삭함의 절대 비결!",
+        coachEn: "Our core action is 'use ice-cold water'. That's the crispy secret!",
+        missionKo: "실전 조립 미션! 극상의 바삭함을 위해 얼음물을 써야 해요!",
+        missionEn: "Snap Mission! 'You have to use ice-cold water for extra crunch.' Snap!",
+        keyVocab: 'use ice-cold water',
+        bgGradient: 'linear-gradient(135deg, #0284c7 0%, #0369a1 100%)',
+        blocks: [
+          { role: 'bb', en: 'You have to', pron: '유 햅투' },
+          { role: 'core', en: 'use ice-cold water', pron: '유즈 아이스콜드 워터' },
+          { role: 'db', en: 'for extra crunch.', pron: '포어 엑스트라 크런치' }
+        ],
+        combos: [
+          { bbEn: 'You have to', fullEn: 'You have to use ice-cold water.', fullPron: '유 햅투 유즈 아이스콜드 워터', ko: '얼음물을 써야 해.' },
+          { bbEn: "I'll", fullEn: "I'll use ice-cold water.", fullPron: '아을 유즈 아이스콜드 워터', ko: '내가 얼음물을 쓸게.' },
+          { bbEn: 'Did you', fullEn: 'Did you use ice-cold water?', fullPron: '디쥬 유즈 아이스콜드 워터?', ko: '얼음물 썼어?' }
+        ],
+        quizPool: {
+          bbCandidates: ['You have to', "I'll", 'Did you'],
+          coreCandidates: ['use ice-cold water', 'soak the rice cakes', 'season with soy sauce']
+        },
+        fullEn: 'You have to use ice-cold water for extra crunch.',
+        fullPron: '유 햅투 + 유즈 아이스콜드 워터 + 포어 엑스트라 크런치',
+        fullKo: '극강의 바삭함을 위해서는 꼭 차가운 얼음물을 써야 해요.'
+      },
+      {
+        stepTitle: 'SCENE 3 · Fresh Scallions and Seafood',
+        visualEmojis: '🦐 🦑 🧅',
+        imagePath: '/images/kfood/ep6-thumb.jpg',
+        actionNote: '신선한 쪽파와 해물 썰기',
+        coachKo: "세 번째 코어 블록은, 신선한 쪽파를 썰다, 찹 프레쉬 그린 어니언스입니다. 시작 블록을 바꿔 볼까요?",
+        coachEn: "Our core action is 'chop fresh green onions'. Let's swap!",
+        missionKo: "실전 조립 미션! 싱싱한 쪽파와 모둠 해물을 썰게요!",
+        missionEn: "Snap Mission! 'I\'ll chop fresh green onions and mixed seafood.' Snap!",
+        keyVocab: 'chop fresh green onions',
+        bgGradient: 'linear-gradient(135deg, #15803d 0%, #166534 100%)',
+        blocks: [
+          { role: 'bb', en: "I'll", pron: '아을' },
+          { role: 'core', en: 'chop fresh green onions', pron: '찹 프레쉬 그린 어니언스' },
+          { role: 'db', en: 'and mixed seafood.', pron: '앤 믹스드 씨푸드' }
+        ],
+        combos: [
+          { bbEn: "I'll", fullEn: "I'll chop fresh green onions.", fullPron: '아을 찹 프레쉬 그린 어니언스', ko: '신선한 쪽파를 썰게.' },
+          { bbEn: "We're gonna", fullEn: "We're gonna chop fresh green onions.", fullPron: '웨어 거너 찹 프레쉬 그린 어니언스', ko: '쪽파를 썰 거야.' },
+          { bbEn: 'Can you', fullEn: 'Can you chop fresh green onions?', fullPron: '캔유 찹 프레쉬 그린 어니언스?', ko: '쪽파 좀 썰어 줄래?' }
+        ],
+        quizPool: {
+          bbCandidates: ["I'll", "We're gonna", 'Can you'],
+          coreCandidates: ['chop fresh green onions', 'dissolve the sauce', 'add the rice cakes']
+        },
+        fullEn: "I'll chop fresh green onions and mixed seafood.",
+        fullPron: '아을 + 찹 프레쉬 그린 어니언스 + 앤 믹스드 씨푸드',
+        fullKo: '신선한 쪽파와 모둠 해물을 알맞게 썰어 둘게요.'
+      },
+      {
+        stepTitle: 'SCENE 4 · Heat the Pan with Plenty of Oil',
+        visualEmojis: '🍳 🫒 🔥',
+        imagePath: '/images/kfood/ep6-thumb.jpg',
+        actionNote: '기름을 넉넉히 두르고 팬 달구기',
+        coachKo: "네 번째 코어 블록은, 팬을 달구다, 히이트 더 팬입니다. 기름이 넉넉해야 바삭해요!",
+        coachEn: "Our core action is 'heat the pan'. Oil makes it super crisp!",
+        missionKo: "실전 조립 미션! 식용유를 넉넉히 두르고 팬을 달굴 거예요!",
+        missionEn: "Snap Mission! 'We\'re gonna heat the pan with plenty of cooking oil.' Snap!",
+        keyVocab: 'heat the pan',
+        bgGradient: 'linear-gradient(135deg, #ea580c 0%, #c2410c 100%)',
+        blocks: [
+          { role: 'bb', en: "We're gonna", pron: '웨어 거너' },
+          { role: 'core', en: 'heat the pan', pron: '히이트 더 팬' },
+          { role: 'db', en: 'with plenty of cooking oil.', pron: '위드 플렌티 오브 쿠킹 오일' }
+        ],
+        combos: [
+          { bbEn: "We're gonna", fullEn: "We're gonna heat the pan.", fullPron: '웨어 거너 히이트 더 팬', ko: '팬을 달굴 거야.' },
+          { bbEn: 'You have to', fullEn: 'You have to heat the pan.', fullPron: '유 햅투 히이트 더 팬', ko: '팬을 달궈야 해.' },
+          { bbEn: 'Did you', fullEn: 'Did you heat the pan?', fullPron: '디쥬 히이트 더 팬?', ko: '팬 달궜어?' }
+        ],
+        quizPool: {
+          bbCandidates: ["We're gonna", 'You have to', 'Did you'],
+          coreCandidates: ['heat the pan', 'pour the broth', 'wrap it in lettuce']
+        },
+        fullEn: "We're gonna heat the pan with plenty of cooking oil.",
+        fullPron: '웨어 거너 + 히이트 더 팬 + 위드 플렌티 오브 쿠킹 오일',
+        fullKo: '기름을 넉넉히 두르고 프라이팬을 뜨겁게 달궈 줍니다.'
+      },
+      {
+        stepTitle: 'SCENE 5 · Spread the Batter Thinly',
+        visualEmojis: '🥞 🥄 ♨️',
+        imagePath: '/images/kfood/ep6-thumb.jpg',
+        actionNote: '반죽을 얇고 넓게 펴기',
+        coachKo: "다섯 번째 코어 블록은, 반죽을 얇게 펴다, 스프레드 더 배터 띤리입니다. 시작 블록을 갈아 끼워 볼까요?",
+        coachEn: "Our core action is 'spread the batter thinly'. Let's swap!",
+        missionKo: "실전 조립 미션! 중불에서 반죽을 얇게 펴 바르는 게 좋아요!",
+        missionEn: "Snap Mission! 'You should spread the batter thinly over medium heat.' Snap!",
+        keyVocab: 'spread the batter thinly',
+        bgGradient: 'linear-gradient(135deg, #d97706 0%, #b45309 100%)',
+        blocks: [
+          { role: 'bb', en: 'You should', pron: '유 슈드' },
+          { role: 'core', en: 'spread the batter thinly', pron: '스프레드 더 배터 띤리' },
+          { role: 'db', en: 'over medium heat.', pron: '오버 미디엄 히이트' }
+        ],
+        combos: [
+          { bbEn: 'You should', fullEn: 'You should spread the batter thinly.', fullPron: '유 슈드 스프레드 더 배터 띤리', ko: '반죽을 얇게 펴는 게 좋아.' },
+          { bbEn: "I'm gonna", fullEn: "I'm gonna spread the batter thinly.", fullPron: '암거너 스프레드 더 배터 띤리', ko: '반죽을 얇게 펼게.' },
+          { bbEn: 'Can you', fullEn: 'Can you spread the batter thinly?', fullPron: '캔유 스프레드 더 배터 띤리?', ko: '반죽 얇게 펴 줄래?' }
+        ],
+        quizPool: {
+          bbCandidates: ['You should', "I'm gonna", 'Can you'],
+          coreCandidates: ['spread the batter thinly', 'boil the noodles', 'take a sip']
+        },
+        fullEn: 'You should spread the batter thinly over medium heat.',
+        fullPron: '유 슈드 + 스프레드 더 배터 띤리 + 오버 미디엄 히이트',
+        fullKo: '중불 위에서 반죽을 최대한 얇고 고르게 펴 주세요.'
+      },
+      {
+        stepTitle: 'SCENE 6 · The Golden Flip',
+        visualEmojis: '🍳 🔄 🏆',
+        imagePath: '/images/kfood/ep6-thumb.jpg',
+        actionNote: '노릇노릇할 때 완벽한 뒤집기 한 판',
+        coachKo: "여섯 번째 코어 블록은, 뒤집다, 플립 잇 오버입니다. 타이밍이 생명!",
+        coachEn: "Our core action is 'flip it over'. Timing is key!",
+        missionKo: "실전 조립 미션! 노릇하고 바삭해졌을 때 뒤집어야 해요!",
+        missionEn: "Snap Mission! 'We have to flip it over when golden and crisp.' Snap!",
+        keyVocab: 'flip it over',
+        bgGradient: 'linear-gradient(135deg, #b45309 0%, #78350f 100%)',
+        blocks: [
+          { role: 'bb', en: 'We have to', pron: '위 햅투' },
+          { role: 'core', en: 'flip it over', pron: '플립 잇 오버' },
+          { role: 'db', en: 'when golden and crisp.', pron: '웬 골든 앤 크리스프' }
+        ],
+        combos: [
+          { bbEn: 'We have to', fullEn: 'We have to flip it over.', fullPron: '위 햅투 플립 잇 오버', ko: '뒤집어야 해.' },
+          { bbEn: 'You can', fullEn: 'You can flip it over.', fullPron: '유 캔 플립 잇 오버', ko: '뒤집으셔도 돼요.' },
+          { bbEn: 'Are you gonna', fullEn: 'Are you gonna flip it over?', fullPron: '아유 거너 플립 잇 오버?', ko: '뒤집을 거야?' }
+        ],
+        quizPool: {
+          bbCandidates: ['We have to', 'You can', 'Are you gonna'],
+          coreCandidates: ['flip it over', 'chop the kimchi', 'simmer on medium heat']
+        },
+        fullEn: 'We have to flip it over when golden and crisp.',
+        fullPron: '위 햅투 + 플립 잇 오버 + 웬 골든 앤 크리스프',
+        fullKo: '바닥면이 노릇노릇하고 바삭해졌을 때 한 번에 싹 뒤집어 줍니다.'
+      },
+      {
+        stepTitle: 'SCENE 7 · Tangy Soy Dipping Sauce',
+        visualEmojis: '🥢 🥣 🧅',
+        imagePath: '/images/kfood/ep6-thumb.jpg',
+        actionNote: '식초와 고춧가루 넣은 초간장 만들기',
+        coachKo: "일곱 번째 코어 블록은, 간장에 식초를 섞다, 믹스 소이 소스 위드 비네거입니다. 전의 최고 단짝!",
+        coachEn: "Our core action is 'mix soy sauce with vinegar'. Let's swap!",
+        missionKo: "실전 조립 미션! 간장에 식초와 고춧가루를 섞을게요!",
+        missionEn: "Snap Mission! 'I\'m gonna mix soy sauce with vinegar and chili.' Snap!",
+        keyVocab: 'mix soy sauce with vinegar',
+        bgGradient: 'linear-gradient(135deg, #3f3f46 0%, #18181b 100%)',
+        blocks: [
+          { role: 'bb', en: "I'm gonna", pron: '암거너' },
+          { role: 'core', en: 'mix soy sauce with vinegar', pron: '믹스 소이 소스 위드 비네거' },
+          { role: 'db', en: 'and chili.', pron: '앤 칠리' }
+        ],
+        combos: [
+          { bbEn: "I'm gonna", fullEn: "I'm gonna mix soy sauce with vinegar.", fullPron: '암거너 믹스 소이 소스 위드 비네거', ko: '간장에 식초를 섞을게.' },
+          { bbEn: 'You have to', fullEn: 'You have to mix soy sauce with vinegar.', fullPron: '유 햅투 믹스 소이 소스 위드 비네거', ko: '간장에 식초를 섞어야 해.' },
+          { bbEn: 'Can you', fullEn: 'Can you mix soy sauce with vinegar?', fullPron: '캔유 믹스 소이 소스 위드 비네거?', ko: '초간장 좀 섞어 줄래?' }
+        ],
+        quizPool: {
+          bbCandidates: ["I'm gonna", 'You have to', 'Can you'],
+          coreCandidates: ['mix soy sauce with vinegar', 'sprinkle mozzarella cheese', 'stir-fry marinated beef']
+        },
+        fullEn: "I'm gonna mix soy sauce with vinegar and chili.",
+        fullPron: '암거너 + 믹스 소이 소스 위드 비네거 + 앤 칠리',
+        fullKo: '간장에 식초와 고춧가루를 타서 새콤짭조름한 초간장을 만들게요.'
+      },
+      {
+        stepTitle: 'SCENE 8 · Crispy Outside & Soft Inside',
+        visualEmojis: '🥢 😋 🌟',
+        imagePath: '/images/kfood/ep6-thumb.jpg',
+        actionNote: '초간장 찍어서 겉바속촉 한 입 먹방 리액션',
+        coachKo: "여덟 번째 코어 리액션은, 겉은 바삭하다, 크리스피 온 디 아웃사이드입니다! 겉바속촉의 정석!",
+        coachEn: "Our core reaction is 'crispy on the outside'. The ultimate crunch!",
+        missionKo: "마지막 실전 조립! 겉은 진짜 바삭하고 속은 부드러워요!",
+        missionEn: "Final Snap Mission! 'It\'s so crispy on the outside and tender inside!' Snap!",
+        keyVocab: 'crispy on the outside',
+        bgGradient: 'linear-gradient(135deg, #78350f 0%, #d97706 100%)',
+        blocks: [
+          { role: 'bb', en: "It's so", pron: '잇츠 쏘' },
+          { role: 'core', en: 'crispy on the outside', pron: '크리스피 온 디 아웃사이드' },
+          { role: 'db', en: 'and tender inside!', pron: '앤 텐더 인사이드' }
+        ],
+        combos: [
+          { bbEn: "It's so", fullEn: "It's so crispy on the outside.", fullPron: '잇츠 쏘 크리스피 온 디 아웃사이드', ko: '겉이 정말 바삭해.' },
+          { bbEn: 'This is', fullEn: 'This is so crispy on the outside.', fullPron: '디스 이즈 쏘 크리스피 온 디 아웃사이드', ko: '이거 겉이 완전 바삭하다.' },
+          { bbEn: "Isn't it", fullEn: "Isn't it crispy on the outside?", fullPron: '이즌 잇 크리스피 온 디 아웃사이드?', ko: '겉이 정말 바삭하지 않니?' }
+        ],
+        quizPool: {
+          bbCandidates: ["It's so", 'This is', "Isn't it"],
+          coreCandidates: ['crispy on the outside', 'chewy and spicy', 'savory and delicious']
+        },
+        fullEn: "It's so crispy on the outside and tender inside!",
+        fullPron: '잇츠 쏘 + 크리스피 온 디 아웃사이드 + 앤 텐더 인사이드!',
+        fullKo: '초간장에 찍어 먹으니 겉은 바삭바삭하고 속은 촉촉해요!'
+      }
+    ]
+  },
+
+  // ==========================================
+  // EP 7. 잔치 잡채 (Authentic Korean Japchae) - 8 Scenes (~5m 30s)
+  // ==========================================
+  {
+    id: 'japchae',
+    epNumber: 'EP.07',
+    emoji: '🥢',
+    shortTitle: '🥢 Festive Japchae',
+    title: 'How to Make Authentic Korean Japchae Glass Noodles',
+    ytTitle: 'How to Make Authentic Korean Japchae in Easy English 🥢 | SoundBlock K-Cooking EP.07',
+    thumbnailText: 'Authentic Korean Japchae! [We\'re gonna] + [make authentic Korean Japchae]',
+    thumbnailImage: '/images/kfood/ep7-thumb.jpg',
+    introNarrationKo: "Welcome to SoundBlock K-Cooking! Today, let's make authentic Korean festive Japchae glass noodles using sound blocks. Let's get cooking!",
+    outroNarrationKo: "Mission complete! You've mastered all the sound blocks for traditional Korean Japchae! Subscribe and like for more delicious K-food. See you next time!",
+    scenes: [
+      {
+        stepTitle: 'SCENE 1 · Festive Japchae Feast',
+        visualEmojis: '🎉 🥢 🥩',
+        imagePath: '/images/kfood/ep7-thumb.jpg',
+        actionNote: '잔칫날이나 특별한 날 만드는 고급 잡채 소개',
+        coachKo: "첫 번째 코어 블록은, 정통 한국 잡채를 만들다, 메익 어센틱 코리안 잡채입니다. 시작 블록을 바꿔 볼까요?",
+        coachEn: "Our core action is 'make authentic Korean Japchae'. Let's swap the starter block!",
+        missionKo: "실전 조립 미션! 잔칫상을 위해 정통 한국 잡채를 만들 거예요!",
+        missionEn: "Snap Mission! 'We\'re gonna make authentic Korean Japchae for a feast.' Snap!",
+        keyVocab: 'make authentic Korean Japchae',
+        bgGradient: 'linear-gradient(135deg, #1e1b4b 0%, #312e81 100%)',
+        blocks: [
+          { role: 'bb', en: "We're gonna", pron: '웨어 거너' },
+          { role: 'core', en: 'make authentic Korean Japchae', pron: '메익 어센틱 코리안 잡채' },
+          { role: 'db', en: 'for a feast.', pron: '포어 어 피이스트' }
+        ],
+        combos: [
+          { bbEn: "We're gonna", fullEn: "We're gonna make authentic Korean Japchae.", fullPron: '웨어 거너 메익 어센틱 코리안 잡채', ko: '정통 잡채를 만들 거야.' },
+          { bbEn: "I'm gonna", fullEn: "I'm gonna make authentic Korean Japchae.", fullPron: '암거너 메익 어센틱 코리안 잡채', ko: '내가 정통 잡채를 만들게.' },
+          { bbEn: 'Do you wanna', fullEn: 'Do you wanna make authentic Korean Japchae?', fullPron: '두유 워너 메익 어센틱 코리안 잡채?', ko: '정통 잡채 만들어 볼래?' }
+        ],
+        quizPool: {
+          bbCandidates: ["We're gonna", "I'm gonna", 'Do you wanna'],
+          coreCandidates: ['make authentic Korean Japchae', 'make crispy Korean pancakes', 'cook Korean ramen']
+        },
+        fullEn: "We're gonna make authentic Korean Japchae for a feast.",
+        fullPron: '웨어 거너 + 메익 어센틱 코리안 잡채 + 포어 어 피이스트',
+        fullKo: '특별한 날을 위해 알록달록 맛있는 정통 잡채를 만들 거예요.'
+      },
+      {
+        stepTitle: 'SCENE 2 · Boil Chewy Glass Noodles',
+        visualEmojis: '🥢 ♨️ ⏱️',
+        imagePath: '/images/kfood/ep7-thumb.jpg',
+        actionNote: '쫄깃한 고구마 당면을 딱 7분간 삶기',
+        coachKo: "두 번째 코어 블록은, 당면을 삶다, 보일 더 글래스 누들스입니다. 7분이 황금 시간!",
+        coachEn: "Our core action is 'boil the glass noodles'. Seven minutes is perfect!",
+        missionKo: "실전 조립 미션! 딱 7분 동안 당면을 삶아야 해요!",
+        missionEn: "Snap Mission! 'You have to boil the glass noodles for seven minutes.' Snap!",
+        keyVocab: 'boil the glass noodles',
+        bgGradient: 'linear-gradient(135deg, #0f766e 0%, #115e59 100%)',
+        blocks: [
+          { role: 'bb', en: 'You have to', pron: '유 햅투' },
+          { role: 'core', en: 'boil the glass noodles', pron: '보일 더 글래스 누들스' },
+          { role: 'db', en: 'for seven minutes.', pron: '포어 세븐 미닛츠' }
+        ],
+        combos: [
+          { bbEn: 'You have to', fullEn: 'You have to boil the glass noodles.', fullPron: '유 햅투 보일 더 글래스 누들스', ko: '당면을 삶아야 해.' },
+          { bbEn: "I'll", fullEn: "I'll boil the glass noodles.", fullPron: '아을 보일 더 글래스 누들스', ko: '내가 당면을 삶을게.' },
+          { bbEn: 'Did you', fullEn: 'Did you boil the glass noodles?', fullPron: '디쥬 보일 더 글래스 누들스?', ko: '당면 삶았어?' }
+        ],
+        quizPool: {
+          bbCandidates: ['You have to', "I'll", 'Did you'],
+          coreCandidates: ['boil the glass noodles', 'use ice-cold water', 'soak the rice cakes']
+        },
+        fullEn: 'You have to boil the glass noodles for seven minutes.',
+        fullPron: '유 햅투 + 보일 더 글래스 누들스 + 포어 세븐 미닛츠',
+        fullKo: '쫄깃한 식감을 위해 당면을 끓는 물에 딱 7분간 삶아 주어야 해요.'
+      },
+      {
+        stepTitle: 'SCENE 3 · Rinse in Cold Water',
+        visualEmojis: '🚰 💧 🧊',
+        imagePath: '/images/kfood/ep7-thumb.jpg',
+        actionNote: '찬물에 헹궈 전분기를 빼고 물기 털기',
+        coachKo: "세 번째 코어 블록은, 찬물에 헹구다, 린스 뎀 인 콜드 워터입니다. 쫄깃함 유지 비결!",
+        coachEn: "Our core action is 'rinse them in cold water'. Keeps them chewy!",
+        missionKo: "실전 조립 미션! 찬물에 헹궈서 물기를 쏙 뺄게요!",
+        missionEn: "Snap Mission! 'I\'ll rinse them in cold water and drain well.' Snap!",
+        keyVocab: 'rinse them in cold water',
+        bgGradient: 'linear-gradient(135deg, #0369a1 0%, #075985 100%)',
+        blocks: [
+          { role: 'bb', en: "I'll", pron: '아을' },
+          { role: 'core', en: 'rinse them in cold water', pron: '린스 뎀 인 콜드 워터' },
+          { role: 'db', en: 'and drain well.', pron: '앤 드레인 웰' }
+        ],
+        combos: [
+          { bbEn: "I'll", fullEn: "I'll rinse them in cold water.", fullPron: '아을 린스 뎀 인 콜드 워터', ko: '찬물에 헹굴게.' },
+          { bbEn: 'We have to', fullEn: 'We have to rinse them in cold water.', fullPron: '위 햅투 린스 뎀 인 콜드 워터', ko: '찬물에 헹궈야 해.' },
+          { bbEn: 'Can you', fullEn: 'Can you rinse them in cold water?', fullPron: '캔유 린스 뎀 인 콜드 워터?', ko: '찬물에 좀 헹궈 줄래?' }
+        ],
+        quizPool: {
+          bbCandidates: ["I'll", 'We have to', 'Can you'],
+          coreCandidates: ['rinse them in cold water', 'heat the pan', 'dissolve the sauce']
+        },
+        fullEn: "I'll rinse them in cold water and drain well.",
+        fullPron: '아을 + 린스 뎀 인 콜드 워터 + 앤 드레인 웰',
+        fullKo: '삶은 당면을 찬물에 헹궈 전분기를 씻고 물기를 털어 둡니다.'
+      },
+      {
+        stepTitle: 'SCENE 4 · Sauté Colorful Vegetables',
+        visualEmojis: '🥕 🫑 🧅',
+        imagePath: '/images/kfood/ep7-thumb.jpg',
+        actionNote: '당근, 파프리카, 양파, 시금치 채소 볶기',
+        coachKo: "네 번째 코어 블록은, 알록달록 채소를 볶다, 쏘테이 컬러풀 페퍼스입니다. 색감이 화려하죠!",
+        coachEn: "Our core action is 'sauté colorful peppers'. Look at those bright colors!",
+        missionKo: "실전 조립 미션! 다채로운 파프리카와 양파를 볶아야 해요!",
+        missionEn: "Snap Mission! 'We have to sauté colorful peppers and sliced onions.' Snap!",
+        keyVocab: 'sauté colorful peppers',
+        bgGradient: 'linear-gradient(135deg, #15803d 0%, #166534 100%)',
+        blocks: [
+          { role: 'bb', en: 'We have to', pron: '위 햅투' },
+          { role: 'core', en: 'sauté colorful peppers', pron: '쏘테이 컬러풀 페퍼스' },
+          { role: 'db', en: 'and sliced onions.', pron: '앤 슬라이스드 어니언스' }
+        ],
+        combos: [
+          { bbEn: 'We have to', fullEn: 'We have to sauté colorful peppers.', fullPron: '위 햅투 쏘테이 컬러풀 페퍼스', ko: '알록달록 채소를 볶아야 해.' },
+          { bbEn: "I'm gonna", fullEn: "I'm gonna sauté colorful peppers.", fullPron: '암거너 쏘테이 컬러풀 페퍼스', ko: '채소를 볶을게.' },
+          { bbEn: 'Did you', fullEn: 'Did you sauté colorful peppers?', fullPron: '디쥬 쏘테이 컬러풀 페퍼스?', ko: '채소 볶았어?' }
+        ],
+        quizPool: {
+          bbCandidates: ['We have to', "I'm gonna", 'Did you'],
+          coreCandidates: ['sauté colorful peppers', 'spread the batter thinly', 'add the rice cakes']
+        },
+        fullEn: 'We have to sauté colorful peppers and sliced onions.',
+        fullPron: '위 햅투 + 쏘테이 컬러풀 페퍼스 + 앤 슬라이스드 어니언스',
+        fullKo: '채 썬 파프리카와 양파, 시금치를 색감이 살도록 볶아 줍니다.'
+      },
+      {
+        stepTitle: 'SCENE 5 · Stir-Fry Beef and Mushrooms',
+        visualEmojis: '🥩 🍄 🔥',
+        imagePath: '/images/kfood/ep7-thumb.jpg',
+        actionNote: '양념 소고기와 표고버섯 볶기',
+        coachKo: "다섯 번째 코어 블록은, 양념 소고기를 볶다, 스터 프라이 매리네이티드 비이프입니다. 고기 향이 일품!",
+        coachEn: "Our core action is 'stir-fry marinated beef'. Smells amazing!",
+        missionKo: "실전 조립 미션! 양념 소고기와 표고버섯을 볶을 거예요!",
+        missionEn: "Snap Mission! 'I\'m gonna stir-fry marinated beef with shiitake mushrooms.' Snap!",
+        keyVocab: 'stir-fry marinated beef',
+        bgGradient: 'linear-gradient(135deg, #7c2d12 0%, #451a03 100%)',
+        blocks: [
+          { role: 'bb', en: "I'm gonna", pron: '암거너' },
+          { role: 'core', en: 'stir-fry marinated beef', pron: '스터 프라이 매리네이티드 비이프' },
+          { role: 'db', en: 'with shiitake mushrooms.', pron: '위드 시이타케 머쉬룸스' }
+        ],
+        combos: [
+          { bbEn: "I'm gonna", fullEn: "I'm gonna stir-fry marinated beef.", fullPron: '암거너 스터 프라이 매리네이티드 비이프', ko: '양념 소고기를 볶을게.' },
+          { bbEn: 'You have to', fullEn: 'You have to stir-fry marinated beef.', fullPron: '유 햅투 스터 프라이 매리네이티드 비이프', ko: '양념 소고기를 볶아야 해.' },
+          { bbEn: 'Are you gonna', fullEn: 'Are you gonna stir-fry marinated beef?', fullPron: '아유 거너 스터 프라이 매리네이티드 비이프?', ko: '양념 소고기 볶을 거야?' }
+        ],
+        quizPool: {
+          bbCandidates: ["I'm gonna", 'You have to', 'Are you gonna'],
+          coreCandidates: ['stir-fry marinated beef', 'flip it over', 'pour the broth']
+        },
+        fullEn: "I'm gonna stir-fry marinated beef with shiitake mushrooms.",
+        fullPron: '암거너 + 스터 프라이 매리네이티드 비이프 + 위드 시이타케 머쉬룸스',
+        fullKo: '간장 양념한 소고기와 표고버섯을 센 불에 달달 볶아 줄게요.'
+      },
+      {
+        stepTitle: 'SCENE 6 · Combine in a Large Bowl',
+        visualEmojis: '🥣 🥢 ✨',
+        imagePath: '/images/kfood/ep7-thumb.jpg',
+        actionNote: '큰 볼에 당면과 볶은 모든 재료 합치기',
+        coachKo: "여섯 번째 코어 블록은, 모든 재료를 합치다, 컴바인 올 디 인그리디언츠입니다. 큰 볼에 모아 볼까요?",
+        coachEn: "Our core action is 'combine all the ingredients'. Let's mix!",
+        missionKo: "실전 조립 미션! 큰 볼에 모든 재료를 다 합칠 수 있어요!",
+        missionEn: "Snap Mission! 'You can combine all the ingredients in a large bowl.' Snap!",
+        keyVocab: 'combine all the ingredients',
+        bgGradient: 'linear-gradient(135deg, #4c1d95 0%, #581c87 100%)',
+        blocks: [
+          { role: 'bb', en: 'You can', pron: '유 캔' },
+          { role: 'core', en: 'combine all the ingredients', pron: '컴바인 올 디 인그리디언츠' },
+          { role: 'db', en: 'in a large bowl.', pron: '인 어 라아지 볼' }
+        ],
+        combos: [
+          { bbEn: 'You can', fullEn: 'You can combine all the ingredients.', fullPron: '유 캔 컴바인 올 디 인그리디언츠', ko: '모든 재료를 합치시면 돼요.' },
+          { bbEn: "We're gonna", fullEn: "We're gonna combine all the ingredients.", fullPron: '웨어 거너 컴바인 올 디 인그리디언츠', ko: '모든 재료를 합칠 거야.' },
+          { bbEn: 'Can you', fullEn: 'Can you combine all the ingredients?', fullPron: '캔유 컴바인 올 디 인그리디언츠?', ko: '재료들 좀 합쳐 줄래?' }
+        ],
+        quizPool: {
+          bbCandidates: ['You can', "We're gonna", 'Can you'],
+          coreCandidates: ['combine all the ingredients', 'mix soy sauce with vinegar', 'simmer on medium heat']
+        },
+        fullEn: 'You can combine all the ingredients in a large bowl.',
+        fullPron: '유 캔 + 컴바인 올 디 인그리디언츠 + 인 어 라아지 볼',
+        fullKo: '커다란 믹싱 볼에 삶은 당면과 볶은 고기, 채소를 한데 담습니다.'
+      },
+      {
+        stepTitle: 'SCENE 7 · Sweet Soy & Fragrant Sesame Oil',
+        visualEmojis: '🍶 🫒 🤎',
+        imagePath: '/images/kfood/ep7-thumb.jpg',
+        actionNote: '단짠 간장과 고소한 참깨, 참기름으로 버무리기',
+        coachKo: "일곱 번째 코어 블록은, 달콤한 간장으로 간하다, 시즌 위드 스위트 소이 소오스입니다. 윤기 좌르르!",
+        coachEn: "Our core action is 'season with sweet soy sauce'. The secret glaze!",
+        missionKo: "실전 조립 미션! 달콤한 간장 소스와 참기름으로 간을 맞출 거예요!",
+        missionEn: "Snap Mission! 'We\'re gonna season with sweet soy sauce and sesame oil.' Snap!",
+        keyVocab: 'season with sweet soy sauce',
+        bgGradient: 'linear-gradient(135deg, #78350f 0%, #451a03 100%)',
+        blocks: [
+          { role: 'bb', en: "We're gonna", pron: '웨어 거너' },
+          { role: 'core', en: 'season with sweet soy sauce', pron: '시즌 위드 스위트 소이 소오스' },
+          { role: 'db', en: 'and sesame oil.', pron: '앤 세서미 오일' }
+        ],
+        combos: [
+          { bbEn: "We're gonna", fullEn: "We're gonna season with sweet soy sauce.", fullPron: '웨어 거너 시즌 위드 스위트 소이 소오스', ko: '달콤한 간장으로 간할 거야.' },
+          { bbEn: "I'm gonna", fullEn: "I'm gonna season with sweet soy sauce.", fullPron: '암거너 시즌 위드 스위트 소이 소오스', ko: '간장 양념으로 간을 맞출게.' },
+          { bbEn: 'Did you', fullEn: 'Did you season with sweet soy sauce?', fullPron: '디쥬 시즌 위드 스위트 소이 소오스?', ko: '간장 양념으로 간했어?' }
+        ],
+        quizPool: {
+          bbCandidates: ["We're gonna", "I'm gonna", 'Did you'],
+          coreCandidates: ['season with sweet soy sauce', 'soak the rice cakes', 'spread the batter thinly']
+        },
+        fullEn: "We're gonna season with sweet soy sauce and sesame oil.",
+        fullPron: '웨어 거너 + 시즌 위드 스위트 소이 소오스 + 앤 세서미 오일',
+        fullKo: '진간장, 설탕, 고소한 참기름을 듬뿍 두르고 손으로 골고루 버무려 줍니다.'
+      },
+      {
+        stepTitle: 'SCENE 8 · Savory & Glossy Reaction',
+        visualEmojis: '🥢 😋 👑',
+        imagePath: '/images/kfood/ep7-thumb.jpg',
+        actionNote: '윤기 흐르는 잡채 한 젓가락 시식 리액션',
+        coachKo: "여덟 번째 코어 리액션은, 감칠맛 나고 맛있다, 세이보리 앤 딜리셔스입니다! 풍성한 잔칫상 맛!",
+        coachEn: "Our core reaction is 'savory and delicious'. Perfect festival flavor!",
+        missionKo: "마지막 실전 조립! 한 입 먹을 때마다 감칠맛 나고 맛있어요!",
+        missionEn: "Final Snap Mission! 'It tastes so savory and delicious with every bite!' Snap!",
+        keyVocab: 'savory and delicious',
+        bgGradient: 'linear-gradient(135deg, #b45309 0%, #ca8a04 100%)',
+        blocks: [
+          { role: 'bb', en: 'It tastes so', pron: '잇 테이스트 쏘' },
+          { role: 'core', en: 'savory and delicious', pron: '세이보리 앤 딜리셔스' },
+          { role: 'db', en: 'with every bite!', pron: '위드 에브리 바이트' }
+        ],
+        combos: [
+          { bbEn: 'It tastes so', fullEn: 'It tastes so savory and delicious.', fullPron: '잇 테이스트 쏘 세이보리 앤 딜리셔스', ko: '정말 감칠맛 나고 맛있어.' },
+          { bbEn: 'This is', fullEn: 'This is so savory and delicious.', fullPron: '디스 이즈 쏘 세이보리 앤 딜리셔스', ko: '이거 완전 감칠맛 나고 맛있다.' },
+          { bbEn: "Doesn't it taste", fullEn: "Doesn't it taste savory and delicious?", fullPron: '더즌 잇 테이스트 세이보리 앤 딜리셔스?', ko: '진짜 감칠맛 나고 맛있지 않니?' }
+        ],
+        quizPool: {
+          bbCandidates: ['It tastes so', 'This is', "Doesn't it taste"],
+          coreCandidates: ['savory and delicious', 'chewy and spicy', 'crispy on the outside']
+        },
+        fullEn: 'It tastes so savory and delicious with every bite!',
+        fullPron: '잇 테이스트 쏘 + 세이보리 앤 딜리셔스 + 위드 에브리 바이트!',
+        fullKo: '탱글탱글한 당면에 참기름 향이 배어 한 입 먹을 때마다 감칠맛이 폭발해요!'
+      }
+    ]
   }
+
 ]
 
 const currentEpId = ref(episodes[0].id)
@@ -2395,7 +3145,10 @@ function getEpisodeTags(ep: CookingEpisode): string {
     'kimchi-stew': ['kimchi stew', 'how to make kimchi stew', 'authentic kimchi stew recipe', 'kimchi jjigae recipe', 'kimchi soup in english'],
     'kimchi-fried-rice': ['kimchi fried rice', 'easy kimchi fried rice', 'how to make kimchi fried rice', '5 minute kimchi fried rice', 'bokkeumbap recipe'],
     'korean-ramen': ['korean ramen', 'korean ramyeon', 'how to cook korean ramen', 'how to cook shin ramen', 'k-ramen recipe'],
-    'bulgogi-bbq': ['korean bulgogi', 'bulgogi beef recipe', 'korean bbq beef', 'how to make bulgogi', 'ssam lettuce wrap']
+    'bulgogi-bbq': ['korean bulgogi', 'bulgogi beef recipe', 'korean bbq beef', 'how to make bulgogi', 'ssam lettuce wrap'],
+    'tteokbokki': ['tteokbokki recipe', 'how to make tteokbokki', 'spicy tteokbokki', 'cheese tteokbokki', 'korean rice cakes in english'],
+    'korean-pancake': ['korean pancake recipe', 'crispy pajeon', 'haemul pajeon recipe', 'how to make korean pancake', 'kimchijeon recipe'],
+    'japchae': ['japchae recipe', 'how to make japchae', 'korean glass noodles recipe', 'traditional japchae', 'sweet potato noodles']
   }
   const dishSpecific = specificTagsMap[ep.id] || [dish.toLowerCase(), `how to cook ${dish.toLowerCase()}`, `${dish.toLowerCase()} recipe`]
   const globalTags = [
