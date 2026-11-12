@@ -298,14 +298,17 @@
                STAGE 2: 실전 자석 합체 미션 (Magnet Snap Quiz)
                ============================================================ -->
           <div v-else-if="activeStage === 'quiz'" class="kf-lower-third kf-quiz-stage">
-            <!-- 1) 깔끔하게 통합된 단일 목표 문장 헤더 -->
+            <!-- 1) 퀴즈형 미션 배너 (정답 직접 노출 대신 빈칸 챌린지 + 핵심 단서 제공) -->
             <div class="kf-mission-banner" @click="playMissionAudio">
               <span class="m-badge">🎯 MISSION</span>
-              <span class="m-text">Assemble: <strong>"{{ currentScene.fullEn }}"</strong></span>
+              <span class="m-text">
+                Snap: <strong class="m-puzzle">[ ? ] + [ ? ] + "{{ currentScene.blocks[2]?.en || '...' }}"</strong>
+                <span class="m-clue">💡 Clue: <strong>{{ currentScene.keyVocab }}</strong></span>
+              </span>
               <span class="m-listen">🔊 Listen</span>
             </div>
 
-            <!-- 2) 자석 결합 타겟 슬롯 (도톰한 레고 마그넷 블록) -->
+            <!-- 2) 자석 결합 타겟 슬롯 (블록별 화사한 테마 컬러 & 겹침 방지 여백) -->
             <div class="kf-snap-target-row" :class="{ snapped: isSnapped }">
               <div
                 class="snap-slot slot-bb"
@@ -314,7 +317,9 @@
                 @click="clearPicked('bb')"
               >
                 <span class="slot-badge">① 1st Block</span>
-                <span class="slot-word">{{ isSnapped ? currentScene.blocks[0].en : (pickedBb || '?') }}</span>
+                <span class="slot-word" :class="{ 'is-qmark': !isSnapped && !pickedBb }">
+                  {{ isSnapped ? currentScene.blocks[0].en : (pickedBb || '?') }}
+                </span>
               </div>
               <span class="snap-plus">+</span>
               <div
@@ -324,19 +329,21 @@
                 @click="clearPicked('core')"
               >
                 <span class="slot-badge">② Core Action</span>
-                <span class="slot-word">{{ isSnapped ? currentScene.blocks[1].en : (pickedCore || '?') }}</span>
+                <span class="slot-word" :class="{ 'is-qmark': !isSnapped && !pickedCore }">
+                  {{ isSnapped ? currentScene.blocks[1].en : (pickedCore || '?') }}
+                </span>
               </div>
               <span class="snap-plus">+</span>
               <div class="snap-slot slot-db" :class="{ 'is-filled': isSnapped }">
-                <span class="slot-badge">③ Detail</span>
-                <span class="slot-word">{{ isSnapped ? currentScene.blocks[2].en : '...' }}</span>
+                <span class="slot-badge">③ Detail Block</span>
+                <span class="slot-word">{{ currentScene.blocks[2]?.en || '...' }}</span>
               </div>
             </div>
 
-            <!-- 3) 후보 블록 풀 (카테고리별 시원하고 큼직한 레고 블록 선택 패널) -->
+            <!-- 3) 후보 블록 풀 (알록달록 산뜻한 레고 컬러 테마) -->
             <div class="kf-candidate-pool">
               <!-- 행 1: 1st Starter Block 후보 -->
-              <div class="cand-row">
+              <div class="cand-row row-bb">
                 <div class="cand-badge-col">
                   <span class="cand-sec-badge badge-bb">① 1st Block</span>
                 </div>
@@ -358,7 +365,7 @@
               </div>
 
               <!-- 행 2: Core Action Block 후보 -->
-              <div class="cand-row">
+              <div class="cand-row row-core">
                 <div class="cand-badge-col">
                   <span class="cand-sec-badge badge-core">② Core Action</span>
                 </div>
@@ -378,11 +385,6 @@
                   </button>
                 </div>
               </div>
-            </div>
-
-            <!-- 4) 합체 완료 문장 배너 (겹침 0% · 시원하고 아름다운 완성 문장 단일 출력) -->
-            <div v-if="isSnapped" class="kf-quiz-complete-bar" @click="speakSceneSentence(1.0)">
-              <div class="qc-en">✨ PERFECT SNAP! 🧲 <strong>{{ currentScene.fullEn }}</strong></div>
             </div>
           </div>
 
@@ -4278,34 +4280,54 @@ onBeforeUnmount(() => {
   border-radius: 14px;
 }
 
+.theater-fullscreen .m-text {
+  font-size: 1.65rem;
+}
+
+.theater-fullscreen .m-puzzle {
+  font-size: 1.85rem;
+}
+
+.theater-fullscreen .m-clue {
+  font-size: 1.55rem;
+}
+
+.theater-fullscreen .snap-slot {
+  min-height: 120px;
+  padding: 0.95rem 1.25rem;
+  border-radius: 18px;
+  gap: 0.65rem;
+}
+
 .theater-fullscreen .slot-badge {
-  font-size: 1.35rem;
+  font-size: 1.55rem;
 }
 
 .theater-fullscreen .slot-word {
-  font-size: 3.1rem;
+  font-size: 2.35rem;
+  line-height: 1.25;
+}
+
+.theater-fullscreen .slot-word.is-qmark {
+  font-size: 2.85rem;
 }
 
 .theater-fullscreen .cand-row {
-  padding: 0.95rem 1.5rem;
-  border-radius: 20px;
-  gap: 1.5rem;
+  padding: 0.75rem 1.25rem;
+  border-radius: 18px;
+  gap: 1.25rem;
 }
 
 .theater-fullscreen .cand-sec-badge {
-  font-size: 1.85rem;
-  padding: 0.85rem 1.85rem;
-  border-radius: 16px;
+  font-size: 1.65rem;
+  padding: 0.75rem 1.65rem;
+  border-radius: 14px;
 }
 
 .theater-fullscreen .cand-btn {
-  font-size: 2.65rem;
-  padding: 1.15rem 2.0rem;
-  border-radius: 18px;
-}
-
-.theater-fullscreen .qc-en {
-  font-size: 3.15rem;
+  font-size: 2.25rem;
+  padding: 0.95rem 1.6rem;
+  border-radius: 16px;
 }
 
 /* STAGE 3: 완성 문장 & 소리 블록 대왕 폰트 */
