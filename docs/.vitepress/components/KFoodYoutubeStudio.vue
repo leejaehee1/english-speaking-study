@@ -3002,11 +3002,11 @@ onBeforeUnmount(() => {
 
 .kf-snap-target-row {
   display: flex;
-  align-items: center;
-  gap: 0.55rem;
-  padding: 0.6rem 0.8rem;
-  background: rgba(15, 23, 42, 0.85);
-  border-radius: 12px;
+  align-items: stretch;
+  gap: 0.75rem;
+  padding: 0.75rem 1.1rem;
+  background: rgba(15, 23, 42, 0.75);
+  border-radius: 18px;
   border: 2px dashed rgba(255, 255, 255, 0.25);
   transition: all 0.3s ease;
 }
@@ -3014,148 +3014,223 @@ onBeforeUnmount(() => {
 .kf-snap-target-row.snapped {
   border-style: solid;
   border-color: #fde047;
-  background: rgba(30, 41, 59, 0.95);
-  box-shadow: 0 0 20px rgba(250, 204, 21, 0.35);
+  background: rgba(15, 23, 42, 0.92);
+  box-shadow: 0 0 25px rgba(250, 204, 21, 0.45);
 }
 
+/* 🌟 회색 대신 선명한 블루 / 그린 / 오렌지 고유 레고 블록 색상 탑재 */
 .snap-slot {
   flex: 1;
-  padding: 0.5rem 0.75rem;
-  border-radius: 10px;
-  background: rgba(255, 255, 255, 0.08);
+  min-height: 90px;
+  padding: 0.75rem 0.95rem;
+  border-radius: 14px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.15rem;
-  transition: all 0.25s ease;
+  justify-content: center;
+  gap: 0.45rem;
+  text-align: center;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
 }
 
+.slot-bb {
+  background: rgba(29, 78, 216, 0.5) !important;
+  border: 2.5px dashed #60a5fa !important;
+}
+.slot-bb .slot-badge {
+  color: #bfdbfe !important;
+}
 .slot-bb.is-filled {
-  background: #2563eb;
+  background: #2563eb !important;
+  border: 2.5px solid #93c5fd !important;
+  box-shadow: 0 0 22px rgba(37, 99, 235, 0.75) !important;
+}
+
+.slot-core {
+  background: rgba(4, 120, 87, 0.5) !important;
+  border: 2.5px dashed #34d399 !important;
+}
+.slot-core .slot-badge {
+  color: #a7f3d0 !important;
 }
 .slot-core.is-filled {
-  background: #059669;
+  background: #059669 !important;
+  border: 2.5px solid #6ee7b7 !important;
+  box-shadow: 0 0 22px rgba(5, 150, 105, 0.75) !important;
+}
+
+.slot-db {
+  background: rgba(180, 83, 9, 0.55) !important;
+  border: 2.5px solid #fbbf24 !important;
+}
+.slot-db .slot-badge {
+  color: #fde68a !important;
 }
 .slot-db.is-filled {
-  background: #d97706;
+  background: #d97706 !important;
+  border: 2.5px solid #fde047 !important;
+  box-shadow: 0 0 22px rgba(217, 119, 6, 0.75) !important;
 }
 
 .slot-badge {
-  font-size: 1.05rem;
+  font-size: 1.15rem;
   font-weight: 800;
-  opacity: 0.95;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
 }
 
 .slot-word {
-  font-size: 2.15rem;
+  font-size: 1.65rem;
   font-weight: 900;
   color: #fff;
-  letter-spacing: -0.01em;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
+  line-height: 1.25;
+  text-align: center;
+  word-break: keep-all;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
+}
+
+.slot-word.is-qmark {
+  font-size: 2.1rem;
+  color: #ffffff;
+  font-weight: 900;
 }
 
 .snap-plus {
+  display: flex;
+  align-items: center;
   font-weight: 900;
   color: #fde047;
-  font-size: 1.2rem;
+  font-size: 1.55rem;
 }
 
+/* 🌟 후보 블록 풀: 라벨과 버튼이 여유 있게 떨어지도록 간격 대폭 확대 */
 .kf-candidate-pool {
   display: flex;
   flex-direction: column;
-  gap: 0.35rem;
+  gap: 0.85rem;
+  width: 100%;
+  margin-top: 0.4rem;
 }
 
-.cand-group {
+.cand-row {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  flex-wrap: wrap;
+  gap: 1.25rem; /* 라벨과 버튼 사이 시원하고 넉넉한 간격 */
+  padding: 0.65rem 1.05rem;
+  border-radius: 16px;
+  backdrop-filter: blur(14px);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.4);
 }
 
-.cand-label {
+.cand-row.row-bb {
+  background: rgba(30, 58, 138, 0.45);
+  border: 2px solid rgba(96, 165, 250, 0.45);
+}
+
+.cand-row.row-core {
+  background: rgba(6, 78, 59, 0.45);
+  border: 2px solid rgba(52, 211, 153, 0.45);
+}
+
+.cand-badge-col {
+  flex-shrink: 0;
+}
+
+.cand-sec-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.65rem 1.35rem;
+  border-radius: 12px;
   font-size: 1.25rem;
   font-weight: 900;
-  color: #e2e8f0;
-  min-width: 150px;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.cand-sec-badge.badge-bb {
+  background: #1d4ed8;
+  border: 2px solid #93c5fd;
+  color: #ffffff;
+  box-shadow: 0 0 14px rgba(37, 99, 235, 0.6);
+}
+
+.cand-sec-badge.badge-core {
+  background: #047857;
+  border: 2px solid #6ee7b7;
+  color: #ffffff;
+  box-shadow: 0 0 14px rgba(5, 150, 105, 0.6);
 }
 
 .cand-items {
   display: flex;
-  gap: 0.55rem;
-  flex-wrap: wrap;
+  gap: 0.85rem;
+  flex: 1;
 }
 
+/* 🌟 후보 버튼: 회색 대신 선명한 블루 / 그린 레고 블록 */
 .cand-btn {
-  padding: 0.65rem 1.45rem;
+  flex: 1;
+  padding: 0.75rem 1.25rem;
   border-radius: 14px;
   font-size: 1.65rem;
   font-weight: 900;
-  border: 2px solid rgba(255, 255, 255, 0.35);
-  background: rgba(15, 23, 42, 0.92);
-  color: #fff;
   cursor: pointer;
-  transition: all 0.18s ease;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+  text-align: center;
+  white-space: nowrap;
 }
 
-.cand-bb:hover {
-  border-color: #60a5fa;
-  background: rgba(37, 99, 235, 0.3);
+.cand-btn.cand-bb {
+  background: rgba(30, 64, 175, 0.65);
+  border: 2.5px solid #60a5fa;
+  color: #ffffff;
+}
+.cand-btn.cand-bb:hover {
+  background: #2563eb;
+  border-color: #93c5fd;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.7);
 }
 
-.cand-core:hover {
-  border-color: #34d399;
-  background: rgba(5, 150, 105, 0.3);
+.cand-btn.cand-core {
+  background: rgba(6, 95, 70, 0.65);
+  border: 2.5px solid #34d399;
+  color: #ffffff;
+}
+.cand-btn.cand-core:hover {
+  background: #059669;
+  border-color: #6ee7b7;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(5, 150, 105, 0.7);
 }
 
 .cand-btn.selected {
-  border-color: #fde047 !important;
-  box-shadow: 0 0 14px rgba(250, 204, 21, 0.5);
-  transform: translateY(-2px) scale(1.04);
+  transform: translateY(-2px) scale(1.02);
 }
+
 .cand-bb.selected {
-  background: #2563eb !important;
+  background: #1d4ed8 !important;
+  border-color: #fde047 !important;
   color: #fff !important;
+  box-shadow: 0 0 24px rgba(250, 204, 21, 0.75) !important;
 }
+
 .cand-core.selected {
-  background: #059669 !important;
+  background: #047857 !important;
+  border-color: #fde047 !important;
   color: #fff !important;
+  box-shadow: 0 0 24px rgba(250, 204, 21, 0.75) !important;
 }
 
 .cand-btn.correct {
   border-color: #fde047 !important;
-  background: #facc15 !important;
+  background: #eab308 !important;
   color: #0f172a !important;
-  transform: scale(1.05);
-}
-
-.kf-quiz-complete-bar {
-  background: linear-gradient(135deg, rgba(16, 185, 129, 0.38) 0%, rgba(5, 150, 105, 0.48) 100%);
-  backdrop-filter: blur(14px);
-  border: 2px solid #34d399;
-  border-radius: 14px;
-  padding: 0.85rem 1.6rem;
-  cursor: pointer;
-  box-shadow: 0 0 25px rgba(52, 211, 153, 0.35);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  animation: kfPop 0.3s ease-out;
-}
-
-.qc-en {
-  font-size: 1.85rem;
-  font-weight: 900;
-  color: #fff;
-  line-height: 1.35;
-}
-
-.qc-en strong {
-  color: #fde047;
-  text-shadow: 0 0 16px rgba(253, 224, 71, 0.6);
+  box-shadow: 0 0 26px rgba(250, 204, 21, 0.95);
+  transform: scale(1.04);
 }
 
 /* ---------------------------------------------------
@@ -3960,25 +4035,26 @@ onBeforeUnmount(() => {
     font-size: 1.1rem;
   }
 
-  .cand-group {
+  .cand-row {
     flex-direction: column;
-    align-items: flex-start;
-    gap: 0.25rem;
+    align-items: stretch;
+    gap: 0.55rem;
+    padding: 0.55rem;
   }
 
-  .cand-label {
-    font-size: 0.75rem;
-    min-width: auto;
+  .cand-sec-badge {
+    font-size: 0.95rem;
+    padding: 0.35rem 0.75rem;
   }
 
   .cand-items {
     width: 100%;
-    gap: 0.3rem;
+    gap: 0.45rem;
   }
 
   .cand-btn {
-    font-size: 0.88rem;
-    padding: 0.3rem 0.65rem;
+    font-size: 1.15rem;
+    padding: 0.45rem 0.75rem;
   }
 
   .qc-en {
