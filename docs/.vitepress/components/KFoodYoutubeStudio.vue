@@ -3406,4 +3406,227 @@ onBeforeUnmount(() => {
     padding: 0.22rem 0.65rem !important;
   }
 }
+
+/* ===================================================
+   🖥️ 1080p 풀스크린 방송 모드 전용 방송국급 대왕 글씨
+   유튜브 녹화 시 TV 방송 자막처럼 시원시원하고 굵직하게 출력
+   =================================================== */
+.theater-fullscreen .kf-hud-top {
+  padding: 1.2rem 2.2rem 0.4rem;
+}
+
+.theater-fullscreen .kf-hud-logo {
+  width: 44px;
+  height: 44px;
+}
+
+.theater-fullscreen .hud-ch-name {
+  font-size: 0.95rem;
+}
+
+.theater-fullscreen .hud-ep-step {
+  font-size: 1.28rem;
+}
+
+.theater-fullscreen .vocab-tag {
+  font-size: 0.82rem;
+}
+
+.theater-fullscreen .kf-hud-vocab strong {
+  font-size: 1.35rem;
+}
+
+.theater-fullscreen .kf-stage-tabs {
+  padding: 0.65rem 2rem 0;
+  gap: 0.75rem;
+}
+
+.theater-fullscreen .stage-tab-btn {
+  font-size: 1.05rem;
+  padding: 0.45rem 1.25rem;
+}
+
+.theater-fullscreen .kf-coach-banner {
+  padding: 0.6rem 1.65rem;
+  font-size: 1.25rem;
+  margin-bottom: 0.65rem;
+}
+
+.theater-fullscreen .coach-icon {
+  font-size: 0.95rem;
+  padding: 0.3rem 0.85rem;
+}
+
+.theater-fullscreen .coach-text {
+  font-size: 1.22rem;
+}
+
+.theater-fullscreen .kf-center-turn-modal {
+  width: min(85%, 840px);
+  padding: 1.2rem 1.85rem;
+  border-radius: 20px;
+}
+
+.theater-fullscreen .turn-mic-icon {
+  font-size: 2.6rem;
+}
+
+.theater-fullscreen .turn-texts strong {
+  font-size: 1.6rem;
+}
+
+.theater-fullscreen .turn-texts span {
+  font-size: 1.15rem;
+}
+
+.theater-fullscreen .turn-sec-badge {
+  font-size: 1.35rem;
+  padding: 0.35rem 0.85rem;
+}
+
+/* 풀스크린 하단 자막 독 */
+.theater-fullscreen .kf-lower-third {
+  padding: 0.85rem 2.5rem 1.85rem;
+  gap: 0.85rem;
+}
+
+/* STAGE 1: 시작 블록 3단 교체 대왕 폰트 */
+.theater-fullscreen .kf-core-anchor {
+  padding: 0.75rem 1.55rem;
+  border-radius: 16px;
+}
+
+.theater-fullscreen .anchor-label {
+  font-size: 1.1rem;
+}
+
+.theater-fullscreen .anchor-en {
+  font-size: 2.15rem;
+}
+
+.theater-fullscreen .anchor-hint {
+  font-size: 1rem;
+}
+
+.theater-fullscreen .kf-combo-card {
+  padding: 0.75rem 1.35rem;
+  border-radius: 16px;
+  gap: 0.35rem;
+}
+
+.theater-fullscreen .combo-block-pill {
+  font-size: 2.25rem;
+  padding: 0.5rem 1.25rem;
+  border-radius: 14px;
+}
+
+.theater-fullscreen .combo-ko {
+  font-size: 1.55rem;
+  padding-left: 0.35rem;
+}
+
+/* STAGE 2: 실전 자석 합체 대왕 폰트 */
+.theater-fullscreen .kf-mission-banner {
+  padding: 0.85rem 1.65rem;
+  border-radius: 16px;
+}
+
+.theater-fullscreen .m-badge {
+  font-size: 1.1rem;
+  padding: 0.35rem 0.85rem;
+}
+
+.theater-fullscreen .m-text {
+  font-size: 1.85rem;
+}
+
+.theater-fullscreen .m-listen {
+  font-size: 1.05rem;
+}
+
+.theater-fullscreen .snap-slot {
+  padding: 0.85rem 1.25rem;
+  border-radius: 14px;
+}
+
+.theater-fullscreen .slot-badge {
+  font-size: 1rem;
+}
+
+.theater-fullscreen .slot-word {
+  font-size: 2.15rem;
+}
+
+.theater-fullscreen .cand-label {
+  font-size: 1.15rem;
+}
+
+.theater-fullscreen .cand-btn {
+  font-size: 1.5rem;
+  padding: 0.5rem 1.25rem;
+  border-radius: 12px;
+}
+
+.theater-fullscreen .qc-en {
+  font-size: 2.15rem;
+}
+
+.theater-fullscreen .qc-ko {
+  font-size: 1.55rem;
+}
+
+/* STAGE 3: 완성 문장 & 소리 블록 대왕 폰트 */
+.theater-fullscreen .kf-glass-block {
+  padding: 0.85rem 1.45rem;
+  border-radius: 16px;
+}
+
+.theater-fullscreen .gblk-badge {
+  font-size: 1.05rem;
+}
+
+.theater-fullscreen .gblk-en {
+  font-size: 2.35rem;
+}
+
+.theater-fullscreen .kf-sentence-banner {
+  padding: 1rem 1.85rem;
+  border-radius: 16px;
+  gap: 0.45rem;
+}
+
+.theater-fullscreen .kf-main-en {
+  font-size: 2.75rem;
+  gap: 0.75rem;
+}
+
+.theater-fullscreen .play-hint-icon {
+  font-size: 2.1rem;
+}
+
+.theater-fullscreen .kf-meta-ko {
+  font-size: 1.65rem;
+}
+
+/* 아웃트로 복습 그리드 대형화 */
+.theater-fullscreen .outro-title {
+  font-size: 2.2rem !important;
+}
+
+.theater-fullscreen .outro-badge {
+  font-size: 1.15rem;
+}
+
+.theater-fullscreen .rev-num {
+  font-size: 1.1rem;
+}
+
+.theater-fullscreen .rev-en {
+  font-size: 1.35rem;
+}
+
+.theater-fullscreen .rev-ko {
+  font-size: 1.15rem;
+}
+
 </style>
