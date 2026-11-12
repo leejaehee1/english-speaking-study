@@ -406,17 +406,11 @@
               </div>
             </div>
 
-            <!-- 완성 문장 & 한글 리듬 & 번역 바 -->
+            <!-- 완성 문장 바 (군더더기 없이 크고 시원한 원라인 완성 문장) -->
             <div class="kf-sentence-banner" @click="speakSceneSentence(1.0)">
               <div class="kf-main-en">
                 <span class="play-hint-icon">🔊</span>
                 {{ currentScene.fullEn }}
-              </div>
-              <div class="kf-sub-meta">
-
-                <span v-if="showKoSub" class="kf-meta-ko">
-                  🇰🇷 {{ currentScene.fullKo }}
-                </span>
               </div>
             </div>
           </div>
@@ -3031,15 +3025,18 @@ onBeforeUnmount(() => {
 }
 
 .slot-badge {
-  font-size: 0.68rem;
+  font-size: 0.85rem;
   font-weight: 800;
-  opacity: 0.85;
+  opacity: 0.9;
+  letter-spacing: 0.04em;
 }
 
 .slot-word {
-  font-size: 1.15rem;
+  font-size: 1.65rem;
   font-weight: 900;
   color: #fff;
+  letter-spacing: -0.01em;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
 }
 
 .snap-plus {
@@ -3062,10 +3059,10 @@ onBeforeUnmount(() => {
 }
 
 .cand-label {
-  font-size: 1.05rem;
+  font-size: 1.25rem;
   font-weight: 900;
-  color: #f1f5f9;
-  min-width: 130px;
+  color: #e2e8f0;
+  min-width: 150px;
 }
 
 .cand-items {
@@ -3075,15 +3072,16 @@ onBeforeUnmount(() => {
 }
 
 .cand-btn {
-  padding: 0.45rem 1.15rem;
-  border-radius: 10px;
-  font-size: 1.25rem;
+  padding: 0.65rem 1.45rem;
+  border-radius: 14px;
+  font-size: 1.65rem;
   font-weight: 900;
-  border: 2px solid rgba(255, 255, 255, 0.28);
-  background: rgba(15, 23, 42, 0.9);
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  background: rgba(15, 23, 42, 0.92);
   color: #fff;
   cursor: pointer;
   transition: all 0.18s ease;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
 }
 
 .cand-bb:hover {
@@ -4198,54 +4196,53 @@ onBeforeUnmount(() => {
 }
 
 .theater-fullscreen .slot-badge {
-  font-size: 1rem;
+  font-size: 1.25rem;
 }
 
 .theater-fullscreen .slot-word {
-  font-size: 2.15rem;
+  font-size: 2.75rem;
 }
 
 .theater-fullscreen .cand-label {
-  font-size: 1.45rem;
+  font-size: 1.65rem;
 }
 
 .theater-fullscreen .cand-btn {
-  font-size: 1.85rem;
-  padding: 0.65rem 1.55rem;
-  border-radius: 14px;
+  font-size: 2.45rem;
+  padding: 0.85rem 2.2rem;
+  border-radius: 18px;
 }
 
 .theater-fullscreen .qc-en {
-  font-size: 2.15rem;
+  font-size: 2.75rem;
 }
 
 .theater-fullscreen .qc-ko {
-  font-size: 1.55rem;
+  font-size: 1.75rem;
 }
 
 /* STAGE 3: 완성 문장 & 소리 블록 대왕 폰트 */
 .theater-fullscreen .kf-glass-block {
-  padding: 0.85rem 1.45rem;
-  border-radius: 16px;
+  padding: 1rem 1.8rem;
+  border-radius: 20px;
 }
 
 .theater-fullscreen .gblk-badge {
-  font-size: 1.05rem;
+  font-size: 1.25rem;
 }
 
 .theater-fullscreen .gblk-en {
-  font-size: 2.35rem;
+  font-size: 2.75rem;
 }
 
 .theater-fullscreen .kf-sentence-banner {
-  padding: 1rem 1.85rem;
-  border-radius: 16px;
-  gap: 0.45rem;
+  padding: 1.2rem 2.5rem;
+  border-radius: 20px;
 }
 
 .theater-fullscreen .kf-main-en {
-  font-size: 2.75rem;
-  gap: 0.75rem;
+  font-size: 3.35rem;
+  gap: 0.9rem;
 }
 
 .theater-fullscreen .play-hint-icon {
