@@ -254,7 +254,7 @@
               </div>
             </div>
 
-            <!-- 3가지 시작 블록 갈아 끼우기 카드 목록 -->
+            <!-- 3가지 시작 블록 갈아 끼우기 카드 목록 (중복 헤더 제거 및 파랑/초록 블록 직관적 표시) -->
             <div class="kf-combo-grid">
               <div
                 v-for="(combo, cIdx) in currentScene.combos"
@@ -263,15 +263,10 @@
                 :class="{ active: activeComboIdx === cIdx }"
                 @click="playComboCard(cIdx)"
               >
-                <div class="combo-head">
-                  <span class="combo-num">COMBO {{ cIdx + 1 }}</span>
-                  <span class="combo-bb-badge">{{ combo.bbEn }}</span>
-                  <span class="combo-plus">+</span>
-                  <span class="combo-core-badge">{{ currentScene.blocks[1]?.en }}</span>
-                </div>
                 <div class="combo-sentence">
-                  <span class="combo-en">{{ combo.fullEn }}</span>
-                  </div>
+                  <span class="combo-block-pill c-bb">{{ combo.bbEn }}</span>
+                  <span class="combo-block-pill c-core">{{ getComboCorePart(combo) }}</span>
+                </div>
                 <div v-if="showKoSub" class="combo-ko">
                   🇰🇷 {{ combo.ko }}
                 </div>
@@ -1382,6 +1377,13 @@ const activeSceneImage = computed(() => {
   }
   return ''
 })
+
+function getComboCorePart(combo: SwapCombo): string {
+  if (combo.fullEn.startsWith(combo.bbEn)) {
+    return combo.fullEn.slice(combo.bbEn.length).trim()
+  }
+  return combo.fullEn
+}
 
 function setStage(stage: 'swap' | 'quiz' | 'sentence') {
   activeStage.value = stage
@@ -2513,45 +2515,46 @@ onBeforeUnmount(() => {
   box-shadow: 0 0 0 2px #fde047, 0 8px 24px rgba(0, 0, 0, 0.5);
 }
 
-.combo-head {
-  display: flex;
-  align-items: center;
-  gap: 0.45rem;
-  font-size: 0.76rem;
-}
-
-.combo-num {
-  font-weight: 900;
-  color: #38bdf8;
-  font-size: 0.7rem;
-}
-
-.combo-bb-badge {
-  padding: 0.15rem 0.55rem;
-  border-radius: 6px;
-  background: #2563eb;
-  color: #fff;
-  font-weight: 800;
-}
-
-.combo-plus {
-  color: #94a3b8;
-  font-weight: 900;
-}
-
-.combo-core-badge {
-  padding: 0.15rem 0.55rem;
-  border-radius: 6px;
-  background: rgba(5, 150, 105, 0.7);
-  color: #fff;
-  font-weight: 800;
-}
-
 .combo-sentence {
   display: flex;
-  align-items: baseline;
+  align-items: center;
   gap: 0.55rem;
   flex-wrap: wrap;
+}
+
+.combo-block-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.32rem 0.85rem;
+  border-radius: 10px;
+  font-size: 1.45rem;
+  font-weight: 900;
+  color: #fff;
+  letter-spacing: -0.01em;
+  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.85);
+  transition: all 0.18s ease;
+}
+
+.combo-block-pill.c-bb {
+  background: rgba(37, 99, 235, 0.45);
+  border: 2px solid rgba(96, 165, 250, 0.9);
+  box-shadow: 0 2px 10px rgba(37, 99, 235, 0.35);
+}
+
+.combo-block-pill.c-core {
+  background: rgba(5, 150, 105, 0.45);
+  border: 2px solid rgba(52, 211, 153, 0.9);
+  box-shadow: 0 2px 10px rgba(5, 150, 105, 0.35);
+}
+
+.font-large .combo-block-pill {
+  font-size: 1.75rem;
+  padding: 0.38rem 1rem;
+}
+
+.font-huge .combo-block-pill {
+  font-size: 2.15rem;
+  padding: 0.48rem 1.15rem;
 }
 
 .combo-en {
@@ -3396,6 +3399,11 @@ onBeforeUnmount(() => {
 
   .slot-word {
     font-size: 1.35rem !important;
+  }
+
+  .combo-block-pill {
+    font-size: 1.4rem !important;
+    padding: 0.22rem 0.65rem !important;
   }
 }
 </style>
