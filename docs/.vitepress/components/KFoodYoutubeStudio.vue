@@ -20,7 +20,7 @@
           target="_blank"
           rel="noopener noreferrer"
           class="kf-studio-badge"
-          title="유튜브 채널 바로가기"
+          title="Visit YouTube Channel"
         >
           ▶️ @SoundBlockKCooking
         </a>
@@ -99,6 +99,17 @@
          ========================================================== -->
     <div class="kf-canvas-wrapper" :class="aspectRatio === '9:16' ? 'is-shorts' : 'is-wide'">
       <div class="kf-broadcast-screen" :class="aspectRatio === '9:16' ? 'screen-shorts' : 'screen-wide'">
+        <!-- 🎬 풀스크린 복원 & 3초 녹화 준비 카운트다운 오버레이 -->
+        <transition name="kf-pop">
+          <div v-if="countdownToRecord !== null" class="kf-record-countdown-overlay">
+            <div class="rc-box">
+              <div class="rc-badge">🔴 1080p FULLSCREEN RECORDING READY</div>
+              <div class="rc-number">{{ countdownToRecord }}</div>
+              <div class="rc-sub">Fullscreen restored! Starting in {{ countdownToRecord }}s...</div>
+            </div>
+          </div>
+        </transition>
+
         <!-- 🔴 실시간 녹화 중 배너 (컴퓨터 내부 사운드 직통) -->
         <div v-if="isScreenRecording" class="kf-rec-status-badge">
           <span class="rec-pulsing-dot"></span>
@@ -170,7 +181,7 @@
             <div class="kf-hud-left">
               <img :src="withBase('/images/kfood/channel-logo.jpg')" alt="Logo" class="kf-hud-logo" />
               <div class="kf-hud-brand">
-                <span class="hud-ch-name">소리블록 K-쿠킹</span>
+                <span class="hud-ch-name">SoundBlock K-Cooking</span>
                 <span class="hud-ep-step">{{ currentEpisode.epNumber }} · {{ currentScene.stepTitle }}</span>
               </div>
             </div>
@@ -188,7 +199,7 @@
             <span
               class="hud-dot"
               :class="{ active: slideCursor === -1, done: slideCursor > -1 }"
-              title="오프닝 인트로"
+              title="Opening Intro"
               @click="goToSlide(-1)"
             ></span>
             <span
@@ -202,7 +213,7 @@
             <span
               class="hud-dot"
               :class="{ active: slideCursor === currentEpisode.scenes.length }"
-              title="전체 복습 아웃트로"
+              title="Full Review Outro"
               @click="goToSlide(currentEpisode.scenes.length)"
             ></span>
           </div>
@@ -302,7 +313,7 @@
               <div
                 class="snap-slot slot-bb"
                 :class="{ 'is-filled': isSnapped || pickedBb }"
-                title="클릭하여 초기화"
+                title="Click to reset"
                 @click="clearPicked('bb')"
               >
                 <span class="slot-badge">① 1st Block</span>
@@ -312,7 +323,7 @@
               <div
                 class="snap-slot slot-core"
                 :class="{ 'is-filled': isSnapped || pickedCore }"
-                title="클릭하여 초기화"
+                title="Click to reset"
                 @click="clearPicked('core')"
               >
                 <span class="slot-badge">② Core Action</span>
@@ -369,7 +380,7 @@
             <!-- 합체 완료 문장 배너 -->
             <div v-if="isSnapped" class="kf-quiz-complete-bar" @click="speakSceneSentence(1.0)">
               <div class="qc-en">🧲 Snapped Together: <strong>{{ currentScene.fullEn }}</strong></div>
-              <div class="qc-ko">{{ currentScene.fullKo }}</div>
+              <div class="qc-ko">{{ currentScene.missionEn || currentScene.fullEn }}</div>
             </div>
           </div>
 
@@ -438,7 +449,7 @@
                 <span class="rev-num">0{{ idx + 1 }}</span>
                 <div class="rev-body">
                   <div class="rev-en">{{ sc.fullEn }}</div>
-                  <div class="rev-ko">{{ sc.fullKo }}</div>
+                  <div class="rev-ko">{{ sc.fullEn }}</div>
                 </div>
               </div>
             </div>
@@ -564,7 +575,7 @@
 
         <div class="kf-voice-recorder">
           <label v-if="slideCursor >= 0 && slideCursor < currentEpisode.scenes.length" class="kf-upload-label">
-            📷 내 요리 사진 넣기
+            📷 Custom Image
             <input type="file" accept="image/*" hidden @change="onUploadSceneImage" />
           </label>
           <button
@@ -573,7 +584,7 @@
             :class="{ 'kf-btn-rec': isRecording }"
             @click="toggleRecording"
           >
-            {{ isRecording ? '⏹️ 녹음 완료' : '🎙️ 내 목소리 테스트 녹음' }}
+            {{ isRecording ? '⏹️ Stop Test' : '🎙️ Test Mic' }}
           </button>
           <audio
             v-if="recordedAudioMap[sceneKey]"
@@ -588,21 +599,21 @@
       <div v-if="!isCleanMode" class="kf-yt-package">
         <div class="kf-yt-package-header" @click="showYtMeta = !showYtMeta">
           <span>📋 <strong>{{ currentEpisode.title }}</strong> · 유튜브 업로드용 제목·설명·태그·자막 패키지</span>
-          <span class="kf-toggle-arrow">{{ showYtMeta ? '▲ 접기' : '▼ 펼치기' }}</span>
+          <span class="kf-toggle-arrow">{{ showYtMeta ? '▲ Collapse' : '▼ Expand' }}</span>
         </div>
         <div v-if="showYtMeta" class="kf-yt-package-body">
           <div class="kf-meta-row">
-            <strong>추천 영상 제목:</strong>
+            <strong>Video Title:</strong>
             <code>{{ currentEpisode.ytTitle }}</code>
           </div>
           <div class="kf-meta-row">
-            <strong>썸네일 문구:</strong>
+            <strong>Thumbnail Text:</strong>
             <code>{{ currentEpisode.thumbnailText }}</code>
           </div>
           <div class="kf-meta-row">
-            <strong>전체 대본 &amp; 설명란 복사:</strong>
+            <strong>Description &amp; Tags:</strong>
             <button type="button" class="kf-ctrl-btn-sm" @click="copyEpisodeScript">
-              {{ copySuccess ? '✅ 복사 완료!' : '📄 전체 대본 & 태그 복사하기' }}
+              {{ copySuccess ? '✅ Copied!' : '📄 Copy Script & Tags' }}
             </button>
           </div>
         </div>
@@ -691,12 +702,13 @@ const enableSoundEffects = ref(true)
 const includeShadowingPause = ref(true)
 const showCoachBubble = ref(true)
 const showPronGuide = ref(true)
-const showKoSub = ref(true)
+const showKoSub = ref(false)
 const showYtMeta = ref(false)
 const copySuccess = ref(false)
 
 // 자체 비디오 녹화기 상태 (마이크 잡음 0% 내부 사운드 직통 녹화)
 const isScreenRecording = ref(false)
+const countdownToRecord = ref<number | null>(null)
 const includeMicInRecording = ref(false) // 기본값 true: 대표님 마이크 목소리 + 컴퓨터 사운드 동시 녹음
 let activeMicStream: MediaStream | null = null
 let mixerAudioCtx: AudioContext | null = null
@@ -851,12 +863,36 @@ async function startScreenRecording() {
       }
     }
 
+    // 💡 창 공유 선택 직후: 1) 풀스크린 모드 자동 즉시 복원!
+    await enterFullscreen()
+
+    // 💡 2) 3초 카운트다운 (전체화면이 완전하게 자리잡고 사용자가 준비할 수 있는 시간 제공)
+    countdownToRecord.value = 3
+    playTransitionChime()
+
+    for (let c = 3; c >= 1; c--) {
+      countdownToRecord.value = c
+      playTone(440 + (3 - c) * 110, 120, 'sine', 0.12, 0)
+      await new Promise((resolve) => setTimeout(resolve, 950))
+    }
+    countdownToRecord.value = null
+
+    // 💡 3) 풀스크린이 완벽히 안착된 상태에서 실제 레코더 시작! (어색한 창선택 화면 0% 녹화)
+    playSuccessBell()
     screenMediaRecorder.start(1000)
     isScreenRecording.value = true
     screenRecordSeconds.value = 0
     screenRecordTimer = window.setInterval(() => {
       screenRecordSeconds.value++
     }, 1000)
+
+    // 💡 4) 녹화 시작과 동시에 전체 자동 방송 자동 출발 (원클릭 완성)
+    if (!isAutoPlaying.value) {
+      if (slideCursor.value >= currentEpisode.value.scenes.length) {
+        slideCursor.value = -1
+      }
+      toggleAutoShow()
+    }
   } catch (err) {
     console.error('Screen recording cancelled or failed:', err)
     isScreenRecording.value = false
@@ -899,14 +935,14 @@ const episodes: CookingEpisode[] = [
     epNumber: 'EP.01',
     emoji: '🍲',
     shortTitle: '🍲 Kimchi Stew',
-    title: '중학교 단어로 김치찌개 끓이기 (Kimchi Stew)',
+    title: 'How to Cook Authentic Kimchi Stew',
     ytTitle: '[소리블록 요리영어 #1] 중학교 단어로 김치찌개 끓이기 🍲 | How to Make Kimchi Stew in Easy English',
-    thumbnailText: '"김치찌개 끓일게!" → [I\'m gonna] + [make Kimchi stew]',
+    thumbnailText: '"I\'m gonna make Kimchi stew!" → [I\'m gonna] + [make Kimchi stew]',
     introNarrationKo: '안녕하세요, 소리블록 케이쿠킹입니다! 오늘은 한국인의 소울푸드 김치찌개 끓이는 법을 소리 블록 교체와 조립으로 마스터해 볼게요.',
     outroNarrationKo: '오늘 배운 김치찌개 소리 블록 조합 훈련, 입에 착 붙으셨나요? 구독과 좋아요를 누르고 다음 요리도 함께 조립해 봐요!',
     scenes: [
       {
-        stepTitle: 'SCENE 1 · 오늘의 요리 소개',
+        stepTitle: 'SCENE 1 · Introduction to Kimchi Stew',
         visualEmojis: '👨‍🍳 🍲 🇰🇷',
         imagePath: '/images/kfood/ep1-s1.jpg',
         actionNote: '앞치마를 입고 부엌에서 밝게 인사하는 오프닝',
@@ -914,7 +950,7 @@ const episodes: CookingEpisode[] = [
         coachEn: 'Our core action is \'make Kimchi stew\'. Let\'s swap the first block: I\'m gonna, I wanna, Do you wanna!',
         missionKo: '실전 조립 미션! 오늘 저는 김치찌개를 끓일 거예요. 블록 세 개를 합쳐 보세요!',
         missionEn: 'Snap Mission! \'I\'m gonna make Kimchi stew today.\' Snap the blocks together!',
-        keyVocab: 'Kimchi stew (김치찌개)',
+        keyVocab: 'Kimchi stew',
         bgGradient: 'linear-gradient(135deg, #1e293b 0%, #334155 100%)',
         blocks: [
           { role: 'bb', en: "I'm gonna", pron: '암거너' },
@@ -935,7 +971,7 @@ const episodes: CookingEpisode[] = [
         fullKo: '오늘 저는 김치찌개를 끓일 거예요.'
       },
       {
-        stepTitle: 'SCENE 2 · 신김치 비법 공개',
+        stepTitle: 'SCENE 2 · Secret of Sour Kimchi',
         visualEmojis: '🥬 ✨ 😋',
         imagePath: '/images/kfood/ep1-s2.jpg',
         actionNote: '잘 익은 신김치를 보여주며 핵심 비법 설명',
@@ -943,7 +979,7 @@ const episodes: CookingEpisode[] = [
         coachEn: 'Our core action is \'use sour kimchi\'. For deep flavor, sour kimchi is a must!',
         missionKo: '실전 조립 미션! 깊은 맛을 내려면 꼭 신김치를 써야 해요. 어떻게 조립할까요?',
         missionEn: 'Snap Mission! \'You have to use sour kimchi for deep flavor.\' Which blocks snap together?',
-        keyVocab: 'sour kimchi (신김치)',
+        keyVocab: 'sour kimchi',
         bgGradient: 'linear-gradient(135deg, #450a0a 0%, #7f1d1d 100%)',
         blocks: [
           { role: 'bb', en: 'You have to', pron: '유 해프터' },
@@ -964,7 +1000,7 @@ const episodes: CookingEpisode[] = [
         fullKo: '깊은 맛을 내려면 꼭 신김치를 써야 해요.'
       },
       {
-        stepTitle: 'SCENE 3 · 김치와 돼지고기 썰기',
+        stepTitle: 'SCENE 3 · Chop the Pork & Kimchi',
         visualEmojis: '🔪 🥩 🥬',
         imagePath: '/images/kfood/ep1-s3.jpg',
         actionNote: '도마 위에서 김치와 돼지고기를 한 입 크기로 큼직하게 썰기',
@@ -972,7 +1008,7 @@ const episodes: CookingEpisode[] = [
         coachEn: 'Our core action is \'chop the pork and kimchi\'. Let\'s swap the first block!',
         missionKo: '실전 조립 미션! 돼지고기와 김치를 한 입 크기로 썰어 줄게요!',
         missionEn: 'Snap Mission! \'I\'m gonna chop the pork and kimchi into bite-sized pieces.\' Assemble the blocks!',
-        keyVocab: 'chop / bite-sized pieces',
+        keyVocab: 'chop the pork and kimchi',
         bgGradient: 'linear-gradient(135deg, #431407 0%, #7c2d12 100%)',
         blocks: [
           { role: 'bb', en: "I'm gonna", pron: '암거너' },
@@ -993,7 +1029,7 @@ const episodes: CookingEpisode[] = [
         fullKo: '돼지고기와 김치를 한 입 크기로 썰어 줄게요.'
       },
       {
-        stepTitle: 'SCENE 4 · 두부와 대파 손질하기',
+        stepTitle: 'SCENE 4 · Slice the Tofu & Green Onion',
         visualEmojis: '⬜ 🌱 🔪',
         imagePath: '/images/kfood/ep1-s4.jpg',
         actionNote: '두부는 납작하게 썰고(slice), 대파는 송송 썰어 준비',
@@ -1001,7 +1037,7 @@ const episodes: CookingEpisode[] = [
         coachEn: 'Our core action is \'slice the tofu\'. Let\'s swap the first block to change the meaning!',
         missionKo: '실전 조립 미션! 제가 두부는 납작하게 썰고 대파도 썰어 둘게요!',
         missionEn: 'Snap Mission! \'I\'ll slice the tofu and chop the green onion.\' Snap the blocks!',
-        keyVocab: 'slice the tofu (두부를 썰다)',
+        keyVocab: 'slice the tofu',
         bgGradient: 'linear-gradient(135deg, #052e16 0%, #14532d 100%)',
         blocks: [
           { role: 'bb', en: "I'll", pron: '아을' },
@@ -1022,7 +1058,7 @@ const episodes: CookingEpisode[] = [
         fullKo: '제가 두부는 납작하게 썰고 대파도 썰어 둘게요.'
       },
       {
-        stepTitle: 'SCENE 5 · 냄비에 고기와 김치 볶기',
+        stepTitle: 'SCENE 5 · Fry Pork & Kimchi Together',
         visualEmojis: '🍲 🔥 🧄',
         imagePath: '/images/kfood/ep1-s5.jpg',
         actionNote: '달궈진 냄비에 돼지고기, 김치, 다진 마늘을 넣고 지글지글 볶기',
@@ -1030,7 +1066,7 @@ const episodes: CookingEpisode[] = [
         coachEn: 'Our core action is \'fry them together\'. Let\'s swap the first block!',
         missionKo: '실전 조립 미션! 다진 마늘을 넣고 재료들을 함께 볶아 줘야 해요!',
         missionEn: 'Snap Mission! \'We have to fry them together with minced garlic.\' Assemble the blocks!',
-        keyVocab: 'fry them together (함께 볶다)',
+        keyVocab: 'fry them together',
         bgGradient: 'linear-gradient(135deg, #422006 0%, #713f12 100%)',
         blocks: [
           { role: 'bb', en: 'We have to', pron: '위 해프터' },
@@ -1051,7 +1087,7 @@ const episodes: CookingEpisode[] = [
         fullKo: '다진 마늘을 넣고 재료들을 함께 볶아 줘야 해요.'
       },
       {
-        stepTitle: 'SCENE 6 · 물과 김치 국물 붓기',
+        stepTitle: 'SCENE 6 · Pour Water & Kimchi Juice',
         visualEmojis: '💧 🥣 🌶️',
         imagePath: '/images/kfood/ep1-s6.jpg',
         actionNote: '물을 붓고 감칠맛의 핵심인 김치 국물(kimchi juice) 한 국자 추가!',
@@ -1059,7 +1095,7 @@ const episodes: CookingEpisode[] = [
         coachEn: 'Our core action is \'pour some water\'. Let\'s swap the first block!',
         missionKo: '실전 조립 미션! 물을 좀 붓고 김치 국물도 넣어 줄게요!',
         missionEn: 'Snap Mission! \'I\'m gonna pour some water and add the kimchi juice.\' Snap the blocks!',
-        keyVocab: 'kimchi juice (김치 국물)',
+        keyVocab: 'kimchi juice',
         bgGradient: 'linear-gradient(135deg, #172554 0%, #1e3a8a 100%)',
         blocks: [
           { role: 'bb', en: "I'm gonna", pron: '암거너' },
@@ -1080,7 +1116,7 @@ const episodes: CookingEpisode[] = [
         fullKo: '물을 좀 붓고 김치 국물도 넣어 줄게요.'
       },
       {
-        stepTitle: 'SCENE 7 · 팔팔 끓인 뒤 푹 끓이기',
+        stepTitle: 'SCENE 7 · Bring to Boil & Simmer',
         visualEmojis: '♨️ 🍲 ⏲️',
         imagePath: '/images/kfood/ep1-s7.jpg',
         actionNote: '센 불에 팔팔 끓인 뒤 중약불로 줄여 10분간 뭉근히 끓이기',
@@ -1088,7 +1124,7 @@ const episodes: CookingEpisode[] = [
         coachEn: 'Our core action is \'bring it to the boil\'. Let\'s swap the first block!',
         missionKo: '실전 조립 미션! 팔팔 끓인 다음에 푹 끓게 둘 거예요!',
         missionEn: 'Snap Mission! \'We\'re gonna bring it to the boil and let it simmer.\' Let\'s snap!',
-        keyVocab: 'bring it to the boil / simmer',
+        keyVocab: 'bring it to the boil',
         bgGradient: 'linear-gradient(135deg, #4c0519 0%, #881337 100%)',
         blocks: [
           { role: 'bb', en: "We're gonna", pron: '워거너' },
@@ -1109,7 +1145,7 @@ const episodes: CookingEpisode[] = [
         fullKo: '팔팔 끓인 다음에 푹(뭉근히) 끓게 둘 거예요.'
       },
       {
-        stepTitle: 'SCENE 8 · 국물 맛보기 & 시식',
+        stepTitle: 'SCENE 8 · Take a Sip & Taste',
         visualEmojis: '🥄 🍚 😍',
         imagePath: '/images/kfood/ep1-s8.jpg',
         actionNote: '국물 한 모금(take a sip) 맛보고 따뜻한 흰쌀밥과 한 입!',
@@ -1117,7 +1153,7 @@ const episodes: CookingEpisode[] = [
         coachEn: 'Our core action is \'take a sip\'. Let\'s swap the first block!',
         missionKo: '마지막 조립 미션! 지금 당장 국물 한 모금 마셔 보고 싶네요. 와, 진짜 맛있어요!',
         missionEn: 'Final Snap Mission! \'I wanna take a sip right now. Wow, so good!\' Snap the blocks!',
-        keyVocab: 'take a sip (한 모금 맛보다)',
+        keyVocab: 'take a sip',
         bgGradient: 'linear-gradient(135deg, #3b0764 0%, #581c87 100%)',
         blocks: [
           { role: 'bb', en: 'I wanna', pron: '아이 워너' },
@@ -1155,7 +1191,7 @@ const episodes: CookingEpisode[] = [
     outroNarrationKo: '오늘 배운 김치볶음밥 소리 블록 조합 훈련도 정말 유익하셨죠? 구독과 좋아요 누르고 다음 영상에서 또 만나요!',
     scenes: [
       {
-        stepTitle: 'SCENE 1 · 김치볶음밥 시작하기',
+        stepTitle: 'SCENE 1 · Introduction to Kimchi Fried Rice',
         visualEmojis: '🍚 🥬 🍳',
         imagePath: '/images/kfood/ep1-s1.jpg',
         actionNote: '찬밥과 잘게 썬 김치를 준비하며 인사',
@@ -1163,7 +1199,7 @@ const episodes: CookingEpisode[] = [
         coachEn: 'Our core action is \'make Kimchi fried rice\'. Let\'s swap the first block!',
         missionKo: '실전 조립 미션! 점심으로 김치볶음밥을 만들 거예요!',
         missionEn: 'Snap Mission! \'I\'m gonna make Kimchi fried rice for lunch.\' Snap the blocks!',
-        keyVocab: 'Kimchi fried rice (김치볶음밥)',
+        keyVocab: 'Kimchi fried rice',
         bgGradient: 'linear-gradient(135deg, #431407 0%, #7c2d12 100%)',
         blocks: [
           { role: 'bb', en: "I'm gonna", pron: '암거너' },
@@ -1184,7 +1220,7 @@ const episodes: CookingEpisode[] = [
         fullKo: '점심으로 김치볶음밥을 만들 거예요.'
       },
       {
-        stepTitle: 'SCENE 2 · 김치와 베이컨 잘게 썰기',
+        stepTitle: 'SCENE 2 · Chop Kimchi Finely',
         visualEmojis: '🔪 🥓 🥬',
         imagePath: '/images/kfood/ep1-s3.jpg',
         actionNote: '볶음밥용으로 김치와 베이컨을 잘게 다지듯 썰기',
@@ -1192,7 +1228,7 @@ const episodes: CookingEpisode[] = [
         coachEn: 'Our core action is \'chop the kimchi finely\'. Let\'s swap the starter block!',
         missionKo: '실전 조립 미션! 베이컨과 함께 김치를 잘게 썰어 줘야 해요!',
         missionEn: 'Snap Mission! \'You have to chop the kimchi finely for great texture.\' Assemble the blocks!',
-        keyVocab: 'chop finely (잘게 썰다)',
+        keyVocab: 'chop the kimchi finely',
         bgGradient: 'linear-gradient(135deg, #450a0a 0%, #7f1d1d 100%)',
         blocks: [
           { role: 'bb', en: 'You have to', pron: '유 해프터' },
@@ -1213,7 +1249,7 @@ const episodes: CookingEpisode[] = [
         fullKo: '베이컨과 함께 김치를 잘게 썰어 줘야 해요.'
       },
       {
-        stepTitle: 'SCENE 3 · 고추장 한 스푼 넣고 볶기',
+        stepTitle: 'SCENE 3 · Stir-Fry with Gochujang',
         visualEmojis: '🍳 🔥 🌶️',
         imagePath: '/images/kfood/ep1-s5.jpg',
         actionNote: '팬에 김치와 고추장/간장을 넣고 센 불에 달달 볶기',
@@ -1221,7 +1257,7 @@ const episodes: CookingEpisode[] = [
         coachEn: 'Our core action is \'cut the spam into small cubes\'. Let\'s swap the starter block!',
         missionKo: '실전 조립 미션! 고추장을 넣고 김치를 센 불에 볶을 거예요!',
         missionEn: 'Snap Mission! \'I\'ll cut the spam into small cubes.\' Let\'s snap!',
-        keyVocab: 'stir-fry (센 불에 저으며 볶다)',
+        keyVocab: 'stir-fry',
         bgGradient: 'linear-gradient(135deg, #422006 0%, #713f12 100%)',
         blocks: [
           { role: 'bb', en: "We're gonna", pron: '워거너' },
@@ -1242,7 +1278,7 @@ const episodes: CookingEpisode[] = [
         fullKo: '고추장을 넣고 김치를 센 불에 볶을 거예요.'
       },
       {
-        stepTitle: 'SCENE 4 · 밥 넣고 참기름 두르기',
+        stepTitle: 'SCENE 4 · Add Cold Rice & Sesame Oil',
         visualEmojis: '🍚 🫗 ✨',
         imagePath: '/images/kfood/ep1-s2.jpg',
         actionNote: '밥을 넣고 골고루 섞은 뒤 마지막에 고소한 참기름 한 바퀴!',
@@ -1250,7 +1286,7 @@ const episodes: CookingEpisode[] = [
         coachEn: 'Our core action is \'stir-fry the kimchi and spam\'. Let\'s swap the first block!',
         missionKo: '실전 조립 미션! 밥을 넣고 섞은 다음 참기름을 두를게요!',
         missionEn: 'Snap Mission! \'We have to stir-fry the kimchi and spam in cooking oil.\' Snap the blocks!',
-        keyVocab: 'sesame oil (참기름)',
+        keyVocab: 'drizzle sesame oil',
         bgGradient: 'linear-gradient(135deg, #052e16 0%, #14532d 100%)',
         blocks: [
           { role: 'bb', en: "I'll", pron: '아을' },
@@ -1271,7 +1307,7 @@ const episodes: CookingEpisode[] = [
         fullKo: '밥을 넣고 섞은 다음 참기름을 두를게요.'
       },
       {
-        stepTitle: 'SCENE 5 · 반숙 계란프라이 올리기',
+        stepTitle: 'SCENE 5 · Put Fried Egg Right on Top',
         visualEmojis: '🥚 🍳 👑',
         imagePath: '/images/kfood/ep1-s7.jpg',
         actionNote: '노른자가 살아 있는 반숙 계란프라이를 맨 위에 얹기',
@@ -1279,7 +1315,7 @@ const episodes: CookingEpisode[] = [
         coachEn: 'Our core action is \'add the cold rice\'. Let\'s swap the starter block!',
         missionKo: '실전 조립 미션! 맨 위에 계란프라이를 딱 얹어 줄 거예요!',
         missionEn: 'Snap Mission! \'I\'m gonna add the cold rice and break it down.\' Assemble the blocks!',
-        keyVocab: 'put a fried egg right on top',
+        keyVocab: 'put a fried egg on top',
         bgGradient: 'linear-gradient(135deg, #172554 0%, #1e3a8a 100%)',
         blocks: [
           { role: 'bb', en: "I'm gonna", pron: '암거너' },
@@ -1300,7 +1336,7 @@ const episodes: CookingEpisode[] = [
         fullKo: '맨 위에 계란프라이를 딱 얹어 줄 거예요.'
       },
       {
-        stepTitle: 'SCENE 6 · 노른자 터뜨려 한 입 먹기',
+        stepTitle: 'SCENE 6 · Enjoy the Crispy Bottom',
         visualEmojis: '🥄 😋 👍',
         imagePath: '/images/kfood/ep1-s8.jpg',
         actionNote: '숟가락으로 노른자를 톡 터뜨려 밥과 함께 한 입!',
@@ -1308,7 +1344,7 @@ const episodes: CookingEpisode[] = [
         coachEn: 'Our core action is \'drizzle some sesame oil\'. Let\'s swap the first block!',
         missionKo: '마지막 조립 미션! 지금 당장 한 입 먹어 볼래요?',
         missionEn: 'Snap Mission! \'You have to drizzle some sesame oil at the end.\' Let\'s snap!',
-        keyVocab: 'take a bite (한 입 먹다)',
+        keyVocab: 'enjoy the crispy bottom',
         bgGradient: 'linear-gradient(135deg, #3b0764 0%, #581c87 100%)',
         blocks: [
           { role: 'bb', en: 'Do you wanna', pron: '두유워너' },
@@ -1346,7 +1382,7 @@ const episodes: CookingEpisode[] = [
     outroNarrationKo: '라면 끓이면서 혼자 영어로 중얼거려 보면 절대 안 까먹습니다! 구독과 좋아요 부탁드려요!',
     scenes: [
       {
-        stepTitle: 'SCENE 1 · 출출한 밤, 라면 끓이기',
+        stepTitle: 'SCENE 1 · Late-Night Korean Ramen',
         visualEmojis: '🌙 🍜 🔥',
         imagePath: '/images/kfood/ep1-s1.jpg',
         actionNote: '냄비와 라면 한 봉지를 들고 시작',
@@ -1354,7 +1390,7 @@ const episodes: CookingEpisode[] = [
         coachEn: 'Our core action is \'cook Korean ramen\'. Let\'s swap the starter block!',
         missionKo: '실전 조립 미션! 오늘 밤엔 한국 라면을 끓여 먹을 거예요!',
         missionEn: 'Snap Mission! \'I\'m gonna cook spicy Korean ramen for late-night snack.\' Snap the blocks!',
-        keyVocab: 'make Korean ramen (라면 끓이다)',
+        keyVocab: 'cook Korean ramen',
         bgGradient: 'linear-gradient(135deg, #450a0a 0%, #7f1d1d 100%)',
         blocks: [
           { role: 'bb', en: "I'm gonna", pron: '암거너' },
@@ -1375,7 +1411,7 @@ const episodes: CookingEpisode[] = [
         fullKo: '오늘 밤엔 한국 라면을 끓여 먹을 거예요.'
       },
       {
-        stepTitle: 'SCENE 2 · 물 정량 맞춰 끓이기',
+        stepTitle: 'SCENE 2 · Measure 550ml Water & Boil',
         visualEmojis: '💧 🍲 ♨️',
         imagePath: '/images/kfood/ep1-s6.jpg',
         actionNote: '냄비에 물 550ml를 붓고 센 불에 끓이기',
@@ -1383,7 +1419,7 @@ const episodes: CookingEpisode[] = [
         coachEn: 'Our core action is \'measure 550 milliliters of water\'. Let\'s swap the first block!',
         missionKo: '실전 조립 미션! 먼저 작은 냄비에 물을 끓여야 해요!',
         missionEn: 'Snap Mission! \'You have to measure 550 milliliters of water exactly.\' Assemble the blocks!',
-        keyVocab: 'boil the water (물을 끓이다)',
+        keyVocab: 'measure 550ml water',
         bgGradient: 'linear-gradient(135deg, #172554 0%, #1e3a8a 100%)',
         blocks: [
           { role: 'bb', en: 'First, we have to', pron: '퍼스트, 위 해프터' },
@@ -1404,7 +1440,7 @@ const episodes: CookingEpisode[] = [
         fullKo: '먼저 작은 냄비에 물을 끓여야 해요.'
       },
       {
-        stepTitle: 'SCENE 3 · K-라면 꿀팁: 스프 먼저 넣기!',
+        stepTitle: 'SCENE 3 · Add Noodles & Soup Powder',
         visualEmojis: '🌶️ 🥣 💡',
         imagePath: '/images/kfood/ep1-s5.jpg',
         actionNote: '면보다 분말 스프를 먼저 넣는 한국식 꿀팁 설명',
@@ -1412,7 +1448,7 @@ const episodes: CookingEpisode[] = [
         coachEn: 'Our core action is \'put the noodles and soup powder in\'. Let\'s swap the first block!',
         missionKo: '실전 조립 미션! 면보다 스프를 먼저 넣을게요!',
         missionEn: 'Snap Mission! \'I\'m gonna put the noodles and soup powder into the boiling water.\' Let\'s snap!',
-        keyVocab: 'soup base (라면 분말 스프)',
+        keyVocab: 'put noodles and soup powder',
         bgGradient: 'linear-gradient(135deg, #422006 0%, #713f12 100%)',
         blocks: [
           { role: 'bb', en: "I'll", pron: '아을' },
@@ -1433,7 +1469,7 @@ const episodes: CookingEpisode[] = [
         fullKo: '면보다 스프를 먼저 넣을게요.'
       },
       {
-        stepTitle: 'SCENE 4 · 면 넣고 계란 하나 톡 깨 넣기',
+        stepTitle: 'SCENE 4 · Crack an Egg into the Pot',
         visualEmojis: '🍜 🥚 🌱',
         imagePath: '/images/kfood/ep1-s7.jpg',
         actionNote: '면을 넣고 끓인 뒤 계란을 깨 넣고 대파 얹기',
@@ -1441,7 +1477,7 @@ const episodes: CookingEpisode[] = [
         coachEn: 'Our core action is \'crack an egg into the pot\'. Let\'s swap the first block!',
         missionKo: '실전 조립 미션! 냄비에 계란을 하나 톡 깨 넣을 거예요!',
         missionEn: 'Snap Mission! \'I\'m gonna crack an fresh egg into the pot.\' Snap the blocks!',
-        keyVocab: 'crack an egg (계란을 깨 넣다)',
+        keyVocab: 'crack an egg into the pot',
         bgGradient: 'linear-gradient(135deg, #052e16 0%, #14532d 100%)',
         blocks: [
           { role: 'bb', en: "I'm gonna", pron: '암거너' },
@@ -1462,7 +1498,7 @@ const episodes: CookingEpisode[] = [
         fullKo: '냄비에 계란을 하나 톡 깨 넣을 거예요.'
       },
       {
-        stepTitle: 'SCENE 5 · 신김치 얹어서 한 입 먹기',
+        stepTitle: 'SCENE 5 · Take a Bite with Kimchi',
         visualEmojis: '🥢 💨 😋',
         imagePath: '/images/kfood/ep1-s8.jpg',
         actionNote: '꼬들꼬들한 면발 위에 김치 한 점 올려 후루룩!',
@@ -1508,7 +1544,7 @@ const episodes: CookingEpisode[] = [
     outroNarrationKo: '불고기와 상추쌈 영어 표현까지 완벽히 마스터하셨습니다! 구독과 좋아요 잊지 마세요!',
     scenes: [
       {
-        stepTitle: 'SCENE 1 · 단짠단짠 불고기 소개',
+        stepTitle: 'SCENE 1 · Introduction to Bulgogi',
         visualEmojis: '🥩 🧄 🍯',
         imagePath: '/images/kfood/ep1-s1.jpg',
         actionNote: '얇게 썬 소고기와 간장 양념 재료 소개',
@@ -1537,7 +1573,7 @@ const episodes: CookingEpisode[] = [
         fullKo: '저녁으로 한국식 불고기를 만들 거예요.'
       },
       {
-        stepTitle: 'SCENE 2 · 고기를 양념에 재우다 (Marinate)',
+        stepTitle: 'SCENE 2 · Marinate the Beef',
         visualEmojis: '🥣 🥩 ⏲️',
         imagePath: '/images/kfood/ep1-s3.jpg',
         actionNote: '간장, 설탕, 마늘, 참기름 양념에 고기를 30분간 재워 두기',
@@ -1545,7 +1581,7 @@ const episodes: CookingEpisode[] = [
         coachEn: 'Our core action is \'marinate the beef\'. Let\'s swap the starter block!',
         missionKo: '실전 조립 미션! 30분 동안 소고기를 양념에 재워 둬야 해요!',
         missionEn: 'Snap Mission! \'You have to marinate the beef for 30 minutes.\' Assemble the blocks!',
-        keyVocab: 'marinate the beef (고기를 재우다)',
+        keyVocab: 'marinate the beef',
         bgGradient: 'linear-gradient(135deg, #422006 0%, #713f12 100%)',
         blocks: [
           { role: 'bb', en: 'You have to', pron: '유 해프터' },
@@ -1566,7 +1602,7 @@ const episodes: CookingEpisode[] = [
         fullKo: '30분 동안 소고기를 양념에 재워 둬야 해요.'
       },
       {
-        stepTitle: 'SCENE 3 · 센 불에서 빠르게 굽기',
+        stepTitle: 'SCENE 3 · Cook Meat on High Heat',
         visualEmojis: '🍳 🧅 🍄',
         imagePath: '/images/kfood/ep1-s5.jpg',
         actionNote: '달궈진 팬에 양념된 고기와 양파, 버섯을 넣고 빠르게 볶기',
@@ -1574,7 +1610,7 @@ const episodes: CookingEpisode[] = [
         coachEn: 'Our core action is \'cook the meat on high heat\'. Let\'s swap the first block!',
         missionKo: '실전 조립 미션! 센 불에서 고기를 빠르게 구워 줄게요!',
         missionEn: 'Snap Mission! \'I\'m gonna cook the meat on high heat very quickly.\' Snap the blocks!',
-        keyVocab: 'on high heat (센 불에)',
+        keyVocab: 'cook on high heat',
         bgGradient: 'linear-gradient(135deg, #450a0a 0%, #7f1d1d 100%)',
         blocks: [
           { role: 'bb', en: "I'm gonna", pron: '암거너' },
@@ -1595,7 +1631,7 @@ const episodes: CookingEpisode[] = [
         fullKo: '센 불에서 고기를 빠르게 구워 줄게요.'
       },
       {
-        stepTitle: 'SCENE 4 · 한국식 상추쌈(Ssam) 싸 먹기',
+        stepTitle: 'SCENE 4 · Wrap the Meat in Fresh Lettuce',
         visualEmojis: '🥬 🥩 👍',
         imagePath: '/images/kfood/ep1-s8.jpg',
         actionNote: '손바닥 위 상추에 고기, 밥, 쌈장을 올려 한 입에 쏙!',
@@ -1603,7 +1639,7 @@ const episodes: CookingEpisode[] = [
         coachEn: 'Our core action is \'wrap the meat in fresh lettuce\'. Let\'s swap the first block!',
         missionKo: '마지막 조립 미션! 신선한 상추에 고기를 싸서 먹어 볼게요!',
         missionEn: 'Final Snap Mission! \'I\'ll wrap the meat in fresh lettuce with ssamjang.\' Snap the blocks!',
-        keyVocab: 'wrap the meat in fresh lettuce',
+        keyVocab: 'wrap the meat in lettuce',
         bgGradient: 'linear-gradient(135deg, #052e16 0%, #14532d 100%)',
         blocks: [
           { role: 'bb', en: "I'll", pron: '아을' },
@@ -2167,19 +2203,25 @@ function nextSlide() {
 // ---------------------------------------------------------
 // 1080p 전체화면 방송 모드 & 마우스 자동 숨김
 // ---------------------------------------------------------
+async function enterFullscreen() {
+  isFullscreenMode.value = true
+  if (studioRoot.value && studioRoot.value.requestFullscreen) {
+    try {
+      if (!document.fullscreenElement) {
+        await studioRoot.value.requestFullscreen()
+      }
+    } catch {
+      // CSS fullscreen fallback
+    }
+  }
+}
+
 async function toggleFullscreenBroadcast() {
   if (isFullscreenMode.value) {
     await exitFullscreen()
     return
   }
-  isFullscreenMode.value = true
-  if (studioRoot.value && studioRoot.value.requestFullscreen) {
-    try {
-      await studioRoot.value.requestFullscreen()
-    } catch {
-      // CSS fullscreen fallback
-    }
-  }
+  await enterFullscreen()
 }
 
 async function exitFullscreen() {
@@ -4289,6 +4331,46 @@ onBeforeUnmount(() => {
 .rem-btn.rem-rec.recording {
   background: #b91c1c;
   animation: recPulse 1.2s infinite;
+}
+
+.kf-record-countdown-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(15, 23, 42, 0.88);
+  backdrop-filter: blur(10px);
+}
+.rc-box {
+  text-align: center;
+}
+.rc-badge {
+  display: inline-block;
+  padding: 0.5rem 1.4rem;
+  border-radius: 9999px;
+  background: rgba(239, 68, 68, 0.25);
+  border: 1px solid rgba(239, 68, 68, 0.6);
+  color: #fca5a5;
+  font-size: 1.1rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  margin-bottom: 1.25rem;
+}
+.rc-number {
+  font-size: 9rem;
+  font-weight: 900;
+  color: #ffffff;
+  line-height: 1;
+  text-shadow: 0 0 50px rgba(239, 68, 68, 0.8);
+  animation: kfPop 0.4s ease-out;
+}
+.rc-sub {
+  margin-top: 1.25rem;
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: #cbd5e1;
 }
 
 .kf-rec-status-badge {
