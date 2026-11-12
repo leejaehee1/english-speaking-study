@@ -595,7 +595,7 @@
       <!-- 유튜브 업로드 패키지 (제목·설명·자막 원클릭 복사) -->
       <div v-if="!isCleanMode" class="kf-yt-package">
         <div class="kf-yt-package-header" @click="showYtMeta = !showYtMeta">
-          <span>📋 <strong>{{ currentEpisode.title }}</strong> · 유튜브 업로드용 제목·설명·태그·자막 패키지</span>
+          <span>📋 <strong>{{ currentEpisode.title }}</strong> · YouTube Upload Package (Title, Description, Pinned Comment &amp; Tags)</span>
           <span class="kf-toggle-arrow">{{ showYtMeta ? '▲ Collapse' : '▼ Expand' }}</span>
         </div>
         <div v-if="showYtMeta" class="kf-yt-package-body">
@@ -608,9 +608,13 @@
             <code>{{ currentEpisode.thumbnailText }}</code>
           </div>
           <div class="kf-meta-row">
-            <strong>Description &amp; Tags:</strong>
+            <strong>Pinned Comment:</strong>
+            <code>🍲 SoundBlock K-Cooking Challenge! Which step was your favorite? Let us know below! 👇</code>
+          </div>
+          <div class="kf-meta-row">
+            <strong>Full Package:</strong>
             <button type="button" class="kf-ctrl-btn-sm" @click="copyEpisodeScript">
-              {{ copySuccess ? '✅ Copied!' : '📄 Copy Script & Tags' }}
+              {{ copySuccess ? '✅ Copied All to Clipboard!' : '📄 Copy 100% English Upload Package' }}
             </button>
           </div>
         </div>
@@ -957,8 +961,8 @@ const episodes: CookingEpisode[] = [
     emoji: '🍲',
     shortTitle: '🍲 Kimchi Stew',
     title: 'How to Cook Authentic Kimchi Stew',
-    ytTitle: '[소리블록 요리영어 #1] 중학교 단어로 김치찌개 끓이기 🍲 | How to Make Kimchi Stew in Easy English',
-    thumbnailText: '"I\'m gonna make Kimchi stew!" → [I\'m gonna] + [make Kimchi stew]',
+    ytTitle: 'How to Cook Authentic Kimchi Stew in Easy English 🍲 | SoundBlock K-Cooking EP.01',
+    thumbnailText: 'Cook Kimchi Stew in Easy English! [I\'m gonna] + [make Kimchi stew]',
     introNarrationKo: '안녕하세요, 소리블록 케이쿠킹입니다! 오늘은 한국인의 소울푸드 김치찌개 끓이는 법을 소리 블록 교체와 조립으로 마스터해 볼게요.',
     outroNarrationKo: '오늘 배운 김치찌개 소리 블록 조합 훈련, 입에 착 붙으셨나요? 구독과 좋아요를 누르고 다음 요리도 함께 조립해 봐요!',
     scenes: [
@@ -1205,9 +1209,9 @@ const episodes: CookingEpisode[] = [
     epNumber: 'EP.02',
     emoji: '🍳',
     shortTitle: '🍳 Kimchi Fried Rice',
-    title: '5분 완성 김치볶음밥 & 계란프라이 만들기 (Kimchi Fried Rice)',
-    ytTitle: '[소리블록 요리영어 #2] 5분 완성 김치볶음밥 영어로 설명하기 🍳 | Kimchi Fried Rice in Easy English',
-    thumbnailText: '"계란프라이 올릴게!" → [I\'ll] + [put a fried egg] + [on top]',
+    title: 'How to Make 5-Minute Kimchi Fried Rice',
+    ytTitle: 'How to Make 5-Minute Kimchi Fried Rice in Easy English 🍳 | SoundBlock K-Cooking EP.02',
+    thumbnailText: '5-Min Kimchi Fried Rice! [I\'ll] + [put a fried egg on top]',
     introNarrationKo: '안녕하세요, 소리블록 케이쿠킹입니다! 오늘은 5분 만에 뚝딱 만드는 김치볶음밥을 소리 블록 조합으로 말해 볼게요.',
     outroNarrationKo: '오늘 배운 김치볶음밥 소리 블록 조합 훈련도 정말 유익하셨죠? 구독과 좋아요 누르고 다음 영상에서 또 만나요!',
     scenes: [
@@ -1395,10 +1399,10 @@ const episodes: CookingEpisode[] = [
     id: 'korean-ramen',
     epNumber: 'EP.03',
     emoji: '🍜',
-    shortTitle: '3화 · K-라면 끓이기',
-    title: '영어로 K-라면 꼬들꼬들하게 끓이기 (Korean Instant Noodles)',
-    ytTitle: '[소리블록 요리영어 #3] 외국인 친구에게 K-라면 끓이는 법 영어로 말하기 🍜 | How to Cook Korean Ramen',
-    thumbnailText: '"스프부터 넣어야 해!" → [You have to] + [put the soup base first]',
+    shortTitle: '🍜 Korean Ramen',
+    title: 'How to Cook Authentic Korean Ramen',
+    ytTitle: 'How to Cook Authentic Korean Ramen in Easy English 🍜 | SoundBlock K-Cooking EP.03',
+    thumbnailText: 'Cook K-Ramen Like a Pro! [You have to] + [put the soup base first]',
     introNarrationKo: '안녕하세요, 소리블록 케이쿠킹입니다! 오늘은 전 세계가 사랑하는 한국 라면 맛있게 끓이는 법을 소리 블록으로 배워 볼게요.',
     outroNarrationKo: '라면 끓이면서 혼자 영어로 중얼거려 보면 절대 안 까먹습니다! 구독과 좋아요 부탁드려요!',
     scenes: [
@@ -1557,10 +1561,10 @@ const episodes: CookingEpisode[] = [
     id: 'bulgogi-bbq',
     epNumber: 'EP.04',
     emoji: '🥩',
-    shortTitle: '4화 · 불고기 & 쌈',
-    title: '영어로 불고기 재우기 & 상추쌈 싸 먹는 법 설명하기 (Bulgogi)',
-    ytTitle: '[소리블록 요리영어 #4] 불고기 양념 재우기부터 상추쌈(Ssam)까지 영어로! 🥩 | Korean Bulgogi',
-    thumbnailText: '"상추에 싸 드세요!" → [You have to] + [wrap it in lettuce]',
+    shortTitle: '🥩 Korean Bulgogi BBQ',
+    title: 'How to Cook Authentic Korean Bulgogi Beef BBQ',
+    ytTitle: 'How to Make Delicious Korean Bulgogi Beef BBQ in Easy English 🥩 | SoundBlock K-Cooking EP.04',
+    thumbnailText: 'Korean Bulgogi & Ssam! [You have to] + [wrap it in lettuce]',
     introNarrationKo: '안녕하세요, 소리블록 케이쿠킹입니다! 외국인 친구들이 가장 좋아하는 불고기와 상추쌈 싸 먹는 법을 소리 블록으로 배워 볼게요.',
     outroNarrationKo: '불고기와 상추쌈 영어 표현까지 완벽히 마스터하셨습니다! 구독과 좋아요 잊지 마세요!',
     scenes: [
@@ -2366,21 +2370,45 @@ async function toggleRecording() {
 
 async function copyEpisodeScript() {
   const ep = currentEpisode.value
+  const dishName = ep.shortTitle.replace(/^[^\s]+\s*/, '')
   const lines = [
-    `[제목] ${ep.ytTitle}`,
-    `[썸네일 문구] ${ep.thumbnailText}`,
+    `=== 1. VIDEO TITLE ===`,
+    ep.ytTitle,
     '',
-    '--- [타임스탬프 & 소리 블록 대본] ---',
-    ...ep.scenes.map(
-      (s, i) =>
-        `0${i}:00 ${s.stepTitle}
-- EN: ${s.fullEn}
-- 블록: ${s.blocks.map((b) => `[${b.en}]`).join(' + ')}
-- 교체: ${s.combos.map((c) => c.fullEn).join(' / ')}
-- 뜻: ${s.fullKo}
-`
-    ),
-    '#소리블록K쿠킹 #SoundBlockKCooking #영어회화초보 #요리영어 #소리블록 #한식영어 #KFood #EnglishSpeaking #KimchiStew'
+    `=== 2. THUMBNAIL TEXT ===`,
+    ep.thumbnailText,
+    '',
+    `=== 3. PINNED COMMENT (Copy & Pin in YouTube comments) ===`,
+    `🍲 SoundBlock K-Cooking Challenge!`,
+    `Which step was your favorite? Try speaking the full sentence out loud in one breath!`,
+    `👇 Share your favorite sound block in the comments below!`,
+    '',
+    `=== 4. DESCRIPTION & TIMESTAMPS ===`,
+    `Welcome to SoundBlock K-Cooking! ${ep.emoji}`,
+    `Learn how to cook authentic Korean ${dishName} while mastering real-life English speaking using simple 3-part sound blocks!`,
+    '',
+    `💡 What are Sound Blocks?`,
+    `① 1st Block: Starter rhythm (e.g. "I'm gonna", "You have to", "I'll")`,
+    `② Core Action: Natural cooking action (e.g. "${ep.scenes[0]?.blocks[1]?.en || 'action'}")`,
+    `③ Detail Block: Completes the scene with clarity (e.g. "${ep.scenes[0]?.blocks[2]?.en || 'detail'}")`,
+    '',
+    `--- ⏱️ Timestamps ---`,
+    `00:00 Intro · Let's get cooking!`,
+    ...ep.scenes.map((s, i) => {
+      const totalSec = (i + 1) * 32
+      const mm = String(Math.floor(totalSec / 60)).padStart(2, '0')
+      const ss = String(totalSec % 60).padStart(2, '0')
+      return `${mm}:${ss} ${s.stepTitle}
+- Full Sentence: "${s.fullEn}"
+- Blocks: ${s.blocks.map((b) => `[${b.en}]`).join(' + ')}
+- Swap 1st Block: ${s.combos.map((c) => c.fullEn).join(' / ')}`
+    }),
+    `04:15 Full Review · Master all sound blocks!`,
+    '',
+    `🔔 Subscribe & Like to cook more delicious K-food in easy English!`,
+    `Official Channel · YouTube @SoundBlockKCooking`,
+    '',
+    `#SoundBlockKCooking #KFood #${dishName.replace(/\s+/g, '')} #LearnEnglish #EnglishSpeaking #EasyEnglish #KoreanCooking #CookingEnglish`
   ]
   try {
     await navigator.clipboard.writeText(lines.join('\n'))
