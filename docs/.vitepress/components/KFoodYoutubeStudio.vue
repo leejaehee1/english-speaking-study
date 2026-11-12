@@ -258,7 +258,7 @@
               </div>
             </div>
 
-            <div v-else-if="showCoachBubble && currentCoachText" class="kf-coach-banner">
+            <div v-else-if="showCoachBubble && currentCoachText && activeStage !== 'quiz'" class="kf-coach-banner">
               <span class="coach-icon">{{ activeStage === 'quiz' ? '🎯 SNAP MISSION' : '💡 COOKING TIP' }}</span>
               <span class="coach-text">{{ currentCoachText }}</span>
             </div>
@@ -298,13 +298,14 @@
                STAGE 2: 실전 자석 합체 미션 (Magnet Snap Quiz)
                ============================================================ -->
           <div v-else-if="activeStage === 'quiz'" class="kf-lower-third kf-quiz-stage">
+            <!-- 1) 단일 통합 SNAP MISSION 배너 -->
             <div class="kf-mission-banner" @click="playMissionAudio">
-              <span class="m-badge">🎯 Snap Mission</span>
-              <span class="m-text">{{ currentScene.missionEn || currentScene.fullEn }}</span>
-              <span class="m-listen">🔊 Listen Again</span>
+              <span class="m-badge">🎯 SNAP MISSION</span>
+              <span class="m-text">Snap the blocks for: <strong>"{{ currentScene.fullEn }}"</strong></span>
+              <span class="m-listen">🔊 Listen</span>
             </div>
 
-            <!-- 자석으로 중앙에 합체되는 슬롯 (직접 클릭하여 채우거나 취소 가능) -->
+            <!-- 2) 자석 결합 타겟 슬롯 (도톰한 레고 마그넷 블록) -->
             <div class="kf-snap-target-row" :class="{ snapped: isSnapped }">
               <div
                 class="snap-slot slot-bb"
@@ -332,10 +333,13 @@
               </div>
             </div>
 
-            <!-- 후보 블록 풀 (클릭하면 실시간으로 위 슬롯으로 찰칵 올라갑니다!) -->
+            <!-- 3) 후보 블록 풀 (카테고리별 시원하고 큼직한 레고 블록 선택 패널) -->
             <div class="kf-candidate-pool">
-              <div class="cand-group">
-                <span class="cand-label">① Pick 1st Block:</span>
+              <!-- 행 1: 1st Starter Block 후보 -->
+              <div class="cand-row">
+                <div class="cand-badge-col">
+                  <span class="cand-sec-badge badge-bb">① 1st Block</span>
+                </div>
                 <div class="cand-items">
                   <button
                     v-for="(opt, oIdx) in currentScene.quizPool.bbCandidates"
@@ -353,8 +357,11 @@
                 </div>
               </div>
 
-              <div class="cand-group">
-                <span class="cand-label">② Pick Core Action:</span>
+              <!-- 행 2: Core Action Block 후보 -->
+              <div class="cand-row">
+                <div class="cand-badge-col">
+                  <span class="cand-sec-badge badge-core">② Core Action</span>
+                </div>
                 <div class="cand-items">
                   <button
                     v-for="(opt, oIdx) in currentScene.quizPool.coreCandidates"
@@ -373,10 +380,9 @@
               </div>
             </div>
 
-            <!-- 합체 완료 문장 배너 -->
+            <!-- 4) 합체 완료 문장 배너 (겹침 0% · 시원하고 아름다운 완성 문장 단일 출력) -->
             <div v-if="isSnapped" class="kf-quiz-complete-bar" @click="speakSceneSentence(1.0)">
-              <div class="qc-en">🧲 Snapped Together: <strong>{{ currentScene.fullEn }}</strong></div>
-              <div class="qc-ko">{{ currentScene.missionEn || currentScene.fullEn }}</div>
+              <div class="qc-en">✨ PERFECT SNAP! 🧲 <strong>{{ currentScene.fullEn }}</strong></div>
             </div>
           </div>
 
@@ -3127,26 +3133,30 @@ onBeforeUnmount(() => {
 }
 
 .kf-quiz-complete-bar {
-  background: rgba(16, 185, 129, 0.3);
-  backdrop-filter: blur(10px);
-  border: 1.5px solid #34d399;
-  border-radius: 10px;
-  padding: 0.5rem 0.95rem;
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.38) 0%, rgba(5, 150, 105, 0.48) 100%);
+  backdrop-filter: blur(14px);
+  border: 2px solid #34d399;
+  border-radius: 14px;
+  padding: 0.85rem 1.6rem;
   cursor: pointer;
+  box-shadow: 0 0 25px rgba(52, 211, 153, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  animation: kfPop 0.3s ease-out;
 }
 
 .qc-en {
-  font-size: 1.2rem;
+  font-size: 1.85rem;
+  font-weight: 900;
   color: #fff;
+  line-height: 1.35;
 }
 
 .qc-en strong {
   color: #fde047;
-}
-
-.qc-ko {
-  font-size: 0.86rem;
-  color: #cbd5e1;
+  text-shadow: 0 0 16px rgba(253, 224, 71, 0.6);
 }
 
 /* ---------------------------------------------------
@@ -4225,22 +4235,26 @@ onBeforeUnmount(() => {
   font-size: 2.75rem;
 }
 
-.theater-fullscreen .cand-label {
-  font-size: 1.65rem;
+.theater-fullscreen .cand-row {
+  padding: 0.75rem 1.25rem;
+  border-radius: 18px;
+  gap: 1.25rem;
+}
+
+.theater-fullscreen .cand-sec-badge {
+  font-size: 1.55rem;
+  padding: 0.65rem 1.55rem;
+  border-radius: 14px;
 }
 
 .theater-fullscreen .cand-btn {
-  font-size: 2.45rem;
-  padding: 0.85rem 2.2rem;
-  border-radius: 18px;
+  font-size: 2.35rem;
+  padding: 0.95rem 1.6rem;
+  border-radius: 16px;
 }
 
 .theater-fullscreen .qc-en {
-  font-size: 2.75rem;
-}
-
-.theater-fullscreen .qc-ko {
-  font-size: 1.75rem;
+  font-size: 2.85rem;
 }
 
 /* STAGE 3: 완성 문장 & 소리 블록 대왕 폰트 */
