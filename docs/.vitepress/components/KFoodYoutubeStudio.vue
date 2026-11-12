@@ -44,16 +44,16 @@
           <button
             type="button"
             class="kf-mode-btn kf-font-btn"
-            :title="'글자 크기 변경: 현재 ' + fontScaleLabel"
+            :title="'Font Size: ' + fontScaleLabel"
             @click="cycleFontScale"
           >
-            🔠 글자: <strong>{{ fontScaleLabel }}</strong>
+            🔠 Font: <strong>{{ fontScaleLabel }}</strong>
           </button>
         </div>
 
         <!-- 🔴 스튜디오 원클릭 자체 비디오 녹화 (내부 사운드 직통) -->
-        <label class="kf-mic-chk" title="녹화 시 내 마이크 목소리도 함께 믹싱 녹음할지 설정">
-          <input v-model="includeMicInRecording" type="checkbox" /> 🎙️ 내 목소리 포함
+        <label class="kf-mic-chk" title="Optionally mix your microphone into the studio recording">
+          <input v-model="includeMicInRecording" type="checkbox" /> 🎙️ My Mic
         </label>
         <button
           type="button"
@@ -61,7 +61,7 @@
           :class="{ 'is-rec-active': isScreenRecording }"
           @click="toggleScreenRecording"
         >
-          {{ isScreenRecording ? `⏹️ 녹화 완료 & 파일 다운로드 (${formatRecordTime})` : '🔴 1080p 자체 영상 녹화' }}
+          {{ isScreenRecording ? `⏹️ Stop & Save (${formatRecordTime})` : '🔴 Record 1080p Video' }}
         </button>
 
         <div class="kf-aspect-toggle">
@@ -71,7 +71,7 @@
             :class="{ active: aspectRatio === '16:9' }"
             @click="aspectRatio = '16:9'"
           >
-            📺 16:9 가로형 (Full HD)
+            📺 16:9 Landscape (1080p)
           </button>
           <button
             type="button"
@@ -79,7 +79,7 @@
             :class="{ active: aspectRatio === '9:16' }"
             @click="aspectRatio = '9:16'"
           >
-            📱 9:16 쇼츠 세로형
+            📱 9:16 Shorts (Vertical)
           </button>
         </div>
 
@@ -89,7 +89,7 @@
           :class="{ active: isFullscreenMode }"
           @click="toggleFullscreenBroadcast"
         >
-          {{ isFullscreenMode ? '✕ 전체화면 방송 종료 (ESC)' : '🖥️ 1080p 풀스크린 방송 모드' }}
+          {{ isFullscreenMode ? '✕ Exit Fullscreen (ESC)' : '🖥️ 1080p Fullscreen Studio' }}
         </button>
       </div>
     </div>
@@ -102,7 +102,7 @@
         <!-- 🔴 실시간 녹화 중 배너 (컴퓨터 내부 사운드 직통) -->
         <div v-if="isScreenRecording" class="kf-rec-status-badge">
           <span class="rec-pulsing-dot"></span>
-          <span>REC 1080p · {{ includeMicInRecording ? "AI 소리 + 내 목소리 믹싱 녹화 중" : "컴퓨터 내부 사운드 직통 녹화 중" }} ({{ formatRecordTime }})</span>
+          <span>REC 1080p · {{ includeMicInRecording ? "AI Voice + Mic Mixed" : "Clean Direct Digital Audio" }} ({{ formatRecordTime }})</span>
         </div>
         <!-- ----------------------------------------------------
              CASE A: INTRO 슬라이드 (오프닝 훅 화면)
@@ -118,25 +118,25 @@
           <div class="kf-intro-content">
             <div class="kf-intro-top-pill">
               <img :src="withBase('/images/kfood/channel-logo.jpg')" alt="Logo" class="kf-mini-logo" />
-              <span>소리블록 K-쿠킹 · SoundBlock K-Cooking</span>
+              <span>SoundBlock K-Cooking Studio</span>
             </div>
 
             <div class="kf-intro-ep-badge">{{ currentEpisode.epNumber }} · K-FOOD SPEAKING RECIPE</div>
             <h2 class="kf-intro-title">{{ currentEpisode.title }}</h2>
             <p class="kf-intro-sub">
-              단어 하나씩 외우지 마세요! 레고처럼 <strong>소리 블록을 갈아 끼우고 조립</strong>하면 입이 트입니다.
+              Don't memorize word by word! <strong>Swap and snap Sound Blocks</strong> like Lego to speak naturally.
             </p>
 
             <div class="kf-intro-formula">
-              <span class="f-pill bb">① 시작 블록 (I'm gonna / You have to)</span>
+              <span class="f-pill bb">① 1st Block (I'm gonna / You have to)</span>
               <span class="f-plus">+</span>
-              <span class="f-pill core">② 요리 코어 블록 (make Kimchi stew)</span>
+              <span class="f-pill core">② Core Action Block (make Kimchi stew)</span>
               <span class="f-plus">+</span>
-              <span class="f-pill db">③ 디테일 블록 (today)</span>
+              <span class="f-pill db">③ Detail Block (today)</span>
             </div>
 
             <div class="kf-intro-cta" @click="startEpisodeFromBeginning">
-              ▶️ 지금 바로 소리 내어 시작해 볼까요? (Let's get cooking!)
+              ▶️ Let's get cooking! (Click to Start)
             </div>
           </div>
         </div>
@@ -215,7 +215,7 @@
               :class="{ active: activeStage === 'swap' }"
               @click="setStage('swap')"
             >
-              🔄 1단계: 시작 블록 3단 교체
+              🔄 Step 1: Swap 1st Block
             </button>
             <button
               type="button"
@@ -223,7 +223,7 @@
               :class="{ active: activeStage === 'quiz' }"
               @click="setStage('quiz')"
             >
-              🧲 2단계: 실전 자석 합체
+              🧲 Step 2: Snap Blocks
             </button>
             <button
               type="button"
@@ -231,7 +231,7 @@
               :class="{ active: activeStage === 'sentence' }"
               @click="setStage('sentence')"
             >
-              🎤 3단계: 완성 문장 따라하기
+              🎤 Step 3: YOUR TURN (Speak Out Loud)
             </button>
           </div>
 
@@ -241,10 +241,10 @@
               <div class="turn-header">
                 <span class="turn-mic-icon">🎤</span>
                 <div class="turn-texts">
-                  <strong>YOUR TURN! 큰 소리로 따라 말해 보세요!</strong>
-                  <span>소리 블록들을 리듬에 맞춰 한 호흡으로 뱉어 보세요</span>
+                  <strong>YOUR TURN! Speak Out Loud!</strong>
+                  <span>Say the full sentence in one breath with natural rhythm</span>
                 </div>
-                <span class="turn-sec-badge">{{ Math.ceil((100 - shadowingProgress) * 0.04) }}초</span>
+                <span class="turn-sec-badge">{{ Math.ceil((100 - shadowingProgress) * 0.04) }}s</span>
               </div>
               <div class="turn-progress-track">
                 <div class="turn-progress-bar" :style="{ width: shadowingProgress + '%' }"></div>
@@ -252,7 +252,7 @@
             </div>
 
             <div v-else-if="showCoachBubble && currentCoachText" class="kf-coach-banner">
-              <span class="coach-icon">{{ activeStage === 'quiz' ? '🎯 미션 알림' : '💡 요리 상황 코칭' }}</span>
+              <span class="coach-icon">{{ activeStage === 'quiz' ? '🎯 SNAP MISSION' : '💡 COOKING TIP' }}</span>
               <span class="coach-text">{{ currentCoachText }}</span>
             </div>
           </transition>
@@ -265,9 +265,9 @@
           <div v-if="activeStage === 'swap'" class="kf-lower-third kf-swap-stage">
             <!-- 중앙 컴팩트 코어 블록 배지 -->
             <div class="kf-core-anchor-bar" @click="speakCoreBlock">
-              <span class="anchor-badge">② 고정 코어 블록</span>
+              <span class="anchor-badge">② Core Action Block</span>
               <span class="anchor-en">{{ currentScene.blocks[1]?.en || currentScene.keyVocab }}</span>
-              <span class="anchor-hint">🔊 터치하여 듣기</span>
+              <span class="anchor-hint">🔊 Tap to Listen</span>
             </div>
 
             <!-- 3가지 시작 블록 갈아 끼우기 카드 목록 (초대형 중앙 정렬 레고 블록) -->
@@ -292,9 +292,9 @@
                ============================================================ -->
           <div v-else-if="activeStage === 'quiz'" class="kf-lower-third kf-quiz-stage">
             <div class="kf-mission-banner" @click="playMissionAudio">
-              <span class="m-badge">🎯 조립 미션</span>
-              <span class="m-text">{{ currentScene.missionKo || currentScene.fullKo }}</span>
-              <span class="m-listen">🔊 미션 다시 듣기</span>
+              <span class="m-badge">🎯 Snap Mission</span>
+              <span class="m-text">{{ currentScene.missionEn || currentScene.fullEn }}</span>
+              <span class="m-listen">🔊 Listen Again</span>
             </div>
 
             <!-- 자석으로 중앙에 합체되는 슬롯 (직접 클릭하여 채우거나 취소 가능) -->
@@ -305,7 +305,7 @@
                 title="클릭하여 초기화"
                 @click="clearPicked('bb')"
               >
-                <span class="slot-badge">① 시작 블록</span>
+                <span class="slot-badge">① 1st Block</span>
                 <span class="slot-word">{{ isSnapped ? currentScene.blocks[0].en : (pickedBb || '?') }}</span>
               </div>
               <span class="snap-plus">+</span>
@@ -315,12 +315,12 @@
                 title="클릭하여 초기화"
                 @click="clearPicked('core')"
               >
-                <span class="slot-badge">② 코어 블록</span>
+                <span class="slot-badge">② Core Action</span>
                 <span class="slot-word">{{ isSnapped ? currentScene.blocks[1].en : (pickedCore || '?') }}</span>
               </div>
               <span class="snap-plus">+</span>
               <div class="snap-slot slot-db" :class="{ 'is-filled': isSnapped }">
-                <span class="slot-badge">③ 디테일 블록</span>
+                <span class="slot-badge">③ Detail</span>
                 <span class="slot-word">{{ isSnapped ? currentScene.blocks[2].en : '...' }}</span>
               </div>
             </div>
@@ -328,7 +328,7 @@
             <!-- 후보 블록 풀 (클릭하면 실시간으로 위 슬롯으로 찰칵 올라갑니다!) -->
             <div class="kf-candidate-pool">
               <div class="cand-group">
-                <span class="cand-label">① 시작 블록 선택:</span>
+                <span class="cand-label">① Pick 1st Block:</span>
                 <div class="cand-items">
                   <button
                     v-for="(opt, oIdx) in currentScene.quizPool.bbCandidates"
@@ -347,7 +347,7 @@
               </div>
 
               <div class="cand-group">
-                <span class="cand-label">② 코어 블록 선택:</span>
+                <span class="cand-label">② Pick Core Action:</span>
                 <div class="cand-items">
                   <button
                     v-for="(opt, oIdx) in currentScene.quizPool.coreCandidates"
@@ -368,7 +368,7 @@
 
             <!-- 합체 완료 문장 배너 -->
             <div v-if="isSnapped" class="kf-quiz-complete-bar" @click="speakSceneSentence(1.0)">
-              <div class="qc-en">🧲 철컥 합체 완료: <strong>{{ currentScene.fullEn }}</strong></div>
+              <div class="qc-en">🧲 Snapped Together: <strong>{{ currentScene.fullEn }}</strong></div>
               <div class="qc-ko">{{ currentScene.fullKo }}</div>
             </div>
           </div>
@@ -388,7 +388,7 @@
               >
                 <div class="gblk-top">
                   <span class="gblk-badge">
-                    {{ blk.role === 'bb' ? '① 시작 블록' : blk.role === 'core' ? '② 코어 블록' : '③ 디테일 블록' }}
+                    {{ blk.role === 'bb' ? '① 1st Block' : blk.role === 'core' ? '② Core Action' : '③ Detail Block' }}
                   </span>
                   </div>
                 <div class="gblk-en">{{ blk.en }}</div>
@@ -424,8 +424,8 @@
 
           <div class="kf-outro-content">
             <div class="kf-outro-header">
-              <span class="outro-badge">🎉 MISSION COMPLETE · 오늘의 소리 블록 총정리</span>
-              <h2 class="outro-title">{{ currentEpisode.title }} 핵심 문장 복습</h2>
+              <span class="outro-badge">🎉 MISSION COMPLETE · Master All Sound Blocks</span>
+              <h2 class="outro-title">{{ currentEpisode.title }} · Full Review</h2>
             </div>
 
             <div class="kf-review-grid">
@@ -447,7 +447,7 @@
               <div class="outro-cta-box">
                 <img :src="withBase('/images/kfood/channel-logo.jpg')" alt="Logo" class="kf-mini-logo" />
                 <div>
-                  <strong>구독(Subscribe) &amp; 좋아요(Like)</strong>를 누르고 다음 한국 요리도 영어로 말해 봐요!
+                  <strong>Subscribe &amp; Like</strong> to cook more delicious K-food in easy English!
                   <div class="outro-handle">YouTube · @SoundBlockKCooking</div>
                 </div>
               </div>
@@ -461,28 +461,28 @@
           class="kf-floating-remote"
           :class="{ visible: showFloatingControls }"
         >
-          <button type="button" class="rem-btn" @click="prevSlide">◀ 이전</button>
+          <button type="button" class="rem-btn" @click="prevSlide">◀ Prev</button>
           <button
             type="button"
             class="rem-btn rem-primary"
             :class="{ playing: isAutoPlaying }"
             @click="toggleAutoShow"
           >
-            {{ isAutoPlaying ? '⏹️ 방송 정지' : '▶️ 전체 자동 방송 시작' }}
+            {{ isAutoPlaying ? '⏹️ Stop Broadcast' : '▶️ Start Full Auto Broadcast' }}
           </button>
-          <button type="button" class="rem-btn" @click="playCurrentSlideSequence">🔁 현재 장면 재생</button>
-          <button type="button" class="rem-btn" @click="nextSlide">다음 ▶</button>
+          <button type="button" class="rem-btn" @click="playCurrentSlideSequence">🔁 Play Scene</button>
+          <button type="button" class="rem-btn" @click="nextSlide">Next ▶</button>
           <button
             type="button"
             class="rem-btn rem-rec"
             :class="{ recording: isScreenRecording }"
             @click="toggleScreenRecording"
           >
-            {{ isScreenRecording ? `⏹️ 녹화 완료 (${formatRecordTime})` : '🔴 1080p 녹화' }}
+            {{ isScreenRecording ? `⏹️ Stop (${formatRecordTime})` : '🔴 Record 1080p' }}
           </button>
           
           <button v-if="isFullscreenMode" type="button" class="rem-btn rem-exit" @click="exitFullscreen">
-            ✕ 나가기
+            ✕ Exit
           </button>
         </div>
       </div>
@@ -495,7 +495,7 @@
         <div class="srec-info">
           <div class="srec-title">
             <span class="srec-icon">🎥</span>
-            <strong>스튜디오 원클릭 자체 비디오 녹화 (마이크 잡음 0% · 내부 사운드 100% 디지털 원음)</strong>
+            <strong>Studio 1-Click Video Recording (Clean Digital Audio · 1080p Full HD)</strong>
           </div>
           <p class="srec-desc">
             별도 프로그램 설치 없이, 브라우저가 화면과 AI 성우 목소리를 내부에서 다이렉트로 캡처해 고화질 비디오 파일(<code>.mp4</code>/<code>.webm</code>)로 자동 다운로드해 줍니다. (공유 창에서 '탭 오디오 공유'를 선택하세요)
@@ -504,7 +504,7 @@
         <div class="srec-options">
           <label class="kf-rec-mic-label">
             <input v-model="includeMicInRecording" type="checkbox" />
-            🎙️ <strong>내 마이크 목소리도 함께 녹음</strong> (체크 시 AI 목소리와 내 목소리가 하나의 트랙으로 믹싱됩니다)
+            🎙️ <strong>Include Microphone Audio</strong> (Mixed with AI voice if checked)
           </label>
         </div>
         <button
@@ -513,13 +513,13 @@
           :class="{ 'is-rec-active': isScreenRecording }"
           @click="toggleScreenRecording"
         >
-          {{ isScreenRecording ? `⏹️ 녹화 완료 & 파일 다운로드 (${formatRecordTime})` : '🔴 1080p 자체 비디오 녹화 시작' }}
+          {{ isScreenRecording ? `⏹️ Stop & Download Video (${formatRecordTime})` : '🔴 Start 1080p Video Recording' }}
         </button>
       </div>
 
       <div class="kf-nav-group">
-        <button type="button" class="kf-ctrl-btn" @click="goToSlide(-1)">🎬 인트로</button>
-        <button type="button" class="kf-ctrl-btn" @click="prevSlide">◀ 이전</button>
+        <button type="button" class="kf-ctrl-btn" @click="goToSlide(-1)">🎬 Intro</button>
+        <button type="button" class="kf-ctrl-btn" @click="prevSlide">◀ Prev</button>
 
         <button
           type="button"
@@ -527,20 +527,20 @@
           :class="{ 'kf-btn-playing': isAutoPlaying }"
           @click="toggleAutoShow"
         >
-          {{ isAutoPlaying ? '⏹️ 자동 방송 중지' : '▶️ 전체 장면 자동 방송 (3단교체→자석합체→따라말하기 풀코스)' }}
+          {{ isAutoPlaying ? '⏹️ Stop Auto Broadcast' : '▶️ Full Auto Broadcast (Swap → Snap → Your Turn)' }}
         </button>
 
         <button type="button" class="kf-ctrl-btn kf-btn-step" @click="playCurrentSlideSequence">
-          🔁 현재 장면 풀 시퀀스 재생
+          🔁 Play Scene Sequence
         </button>
 
         <button type="button" class="kf-ctrl-btn kf-btn-primary" @click="speakSceneSentence(1.0)">
-          🔊 영어 문장만 (1.0x)
+          🔊 Sentence Only (1.0x)
         </button>
 
-        <button type="button" class="kf-ctrl-btn" @click="nextSlide">다음 ▶</button>
+        <button type="button" class="kf-ctrl-btn" @click="nextSlide">Next ▶</button>
         <button type="button" class="kf-ctrl-btn" @click="goToSlide(currentEpisode.scenes.length)">
-          🏁 아웃트로
+          🏁 Outro
         </button>
       </div>
 
@@ -548,16 +548,16 @@
       <div v-if="!isCleanMode" class="kf-extra-tools">
         <div class="kf-custom-tools">
           <label class="kf-chk">
-            <input v-model="enableKoreanCoachVoice" type="checkbox" /> 🇰🇷 한국어 코칭/미션 음성
+            <input v-model="enableKoreanCoachVoice" type="checkbox" /> 🗣️ English Coach & Mission Voice
           </label>
           <label class="kf-chk">
-            <input v-model="enableSoundEffects" type="checkbox" /> 🔔 방송 효과음(철컥·딩동)
+            <input v-model="enableSoundEffects" type="checkbox" /> 🔔 Sound Effects
           </label>
           <label class="kf-chk">
-            <input v-model="includeShadowingPause" type="checkbox" /> 🎤 따라 말하기(4초) 구간
+            <input v-model="includeShadowingPause" type="checkbox" /> 🎤 YOUR TURN (4s) Pause
           </label>
           <label class="kf-chk">
-            <input v-model="showCoachBubble" type="checkbox" /> 💡 상단 코칭 배너
+            <input v-model="showCoachBubble" type="checkbox" /> 💡 Coaching Banner
           </label>
 
         </div>
@@ -638,8 +638,10 @@ interface CookingScene {
   visualEmojis: string
   imagePath?: string
   actionNote: string
-  coachKo: string
-  missionKo: string
+  coachKo?: string
+  coachEn?: string
+  missionKo?: string
+  missionEn?: string
   keyVocab: string
   bgGradient: string
   blocks: SoundBlockPiece[]
@@ -695,7 +697,7 @@ const copySuccess = ref(false)
 
 // 자체 비디오 녹화기 상태 (마이크 잡음 0% 내부 사운드 직통 녹화)
 const isScreenRecording = ref(false)
-const includeMicInRecording = ref(true) // 기본값 true: 대표님 마이크 목소리 + 컴퓨터 사운드 동시 녹음
+const includeMicInRecording = ref(false) // 기본값 true: 대표님 마이크 목소리 + 컴퓨터 사운드 동시 녹음
 let activeMicStream: MediaStream | null = null
 let mixerAudioCtx: AudioContext | null = null
 const screenRecordSeconds = ref(0)
@@ -896,7 +898,7 @@ const episodes: CookingEpisode[] = [
     id: 'kimchi-stew',
     epNumber: 'EP.01',
     emoji: '🍲',
-    shortTitle: '1화 · 김치찌개',
+    shortTitle: '🍲 Kimchi Stew',
     title: '중학교 단어로 김치찌개 끓이기 (Kimchi Stew)',
     ytTitle: '[소리블록 요리영어 #1] 중학교 단어로 김치찌개 끓이기 🍲 | How to Make Kimchi Stew in Easy English',
     thumbnailText: '"김치찌개 끓일게!" → [I\'m gonna] + [make Kimchi stew]',
@@ -909,7 +911,9 @@ const episodes: CookingEpisode[] = [
         imagePath: '/images/kfood/ep1-s1.jpg',
         actionNote: '앞치마를 입고 부엌에서 밝게 인사하는 오프닝',
         coachKo: '첫 번째 코어 블록은, 김치찌개를 만들다, 메익 김치 스튜입니다. 앞의 시작 블록만 세 번 갈아 끼워 볼까요?',
+        coachEn: 'Our core action is \'make Kimchi stew\'. Let\'s swap the first block: I\'m gonna, I wanna, Do you wanna!',
         missionKo: '실전 조립 미션! 오늘 저는 김치찌개를 끓일 거예요. 블록 세 개를 합쳐 보세요!',
+        missionEn: 'Snap Mission! \'I\'m gonna make Kimchi stew today.\' Snap the blocks together!',
         keyVocab: 'Kimchi stew (김치찌개)',
         bgGradient: 'linear-gradient(135deg, #1e293b 0%, #334155 100%)',
         blocks: [
@@ -936,7 +940,9 @@ const episodes: CookingEpisode[] = [
         imagePath: '/images/kfood/ep1-s2.jpg',
         actionNote: '잘 익은 신김치를 보여주며 핵심 비법 설명',
         coachKo: '두 번째 코어 블록은, 신김치를 쓰다, 유즈 사워 김치입니다. 시작 블록을 바꿔서 조합해 보세요!',
+        coachEn: 'Our core action is \'use sour kimchi\'. For deep flavor, sour kimchi is a must!',
         missionKo: '실전 조립 미션! 깊은 맛을 내려면 꼭 신김치를 써야 해요. 어떻게 조립할까요?',
+        missionEn: 'Snap Mission! \'You have to use sour kimchi for deep flavor.\' Which blocks snap together?',
         keyVocab: 'sour kimchi (신김치)',
         bgGradient: 'linear-gradient(135deg, #450a0a 0%, #7f1d1d 100%)',
         blocks: [
@@ -963,7 +969,9 @@ const episodes: CookingEpisode[] = [
         imagePath: '/images/kfood/ep1-s3.jpg',
         actionNote: '도마 위에서 김치와 돼지고기를 한 입 크기로 큼직하게 썰기',
         coachKo: '세 번째 코어 블록은, 고기와 김치를 큼직하게 썰다, 찹 더 포크 앤 김치입니다. 시작 블록 세 개를 끼워 볼게요!',
+        coachEn: 'Our core action is \'chop the pork and kimchi\'. Let\'s swap the first block!',
         missionKo: '실전 조립 미션! 돼지고기와 김치를 한 입 크기로 썰어 줄게요!',
+        missionEn: 'Snap Mission! \'I\'m gonna chop the pork and kimchi into bite-sized pieces.\' Assemble the blocks!',
         keyVocab: 'chop / bite-sized pieces',
         bgGradient: 'linear-gradient(135deg, #431407 0%, #7c2d12 100%)',
         blocks: [
@@ -990,7 +998,9 @@ const episodes: CookingEpisode[] = [
         imagePath: '/images/kfood/ep1-s4.jpg',
         actionNote: '두부는 납작하게 썰고(slice), 대파는 송송 썰어 준비',
         coachKo: '네 번째 코어 블록은, 두부를 납작하게 썰다, 슬라이스 더 토푸입니다. 앞 블록만 바꾸면 뜻이 어떻게 달라질까요?',
+        coachEn: 'Our core action is \'slice the tofu\'. Let\'s swap the first block to change the meaning!',
         missionKo: '실전 조립 미션! 제가 두부는 납작하게 썰고 대파도 썰어 둘게요!',
+        missionEn: 'Snap Mission! \'I\'ll slice the tofu and chop the green onion.\' Snap the blocks!',
         keyVocab: 'slice the tofu (두부를 썰다)',
         bgGradient: 'linear-gradient(135deg, #052e16 0%, #14532d 100%)',
         blocks: [
@@ -1017,7 +1027,9 @@ const episodes: CookingEpisode[] = [
         imagePath: '/images/kfood/ep1-s5.jpg',
         actionNote: '달궈진 냄비에 돼지고기, 김치, 다진 마늘을 넣고 지글지글 볶기',
         coachKo: '다섯 번째 코어 블록은, 재료들을 함께 볶다, 프라이 뎀 투게더입니다. 시작 블록 세 가지를 결합해 볼까요?',
+        coachEn: 'Our core action is \'fry them together\'. Let\'s swap the first block!',
         missionKo: '실전 조립 미션! 다진 마늘을 넣고 재료들을 함께 볶아 줘야 해요!',
+        missionEn: 'Snap Mission! \'We have to fry them together with minced garlic.\' Assemble the blocks!',
         keyVocab: 'fry them together (함께 볶다)',
         bgGradient: 'linear-gradient(135deg, #422006 0%, #713f12 100%)',
         blocks: [
@@ -1044,7 +1056,9 @@ const episodes: CookingEpisode[] = [
         imagePath: '/images/kfood/ep1-s6.jpg',
         actionNote: '물을 붓고 감칠맛의 핵심인 김치 국물(kimchi juice) 한 국자 추가!',
         coachKo: '여섯 번째 코어 블록은, 물을 좀 붓다, 포어 썸 워러입니다. 시작 블록을 차례대로 갈아 끼워 보세요!',
+        coachEn: 'Our core action is \'pour some water\'. Let\'s swap the first block!',
         missionKo: '실전 조립 미션! 물을 좀 붓고 김치 국물도 넣어 줄게요!',
+        missionEn: 'Snap Mission! \'I\'m gonna pour some water and add the kimchi juice.\' Snap the blocks!',
         keyVocab: 'kimchi juice (김치 국물)',
         bgGradient: 'linear-gradient(135deg, #172554 0%, #1e3a8a 100%)',
         blocks: [
@@ -1071,7 +1085,9 @@ const episodes: CookingEpisode[] = [
         imagePath: '/images/kfood/ep1-s7.jpg',
         actionNote: '센 불에 팔팔 끓인 뒤 중약불로 줄여 10분간 뭉근히 끓이기',
         coachKo: '일곱 번째 코어 블록은, 팔팔 끓이다, 브링 잇 투 더 보일입니다. 시작 블록 세 개와 조합해 볼게요!',
+        coachEn: 'Our core action is \'bring it to the boil\'. Let\'s swap the first block!',
         missionKo: '실전 조립 미션! 팔팔 끓인 다음에 푹 끓게 둘 거예요!',
+        missionEn: 'Snap Mission! \'We\'re gonna bring it to the boil and let it simmer.\' Let\'s snap!',
         keyVocab: 'bring it to the boil / simmer',
         bgGradient: 'linear-gradient(135deg, #4c0519 0%, #881337 100%)',
         blocks: [
@@ -1098,7 +1114,9 @@ const episodes: CookingEpisode[] = [
         imagePath: '/images/kfood/ep1-s8.jpg',
         actionNote: '국물 한 모금(take a sip) 맛보고 따뜻한 흰쌀밥과 한 입!',
         coachKo: '여덟 번째 코어 블록은, 국물 한 모금 마시다, 테이커 씹입니다. 시작 블록을 바꿔가며 말해 보세요!',
+        coachEn: 'Our core action is \'take a sip\'. Let\'s swap the first block!',
         missionKo: '마지막 조립 미션! 지금 당장 국물 한 모금 마셔 보고 싶네요. 와, 진짜 맛있어요!',
+        missionEn: 'Final Snap Mission! \'I wanna take a sip right now. Wow, so good!\' Snap the blocks!',
         keyVocab: 'take a sip (한 모금 맛보다)',
         bgGradient: 'linear-gradient(135deg, #3b0764 0%, #581c87 100%)',
         blocks: [
@@ -1129,7 +1147,7 @@ const episodes: CookingEpisode[] = [
     id: 'kimchi-fried-rice',
     epNumber: 'EP.02',
     emoji: '🍳',
-    shortTitle: '2화 · 김치볶음밥',
+    shortTitle: '🍳 Kimchi Fried Rice',
     title: '5분 완성 김치볶음밥 & 계란프라이 만들기 (Kimchi Fried Rice)',
     ytTitle: '[소리블록 요리영어 #2] 5분 완성 김치볶음밥 영어로 설명하기 🍳 | Kimchi Fried Rice in Easy English',
     thumbnailText: '"계란프라이 올릴게!" → [I\'ll] + [put a fried egg] + [on top]',
@@ -1142,7 +1160,9 @@ const episodes: CookingEpisode[] = [
         imagePath: '/images/kfood/ep1-s1.jpg',
         actionNote: '찬밥과 잘게 썬 김치를 준비하며 인사',
         coachKo: '첫 번째 코어 블록은, 김치볶음밥을 만들다, 메익 김치 프라이드 라이스입니다. 시작 블록 세 개를 갈아 끼워 볼까요?',
+        coachEn: 'Our core action is \'make Kimchi fried rice\'. Let\'s swap the first block!',
         missionKo: '실전 조립 미션! 점심으로 김치볶음밥을 만들 거예요!',
+        missionEn: 'Snap Mission! \'I\'m gonna make Kimchi fried rice for lunch.\' Snap the blocks!',
         keyVocab: 'Kimchi fried rice (김치볶음밥)',
         bgGradient: 'linear-gradient(135deg, #431407 0%, #7c2d12 100%)',
         blocks: [
@@ -1169,7 +1189,9 @@ const episodes: CookingEpisode[] = [
         imagePath: '/images/kfood/ep1-s3.jpg',
         actionNote: '볶음밥용으로 김치와 베이컨을 잘게 다지듯 썰기',
         coachKo: '두 번째 코어 블록은, 김치를 잘게 썰다, 찹 더 김치 파인리입니다. 앞 블록을 바꿔서 조합해 보세요!',
+        coachEn: 'Our core action is \'chop the kimchi finely\'. Let\'s swap the starter block!',
         missionKo: '실전 조립 미션! 베이컨과 함께 김치를 잘게 썰어 줘야 해요!',
+        missionEn: 'Snap Mission! \'You have to chop the kimchi finely for great texture.\' Assemble the blocks!',
         keyVocab: 'chop finely (잘게 썰다)',
         bgGradient: 'linear-gradient(135deg, #450a0a 0%, #7f1d1d 100%)',
         blocks: [
@@ -1196,7 +1218,9 @@ const episodes: CookingEpisode[] = [
         imagePath: '/images/kfood/ep1-s5.jpg',
         actionNote: '팬에 김치와 고추장/간장을 넣고 센 불에 달달 볶기',
         coachKo: '세 번째 코어 블록은, 김치를 센 불에 볶다, 스터 프라이 더 김치입니다. 시작 블록 세 개와 결합해 볼게요!',
+        coachEn: 'Our core action is \'cut the spam into small cubes\'. Let\'s swap the starter block!',
         missionKo: '실전 조립 미션! 고추장을 넣고 김치를 센 불에 볶을 거예요!',
+        missionEn: 'Snap Mission! \'I\'ll cut the spam into small cubes.\' Let\'s snap!',
         keyVocab: 'stir-fry (센 불에 저으며 볶다)',
         bgGradient: 'linear-gradient(135deg, #422006 0%, #713f12 100%)',
         blocks: [
@@ -1223,7 +1247,9 @@ const episodes: CookingEpisode[] = [
         imagePath: '/images/kfood/ep1-s2.jpg',
         actionNote: '밥을 넣고 골고루 섞은 뒤 마지막에 고소한 참기름 한 바퀴!',
         coachKo: '네 번째 코어 블록은, 밥을 넣고 섞다, 믹스 인 더 라이스입니다. 앞 블록을 차례대로 갈아 끼워 보세요!',
+        coachEn: 'Our core action is \'stir-fry the kimchi and spam\'. Let\'s swap the first block!',
         missionKo: '실전 조립 미션! 밥을 넣고 섞은 다음 참기름을 두를게요!',
+        missionEn: 'Snap Mission! \'We have to stir-fry the kimchi and spam in cooking oil.\' Snap the blocks!',
         keyVocab: 'sesame oil (참기름)',
         bgGradient: 'linear-gradient(135deg, #052e16 0%, #14532d 100%)',
         blocks: [
@@ -1250,7 +1276,9 @@ const episodes: CookingEpisode[] = [
         imagePath: '/images/kfood/ep1-s7.jpg',
         actionNote: '노른자가 살아 있는 반숙 계란프라이를 맨 위에 얹기',
         coachKo: '다섯 번째 코어 블록은, 계란프라이를 올리다, 풋 어 프라이드 에그입니다. 시작 블록 세 개를 바꿔 볼까요?',
+        coachEn: 'Our core action is \'add the cold rice\'. Let\'s swap the starter block!',
         missionKo: '실전 조립 미션! 맨 위에 계란프라이를 딱 얹어 줄 거예요!',
+        missionEn: 'Snap Mission! \'I\'m gonna add the cold rice and break it down.\' Assemble the blocks!',
         keyVocab: 'put a fried egg right on top',
         bgGradient: 'linear-gradient(135deg, #172554 0%, #1e3a8a 100%)',
         blocks: [
@@ -1277,7 +1305,9 @@ const episodes: CookingEpisode[] = [
         imagePath: '/images/kfood/ep1-s8.jpg',
         actionNote: '숟가락으로 노른자를 톡 터뜨려 밥과 함께 한 입!',
         coachKo: '여섯 번째 코어 블록은, 한 입 먹다, 테이커 바이트입니다. 시작 블록을 바꿔가며 말해 보세요!',
+        coachEn: 'Our core action is \'drizzle some sesame oil\'. Let\'s swap the first block!',
         missionKo: '마지막 조립 미션! 지금 당장 한 입 먹어 볼래요?',
+        missionEn: 'Snap Mission! \'You have to drizzle some sesame oil at the end.\' Let\'s snap!',
         keyVocab: 'take a bite (한 입 먹다)',
         bgGradient: 'linear-gradient(135deg, #3b0764 0%, #581c87 100%)',
         blocks: [
@@ -1321,7 +1351,9 @@ const episodes: CookingEpisode[] = [
         imagePath: '/images/kfood/ep1-s1.jpg',
         actionNote: '냄비와 라면 한 봉지를 들고 시작',
         coachKo: '첫 번째 코어 블록은, 한국 라면을 끓이다, 메익 코리안 라면입니다. 시작 블록 세 개를 갈아 끼워 볼까요?',
+        coachEn: 'Our core action is \'cook Korean ramen\'. Let\'s swap the starter block!',
         missionKo: '실전 조립 미션! 오늘 밤엔 한국 라면을 끓여 먹을 거예요!',
+        missionEn: 'Snap Mission! \'I\'m gonna cook spicy Korean ramen for late-night snack.\' Snap the blocks!',
         keyVocab: 'make Korean ramen (라면 끓이다)',
         bgGradient: 'linear-gradient(135deg, #450a0a 0%, #7f1d1d 100%)',
         blocks: [
@@ -1348,7 +1380,9 @@ const episodes: CookingEpisode[] = [
         imagePath: '/images/kfood/ep1-s6.jpg',
         actionNote: '냄비에 물 550ml를 붓고 센 불에 끓이기',
         coachKo: '두 번째 코어 블록은, 물을 끓이다, 보일 더 워러입니다. 시작 블록을 바꿔서 조합해 보세요!',
+        coachEn: 'Our core action is \'measure 550 milliliters of water\'. Let\'s swap the first block!',
         missionKo: '실전 조립 미션! 먼저 작은 냄비에 물을 끓여야 해요!',
+        missionEn: 'Snap Mission! \'You have to measure 550 milliliters of water exactly.\' Assemble the blocks!',
         keyVocab: 'boil the water (물을 끓이다)',
         bgGradient: 'linear-gradient(135deg, #172554 0%, #1e3a8a 100%)',
         blocks: [
@@ -1375,7 +1409,9 @@ const episodes: CookingEpisode[] = [
         imagePath: '/images/kfood/ep1-s5.jpg',
         actionNote: '면보다 분말 스프를 먼저 넣는 한국식 꿀팁 설명',
         coachKo: '세 번째 코어 블록은, 라면 스프를 넣다, 풋 더 숩 베이스입니다. 시작 블록 세 개와 결합해 볼게요!',
+        coachEn: 'Our core action is \'put the noodles and soup powder in\'. Let\'s swap the first block!',
         missionKo: '실전 조립 미션! 면보다 스프를 먼저 넣을게요!',
+        missionEn: 'Snap Mission! \'I\'m gonna put the noodles and soup powder into the boiling water.\' Let\'s snap!',
         keyVocab: 'soup base (라면 분말 스프)',
         bgGradient: 'linear-gradient(135deg, #422006 0%, #713f12 100%)',
         blocks: [
@@ -1402,7 +1438,9 @@ const episodes: CookingEpisode[] = [
         imagePath: '/images/kfood/ep1-s7.jpg',
         actionNote: '면을 넣고 끓인 뒤 계란을 깨 넣고 대파 얹기',
         coachKo: '네 번째 코어 블록은, 계란을 톡 깨 넣다, 크랙 언 에그입니다. 앞 블록을 차례대로 갈아 끼워 보세요!',
+        coachEn: 'Our core action is \'crack an egg into the pot\'. Let\'s swap the first block!',
         missionKo: '실전 조립 미션! 냄비에 계란을 하나 톡 깨 넣을 거예요!',
+        missionEn: 'Snap Mission! \'I\'m gonna crack an fresh egg into the pot.\' Snap the blocks!',
         keyVocab: 'crack an egg (계란을 깨 넣다)',
         bgGradient: 'linear-gradient(135deg, #052e16 0%, #14532d 100%)',
         blocks: [
@@ -1429,7 +1467,9 @@ const episodes: CookingEpisode[] = [
         imagePath: '/images/kfood/ep1-s8.jpg',
         actionNote: '꼬들꼬들한 면발 위에 김치 한 점 올려 후루룩!',
         coachKo: '다섯 번째 코어 블록은, 한 입 먹다, 테이커 바이트입니다. 시작 블록을 바꿔가며 말해 보세요!',
+        coachEn: 'Our core action is \'take a bite with kimchi\'. Let\'s swap the first block!',
         missionKo: '마지막 조립 미션! 김치 얹어서 한 입 드셔 보실래요?',
+        missionEn: 'Final Snap Mission! \'Do you wanna take a bite with kimchi? It\'s so delicious!\' Snap the blocks!',
         keyVocab: 'take a bite with kimchi',
         bgGradient: 'linear-gradient(135deg, #3b0764 0%, #581c87 100%)',
         blocks: [
@@ -1473,7 +1513,9 @@ const episodes: CookingEpisode[] = [
         imagePath: '/images/kfood/ep1-s1.jpg',
         actionNote: '얇게 썬 소고기와 간장 양념 재료 소개',
         coachKo: '첫 번째 코어 블록은, 한국식 불고기를 만들다, 메익 코리안 불고기입니다. 시작 블록 세 개를 갈아 끼워 볼까요?',
+        coachEn: 'Our core action is \'make Korean Bulgogi\'. Let\'s swap the starter block!',
         missionKo: '실전 조립 미션! 저녁으로 한국식 불고기를 만들 거예요!',
+        missionEn: 'Snap Mission! \'We\'re gonna make Korean Bulgogi for dinner tonight.\' Snap the blocks!',
         keyVocab: 'make Korean Bulgogi',
         bgGradient: 'linear-gradient(135deg, #431407 0%, #7c2d12 100%)',
         blocks: [
@@ -1500,7 +1542,9 @@ const episodes: CookingEpisode[] = [
         imagePath: '/images/kfood/ep1-s3.jpg',
         actionNote: '간장, 설탕, 마늘, 참기름 양념에 고기를 30분간 재워 두기',
         coachKo: '두 번째 코어 블록은, 소고기를 양념에 재우다, 매리네잇 더 비프입니다. 시작 블록을 바꿔서 조합해 보세요!',
+        coachEn: 'Our core action is \'marinate the beef\'. Let\'s swap the starter block!',
         missionKo: '실전 조립 미션! 30분 동안 소고기를 양념에 재워 둬야 해요!',
+        missionEn: 'Snap Mission! \'You have to marinate the beef for 30 minutes.\' Assemble the blocks!',
         keyVocab: 'marinate the beef (고기를 재우다)',
         bgGradient: 'linear-gradient(135deg, #422006 0%, #713f12 100%)',
         blocks: [
@@ -1527,7 +1571,9 @@ const episodes: CookingEpisode[] = [
         imagePath: '/images/kfood/ep1-s5.jpg',
         actionNote: '달궈진 팬에 양념된 고기와 양파, 버섯을 넣고 빠르게 볶기',
         coachKo: '세 번째 코어 블록은, 고기를 굽다, 쿡 더 밋입니다. 시작 블록 세 개와 결합해 볼게요!',
+        coachEn: 'Our core action is \'cook the meat on high heat\'. Let\'s swap the first block!',
         missionKo: '실전 조립 미션! 센 불에서 고기를 빠르게 구워 줄게요!',
+        missionEn: 'Snap Mission! \'I\'m gonna cook the meat on high heat very quickly.\' Snap the blocks!',
         keyVocab: 'on high heat (센 불에)',
         bgGradient: 'linear-gradient(135deg, #450a0a 0%, #7f1d1d 100%)',
         blocks: [
@@ -1554,7 +1600,9 @@ const episodes: CookingEpisode[] = [
         imagePath: '/images/kfood/ep1-s8.jpg',
         actionNote: '손바닥 위 상추에 고기, 밥, 쌈장을 올려 한 입에 쏙!',
         coachKo: '네 번째 코어 블록은, 고기를 싸다, 랩 더 밋입니다. 시작 블록을 바꿔가며 말해 보세요!',
+        coachEn: 'Our core action is \'wrap the meat in fresh lettuce\'. Let\'s swap the first block!',
         missionKo: '마지막 조립 미션! 신선한 상추에 고기를 싸서 먹어 볼게요!',
+        missionEn: 'Final Snap Mission! \'I\'ll wrap the meat in fresh lettuce with ssamjang.\' Snap the blocks!',
         keyVocab: 'wrap the meat in fresh lettuce',
         bgGradient: 'linear-gradient(135deg, #052e16 0%, #14532d 100%)',
         blocks: [
@@ -1613,8 +1661,8 @@ const currentScene = computed(
 const sceneKey = computed(() => `${currentEpId.value}-${safeSceneIndex.value}`)
 
 const currentCoachText = computed(() => {
-  if (activeStage.value === 'quiz') return currentScene.value.missionKo
-  return currentScene.value.coachKo
+  if (activeStage.value === 'quiz') return currentScene.value.missionEn || currentScene.value.missionKo
+  return currentScene.value.coachEn || currentScene.value.coachKo
 })
 
 const activeSceneImage = computed(() => {
@@ -1837,7 +1885,7 @@ async function playMissionAudio() {
   const mp3Url = `/audio/kfood/${epId}-s${sIdx}-mission.mp3`
   const ok = await playMp3Async(mp3Url, 1.0)
   if (!ok) {
-    await speakAsync(currentScene.value.missionKo, 'ko-KR', 1.05)
+    await speakAsync(currentScene.value.missionEn || currentScene.value.missionKo || '', 'en-US', 1.0)
   }
 }
 
@@ -1963,7 +2011,7 @@ async function playCurrentSlideSequence(): Promise<boolean> {
   if (slideCursor.value === -1) {
     if (enableKoreanCoachVoice.value) {
       const ok = await playMp3Async(`/audio/kfood/${epId}-intro-ko.mp3`, 1.0)
-      if (!ok) await speakAsync(currentEpisode.value.introNarrationKo, 'ko-KR', 1.03)
+      if (!ok) await speakAsync(currentEpisode.value.introNarrationEn || 'Welcome to SoundBlock K-Cooking!', 'en-US', 1.0)
       if (myToken !== sequenceToken) return false
       if (!(await waitMs(250, myToken))) return false
     }
@@ -1976,7 +2024,7 @@ async function playCurrentSlideSequence(): Promise<boolean> {
   if (slideCursor.value >= currentEpisode.value.scenes.length) {
     if (enableKoreanCoachVoice.value) {
       const ok = await playMp3Async(`/audio/kfood/${epId}-outro-ko.mp3`, 1.0)
-      if (!ok) await speakAsync(currentEpisode.value.outroNarrationKo, 'ko-KR', 1.03)
+      if (!ok) await speakAsync(currentEpisode.value.outroNarrationEn || 'Mission complete! See you next time!', 'en-US', 1.0)
       if (myToken !== sequenceToken) return false
       if (!(await waitMs(250, myToken))) return false
     }
@@ -1995,7 +2043,7 @@ async function playCurrentSlideSequence(): Promise<boolean> {
 
   if (enableKoreanCoachVoice.value && sc.coachKo) {
     const okCoach = await playMp3Async(`/audio/kfood/${epId}-s${sIdx}-coach.mp3`, 1.0)
-    if (!okCoach) await speakAsync(sc.coachKo, 'ko-KR', 1.05)
+    if (!okCoach) await speakAsync(sc.coachEn || sc.coachKo || '', 'en-US', 1.0)
     if (myToken !== sequenceToken) return false
     if (!(await waitMs(300, myToken))) return false
   }
@@ -2019,7 +2067,7 @@ async function playCurrentSlideSequence(): Promise<boolean> {
 
   if (enableKoreanCoachVoice.value && sc.missionKo) {
     const okMission = await playMp3Async(`/audio/kfood/${epId}-s${sIdx}-mission.mp3`, 1.0)
-    if (!okMission) await speakAsync(sc.missionKo, 'ko-KR', 1.05)
+    if (!okMission) await speakAsync(sc.missionEn || sc.missionKo || '', 'en-US', 1.0)
     if (myToken !== sequenceToken) return false
     if (!(await waitMs(400, myToken))) return false
   }
