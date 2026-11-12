@@ -110,11 +110,7 @@
           </div>
         </transition>
 
-        <!-- 🔴 실시간 녹화 중 배너 (컴퓨터 내부 사운드 직통) -->
-        <div v-if="isScreenRecording" class="kf-rec-status-badge">
-          <span class="rec-pulsing-dot"></span>
-          <span>REC 1080p · {{ includeMicInRecording ? "AI Voice + Mic Mixed" : "Clean Direct Digital Audio" }} ({{ formatRecordTime }})</span>
-        </div>
+<!-- 💡 In-canvas REC badge removed so video is 100% clean -->
         <!-- ----------------------------------------------------
              CASE A: INTRO 슬라이드 (오프닝 훅 화면)
              ---------------------------------------------------- -->
@@ -443,7 +439,6 @@
                 <span class="rev-num">0{{ idx + 1 }}</span>
                 <div class="rev-body">
                   <div class="rev-en">{{ sc.fullEn }}</div>
-                  <div class="rev-ko">{{ sc.fullEn }}</div>
                 </div>
               </div>
             </div>
@@ -725,7 +720,7 @@ async function startScreenRecording() {
   }
 
   try {
-    // 1) 화면 및 탭 내부 오디오(AI 성우 + 효과음) 캡처
+    // 1) 화면 및 탭 내부 오디오 캡처 (Chrome 최신 preferCurrentTab 옵션 탑재)
     const displayStream = await navigator.mediaDevices.getDisplayMedia({
       video: {
         displaySurface: 'browser',
@@ -735,8 +730,24 @@ async function startScreenRecording() {
       },
       audio: {
         suppressLocalAudioPlayback: false
-      }
-    } as DisplayMediaStreamOptions)
+      },
+      preferCurrentTab: true,
+      selfBrowserSurface: 'include',
+      systemAudio: 'include'
+    } as any)
+
+    // 💡 오디오 트랙 유무 검사 (소리 없이 녹화되는 사고 방지)
+    const audioTracks = displayStream.getAudioTracks()
+    if (audioTracks.length === 0) {
+      alert(
+        '⚠️ 오디오(소리) 트랙이 감지되지 않았습니다!\n\n' +
+        '화면 공유 선택 창에서:\n' +
+        '1. 반드시 [Chrome 탭]을 선택해주세요 (창이나 전체 화면 X).\n' +
+        '2. 하단의 [탭 오디오도 공유 (Also share tab audio)] 체크박스를 꼭 체크해주세요!'
+      )
+      displayStream.getTracks().forEach((track) => track.stop())
+      return
+    }
 
     activeDisplayStream = displayStream
 
@@ -3462,14 +3473,15 @@ onBeforeUnmount(() => {
 
 /* 아웃트로 복습 그리드 */
 .outro-badge {
-  font-size: 0.74rem;
+  font-size: 1.15rem;
   font-weight: 800;
   color: #34d399;
+  letter-spacing: 0.06em;
 }
 
 .outro-title {
-  margin: 0.2rem 0 0.85rem !important;
-  font-size: 1.35rem !important;
+  margin: 0.35rem 0 1.25rem !important;
+  font-size: 2.15rem !important;
   font-weight: 900;
   color: #fff !important;
   border: none !important;
@@ -3477,33 +3489,43 @@ onBeforeUnmount(() => {
 
 .kf-review-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 0.45rem;
+  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+  gap: 0.75rem;
   text-align: left;
-  margin-bottom: 0.9rem;
+  margin-bottom: 1.25rem;
 }
 
 .kf-review-item {
   display: flex;
   align-items: center;
-  gap: 0.55rem;
-  padding: 0.42rem 0.7rem;
-  border-radius: 10px;
-  background: rgba(30, 41, 59, 0.85);
-  border: 1px solid rgba(255, 255, 255, 0.14);
+  gap: 0.85rem;
+  padding: 0.75rem 1.25rem;
+  border-radius: 14px;
+  background: rgba(30, 41, 59, 0.92);
+  border: 2px solid rgba(255, 255, 255, 0.2);
   cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+}
+
+.kf-review-item:hover {
+  border-color: #38bdf8;
+  background: rgba(14, 165, 233, 0.25);
+  transform: translateY(-2px);
 }
 
 .rev-num {
-  font-size: 0.72rem;
+  font-size: 1.25rem;
   font-weight: 900;
   color: #38bdf8;
+  min-width: 2.4rem;
 }
 
 .rev-en {
-  font-size: 0.82rem;
-  font-weight: 800;
+  font-size: 1.45rem;
+  font-weight: 900;
   color: #fff;
+  line-height: 1.35;
 }
 
 .rev-ko {
@@ -4259,15 +4281,32 @@ onBeforeUnmount(() => {
 }
 
 .theater-fullscreen .outro-badge {
-  font-size: 1.15rem;
+  font-size: 1.65rem;
+}
+
+.theater-fullscreen .outro-title {
+  font-size: 3.0rem !important;
+}
+
+.theater-fullscreen .kf-review-grid {
+  gap: 1.1rem;
+  grid-template-columns: repeat(2, 1fr);
+  margin-bottom: 1.8rem;
+}
+
+.theater-fullscreen .kf-review-item {
+  padding: 1.15rem 1.85rem;
+  border-radius: 18px;
 }
 
 .theater-fullscreen .rev-num {
-  font-size: 1.1rem;
+  font-size: 1.85rem;
+  min-width: 3.2rem;
 }
 
 .theater-fullscreen .rev-en {
-  font-size: 1.35rem;
+  font-size: 2.15rem;
+  line-height: 1.3;
 }
 
 .theater-fullscreen .rev-ko {
