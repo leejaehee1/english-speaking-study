@@ -937,7 +937,7 @@ const pickedBb = ref<string | null>(null)
 const pickedCore = ref<string | null>(null)
 
 // slideCursor: -1 = INTRO, 0..(scenes.length-1) = SCENES, scenes.length = OUTRO
-const slideCursor = ref(0)
+const slideCursor = ref(-1)
 
 const episodes: CookingEpisode[] = [
   // ==========================================
@@ -2180,7 +2180,7 @@ function startEpisodeFromBeginning() {
 function selectEpisode(id: string) {
   stopAutoShow()
   currentEpId.value = id
-  slideCursor.value = 0
+  slideCursor.value = -1
   activeStage.value = 'swap'
 }
 
