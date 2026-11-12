@@ -250,7 +250,6 @@
               <span class="anchor-label">② 고정 코어 블록 (Core Action)</span>
               <div class="anchor-body">
                 <span class="anchor-en">{{ currentScene.blocks[1]?.en || currentScene.keyVocab }}</span>
-                <span v-if="showPronGuide" class="anchor-pron">[{{ currentScene.blocks[1]?.pron }}]</span>
                 <span class="anchor-hint">🔊 터치하여 듣기</span>
               </div>
             </div>
@@ -272,8 +271,7 @@
                 </div>
                 <div class="combo-sentence">
                   <span class="combo-en">{{ combo.fullEn }}</span>
-                  <span v-if="showPronGuide" class="combo-pron">[{{ combo.fullPron }}]</span>
-                </div>
+                  </div>
                 <div v-if="showKoSub" class="combo-ko">
                   🇰🇷 {{ combo.ko }}
                 </div>
@@ -347,7 +345,7 @@
             <!-- 합체 완료 문장 배너 -->
             <div v-if="isSnapped" class="kf-quiz-complete-bar" @click="speakSceneSentence(1.0)">
               <div class="qc-en">🧲 철컥 합체 완료: <strong>{{ currentScene.fullEn }}</strong></div>
-              <div class="qc-ko">{{ currentScene.fullKo }} · ({{ currentScene.fullPron }})</div>
+              <div class="qc-ko">{{ currentScene.fullKo }}</div>
             </div>
           </div>
 
@@ -368,8 +366,7 @@
                   <span class="gblk-badge">
                     {{ blk.role === 'bb' ? '① 시작 블록' : blk.role === 'core' ? '② 코어 블록' : '③ 디테일 블록' }}
                   </span>
-                  <span v-if="showPronGuide" class="gblk-pron">[{{ blk.pron }}]</span>
-                </div>
+                  </div>
                 <div class="gblk-en">{{ blk.en }}</div>
               </div>
             </div>
@@ -381,9 +378,7 @@
                 {{ currentScene.fullEn }}
               </div>
               <div class="kf-sub-meta">
-                <span v-if="showPronGuide" class="kf-meta-pron">
-                  🗣️ <strong>{{ currentScene.fullPron }}</strong>
-                </span>
+
                 <span v-if="showKoSub" class="kf-meta-ko">
                   🇰🇷 {{ currentScene.fullKo }}
                 </span>
@@ -419,7 +414,7 @@
                 <span class="rev-num">0{{ idx + 1 }}</span>
                 <div class="rev-body">
                   <div class="rev-en">{{ sc.fullEn }}</div>
-                  <div class="rev-ko">{{ sc.fullKo }} · <em>({{ sc.fullPron }})</em></div>
+                  <div class="rev-ko">{{ sc.fullKo }}</div>
                 </div>
               </div>
             </div>
@@ -504,9 +499,7 @@
           <label class="kf-chk">
             <input v-model="showCoachBubble" type="checkbox" /> 💡 상단 코칭 배너
           </label>
-          <label class="kf-chk">
-            <input v-model="showPronGuide" type="checkbox" /> 한글 발음 표시
-          </label>
+
         </div>
 
         <div class="kf-voice-recorder">
@@ -2865,50 +2858,103 @@ onBeforeUnmount(() => {
 }
 
 /* ===================================================
-   🔠 대형/초대형 글자 모드 (모바일 및 시인성 최적화)
+   🔠 글자 대폭 확대 (한글 발음 제거로 확보된 공간 전면 활용)
    =================================================== */
+.anchor-en {
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: #fff;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.85);
+}
+
+.combo-en {
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: #fff;
+  line-height: 1.3;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.9);
+}
+
+.combo-ko {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #fde047;
+  letter-spacing: -0.01em;
+}
+
+.gblk-en {
+  font-size: 1.55rem;
+  font-weight: 900;
+  color: #fff;
+  letter-spacing: -0.01em;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.9);
+}
+
+.kf-main-en {
+  font-size: 1.85rem;
+  font-weight: 900;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  line-height: 1.3;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.95);
+}
+
+.kf-meta-ko {
+  font-size: 1.25rem;
+  color: #fde047;
+  font-weight: 800;
+}
+
 .font-large .kf-main-en {
-  font-size: 1.65rem;
+  font-size: 2.25rem;
 }
 .font-large .gblk-en {
-  font-size: 1.4rem;
+  font-size: 1.85rem;
 }
 .font-large .combo-en {
-  font-size: 1.35rem;
+  font-size: 1.8rem;
 }
 .font-large .anchor-en {
+  font-size: 1.8rem;
+}
+.font-large .combo-ko {
+  font-size: 1.28rem;
+}
+.font-large .kf-meta-ko {
   font-size: 1.38rem;
 }
 .font-large .m-text {
-  font-size: 1.15rem;
+  font-size: 1.3rem;
 }
 .font-large .slot-word {
-  font-size: 1.25rem;
+  font-size: 1.55rem;
 }
 
 .font-huge .kf-main-en {
-  font-size: 2rem;
+  font-size: 2.75rem;
 }
 .font-huge .gblk-en {
-  font-size: 1.65rem;
+  font-size: 2.25rem;
 }
 .font-huge .combo-en {
-  font-size: 1.55rem;
+  font-size: 2.15rem;
 }
 .font-huge .anchor-en {
+  font-size: 2.15rem;
+}
+.font-huge .combo-ko {
+  font-size: 1.45rem;
+}
+.font-huge .kf-meta-ko {
   font-size: 1.55rem;
 }
 .font-huge .m-text {
-  font-size: 1.3rem;
+  font-size: 1.45rem;
 }
 .font-huge .slot-word {
-  font-size: 1.4rem;
-}
-.font-huge .kf-meta-pron {
-  font-size: 1.1rem;
-}
-.font-huge .kf-meta-ko {
-  font-size: 1.05rem;
+  font-size: 1.8rem;
 }
 
 /* ===================================================
@@ -3278,7 +3324,7 @@ onBeforeUnmount(() => {
 @media (max-width: 768px) {
   .kf-broadcast-screen.screen-wide {
     aspect-ratio: auto;
-    min-height: 480px;
+    min-height: 520px;
   }
 
   .kf-hud-top {
@@ -3291,49 +3337,65 @@ onBeforeUnmount(() => {
 
   .kf-stage-tabs {
     flex-wrap: wrap;
-    gap: 0.3rem;
+    gap: 0.35rem;
+    padding: 0.3rem 0.6rem 0;
   }
 
   .stage-tab-btn {
-    font-size: 0.72rem;
-    padding: 0.25rem 0.65rem;
+    font-size: 0.76rem;
+    padding: 0.28rem 0.7rem;
   }
 
   .kf-lower-third {
-    padding: 0.4rem 0.8rem 0.8rem;
+    padding: 0.5rem 0.85rem 1rem;
+    gap: 0.65rem;
   }
 
   .kf-blocks-row {
     flex-direction: column;
-    gap: 0.35rem;
+    gap: 0.4rem;
   }
 
   .kf-glass-block {
-    padding: 0.45rem 0.75rem;
+    padding: 0.55rem 0.85rem;
   }
 
+  /* 모바일 화면에서 한눈에 들어오는 시원시원한 대왕 글씨 */
   .gblk-en {
-    font-size: 1.35rem !important;
+    font-size: 1.65rem !important;
+    line-height: 1.25;
   }
 
   .kf-main-en {
-    font-size: 1.45rem !important;
+    font-size: 1.75rem !important;
+    line-height: 1.3;
   }
 
   .combo-en {
-    font-size: 1.25rem !important;
+    font-size: 1.55rem !important;
+    line-height: 1.3;
+  }
+
+  .combo-ko {
+    font-size: 1.15rem !important;
+    color: #fde047 !important;
   }
 
   .anchor-en {
+    font-size: 1.55rem !important;
+  }
+
+  .kf-meta-ko {
     font-size: 1.25rem !important;
+    color: #fde047 !important;
   }
 
   .m-text {
-    font-size: 1rem !important;
+    font-size: 1.15rem !important;
   }
 
   .slot-word {
-    font-size: 1.1rem !important;
+    font-size: 1.35rem !important;
   }
 }
 </style>
