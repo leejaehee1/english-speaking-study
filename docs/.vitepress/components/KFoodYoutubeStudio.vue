@@ -52,6 +52,9 @@
         </div>
 
         <!-- 🔴 스튜디오 원클릭 자체 비디오 녹화 (내부 사운드 직통) -->
+        <label class="kf-mic-chk" title="녹화 시 내 마이크 목소리도 함께 믹싱 녹음할지 설정">
+          <input v-model="includeMicInRecording" type="checkbox" /> 🎙️ 내 목소리 포함
+        </label>
         <button
           type="button"
           class="kf-mode-btn kf-rec-toggle-btn"
@@ -99,7 +102,7 @@
         <!-- 🔴 실시간 녹화 중 배너 (컴퓨터 내부 사운드 직통) -->
         <div v-if="isScreenRecording" class="kf-rec-status-badge">
           <span class="rec-pulsing-dot"></span>
-          <span>REC 1080p · 컴퓨터 내부 사운드 직통 녹화 중 ({{ formatRecordTime }})</span>
+          <span>REC 1080p · {{ includeMicInRecording ? "AI 소리 + 내 목소리 믹싱 녹화 중" : "컴퓨터 내부 사운드 직통 녹화 중" }} ({{ formatRecordTime }})</span>
         </div>
         <!-- ----------------------------------------------------
              CASE A: INTRO 슬라이드 (오프닝 훅 화면)
@@ -498,6 +501,12 @@
             별도 프로그램 설치 없이, 브라우저가 화면과 AI 성우 목소리를 내부에서 다이렉트로 캡처해 고화질 비디오 파일(<code>.mp4</code>/<code>.webm</code>)로 자동 다운로드해 줍니다. (공유 창에서 '탭 오디오 공유'를 선택하세요)
           </p>
         </div>
+        <div class="srec-options">
+          <label class="kf-rec-mic-label">
+            <input v-model="includeMicInRecording" type="checkbox" />
+            🎙️ <strong>내 마이크 목소리도 함께 녹음</strong> (체크 시 AI 목소리와 내 목소리가 하나의 트랙으로 믹싱됩니다)
+          </label>
+        </div>
         <button
           type="button"
           class="kf-ctrl-btn kf-btn-studio-rec"
@@ -686,6 +695,9 @@ const copySuccess = ref(false)
 
 // 자체 비디오 녹화기 상태 (마이크 잡음 0% 내부 사운드 직통 녹화)
 const isScreenRecording = ref(false)
+const includeMicInRecording = ref(true) // 기본값 true: 대표님 마이크 목소리 + 컴퓨터 사운드 동시 녹음
+let activeMicStream: MediaStream | null = null
+let mixerAudioCtx: AudioContext | null = null
 const screenRecordSeconds = ref(0)
 let screenMediaRecorder: MediaRecorder | null = null
 let screenVideoChunks: Blob[] = []
@@ -705,7 +717,8 @@ async function startScreenRecording() {
   }
 
   try {
-    const stream = await navigator.mediaDevices.getDisplayMedia({
+    // 1) 화면 및 탭 내부 오디오(AI 성우 + 효과음) 캡처
+    const displayStream = await navigator.mediaDevices.getDisplayMedia({
       video: {
         displaySurface: 'browser',
         frameRate: 60,
@@ -717,7 +730,54 @@ async function startScreenRecording() {
       }
     } as DisplayMediaStreamOptions)
 
-    activeDisplayStream = stream
+    activeDisplayStream = displayStream
+
+    let recordStream: MediaStream = displayStream
+
+    // 2) 대표님 마이크 목소리도 함께 믹싱할 경우 (Web Audio API 활용)
+    if (includeMicInRecording.value && navigator.mediaDevices?.getUserMedia) {
+      try {
+        const micStream = await navigator.mediaDevices.getUserMedia({
+          audio: {
+            echoCancellation: true,
+            noiseSuppression: true,
+            autoGainControl: true
+          }
+        })
+        activeMicStream = micStream
+
+        const AudioCtxClass = window.AudioContext || (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext
+        mixerAudioCtx = new AudioCtxClass()
+        const destination = mixerAudioCtx.createMediaStreamDestination()
+
+        // 탭 내부 사운드 오디오 노드
+        const displayAudioTrack = displayStream.getAudioTracks()[0]
+        if (displayAudioTrack) {
+          const displaySource = mixerAudioCtx.createMediaStreamSource(new MediaStream([displayAudioTrack]))
+          displaySource.connect(destination)
+        }
+
+        // 마이크 오디오 노드 (대표님 목소리)
+        const micAudioTrack = micStream.getAudioTracks()[0]
+        if (micAudioTrack) {
+          const micSource = mixerAudioCtx.createMediaStreamSource(new MediaStream([micAudioTrack]))
+          const micGain = mixerAudioCtx.createGain()
+          micGain.gain.value = 1.05 // 대표님 목소리 시원하게 송출
+          micSource.connect(micGain)
+          micGain.connect(destination)
+        }
+
+        // 화면 비디오 + 믹싱된 오디오 결합
+        const combinedTracks = [
+          ...displayStream.getVideoTracks(),
+          ...destination.stream.getAudioTracks()
+        ]
+        recordStream = new MediaStream(combinedTracks)
+      } catch (micErr) {
+        console.warn('Microphone access denied or not available, recording tab audio only:', micErr)
+      }
+    }
+
     screenVideoChunks = []
 
     const mimeTypes = [
@@ -739,7 +799,7 @@ async function startScreenRecording() {
       ? { mimeType: selectedMime, videoBitsPerSecond: 8000000 }
       : { videoBitsPerSecond: 8000000 }
 
-    screenMediaRecorder = new MediaRecorder(stream, options)
+    screenMediaRecorder = new MediaRecorder(recordStream, options)
 
     screenMediaRecorder.ondataavailable = (e) => {
       if (e.data && e.data.size > 0) {
@@ -763,10 +823,18 @@ async function startScreenRecording() {
       a.click()
       document.body.removeChild(a)
 
-      // 스트림 정리
+      // 스트림 및 믹서 정리
       if (activeDisplayStream) {
         activeDisplayStream.getTracks().forEach((track) => track.stop())
         activeDisplayStream = null
+      }
+      if (activeMicStream) {
+        activeMicStream.getTracks().forEach((track) => track.stop())
+        activeMicStream = null
+      }
+      if (mixerAudioCtx) {
+        mixerAudioCtx.close().catch(() => {})
+        mixerAudioCtx = null
       }
       if (screenRecordTimer !== null) {
         window.clearInterval(screenRecordTimer)
@@ -775,7 +843,7 @@ async function startScreenRecording() {
       isScreenRecording.value = false
     }
 
-    stream.getVideoTracks()[0].onended = () => {
+    displayStream.getVideoTracks()[0].onended = () => {
       if (isScreenRecording.value) {
         stopScreenRecording()
       }
@@ -4119,6 +4187,34 @@ onBeforeUnmount(() => {
   font-size: 1.15rem;
 }
 
+
+.kf-mic-chk {
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: var(--vp-c-text-1);
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  cursor: pointer;
+  background: var(--vp-c-bg-soft);
+  padding: 0.35rem 0.65rem;
+  border-radius: 8px;
+  border: 1px solid var(--vp-c-divider);
+}
+
+.srec-options {
+  width: 100%;
+  margin-top: 0.35rem;
+}
+
+.kf-rec-mic-label {
+  font-size: 0.84rem;
+  color: var(--vp-c-text-1);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  cursor: pointer;
+}
 
 /* ===================================================
    🔴 스튜디오 원클릭 자체 비디오 녹화기 스타일
