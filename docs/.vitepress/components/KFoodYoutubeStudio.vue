@@ -3234,70 +3234,89 @@ onBeforeUnmount(() => {
 }
 
 /* ---------------------------------------------------
-   STAGE 3 · 완성 문장 & 소리 블록 표준 스타일
+   STAGE 3 · 완성 문장 & 소리 블록 표준 스타일 (Step 2와 통일된 겹침 없는 레고 블록)
    --------------------------------------------------- */
 .kf-blocks-row {
   display: flex;
-  gap: 0.5rem;
-  flex-wrap: wrap;
+  align-items: stretch;
+  gap: 0.75rem;
+  width: 100%;
 }
 
 .kf-glass-block {
-  flex: 1 1 140px;
-  padding: 0.55rem 0.95rem;
-  border-radius: 12px;
-  backdrop-filter: blur(12px);
+  flex: 1;
+  min-height: 90px;
+  padding: 0.75rem 1rem;
+  border-radius: 14px;
+  backdrop-filter: blur(14px);
   cursor: pointer;
-  border: 2px solid transparent;
-  transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease;
+  border: 2.5px solid transparent;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  text-align: center;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+  transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.2s ease, border-color 0.2s ease;
 }
 
 .kf-glass-block.bb {
-  background: rgba(37, 99, 235, 0.5);
-  border-color: rgba(96, 165, 250, 0.8);
+  background: rgba(29, 78, 216, 0.75);
+  border-color: #60a5fa;
 }
 
 .kf-glass-block.core {
-  background: rgba(5, 150, 105, 0.5);
-  border-color: rgba(52, 211, 153, 0.8);
+  background: rgba(4, 120, 87, 0.75);
+  border-color: #34d399;
 }
 
 .kf-glass-block.db {
-  background: rgba(217, 119, 6, 0.5);
-  border-color: rgba(251, 191, 36, 0.8);
+  background: rgba(180, 83, 9, 0.75);
+  border-color: #fbbf24;
 }
 
 .kf-glass-block.active {
-  transform: translateY(-4px) scale(1.03);
-  box-shadow: 0 0 0 3px #fde047, 0 10px 24px rgba(0, 0, 0, 0.45);
+  transform: translateY(-3px) scale(1.02);
+  border-color: #fde047 !important;
+  box-shadow: 0 0 25px rgba(250, 204, 21, 0.8), 0 8px 24px rgba(0, 0, 0, 0.5);
 }
 
 .gblk-top {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   gap: 0.35rem;
-  margin-bottom: 0.15rem;
+  flex-shrink: 0;
 }
 
 .gblk-badge {
-  font-size: 0.72rem;
+  font-size: 1.15rem;
   font-weight: 800;
-  color: #e2e8f0;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
 }
 
-.gblk-pron {
-  font-size: 0.82rem;
-  font-weight: 700;
-  color: #fef08a;
+.kf-glass-block.bb .gblk-badge {
+  color: #bfdbfe;
+}
+
+.kf-glass-block.core .gblk-badge {
+  color: #a7f3d0;
+}
+
+.kf-glass-block.db .gblk-badge {
+  color: #fde68a;
 }
 
 .gblk-en {
-  font-size: 1.25rem;
+  font-size: 1.65rem;
   font-weight: 900;
-  color: #fff;
-  letter-spacing: -0.01em;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+  color: #ffffff;
+  line-height: 1.25;
+  text-align: center;
+  word-break: keep-all;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
 }
 
 .kf-sentence-banner {
@@ -3459,15 +3478,29 @@ onBeforeUnmount(() => {
   background: rgba(9, 13, 24, 0.9);
 }
 
-.kf-intro-content,
-.kf-outro-content {
+.kf-intro-content {
   position: relative;
   z-index: 10;
   margin: auto;
   padding: 1.5rem;
   text-align: center;
   color: #fff;
-  width: min(92%, 760px);
+  width: min(92%, 840px);
+}
+
+/* 🌟 아웃트로: 760px 제한을 풀고 16:9 와이드 화면에 맞춰 넓고 시원하게 전면 배치 */
+.kf-outro-content {
+  position: relative;
+  z-index: 10;
+  margin: auto;
+  padding: 1rem 2rem;
+  text-align: center;
+  color: #fff;
+  width: min(96%, 1440px);
+  max-height: 96%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .kf-intro-top-pill {
@@ -3555,61 +3588,73 @@ onBeforeUnmount(() => {
   box-shadow: 0 8px 24px rgba(239, 68, 68, 0.4);
 }
 
-/* 아웃트로 복습 그리드 */
+/* 아웃트로 복습 그리드: 4열 x 2행 와이드 배치로 8개 문장 전체가 짤림 없이 한 화면에 쏙 */
 .outro-badge {
-  font-size: 1.15rem;
+  display: inline-block;
+  font-size: 1.2rem;
   font-weight: 800;
   color: #34d399;
   letter-spacing: 0.06em;
+  margin-bottom: 0.35rem;
 }
 
 .outro-title {
-  margin: 0.35rem 0 1.25rem !important;
-  font-size: 2.15rem !important;
+  margin: 0.35rem 0 1.2rem !important;
+  font-size: 2.35rem !important;
   font-weight: 900;
   color: #fff !important;
+  line-height: 1.35 !important; /* 🌟 2줄로 개행되어도 위아래 글자가 겹치거나 붙지 않는 충분한 줄간격 */
   border: none !important;
+  text-shadow: 0 3px 12px rgba(0, 0, 0, 0.85);
 }
 
 .kf-review-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
-  gap: 0.75rem;
+  grid-template-columns: repeat(4, 1fr); /* 4열 x 2행으로 8개 전체가 한눈에 쏙 들어옴! */
+  gap: 0.85rem;
   text-align: left;
-  margin-bottom: 1.25rem;
+  margin-bottom: 1.2rem;
+  width: 100%;
 }
 
 .kf-review-item {
   display: flex;
   align-items: center;
-  gap: 0.85rem;
-  padding: 0.75rem 1.25rem;
+  gap: 0.75rem;
+  padding: 0.75rem 0.95rem;
   border-radius: 14px;
   background: rgba(30, 41, 59, 0.92);
-  border: 2px solid rgba(255, 255, 255, 0.2);
+  border: 2px solid rgba(255, 255, 255, 0.22);
   cursor: pointer;
-  transition: all 0.2s ease;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.45);
 }
 
 .kf-review-item:hover {
   border-color: #38bdf8;
-  background: rgba(14, 165, 233, 0.25);
+  background: rgba(14, 165, 233, 0.35);
   transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(56, 189, 248, 0.4);
 }
 
 .rev-num {
-  font-size: 1.25rem;
+  font-size: 1.2rem;
   font-weight: 900;
   color: #38bdf8;
-  min-width: 2.4rem;
+  min-width: 1.8rem;
+  flex-shrink: 0;
+}
+
+.rev-body {
+  flex: 1;
 }
 
 .rev-en {
-  font-size: 1.45rem;
-  font-weight: 900;
+  font-size: 1.15rem;
+  font-weight: 800;
   color: #fff;
-  line-height: 1.35;
+  line-height: 1.3;
+  word-break: keep-all;
 }
 
 .rev-ko {
@@ -3820,6 +3865,12 @@ onBeforeUnmount(() => {
    모바일 화면 전용 미디어 쿼리 (@media max-width: 768px)
    스마트폰에서 글자가 작아서 안 보이는 현상 완벽 해결!
    =================================================== */
+@media (max-width: 1100px) and (min-width: 769px) {
+  .kf-review-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
 /* ===================================================
    📱 스마트폰 세로 모드(Portrait) 전용 완벽 대응
    화면 겹침/잘림 방지 및 모바일 앱(쇼츠/릴스) 스타일 레이아웃
@@ -4408,16 +4459,19 @@ onBeforeUnmount(() => {
 
 /* STAGE 3: 완성 문장 & 소리 블록 대왕 폰트 */
 .theater-fullscreen .kf-glass-block {
-  padding: 1rem 1.8rem;
-  border-radius: 20px;
+  min-height: 120px;
+  padding: 0.95rem 1.6rem;
+  border-radius: 18px;
+  gap: 0.6rem;
 }
 
 .theater-fullscreen .gblk-badge {
-  font-size: 1.25rem;
+  font-size: 1.45rem;
 }
 
 .theater-fullscreen .gblk-en {
-  font-size: 2.75rem;
+  font-size: 2.35rem;
+  line-height: 1.25;
 }
 
 .theater-fullscreen .kf-sentence-banner {
@@ -4438,38 +4492,42 @@ onBeforeUnmount(() => {
   font-size: 1.65rem;
 }
 
-/* 아웃트로 복습 그리드 대형화 */
-.theater-fullscreen .outro-title {
-  font-size: 2.2rem !important;
+/* 아웃트로 복습 그리드 대형화 (와이드 4열 x 2행 전면 배치) */
+.theater-fullscreen .kf-outro-content {
+  width: min(96%, 1720px);
+  padding: 1.2rem 2.5rem;
 }
 
 .theater-fullscreen .outro-badge {
-  font-size: 1.65rem;
+  font-size: 1.55rem;
+  margin-bottom: 0.5rem;
 }
 
 .theater-fullscreen .outro-title {
-  font-size: 3.0rem !important;
+  font-size: 2.85rem !important;
+  line-height: 1.35 !important;
+  margin: 0.4rem 0 1.4rem !important;
 }
 
 .theater-fullscreen .kf-review-grid {
   gap: 1.1rem;
-  grid-template-columns: repeat(2, 1fr);
-  margin-bottom: 1.8rem;
+  grid-template-columns: repeat(4, 1fr);
+  margin-bottom: 1.6rem;
 }
 
 .theater-fullscreen .kf-review-item {
-  padding: 1.15rem 1.85rem;
-  border-radius: 18px;
+  padding: 1rem 1.35rem;
+  border-radius: 16px;
 }
 
 .theater-fullscreen .rev-num {
-  font-size: 1.85rem;
-  min-width: 3.2rem;
+  font-size: 1.45rem;
+  min-width: 2.2rem;
 }
 
 .theater-fullscreen .rev-en {
-  font-size: 2.15rem;
-  line-height: 1.3;
+  font-size: 1.45rem;
+  line-height: 1.32;
 }
 
 .theater-fullscreen .rev-ko {
