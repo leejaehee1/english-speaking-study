@@ -279,35 +279,48 @@
               <span class="m-listen">🔊 미션 다시 듣기</span>
             </div>
 
-            <!-- 자석으로 중앙에 합체되는 슬롯 -->
+            <!-- 자석으로 중앙에 합체되는 슬롯 (직접 클릭하여 채우거나 취소 가능) -->
             <div class="kf-snap-target-row" :class="{ snapped: isSnapped }">
-              <div class="snap-slot slot-bb" :class="{ 'is-filled': isSnapped }">
-                <span class="slot-badge">① 시작</span>
-                <span class="slot-word">{{ isSnapped ? currentScene.blocks[0].en : '?' }}</span>
+              <div
+                class="snap-slot slot-bb"
+                :class="{ 'is-filled': isSnapped || pickedBb }"
+                title="클릭하여 초기화"
+                @click="clearPicked('bb')"
+              >
+                <span class="slot-badge">① 시작 블록</span>
+                <span class="slot-word">{{ isSnapped ? currentScene.blocks[0].en : (pickedBb || '?') }}</span>
               </div>
               <span class="snap-plus">+</span>
-              <div class="snap-slot slot-core" :class="{ 'is-filled': isSnapped }">
-                <span class="slot-badge">② 코어</span>
-                <span class="slot-word">{{ isSnapped ? currentScene.blocks[1].en : '?' }}</span>
+              <div
+                class="snap-slot slot-core"
+                :class="{ 'is-filled': isSnapped || pickedCore }"
+                title="클릭하여 초기화"
+                @click="clearPicked('core')"
+              >
+                <span class="slot-badge">② 코어 블록</span>
+                <span class="slot-word">{{ isSnapped ? currentScene.blocks[1].en : (pickedCore || '?') }}</span>
               </div>
               <span class="snap-plus">+</span>
               <div class="snap-slot slot-db" :class="{ 'is-filled': isSnapped }">
-                <span class="slot-badge">③ 디테일</span>
-                <span class="slot-word">{{ isSnapped ? currentScene.blocks[2].en : '?' }}</span>
+                <span class="slot-badge">③ 디테일 블록</span>
+                <span class="slot-word">{{ isSnapped ? currentScene.blocks[2].en : '...' }}</span>
               </div>
             </div>
 
-            <!-- 후보 블록 풀 (선택해 보거나 3초 후 자동 철컥 합체) -->
+            <!-- 후보 블록 풀 (클릭하면 실시간으로 위 슬롯으로 찰칵 올라갑니다!) -->
             <div class="kf-candidate-pool">
               <div class="cand-group">
-                <span class="cand-label">① 시작 블록 후보:</span>
+                <span class="cand-label">① 시작 블록 선택:</span>
                 <div class="cand-items">
                   <button
                     v-for="(opt, oIdx) in currentScene.quizPool.bbCandidates"
                     :key="oIdx"
                     type="button"
                     class="cand-btn cand-bb"
-                    :class="{ correct: isSnapped && opt === currentScene.blocks[0].en }"
+                    :class="{
+                      selected: pickedBb === opt,
+                      correct: isSnapped && opt === currentScene.blocks[0].en
+                    }"
                     @click="onPickCandidate('bb', opt)"
                   >
                     {{ opt }}
@@ -316,14 +329,17 @@
               </div>
 
               <div class="cand-group">
-                <span class="cand-label">② 코어 블록 후보:</span>
+                <span class="cand-label">② 코어 블록 선택:</span>
                 <div class="cand-items">
                   <button
                     v-for="(opt, oIdx) in currentScene.quizPool.coreCandidates"
                     :key="oIdx"
                     type="button"
                     class="cand-btn cand-core"
-                    :class="{ correct: isSnapped && opt === currentScene.blocks[1].en }"
+                    :class="{
+                      selected: pickedCore === opt,
+                      correct: isSnapped && opt === currentScene.blocks[1].en
+                    }"
                     @click="onPickCandidate('core', opt)"
                   >
                     {{ opt }}
@@ -630,6 +646,8 @@ const shadowingProgress = ref(0)
 const activeStage = ref<'swap' | 'quiz' | 'sentence'>('swap')
 const activeComboIdx = ref<number | null>(null)
 const isSnapped = ref(false)
+const pickedBb = ref<string | null>(null)
+const pickedCore = ref<string | null>(null)
 
 // slideCursor: -1 = INTRO, 0..(scenes.length-1) = SCENES, scenes.length = OUTRO
 const slideCursor = ref(0)
@@ -1384,6 +1402,8 @@ function setStage(stage: 'swap' | 'quiz' | 'sentence') {
   activeStage.value = stage
   if (stage === 'quiz') {
     isSnapped.value = false
+    pickedBb.value = null
+    pickedCore.value = null
   }
 }
 
@@ -1585,14 +1605,43 @@ async function playMissionAudio() {
   }
 }
 
-async function onPickCandidate(role: 'bb' | 'core', text: string) {
-  playBlockPop(role === 'bb' ? 0 : 1)
-  await speakAsync(text, 'en-US', 0.95)
+function clearPicked(role: 'bb' | 'core') {
+  if (role === 'bb') pickedBb.value = null
+  if (role === 'core') pickedCore.value = null
+  isSnapped.value = false
 }
 
 async function triggerSnapAnimation() {
   playMagnetSnapSound()
   isSnapped.value = true
+  pickedBb.value = currentScene.value.blocks[0].en
+  pickedCore.value = currentScene.value.blocks[1].en
+}
+
+async function onPickCandidate(role: 'bb' | 'core', optText: string) {
+  if (role === 'bb') {
+    pickedBb.value = optText
+    playBlockPop(0)
+    await speakAsync(optText, 'en-US', 0.95)
+  } else {
+    pickedCore.value = optText
+    playBlockPop(1)
+    await speakAsync(optText, 'en-US', 0.95)
+  }
+
+  // 두 슬롯이 모두 선택되었을 때 정답 검증
+  if (pickedBb.value && pickedCore.value) {
+    const isCorrectBb = pickedBb.value === currentScene.value.blocks[0].en
+    const isCorrectCore = pickedCore.value === currentScene.value.blocks[1].en
+    if (isCorrectBb && isCorrectCore) {
+      await triggerSnapAnimation()
+      playSuccessBell()
+      await speakSceneSentence(1.0)
+    } else {
+      // 오답일 경우 경쾌한 재시도 톤
+      playTone(330, 160, 'triangle', 0.08, 0)
+    }
+  }
 }
 
 async function speakSceneSentence(rate = 1.0) {
@@ -1623,6 +1672,8 @@ function clearTimers() {
   activeComboIdx.value = null
   isShadowingTurn.value = false
   shadowingProgress.value = 0
+  pickedBb.value = null
+  pickedCore.value = null
 }
 
 function waitMs(ms: number, token: number): Promise<boolean> {
@@ -2712,6 +2763,20 @@ onBeforeUnmount(() => {
 .cand-core:hover {
   border-color: #34d399;
   background: rgba(5, 150, 105, 0.3);
+}
+
+.cand-btn.selected {
+  border-color: #fde047 !important;
+  box-shadow: 0 0 14px rgba(250, 204, 21, 0.5);
+  transform: translateY(-2px) scale(1.04);
+}
+.cand-bb.selected {
+  background: #2563eb !important;
+  color: #fff !important;
+}
+.cand-core.selected {
+  background: #059669 !important;
+  color: #fff !important;
 }
 
 .cand-btn.correct {
