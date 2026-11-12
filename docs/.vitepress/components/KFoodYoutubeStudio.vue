@@ -242,19 +242,17 @@
           <!-- 5) 메인 무대: 활성 훈련 단계에 따른 독 (Lower-Third Dock) -->
 
           <!-- ============================================================
-               STAGE 1: 시작 블록 3단 교체 훈련 (Slot Machine Style Swap)
+               STAGE 1: 시작 블록 3단 교체 훈련 (안 B: 한글 자막 없이 영어 블록만 초대형 중앙 배치)
                ============================================================ -->
           <div v-if="activeStage === 'swap'" class="kf-lower-third kf-swap-stage">
-            <!-- 고정된 코어 블록 배너 -->
-            <div class="kf-core-anchor" @click="speakCoreBlock">
-              <span class="anchor-label">② 고정 코어 블록 (Core Action)</span>
-              <div class="anchor-body">
-                <span class="anchor-en">{{ currentScene.blocks[1]?.en || currentScene.keyVocab }}</span>
-                <span class="anchor-hint">🔊 터치하여 듣기</span>
-              </div>
+            <!-- 중앙 컴팩트 코어 블록 배지 -->
+            <div class="kf-core-anchor-bar" @click="speakCoreBlock">
+              <span class="anchor-badge">② 고정 코어 블록</span>
+              <span class="anchor-en">{{ currentScene.blocks[1]?.en || currentScene.keyVocab }}</span>
+              <span class="anchor-hint">🔊 터치하여 듣기</span>
             </div>
 
-            <!-- 3가지 시작 블록 갈아 끼우기 카드 목록 (중복 헤더 제거 및 파랑/초록 블록 직관적 표시) -->
+            <!-- 3가지 시작 블록 갈아 끼우기 카드 목록 (초대형 중앙 정렬 레고 블록) -->
             <div class="kf-combo-grid">
               <div
                 v-for="(combo, cIdx) in currentScene.combos"
@@ -266,9 +264,6 @@
                 <div class="combo-sentence">
                   <span class="combo-block-pill c-bb">{{ combo.bbEn }}</span>
                   <span class="combo-block-pill c-core">{{ getComboCorePart(combo) }}</span>
-                </div>
-                <div v-if="showKoSub" class="combo-ko">
-                  🇰🇷 {{ combo.ko }}
                 </div>
               </div>
             </div>
@@ -2446,73 +2441,74 @@ onBeforeUnmount(() => {
 /* ---------------------------------------------------
    STAGE 1 · 시작 블록 3단 교체 스타일
    --------------------------------------------------- */
-.kf-core-anchor {
-  display: flex;
+.kf-core-anchor-bar {
+  display: inline-flex;
   align-items: center;
-  justify-content: space-between;
-  background: rgba(5, 150, 105, 0.35);
-  backdrop-filter: blur(10px);
-  border: 2px solid rgba(52, 211, 153, 0.85);
-  border-radius: 12px;
-  padding: 0.45rem 1rem;
+  align-self: center;
+  gap: 0.65rem;
+  background: rgba(5, 150, 105, 0.38);
+  backdrop-filter: blur(12px);
+  border: 1.5px solid rgba(52, 211, 153, 0.85);
+  border-radius: 999px;
+  padding: 0.35rem 1.15rem;
   color: #fff;
   cursor: pointer;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+  margin-bottom: 0.25rem;
+  transition: transform 0.18s ease;
 }
 
-.anchor-label {
-  font-size: 0.76rem;
+.kf-core-anchor-bar:hover {
+  transform: scale(1.02);
+}
+
+.kf-core-anchor-bar .anchor-badge {
+  font-size: 0.78rem;
   font-weight: 800;
-  color: #a7f3d0;
-}
-
-.anchor-body {
-  display: flex;
-  align-items: center;
-  gap: 0.65rem;
-}
-
-.anchor-en {
-  font-size: 1.25rem;
-  font-weight: 900;
+  padding: 0.15rem 0.55rem;
+  border-radius: 999px;
+  background: #059669;
   color: #fff;
 }
 
-.anchor-pron {
-  font-size: 0.88rem;
-  color: #fde047;
-  font-weight: 700;
+.kf-core-anchor-bar .anchor-en {
+  font-size: 1.35rem;
+  font-weight: 900;
+  color: #fff;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
 }
 
-.anchor-hint {
-  font-size: 0.72rem;
-  color: #cbd5e1;
+.kf-core-anchor-bar .anchor-hint {
+  font-size: 0.74rem;
+  color: #a7f3d0;
 }
 
 .kf-combo-grid {
   display: flex;
   flex-direction: column;
-  gap: 0.45rem;
+  gap: 0.55rem;
+  width: 100%;
 }
 
 .kf-combo-card {
   background: rgba(15, 23, 42, 0.88);
-  backdrop-filter: blur(10px);
-  border: 1.5px solid rgba(255, 255, 255, 0.16);
-  border-radius: 12px;
-  padding: 0.55rem 0.95rem;
+  backdrop-filter: blur(12px);
+  border: 2px solid rgba(255, 255, 255, 0.16);
+  border-radius: 16px;
+  padding: 0.85rem 1.35rem;
   cursor: pointer;
-  transition: all 0.18s ease;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   display: flex;
-  flex-direction: column;
-  gap: 0.2rem;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
 }
 
 .kf-combo-card.active {
-  background: rgba(37, 99, 235, 0.4);
+  background: rgba(30, 58, 138, 0.6);
   border-color: #fde047;
-  transform: scale(1.015);
-  box-shadow: 0 0 0 2px #fde047, 0 8px 24px rgba(0, 0, 0, 0.5);
+  transform: scale(1.02);
+  box-shadow: 0 0 0 3px #fde047, 0 12px 32px rgba(0, 0, 0, 0.6);
 }
 
 .combo-sentence {
@@ -3514,10 +3510,35 @@ onBeforeUnmount(() => {
   gap: 0.35rem;
 }
 
+.theater-fullscreen .kf-core-anchor-bar {
+  padding: 0.55rem 1.65rem;
+}
+.theater-fullscreen .kf-core-anchor-bar .anchor-badge {
+  font-size: 1rem;
+  padding: 0.25rem 0.75rem;
+}
+.theater-fullscreen .kf-core-anchor-bar .anchor-en {
+  font-size: 1.85rem;
+}
+
+.theater-fullscreen .kf-combo-grid {
+  gap: 0.85rem;
+}
+
+.theater-fullscreen .kf-combo-card {
+  padding: 1.15rem 2rem;
+  border-radius: 20px;
+}
+
+.theater-fullscreen .combo-sentence {
+  gap: 1.6rem;
+}
+
 .theater-fullscreen .combo-block-pill {
-  font-size: 2.25rem;
-  padding: 0.5rem 1.25rem;
-  border-radius: 14px;
+  font-size: 2.85rem;
+  padding: 0.75rem 2rem;
+  border-radius: 18px;
+  border-width: 3px;
 }
 
 .theater-fullscreen .combo-ko {
