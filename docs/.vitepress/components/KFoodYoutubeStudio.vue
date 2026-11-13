@@ -3816,12 +3816,12 @@ const episodes: CookingEpisode[] = [
           { role: 'db', en: 'and garlic cloves.', pron: '앤 갈릭 클로브스' }
         ],
         combos: [
-          { bbEn: 'You have to', fullEn: 'You have to stuff with sweet rice.', fullPron: '유 해브 투 스터프 위드 스위트 라이스', ko: 'stuff with sweet rice 할 거예요.' },
+          { bbEn: 'I\'m gonna', fullEn: 'I\'m gonna stuff with sweet rice.', fullPron: '암거너 스터프 위드 스위트 라이스', ko: 'stuff with sweet rice 할 거예요.' },
           { bbEn: 'You have to', fullEn: 'You have to stuff with sweet rice.', fullPron: '유 해브 투 스터프 위드 스위트 라이스', ko: 'stuff with sweet rice 해야 해요.' },
           { bbEn: 'Can you', fullEn: 'Can you stuff with sweet rice?', fullPron: '캔 유 스터프 위드 스위트 라이스?', ko: 'stuff with sweet rice 해 줄래요?' }
         ],
         quizPool: {
-          bbCandidates: ["You have to", "You have to", "Can you"],
+          bbCandidates: ["I\'m gonna", "You have to", "Can you"],
           coreCandidates: ['stuff with sweet rice', 'stir-fry the beef', 'pour the broth']
         },
         fullEn: "You have to stuff with sweet rice and garlic cloves.",
@@ -6600,6 +6600,9 @@ function nextSlide() {
 // ---------------------------------------------------------
 async function enterFullscreen() {
   isFullscreenMode.value = true
+  if (typeof document !== 'undefined') {
+    document.body.classList.add('kf-theater-body')
+  }
   if (studioRoot.value && studioRoot.value.requestFullscreen) {
     try {
       if (!document.fullscreenElement) {
@@ -6621,18 +6624,28 @@ async function toggleFullscreenBroadcast() {
 
 async function exitFullscreen() {
   isFullscreenMode.value = false
-  if (typeof document !== 'undefined' && document.fullscreenElement) {
-    try {
-      await document.exitFullscreen()
-    } catch {
-      // ignore
+  if (typeof document !== 'undefined') {
+    document.body.classList.remove('kf-theater-body')
+    if (document.fullscreenElement) {
+      try {
+        await document.exitFullscreen()
+      } catch {
+        // ignore
+      }
     }
   }
 }
 
 function onFullscreenChange() {
   if (typeof document !== 'undefined' && !document.fullscreenElement) {
+    // 🚨 녹화 중이거나 녹화 준비 카운트다운 중일 때는
+    // 브라우저 탭 공유 다이얼로그 때문에 네이티브 풀스크린이 일시 해제되더라도
+    // CSS 극장 모드(Theater Fullscreen)를 철통 유지하여 창모드로 튕기는 현상을 원천 방지합니다!
+    if (isScreenRecording.value || countdownToRecord.value !== null) {
+      return
+    }
     isFullscreenMode.value = false
+    document.body.classList.remove('kf-theater-body')
   }
 }
 
@@ -6870,18 +6883,34 @@ onBeforeUnmount(() => {
 
 /* 전체화면 방송 모드 (1080p Full HD 꽉 찬 화면) */
 .kf-studio-v2.theater-fullscreen {
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-  margin: 0;
-  border-radius: 0;
-  border: none;
-  width: 100vw;
-  height: 100vh;
-  background: #000;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  z-index: 999999 !important;
+  margin: 0 !important;
+  border-radius: 0 !important;
+  border: none !important;
+  background: #000 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+}
+
+body.kf-theater-body {
+  overflow: hidden !important;
+}
+
+body.kf-theater-body .VPNav,
+body.kf-theater-body .VPSidebar,
+body.kf-theater-body .VPFooter,
+body.kf-theater-body .VPLocalNav,
+body.kf-theater-body header,
+body.kf-theater-body nav {
+  display: none !important;
 }
 
 .kf-topbar {
@@ -6989,6 +7018,15 @@ onBeforeUnmount(() => {
 
 .theater-fullscreen .kf-canvas-wrapper {
   height: 100vh;
+  width: 100vw;
+}
+
+.theater-fullscreen .screen-wide {
+  width: 100vw !important;
+  height: 100vh !important;
+  max-height: 100vh !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
 }
 
 .kf-broadcast-screen {
