@@ -288,7 +288,8 @@
               >
                 <div class="combo-sentence">
                   <span class="combo-block-pill c-bb">{{ combo.bbEn }}</span>
-                  <span class="combo-block-pill c-core">{{ getComboCorePart(combo) }}</span>
+                  <span class="combo-block-pill c-core">{{ getComboCoreBlock(combo) }}</span>
+                  <span v-if="getComboDetailBlock(combo)" class="combo-block-pill c-db">{{ getComboDetailBlock(combo) }}</span>
                 </div>
               </div>
             </div>
@@ -600,34 +601,72 @@
         </div>
         <div v-if="showYtMeta" class="kf-yt-package-body">
           <div class="kf-meta-row">
-            <strong>Video Title:</strong>
+            <div class="kf-meta-header-row">
+              <strong>1. Video Title:</strong>
+              <button type="button" class="kf-copy-mini-btn" @click="copySingleItem('title', currentEpisode.ytTitle)">
+                {{ copiedField === 'title' ? '✅ Copied' : '📋 Copy Title' }}
+              </button>
+            </div>
             <code>{{ currentEpisode.ytTitle }}</code>
           </div>
+
           <div class="kf-meta-row">
-            <strong>Thumbnail Text:</strong>
+            <div class="kf-meta-header-row">
+              <strong>2. Thumbnail Text &amp; Image:</strong>
+              <div style="display: flex; gap: 0.5rem; align-items: center;">
+                <button type="button" class="kf-copy-mini-btn" @click="copySingleItem('thumbText', currentEpisode.thumbnailText)">
+                  {{ copiedField === 'thumbText' ? '✅ Copied' : '📋 Copy Text' }}
+                </button>
+                <a
+                  :href="withBase(currentEpisode.thumbnailImage || '/images/kfood/ep1-thumb.jpg')"
+                  :download="`${currentEpisode.id}-thumb.jpg`"
+                  target="_blank"
+                  class="kf-ctrl-btn-sm"
+                  style="display: inline-flex; align-items: center; gap: 0.35rem; text-decoration: none;"
+                >
+                  🖼️ Download 1080p Thumbnail (.jpg)
+                </a>
+              </div>
+            </div>
             <code>{{ currentEpisode.thumbnailText }}</code>
           </div>
+
           <div class="kf-meta-row">
-            <strong>Thumbnail Image:</strong>
-            <a
-              :href="withBase(currentEpisode.thumbnailImage || '/images/kfood/ep1-thumb.jpg')"
-              :download="`${currentEpisode.id}-thumb.jpg`"
-              target="_blank"
-              class="kf-ctrl-btn-sm"
-              style="display: inline-flex; align-items: center; gap: 0.35rem; text-decoration: none;"
-            >
-              🖼️ Download 1080p Thumbnail (.jpg)
-            </a>
+            <div class="kf-meta-header-row">
+              <strong>3. Pinned Comment:</strong>
+              <button type="button" class="kf-copy-mini-btn" @click="copySingleItem('pinned', currentPinnedComment)">
+                {{ copiedField === 'pinned' ? '✅ Copied' : '📋 Copy Pinned Comment' }}
+              </button>
+            </div>
+            <pre class="kf-code-block">{{ currentPinnedComment }}</pre>
           </div>
+
           <div class="kf-meta-row">
-            <strong>Pinned Comment:</strong>
-            <code>🍲 SoundBlock K-Cooking Challenge! Which step was your favorite? Let us know below! 👇</code>
+            <div class="kf-meta-header-row">
+              <strong>4. Description &amp; Timestamps (Video Details):</strong>
+              <button type="button" class="kf-copy-mini-btn" @click="copySingleItem('desc', currentDescriptionText)">
+                {{ copiedField === 'desc' ? '✅ Copied' : '📋 Copy Description & Details' }}
+              </button>
+            </div>
+            <textarea
+              class="kf-desc-textarea"
+              readonly
+              :value="currentDescriptionText"
+              rows="8"
+            ></textarea>
           </div>
+
           <div class="kf-meta-row">
-            <strong>Video Tags (500 chars):</strong>
+            <div class="kf-meta-header-row">
+              <strong>5. Video Tags (500 chars):</strong>
+              <button type="button" class="kf-copy-mini-btn" @click="copySingleItem('tags', getEpisodeTags(currentEpisode))">
+                {{ copiedField === 'tags' ? '✅ Copied' : '📋 Copy Tags' }}
+              </button>
+            </div>
             <code>{{ getEpisodeTags(currentEpisode) }}</code>
           </div>
-          <div class="kf-meta-row">
+
+          <div class="kf-meta-row kf-meta-row-actions">
             <strong>Full Package:</strong>
             <button type="button" class="kf-ctrl-btn-sm" @click="copyEpisodeScript">
               {{ copySuccess ? '✅ Copied All to Clipboard!' : '📄 Copy 100% English Upload Package' }}
@@ -6007,6 +6046,35 @@ function getComboCorePart(combo: SwapCombo): string {
   return combo.fullEn
 }
 
+function getComboCoreBlock(combo: SwapCombo): string {
+  const scene = currentScene.value
+  const coreEn = scene?.blocks?.[1]?.en
+  const detailEn = scene?.blocks?.[2]?.en
+  if (combo.fullEn.startsWith(combo.bbEn)) {
+    const rest = combo.fullEn.slice(combo.bbEn.length).trim()
+    if (detailEn && rest.endsWith(detailEn)) {
+      return rest.slice(0, rest.length - detailEn.length).trim()
+    }
+    if (coreEn) return coreEn
+    return rest
+  }
+  return coreEn || combo.fullEn
+}
+
+function getComboDetailBlock(combo: SwapCombo): string {
+  const scene = currentScene.value
+  const detailEn = scene?.blocks?.[2]?.en
+  if (detailEn) return detailEn
+  if (combo.fullEn.startsWith(combo.bbEn)) {
+    const rest = combo.fullEn.slice(combo.bbEn.length).trim()
+    const coreEn = scene?.blocks?.[1]?.en
+    if (coreEn && rest.startsWith(coreEn)) {
+      return rest.slice(coreEn.length).trim()
+    }
+  }
+  return ''
+}
+
 // 🌟 Step 2 자석 결합 퀴즈 후보 블록 랜덤 셔플 (정답이 항상 1번에 위치하는 현상 해결)
 function shuffleArray<T>(items: T[]): T[] {
   if (!items || items.length <= 1) return items ? [...items] : []
@@ -6678,22 +6746,39 @@ function getEpisodeTags(ep: CookingEpisode): string {
   return [...dishSpecific, ...globalTags].join(', ')
 }
 
-async function copyEpisodeScript() {
+const copiedField = ref<string>('')
+
+async function copySingleItem(field: string, text: string) {
+  try {
+    await navigator.clipboard.writeText(text)
+    copiedField.value = field
+    setTimeout(() => {
+      if (copiedField.value === field) copiedField.value = ''
+    }, 2000)
+  } catch (err) {
+    console.error('Failed to copy', err)
+  }
+}
+
+const currentPinnedComment = computed(() => {
+  const ep = currentEpisode.value
+  const scene1 = ep.scenes[0]
+  const sampleBlocks = scene1 ? scene1.blocks.map((b) => `[${b.en}]`).join(' + ') : ''
+  const dishName = ep.shortTitle.replace(/^[^\s]+\s*/, '')
+  return [
+    `${ep.emoji} SoundBlock K-Cooking Challenge!`,
+    `Can you speak today's sentence out loud in one breath?`,
+    sampleBlocks ? `👉 ${sampleBlocks}` : `👉 "${scene1?.fullEn || ''}"`,
+    '',
+    `💬 Which step was your favorite in cooking ${dishName}?`,
+    `Or tell us what Korean food you want to cook next in easy English! 👇`
+  ].join('\n')
+})
+
+const currentDescriptionText = computed(() => {
   const ep = currentEpisode.value
   const dishName = ep.shortTitle.replace(/^[^\s]+\s*/, '')
-  const lines = [
-    `=== 1. VIDEO TITLE ===`,
-    ep.ytTitle,
-    '',
-    `=== 2. THUMBNAIL TEXT ===`,
-    ep.thumbnailText,
-    '',
-    `=== 3. PINNED COMMENT (Copy & Pin in YouTube comments) ===`,
-    `🍲 SoundBlock K-Cooking Challenge!`,
-    `Which step was your favorite? Try speaking the full sentence out loud in one breath!`,
-    `👇 Share your favorite sound block in the comments below!`,
-    '',
-    `=== 4. DESCRIPTION & TIMESTAMPS ===`,
+  return [
     `Welcome to SoundBlock K-Cooking! ${ep.emoji}`,
     `Learn how to cook authentic Korean ${dishName} while mastering real-life English speaking using simple 3-part sound blocks!`,
     '',
@@ -6718,7 +6803,24 @@ async function copyEpisodeScript() {
     `🔔 Subscribe & Like to cook more delicious K-food in easy English!`,
     `Official Channel · YouTube @SoundBlockKCooking`,
     '',
-    `#SoundBlockKCooking #KFood #${dishName.replace(/\s+/g, '')} #LearnEnglish #EnglishSpeaking #EasyEnglish #KoreanCooking #CookingEnglish`,
+    `#SoundBlockKCooking #KFood #${dishName.replace(/\s+/g, '')} #LearnEnglish #EnglishSpeaking #EasyEnglish #KoreanCooking #CookingEnglish`
+  ].join('\n')
+})
+
+async function copyEpisodeScript() {
+  const ep = currentEpisode.value
+  const lines = [
+    `=== 1. VIDEO TITLE ===`,
+    ep.ytTitle,
+    '',
+    `=== 2. THUMBNAIL TEXT ===`,
+    ep.thumbnailText,
+    '',
+    `=== 3. PINNED COMMENT (Copy & Pin in YouTube comments) ===`,
+    currentPinnedComment.value,
+    '',
+    `=== 4. DESCRIPTION & TIMESTAMPS ===`,
+    currentDescriptionText.value,
     '',
     `=== 5. YOUTUBE VIDEO TAGS (Copy & Paste into YouTube Studio 'Tags' box) ===`,
     getEpisodeTags(ep)
@@ -7335,6 +7437,12 @@ onBeforeUnmount(() => {
   background: rgba(5, 150, 105, 0.45);
   border: 2px solid rgba(52, 211, 153, 0.9);
   box-shadow: 0 2px 10px rgba(5, 150, 105, 0.35);
+}
+
+.combo-block-pill.c-db {
+  background: rgba(147, 51, 234, 0.45);
+  border: 2px solid rgba(192, 132, 252, 0.9);
+  box-shadow: 0 2px 10px rgba(147, 51, 234, 0.35);
 }
 
 .font-large .combo-block-pill {
@@ -8248,9 +8356,65 @@ onBeforeUnmount(() => {
 
 .kf-meta-row {
   display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.35rem;
+  padding: 0.45rem 0;
+  border-bottom: 1px dashed var(--vp-c-divider);
+}
+
+.kf-meta-row:last-child {
+  border-bottom: none;
+}
+
+.kf-meta-header-row {
+  display: flex;
+  justify-content: space-between;
   align-items: center;
   gap: 0.5rem;
-  flex-wrap: wrap;
+}
+
+.kf-copy-mini-btn {
+  background: var(--vp-c-brand-soft);
+  color: var(--vp-c-brand-1);
+  border: 1px solid var(--vp-c-brand-2);
+  border-radius: 6px;
+  padding: 0.2rem 0.55rem;
+  font-size: 0.76rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.kf-copy-mini-btn:hover {
+  background: var(--vp-c-brand-1);
+  color: #fff;
+}
+
+.kf-code-block {
+  background: var(--vp-c-bg-alt);
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 8px;
+  padding: 0.6rem 0.75rem;
+  font-family: inherit;
+  font-size: 0.8rem;
+  line-height: 1.45;
+  white-space: pre-wrap;
+  margin: 0;
+  color: var(--vp-c-text-1);
+}
+
+.kf-desc-textarea {
+  width: 100%;
+  background: var(--vp-c-bg-alt);
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 8px;
+  padding: 0.6rem 0.75rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.78rem;
+  line-height: 1.45;
+  color: var(--vp-c-text-1);
+  resize: vertical;
 }
 
 .kf-pop-enter-active,
