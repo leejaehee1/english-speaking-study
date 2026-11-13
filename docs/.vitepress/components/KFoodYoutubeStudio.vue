@@ -288,7 +288,8 @@
               >
                 <div class="combo-sentence">
                   <span class="combo-block-pill c-bb">{{ combo.bbEn }}</span>
-                  <span class="combo-block-pill c-core">{{ getComboCorePart(combo) }}</span>
+                  <span class="combo-block-pill c-core">{{ getComboCoreBlock(combo) }}</span>
+                  <span v-if="getComboDetailBlock(combo)" class="combo-block-pill c-db">{{ getComboDetailBlock(combo) }}</span>
                 </div>
               </div>
             </div>
@@ -794,8 +795,14 @@ async function startScreenRecording() {
     return
   }
 
+  // 🚀 1) 사용자가 버튼을 클릭한 즉시 브라우저 사용자 제스처(User Gesture)로 전체 화면 모드 자동 진입!
+  // (창모드에서 녹화 시 글자가 짤리거나 2px 오차가 생기는 문제를 방지하고 1080p Full HD 전체 화면으로 캡처 준비)
+  await enterFullscreen()
+  // 브라우저 뷰포트가 1920x1080 전체 화면으로 완전 리사이즈/안착될 시간을 줍니다.
+  await new Promise((resolve) => setTimeout(resolve, 350))
+
   try {
-    // 1) 화면 및 탭 내부 오디오 캡처 (Chrome 최신 preferCurrentTab 옵션 탑재)
+    // 2) 1920x1080 전체 화면 상태에서 탭 공유 다이얼로그 호출
     const displayStream = await navigator.mediaDevices.getDisplayMedia({
       video: {
         displaySurface: 'browser',
@@ -821,6 +828,7 @@ async function startScreenRecording() {
         '2. 하단의 [탭 오디오도 공유 (Also share tab audio)] 체크박스를 꼭 체크해주세요!'
       )
       displayStream.getTracks().forEach((track) => track.stop())
+      await exitFullscreen()
       return
     }
 
@@ -935,6 +943,8 @@ async function startScreenRecording() {
         screenRecordTimer = null
       }
       isScreenRecording.value = false
+      // 녹화 파일 다운로드 완료 후 전체 화면 해제하여 편리하게 원래 화면으로 복귀
+      exitFullscreen().catch(() => {})
     }
 
     displayStream.getVideoTracks()[0].onended = () => {
@@ -981,6 +991,7 @@ async function startScreenRecording() {
   } catch (err) {
     console.error('Screen recording cancelled or failed:', err)
     isScreenRecording.value = false
+    await exitFullscreen()
   }
 }
 
@@ -6045,6 +6056,21 @@ function getComboCorePart(combo: SwapCombo): string {
   return combo.fullEn
 }
 
+function getComboCoreBlock(combo: SwapCombo): string {
+  const scene = currentScene.value
+  const coreEn = scene?.blocks?.[1]?.en
+  if (coreEn) return coreEn
+  if (combo.fullEn.startsWith(combo.bbEn)) {
+    return combo.fullEn.slice(combo.bbEn.length).trim()
+  }
+  return combo.fullEn
+}
+
+function getComboDetailBlock(combo: SwapCombo): string {
+  const scene = currentScene.value
+  return scene?.blocks?.[2]?.en || ''
+}
+
 // 🌟 Step 2 자석 결합 퀴즈 후보 블록 랜덤 셔플 (정답이 항상 1번에 위치하는 현상 해결)
 function shuffleArray<T>(items: T[]): T[] {
   if (!items || items.length <= 1) return items ? [...items] : []
@@ -8904,19 +8930,22 @@ onBeforeUnmount(() => {
 }
 
 .theater-fullscreen .combo-sentence {
-  gap: 1.2rem;
-  flex-wrap: wrap;
+  gap: 1rem;
+  display: flex;
+  align-items: center;
   justify-content: center;
+  flex-wrap: wrap;
 }
 
 .theater-fullscreen .combo-block-pill {
-  font-size: 2.25rem;
-  padding: 0.55rem 1.6rem;
-  border-radius: 18px;
+  font-size: 2.05rem;
+  padding: 0.48rem 1.35rem;
+  border-radius: 16px;
   border-width: 3px;
   max-width: 100%;
   word-break: keep-all;
   text-align: center;
+  white-space: nowrap;
 }
 
 .theater-fullscreen .combo-ko {
