@@ -917,9 +917,14 @@ async function startScreenRecording() {
       playTone(440 + (4 - c) * 70, 120, 'sine', 0.12, 0)
       await new Promise((resolve) => setTimeout(resolve, 950))
     }
+    // 💡 카운트다운 오버레이 완전 제거
     countdownToRecord.value = null
 
-    // 💡 3) 풀스크린이 완벽히 안착된 상태에서 실제 레코더 시작! (어색한 창선택 화면 0% 녹화)
+    // 💡 오버레이 페이드아웃 및 '1' 잔상이 100% 사라지고 깨끗한 인트로 화면이 정착할 수 있도록 1.2초간 지연 대기
+    // (녹화 첫머리에 '1'이 남아 수동으로 잘라내야 했던 문제를 원천 차단)
+    await new Promise((resolve) => setTimeout(resolve, 1200))
+
+    // 💡 3) 풀스크린이 완벽히 안착되고 화면이 100% 깨끗해진 상태에서 실제 녹화 시작!
     playSuccessBell()
     screenMediaRecorder.start(1000)
     isScreenRecording.value = true
