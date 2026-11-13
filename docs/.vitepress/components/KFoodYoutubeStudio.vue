@@ -288,8 +288,7 @@
               >
                 <div class="combo-sentence">
                   <span class="combo-block-pill c-bb">{{ combo.bbEn }}</span>
-                  <span class="combo-block-pill c-core">{{ getComboCoreBlock(combo) }}</span>
-                  <span v-if="getComboDetailBlock(combo)" class="combo-block-pill c-db">{{ getComboDetailBlock(combo) }}</span>
+                  <span class="combo-block-pill c-core">{{ getComboCorePart(combo) }}</span>
                 </div>
               </div>
             </div>
@@ -6046,35 +6045,6 @@ function getComboCorePart(combo: SwapCombo): string {
   return combo.fullEn
 }
 
-function getComboCoreBlock(combo: SwapCombo): string {
-  const scene = currentScene.value
-  const coreEn = scene?.blocks?.[1]?.en
-  const detailEn = scene?.blocks?.[2]?.en
-  if (combo.fullEn.startsWith(combo.bbEn)) {
-    const rest = combo.fullEn.slice(combo.bbEn.length).trim()
-    if (detailEn && rest.endsWith(detailEn)) {
-      return rest.slice(0, rest.length - detailEn.length).trim()
-    }
-    if (coreEn) return coreEn
-    return rest
-  }
-  return coreEn || combo.fullEn
-}
-
-function getComboDetailBlock(combo: SwapCombo): string {
-  const scene = currentScene.value
-  const detailEn = scene?.blocks?.[2]?.en
-  if (detailEn) return detailEn
-  if (combo.fullEn.startsWith(combo.bbEn)) {
-    const rest = combo.fullEn.slice(combo.bbEn.length).trim()
-    const coreEn = scene?.blocks?.[1]?.en
-    if (coreEn && rest.startsWith(coreEn)) {
-      return rest.slice(coreEn.length).trim()
-    }
-  }
-  return ''
-}
-
 // 🌟 Step 2 자석 결합 퀴즈 후보 블록 랜덤 셔플 (정답이 항상 1번에 위치하는 현상 해결)
 function shuffleArray<T>(items: T[]): T[] {
   if (!items || items.length <= 1) return items ? [...items] : []
@@ -8934,14 +8904,19 @@ onBeforeUnmount(() => {
 }
 
 .theater-fullscreen .combo-sentence {
-  gap: 1.6rem;
+  gap: 1.2rem;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .theater-fullscreen .combo-block-pill {
-  font-size: 2.85rem;
-  padding: 0.75rem 2rem;
+  font-size: 2.25rem;
+  padding: 0.55rem 1.6rem;
   border-radius: 18px;
   border-width: 3px;
+  max-width: 100%;
+  word-break: keep-all;
+  text-align: center;
 }
 
 .theater-fullscreen .combo-ko {
