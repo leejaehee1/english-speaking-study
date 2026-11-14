@@ -6,7 +6,9 @@
       'font-' + fontScale,
       {
         'clean-record-mode': isCleanMode,
-        'theater-fullscreen': isFullscreenMode
+        'theater-fullscreen': isFullscreenMode,
+        'is-recording': isScreenRecording,
+        'is-playing': isAutoPlaying
       }
     ]"
     @click.stop
@@ -13212,6 +13214,20 @@ body.kf-theater-body nav {
   opacity: 0;
   pointer-events: none;
   transform: translateY(-100%);
+}
+
+/* 🎬 녹화 또는 방송 재생 중에는 상단 컨트롤 바와 마우스 커서를 강제로 100% 완전 은닉 */
+.theater-fullscreen.is-recording .kf-topbar,
+.theater-fullscreen.is-playing .kf-topbar {
+  opacity: 0 !important;
+  pointer-events: none !important;
+  transform: translateY(-100%) !important;
+  display: none !important;
+}
+
+.theater-fullscreen.is-recording,
+.theater-fullscreen.is-playing {
+  cursor: none !important;
 }
 
 .kf-topbar-left,
