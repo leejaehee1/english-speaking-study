@@ -13111,6 +13111,22 @@ onMounted(() => {
       if (saved === 'normal' || saved === 'large' || saved === 'huge') {
         fontScale.value = saved
       }
+
+      // 🚀 URL 쿼리 파라미터를 통한 다이렉트 풀스크린 시작 (세팅 UI 노출 원천 차단)
+      const params = new URLSearchParams(window.location.search)
+      const epParam = params.get('ep')
+      if (epParam) {
+        const found = episodes.find((e) => e.id === epParam || e.epNumber === epParam)
+        if (found) currentEpId.value = found.id
+      }
+      if (params.get('fullscreen') === '1') {
+        isFullscreenMode.value = true
+      }
+      if (params.get('auto') === '1') {
+        setTimeout(() => {
+          startEpisodeFromBeginning()
+        }, 600)
+      }
     } catch {}
   }
   if (typeof document !== 'undefined') {
