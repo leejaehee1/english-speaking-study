@@ -13719,49 +13719,50 @@ body.kf-theater-body nav {
 .combo-sentence {
   display: flex;
   align-items: center;
-  gap: 0.55rem;
+  justify-content: center;
+  gap: 0.85rem;
   flex-wrap: wrap;
 }
 
 .combo-block-pill {
   display: inline-flex;
   align-items: center;
-  padding: 0.32rem 0.85rem;
-  border-radius: 10px;
-  font-size: 1.45rem;
+  padding: 0.55rem 1.35rem;
+  border-radius: 14px;
+  font-size: 2.35rem;
   font-weight: 900;
   color: #fff;
   letter-spacing: -0.01em;
-  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.85);
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.9);
   transition: all 0.18s ease;
 }
 
 .combo-block-pill.c-bb {
-  background: rgba(37, 99, 235, 0.45);
-  border: 2px solid rgba(96, 165, 250, 0.9);
-  box-shadow: 0 2px 10px rgba(37, 99, 235, 0.35);
+  background: rgba(37, 99, 235, 0.6);
+  border: 3px solid rgba(147, 197, 253, 0.95);
+  box-shadow: 0 4px 16px rgba(37, 99, 235, 0.45);
 }
 
 .combo-block-pill.c-core {
-  background: rgba(5, 150, 105, 0.45);
-  border: 2px solid rgba(52, 211, 153, 0.9);
-  box-shadow: 0 2px 10px rgba(5, 150, 105, 0.35);
+  background: rgba(5, 150, 105, 0.6);
+  border: 3px solid rgba(110, 231, 183, 0.95);
+  box-shadow: 0 4px 16px rgba(5, 150, 105, 0.45);
 }
 
 .combo-block-pill.c-db {
-  background: rgba(147, 51, 234, 0.45);
-  border: 2px solid rgba(192, 132, 252, 0.9);
-  box-shadow: 0 2px 10px rgba(147, 51, 234, 0.35);
+  background: rgba(147, 51, 234, 0.6);
+  border: 3px solid rgba(216, 180, 254, 0.95);
+  box-shadow: 0 4px 16px rgba(147, 51, 234, 0.45);
 }
 
 .font-large .combo-block-pill {
-  font-size: 1.75rem;
-  padding: 0.38rem 1rem;
+  font-size: 2.55rem;
+  padding: 0.65rem 1.55rem;
 }
 
 .font-huge .combo-block-pill {
-  font-size: 2.15rem;
-  padding: 0.48rem 1.15rem;
+  font-size: 2.85rem;
+  padding: 0.75rem 1.75rem;
 }
 
 .combo-en {
@@ -13900,7 +13901,7 @@ body.kf-theater-body nav {
 }
 
 .slot-word {
-  font-size: 1.65rem;
+  font-size: 2.35rem;
   font-weight: 900;
   color: #fff;
   line-height: 1.25;
@@ -13909,8 +13910,12 @@ body.kf-theater-body nav {
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.7);
 }
 
+.font-huge .slot-word {
+  font-size: 2.75rem;
+}
+
 .slot-word.is-qmark {
-  font-size: 2.1rem;
+  font-size: 2.6rem;
   color: #ffffff;
   font-weight: 900;
 }
@@ -13991,15 +13996,20 @@ body.kf-theater-body nav {
 /* 🌟 후보 버튼: 회색 대신 선명한 블루 / 그린 레고 블록 */
 .cand-btn {
   flex: 1;
-  padding: 0.75rem 1.25rem;
+  padding: 0.85rem 1.45rem;
   border-radius: 14px;
-  font-size: 1.65rem;
+  font-size: 2.25rem;
   font-weight: 900;
   cursor: pointer;
   transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
   text-align: center;
   white-space: nowrap;
+}
+
+.font-huge .cand-btn {
+  font-size: 2.65rem;
+  padding: 0.95rem 1.65rem;
 }
 
 .cand-btn.cand-bb {
@@ -14129,13 +14139,17 @@ body.kf-theater-body nav {
 }
 
 .gblk-en {
-  font-size: 1.65rem;
+  font-size: 2.35rem;
   font-weight: 900;
   color: #ffffff;
   line-height: 1.25;
   text-align: center;
   word-break: keep-all;
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+}
+
+.font-huge .gblk-en {
+  font-size: 2.75rem;
 }
 
 .kf-sentence-banner {
@@ -14151,11 +14165,12 @@ body.kf-theater-body nav {
 }
 
 .kf-main-en {
-  font-size: 1.45rem;
+  font-size: 2.25rem;
   font-weight: 900;
   color: #fff;
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 0.45rem;
   text-shadow: 0 2px 6px rgba(0, 0, 0, 0.85);
 }
