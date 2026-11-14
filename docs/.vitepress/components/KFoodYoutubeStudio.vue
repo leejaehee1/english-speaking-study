@@ -12671,7 +12671,7 @@ async function playCurrentSlideSequence(): Promise<boolean> {
     return myToken === sequenceToken
   }
 
-  // 2) 아웃트로 슬라이드일 때
+  // 2) 아웃트로 슬라이드일 때 (outro-ko.mp3 안에 이미 'See you in the next video!'가 포함되어 있으므로 단 1회만 재생)
   if (slideCursor.value >= currentEpisode.value.scenes.length) {
     if (enableKoreanCoachVoice.value) {
       const ok = await playMp3Async(`/audio/kfood/${epId}-outro-ko.mp3`, 1.0)
@@ -12679,8 +12679,6 @@ async function playCurrentSlideSequence(): Promise<boolean> {
       if (myToken !== sequenceToken) return false
       if (!(await waitMs(250, myToken))) return false
     }
-    const okEn = await playMp3Async('/audio/kfood/common-see-you.mp3', 1.0)
-    if (!okEn) await speakAsync('See you in the next video!', 'en-US', 1.0)
     return myToken === sequenceToken
   }
 

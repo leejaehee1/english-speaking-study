@@ -274,7 +274,14 @@ def main():
 
     video_path = args.video
     if not video_path:
+        home_dl = os.path.expanduser("~/Downloads")
         candidates = [
+            # 1. 브라우저에서 자동 다운로드된 최신 파일 (Downloads 폴더)
+            os.path.join(home_dl, f"[SoundBlock-KCooking]-{ep_num}-{ep_id}-1080p.webm"),
+            os.path.join(home_dl, f"[SoundBlock-KCooking]-{ep_num}-{ep_id}-1080p.mp4"),
+            os.path.join(home_dl, f"[SoundBlock-KCooking]-{ep_num.replace('.', '')}-{ep_id}-1080p.webm"),
+            os.path.join(home_dl, f"[SoundBlock-KCooking]-{ep_num.replace('.', '')}-{ep_id}-1080p.mp4"),
+            # 2. recordings 폴더
             f"recordings/{ep_id}.webm",
             f"recordings/{ep_id}.mp4",
             f"recordings/{ep_num}_{ep_id}.webm",
