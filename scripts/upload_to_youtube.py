@@ -82,7 +82,8 @@ console.log(JSON.stringify(ep || null));
 
 def build_all_english_description(ep):
     """100% 완전 영어 설명문(Description) 생성 (한글 0%)"""
-    title_en = ep.get('title', 'Korean Dish')
+    raw_title = ep.get('title', 'Korean Dish')
+    title_en = raw_title.replace("How to Cook Authentic ", "").replace("How to Cook ", "").strip()
     ep_id = ep.get('id', 'kfood')
     
     intro_en = ep.get('introNarrationEn') or f"Welcome to SoundBlock K-Cooking! Today, let's learn how to cook authentic {title_en} using simple English sound blocks. Master natural English speaking rhythm while cooking delicious Korean food! Let's get cooking!"
@@ -189,16 +190,18 @@ def post_first_comment(youtube, video_id, ep):
     """100% 완전 영어 첫 댓글(Pinned First Comment) 자동 등록"""
     print(f"💬 [3/3] Posting Pinned First Comment (All-English)...")
     
+    raw_title = ep.get('title', 'Korean Food')
+    title_en = raw_title.replace("How to Cook Authentic ", "").replace("How to Cook ", "").strip()
     scenes = ep.get("scenes", [])
     step_list = []
-    for i, s in enumerate(scenes[:5]):
+    for i, s in enumerate(scenes):
         bb = s["blocks"][0]["en"]
         core = s["blocks"][1]["en"]
         step_list.append(f"• Step {i+1}: [{bb}] + [{core}]")
     steps_txt = "\n".join(step_list)
     
     comment_text = f"""🎉 Welcome to SoundBlock K-Cooking!
-Today's core cooking English sound blocks for {ep.get('title', 'Korean Food')}:
+Today's core cooking English sound blocks for {title_en}:
 
 {steps_txt}
 
