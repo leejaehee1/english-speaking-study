@@ -3319,11 +3319,11 @@ const episodes: CookingEpisode[] = [
         ],
         combos: [
           { bbEn: 'You have to', fullEn: 'You have to dissolve the soybean paste.', fullPron: '유 해브 투 디졸브 더 소이빈 페이스트', ko: 'dissolve the soybean paste 할 거예요.' },
-          { bbEn: 'You have to', fullEn: 'You have to dissolve the soybean paste.', fullPron: '유 해브 투 디졸브 더 소이빈 페이스트', ko: 'dissolve the soybean paste 해야 해요.' },
+          { bbEn: "I'm gonna", fullEn: "I'm gonna dissolve the soybean paste.", fullPron: "암거너 디졸브 더 소이빈 페이스트", ko: "dissolve the soybean paste 할 거예요." },
           { bbEn: 'Can you', fullEn: 'Can you dissolve the soybean paste?', fullPron: '캔 유 디졸브 더 소이빈 페이스트?', ko: 'dissolve the soybean paste 해 줄래요?' }
         ],
         quizPool: {
-          bbCandidates: ["You have to", "You have to", "Can you"],
+          bbCandidates: ["You have to", "I'm gonna", "Can you"],
           coreCandidates: ['dissolve the soybean paste', 'stir-fry the beef', 'pour the broth']
         },
         fullEn: "You have to dissolve the soybean paste using a fine strainer.",
@@ -3568,11 +3568,11 @@ const episodes: CookingEpisode[] = [
         ],
         combos: [
           { bbEn: 'You have to', fullEn: 'You have to arrange the ingredients.', fullPron: '유 해브 투 어레인지 디 인그리디언츠', ko: 'arrange the ingredients 할 거예요.' },
-          { bbEn: 'You have to', fullEn: 'You have to arrange the ingredients.', fullPron: '유 해브 투 어레인지 디 인그리디언츠', ko: 'arrange the ingredients 해야 해요.' },
+          { bbEn: "I'm gonna", fullEn: "I'm gonna arrange the ingredients.", fullPron: "암거너 어레인지 디 인그리디언츠", ko: "arrange the ingredients 할 거예요." },
           { bbEn: 'Can you', fullEn: 'Can you arrange the ingredients?', fullPron: '캔 유 어레인지 디 인그리디언츠?', ko: 'arrange the ingredients 해 줄래요?' }
         ],
         quizPool: {
-          bbCandidates: ["You have to", "You have to", "Can you"],
+          bbCandidates: ["You have to", "I'm gonna", "Can you"],
           coreCandidates: ['arrange the ingredients', 'stir-fry the beef', 'pour the broth']
         },
         fullEn: "You have to arrange the ingredients neatly in a shallow pot.",
@@ -4066,11 +4066,11 @@ const episodes: CookingEpisode[] = [
         ],
         combos: [
           { bbEn: 'You have to', fullEn: 'You have to squeeze out the water.', fullPron: '유 해브 투 스퀴즈 아웃 더 워터', ko: 'squeeze out the water 할 거예요.' },
-          { bbEn: 'You have to', fullEn: 'You have to squeeze out the water.', fullPron: '유 해브 투 스퀴즈 아웃 더 워터', ko: 'squeeze out the water 해야 해요.' },
+          { bbEn: "I'm gonna", fullEn: "I'm gonna squeeze out the water.", fullPron: "암거너 스퀴즈 아웃 더 워터", ko: "squeeze out the water 할 거예요." },
           { bbEn: 'Can you', fullEn: 'Can you squeeze out the water?', fullPron: '캔 유 스퀴즈 아웃 더 워터?', ko: 'squeeze out the water 해 줄래요?' }
         ],
         quizPool: {
-          bbCandidates: ["You have to", "You have to", "Can you"],
+          bbCandidates: ["You have to", "I'm gonna", "Can you"],
           coreCandidates: ['squeeze out the water', 'stir-fry the beef', 'pour the broth']
         },
         fullEn: "You have to squeeze out the water and cut into pieces.",
@@ -4315,11 +4315,11 @@ const episodes: CookingEpisode[] = [
         ],
         combos: [
           { bbEn: 'You have to', fullEn: 'You have to mix red chili paste.', fullPron: '유 해브 투 믹스 레드 칠리 페이스트', ko: 'mix red chili paste 할 거예요.' },
-          { bbEn: 'You have to', fullEn: 'You have to mix red chili paste.', fullPron: '유 해브 투 믹스 레드 칠리 페이스트', ko: 'mix red chili paste 해야 해요.' },
+          { bbEn: "I'm gonna", fullEn: "I'm gonna mix red chili paste.", fullPron: "암거너 믹스 레드 칠리 페이스트", ko: "mix red chili paste 할 거예요." },
           { bbEn: 'Can you', fullEn: 'Can you mix red chili paste?', fullPron: '캔 유 믹스 레드 칠리 페이스트?', ko: 'mix red chili paste 해 줄래요?' }
         ],
         quizPool: {
-          bbCandidates: ["You have to", "You have to", "Can you"],
+          bbCandidates: ["You have to", "I'm gonna", "Can you"],
           coreCandidates: ['mix red chili paste', 'stir-fry the beef', 'pour the broth']
         },
         fullEn: "You have to mix red chili paste with soy sauce and sugar.",
@@ -4564,11 +4564,11 @@ const episodes: CookingEpisode[] = [
         ],
         combos: [
           { bbEn: 'You have to', fullEn: 'You have to whisk soy sauce.', fullPron: '유 해브 투 위스크 소이 소스', ko: 'whisk soy sauce 할 거예요.' },
-          { bbEn: 'You have to', fullEn: 'You have to whisk soy sauce.', fullPron: '유 해브 투 위스크 소이 소스', ko: 'whisk soy sauce 해야 해요.' },
+          { bbEn: "I'm gonna", fullEn: "I'm gonna whisk soy sauce.", fullPron: "암거너 위스크 소이 소스", ko: "whisk soy sauce 할 거예요." },
           { bbEn: 'Can you', fullEn: 'Can you whisk soy sauce?', fullPron: '캔 유 위스크 소이 소스?', ko: 'whisk soy sauce 해 줄래요?' }
         ],
         quizPool: {
-          bbCandidates: ["You have to", "You have to", "Can you"],
+          bbCandidates: ["You have to", "I'm gonna", "Can you"],
           coreCandidates: ['whisk soy sauce', 'stir-fry the beef', 'pour the broth']
         },
         fullEn: "You have to whisk soy sauce with garlic and brown sugar.",
@@ -4813,11 +4813,11 @@ const episodes: CookingEpisode[] = [
         ],
         combos: [
           { bbEn: 'You have to', fullEn: 'You have to mix pancake mix.', fullPron: '유 해브 투 믹스 팬케이크 믹스', ko: 'mix pancake mix 할 거예요.' },
-          { bbEn: 'You have to', fullEn: 'You have to mix pancake mix.', fullPron: '유 해브 투 믹스 팬케이크 믹스', ko: 'mix pancake mix 해야 해요.' },
+          { bbEn: "I'm gonna", fullEn: "I'm gonna mix pancake mix.", fullPron: "암거너 믹스 팬케이크 믹스", ko: "mix pancake mix 할 거예요." },
           { bbEn: 'Can you', fullEn: 'Can you mix pancake mix?', fullPron: '캔 유 믹스 팬케이크 믹스?', ko: 'mix pancake mix 해 줄래요?' }
         ],
         quizPool: {
-          bbCandidates: ["You have to", "You have to", "Can you"],
+          bbCandidates: ["You have to", "I'm gonna", "Can you"],
           coreCandidates: ['mix pancake mix', 'stir-fry the beef', 'pour the broth']
         },
         fullEn: "You have to mix pancake mix with ice-cold water.",
@@ -5062,11 +5062,11 @@ const episodes: CookingEpisode[] = [
         ],
         combos: [
           { bbEn: 'You have to', fullEn: 'You have to grate the potatoes finely.', fullPron: '유 해브 투 그레이트 더 포테이토우스 파인리', ko: 'grate the potatoes finely 할 거예요.' },
-          { bbEn: 'You have to', fullEn: 'You have to grate the potatoes finely.', fullPron: '유 해브 투 그레이트 더 포테이토우스 파인리', ko: 'grate the potatoes finely 해야 해요.' },
+          { bbEn: "I'm gonna", fullEn: "I'm gonna grate the potatoes finely.", fullPron: "암거너 그레이트 더 포테이토우스 파인리", ko: "grate the potatoes finely 할 거예요." },
           { bbEn: 'Can you', fullEn: 'Can you grate the potatoes finely?', fullPron: '캔 유 그레이트 더 포테이토우스 파인리?', ko: 'grate the potatoes finely 해 줄래요?' }
         ],
         quizPool: {
-          bbCandidates: ["You have to", "You have to", "Can you"],
+          bbCandidates: ["You have to", "I'm gonna", "Can you"],
           coreCandidates: ['grate the potatoes finely', 'stir-fry the beef', 'pour the broth']
         },
         fullEn: "You have to grate the potatoes finely on a hand grater.",
@@ -5311,11 +5311,11 @@ const episodes: CookingEpisode[] = [
         ],
         combos: [
           { bbEn: 'You have to', fullEn: 'You have to toss with coarse sea salt.', fullPron: '유 해브 투 토스 위드 코어스 씨 솔트', ko: 'toss with coarse sea salt 할 거예요.' },
-          { bbEn: 'You have to', fullEn: 'You have to toss with coarse sea salt.', fullPron: '유 해브 투 토스 위드 코어스 씨 솔트', ko: 'toss with coarse sea salt 해야 해요.' },
+          { bbEn: "I'm gonna", fullEn: "I'm gonna toss with coarse sea salt.", fullPron: "암거너 토스 위드 코어스 씨 솔트", ko: "toss with coarse sea salt 할 거예요." },
           { bbEn: 'Can you', fullEn: 'Can you toss with coarse sea salt?', fullPron: '캔 유 토스 위드 코어스 씨 솔트?', ko: 'toss with coarse sea salt 해 줄래요?' }
         ],
         quizPool: {
-          bbCandidates: ["You have to", "You have to", "Can you"],
+          bbCandidates: ["You have to", "I'm gonna", "Can you"],
           coreCandidates: ['toss with coarse sea salt', 'stir-fry the beef', 'pour the broth']
         },
         fullEn: "You have to toss with coarse sea salt and a pinch of sugar.",
@@ -5560,11 +5560,11 @@ const episodes: CookingEpisode[] = [
         ],
         combos: [
           { bbEn: 'You have to', fullEn: 'You have to salt the radishes.', fullPron: '유 해브 투 솔트 더 래디시스', ko: 'salt the radishes 할 거예요.' },
-          { bbEn: 'You have to', fullEn: 'You have to salt the radishes.', fullPron: '유 해브 투 솔트 더 래디시스', ko: 'salt the radishes 해야 해요.' },
+          { bbEn: "I'm gonna", fullEn: "I'm gonna salt the radishes.", fullPron: "암거너 솔트 더 래디시스", ko: "salt the radishes 할 거예요." },
           { bbEn: 'Can you', fullEn: 'Can you salt the radishes?', fullPron: '캔 유 솔트 더 래디시스?', ko: 'salt the radishes 해 줄래요?' }
         ],
         quizPool: {
-          bbCandidates: ["You have to", "You have to", "Can you"],
+          bbCandidates: ["You have to", "I'm gonna", "Can you"],
           coreCandidates: ['salt the radishes', 'stir-fry the beef', 'pour the broth']
         },
         fullEn: "You have to salt the radishes with coarse salt for two hours.",
@@ -5809,11 +5809,11 @@ const episodes: CookingEpisode[] = [
         ],
         combos: [
           { bbEn: 'You have to', fullEn: 'You have to salt the cabbage lightly.', fullPron: '유 해브 투 솔트 더 캐비지 라이틀리', ko: 'salt the cabbage lightly 할 거예요.' },
-          { bbEn: 'You have to', fullEn: 'You have to salt the cabbage lightly.', fullPron: '유 해브 투 솔트 더 캐비지 라이틀리', ko: 'salt the cabbage lightly 해야 해요.' },
+          { bbEn: "I'm gonna", fullEn: "I'm gonna salt the cabbage lightly.", fullPron: "암거너 솔트 더 캐비지 라이틀리", ko: "salt the cabbage lightly 할 거예요." },
           { bbEn: 'Can you', fullEn: 'Can you salt the cabbage lightly?', fullPron: '캔 유 솔트 더 캐비지 라이틀리?', ko: 'salt the cabbage lightly 해 줄래요?' }
         ],
         quizPool: {
-          bbCandidates: ["You have to", "You have to", "Can you"],
+          bbCandidates: ["You have to", "I'm gonna", "Can you"],
           coreCandidates: ['salt the cabbage lightly', 'stir-fry the beef', 'pour the broth']
         },
         fullEn: "You have to salt the cabbage lightly for thirty minutes.",
