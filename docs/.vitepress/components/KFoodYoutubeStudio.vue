@@ -54,6 +54,9 @@
         </div>
 
         <!-- 🔴 스튜디오 원클릭 자체 비디오 녹화 (내부 사운드 직통) -->
+        <label class="kf-mic-chk" title="전편 연속 자동 녹화: 한 편 완주 시 다음 에피소드로 자동 전환하여 연속 녹화 & 자동 다운로드">
+          <input v-model="autoContinuousRecording" type="checkbox" /> 🔄 전편 연속 자동 주행
+        </label>
         <label class="kf-mic-chk" title="Optionally mix your microphone into the studio recording">
           <input v-model="includeMicInRecording" type="checkbox" /> 🎙️ My Mic
         </label>
@@ -513,6 +516,10 @@
           </p>
         </div>
         <div class="srec-options">
+          <label class="kf-rec-mic-label" style="color: #6ee7b7; font-weight: 800;">
+            <input v-model="autoContinuousRecording" type="checkbox" />
+            🔄 <strong>전편 연속 자동 주행 (Auto-Continuous)</strong>: 한 편 완주 시 자동으로 다음 에피소드로 넘어가며 EP.45까지 연속 녹화 & 자동 다운로드
+          </label>
           <label class="kf-rec-mic-label">
             <input v-model="includeMicInRecording" type="checkbox" />
             🎙️ <strong>Include Microphone Audio</strong> (Mixed with AI voice if checked)
@@ -784,12 +791,107 @@ let screenMediaRecorder: MediaRecorder | null = null
 let screenVideoChunks: Blob[] = []
 let screenRecordTimer: number | null = null
 let activeDisplayStream: MediaStream | null = null
+const autoContinuousRecording = ref(true) // 🔄 전편 연속 자동 녹화 (기본값 ON)
+let activeRecordStream: MediaStream | null = null
+let activeRecordOptions: MediaRecorderOptions = {}
+let activeSelectedMime = ''
 
 const formatRecordTime = computed(() => {
   const m = Math.floor(screenRecordSeconds.value / 60)
   const s = screenRecordSeconds.value % 60
   return `${m < 10 ? '0' + m : m}:${s < 10 ? '0' + s : s}`
 })
+
+function handleScreenMediaRecorderStop() {
+  const ext = activeSelectedMime.includes('mp4') ? 'mp4' : 'webm'
+  const blob = new Blob(screenVideoChunks, { type: activeSelectedMime || 'video/webm' })
+  const url = URL.createObjectURL(blob)
+
+  // 파일명 자동 생성: [SoundBlock-KCooking]-EP.06-korean-pancake-1080p.mp4
+  const filename = `[SoundBlock-KCooking]-${currentEpisode.value.epNumber}-${currentEpisode.value.id}-1080p.${ext}`
+
+  // 자동 다운로드 트리거
+  const a = document.createElement('a')
+  a.href = url
+  a.download = filename
+  document.body.appendChild(a)
+  a.click()
+  document.body.removeChild(a)
+
+  if (screenRecordTimer !== null) {
+    window.clearInterval(screenRecordTimer)
+    screenRecordTimer = null
+  }
+  isScreenRecording.value = false
+
+  // 🔄 연속 녹화 모드일 때: 스트림 유지하고 자동으로 다음 에피소드로 전환하여 연속 녹화!
+  if (autoContinuousRecording.value && activeDisplayStream) {
+    const curIdx = episodes.findIndex((e) => e.id === currentEpId.value)
+    if (curIdx >= 0 && curIdx < episodes.length - 1) {
+      const nextEp = episodes[curIdx + 1]
+      currentEpId.value = nextEp.id
+      slideCursor.value = -1
+
+      // 2.5초 휴식 후 다음 에피소드 자동 녹화 & 방송 출발!
+      setTimeout(async () => {
+        await startNextEpisodeBatchRecording()
+      }, 2500)
+      return
+    }
+  }
+
+  // 단일 녹화 종료 시 또는 마지막 에피소드(EP.45) 완주 시에만 스트림 및 믹서 정리 & 풀스크린 해제
+  if (activeDisplayStream) {
+    activeDisplayStream.getTracks().forEach((track) => track.stop())
+    activeDisplayStream = null
+  }
+  if (activeMicStream) {
+    activeMicStream.getTracks().forEach((track) => track.stop())
+    activeMicStream = null
+  }
+  if (mixerAudioCtx) {
+    mixerAudioCtx.close().catch(() => {})
+    mixerAudioCtx = null
+  }
+  activeRecordStream = null
+  exitFullscreen().catch(() => {})
+}
+
+async function startNextEpisodeBatchRecording() {
+  if (!activeDisplayStream || !activeRecordStream) return
+  screenVideoChunks = []
+  screenMediaRecorder = new MediaRecorder(activeRecordStream, activeRecordOptions)
+  screenMediaRecorder.ondataavailable = (e) => {
+    if (e.data && e.data.size > 0) {
+      screenVideoChunks.push(e.data)
+    }
+  }
+  screenMediaRecorder.onstop = handleScreenMediaRecorderStop
+
+  // 3초 카운트다운
+  countdownToRecord.value = 3
+  playTransitionChime()
+  for (let c = 3; c >= 1; c--) {
+    countdownToRecord.value = c
+    playTone(440 + (3 - c) * 70, 120, 'sine', 0.12, 0)
+    await new Promise((resolve) => setTimeout(resolve, 950))
+  }
+  countdownToRecord.value = null
+  await new Promise((resolve) => setTimeout(resolve, 800))
+
+  playSuccessBell()
+  screenMediaRecorder.start(1000)
+  isScreenRecording.value = true
+  screenRecordSeconds.value = 0
+  screenRecordTimer = window.setInterval(() => {
+    screenRecordSeconds.value++
+  }, 1000)
+
+  slideCursor.value = -1
+  if (!isAutoPlaying.value) {
+    toggleAutoShow()
+  }
+}
 
 async function startScreenRecording() {
   if (typeof navigator === 'undefined' || !navigator.mediaDevices?.getDisplayMedia) {
@@ -903,6 +1005,10 @@ async function startScreenRecording() {
       ? { mimeType: selectedMime, videoBitsPerSecond: 8000000 }
       : { videoBitsPerSecond: 8000000 }
 
+    activeRecordStream = recordStream
+    activeRecordOptions = options
+    activeSelectedMime = selectedMime
+
     screenMediaRecorder = new MediaRecorder(recordStream, options)
 
     screenMediaRecorder.ondataavailable = (e) => {
@@ -911,43 +1017,7 @@ async function startScreenRecording() {
       }
     }
 
-    screenMediaRecorder.onstop = () => {
-      const ext = selectedMime.includes('mp4') ? 'mp4' : 'webm'
-      const blob = new Blob(screenVideoChunks, { type: selectedMime || 'video/webm' })
-      const url = URL.createObjectURL(blob)
-
-      // 파일명 자동 생성: [SoundBlock-KCooking]-EP01-Kimchi-Stew-1080p.mp4
-      const filename = `[SoundBlock-KCooking]-${currentEpisode.value.epNumber}-${currentEpisode.value.id}-1080p.${ext}`
-
-      // 자동 다운로드 트리거
-      const a = document.createElement('a')
-      a.href = url
-      a.download = filename
-      document.body.appendChild(a)
-      a.click()
-      document.body.removeChild(a)
-
-      // 스트림 및 믹서 정리
-      if (activeDisplayStream) {
-        activeDisplayStream.getTracks().forEach((track) => track.stop())
-        activeDisplayStream = null
-      }
-      if (activeMicStream) {
-        activeMicStream.getTracks().forEach((track) => track.stop())
-        activeMicStream = null
-      }
-      if (mixerAudioCtx) {
-        mixerAudioCtx.close().catch(() => {})
-        mixerAudioCtx = null
-      }
-      if (screenRecordTimer !== null) {
-        window.clearInterval(screenRecordTimer)
-        screenRecordTimer = null
-      }
-      isScreenRecording.value = false
-      // 녹화 파일 다운로드 완료 후 전체 화면 해제하여 편리하게 원래 화면으로 복귀
-      exitFullscreen().catch(() => {})
-    }
+    screenMediaRecorder.onstop = handleScreenMediaRecorderStop
 
     displayStream.getVideoTracks()[0].onended = () => {
       if (isScreenRecording.value) {
@@ -12784,8 +12854,8 @@ async function toggleAutoShow() {
     await new Promise((resolve) => setTimeout(resolve, 1800))
     if (isScreenRecording.value) {
       stopScreenRecording()
-      // 전체화면 모드였다면 자연스럽게 복원
-      if (typeof document !== 'undefined' && document.fullscreenElement) {
+      // 전체화면 모드였다면 자연스럽게 복원 (단, 전편 연속 녹화 중일 때는 풀스크린 유지)
+      if (!autoContinuousRecording.value && typeof document !== 'undefined' && document.fullscreenElement) {
         document.exitFullscreen().catch(() => {})
       }
     }
