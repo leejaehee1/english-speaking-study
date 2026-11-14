@@ -2,3 +2,6 @@ node_modules/
 docs/.vitepress/cache/
 docs/.vitepress/dist/
 .DS_Store
+scripts/client_secret*.json
+scripts/token.json
+recordings/
