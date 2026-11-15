@@ -5,3 +5,5 @@ docs/.vitepress/dist/
 scripts/client_secret*.json
 scripts/token.json
 recordings/
+docs/public/audio/kfood/
+docs/public/images/kfood/
