@@ -228,6 +228,28 @@ Don't forget to Like & Subscribe for more delicious SoundBlock K-Cooking! 🍲�
     except Exception as e:
         print(f"⚠️ First comment note: {e}")
 
+def add_to_season2_playlist(youtube, video_id, ep_num):
+    """시즌 2 공식 재생목록(PLceAIvjztbo0)에 자동 추가"""
+    playlist_id = "PLceAIvjztbo0"
+    print(f"📑 [4/4] Adding to Season 2 Official Playlist ({playlist_id})...")
+    try:
+        request = youtube.playlistItems().insert(
+            part="snippet",
+            body={
+                "snippet": {
+                    "playlistId": playlist_id,
+                    "resourceId": {
+                        "kind": "youtube#video",
+                        "videoId": video_id
+                    }
+                }
+            }
+        )
+        response = request.execute()
+        print(f"✅ Successfully added to Season 2 Playlist! (Item ID: {response.get('id')})")
+    except Exception as e:
+        print(f"⚠️ Playlist addition note: {e}")
+
 def update_existing_video_description(youtube, video_id, ep):
     """이미 업로드된 동영상의 설명을 100% All-English로 즉시 수정"""
     print(f"🔄 Updating YouTube video {video_id} description to 100% English...")
@@ -300,8 +322,8 @@ def main():
         sys.exit(1)
 
     title = ep.get("ytTitle") or f"How to Cook Authentic {ep.get('title')} in Easy English | SoundBlock K-Cooking {ep_num}"
-    if len(title) > 95:
-        title = title[:95].strip()
+    if len(title) > 100:
+        title = title[:100].strip()
     description = build_all_english_description(ep)
     tags = build_all_english_tags(ep)
     thumb_path = os.path.join("docs/public", ep.get("thumbnailImage", "").lstrip("/"))
@@ -315,6 +337,9 @@ def main():
 
     # 3. 100% 영어 첫 댓글 등록
     post_first_comment(youtube, video_id, ep)
+
+    # 4. 시즌 2 공식 재생목록에 자동 추가 (EP.46 ~ EP.60)
+    add_to_season2_playlist(youtube, video_id, ep_num)
 
     print(f"\n🎉 [{ep_num}] 100% All-English Upload Complete!")
 
