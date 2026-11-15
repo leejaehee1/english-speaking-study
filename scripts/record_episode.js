@@ -1,17 +1,14 @@
 /**
- * SoundBlock K-Cooking 무인 자동 녹화 스크립트 (Playwright 기반)
- * 
- * 사용법:
- *   1. npm i -D playwright
- *   2. npx playwright install chromium
- *   3. node scripts/record_episode.js [epId]
- *      예: node scripts/record_episode.js samgyetang
- *          node scripts/record_episode.js all
+ * SoundBlock K-Cooking 무인 자동 녹화 스크립트 (Playwright 기반, ESM)
  */
 
-const { chromium } = require('playwright');
-const fs = require('fs');
-const path = require('path');
+import { chromium } from 'playwright';
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const OUTPUT_DIR = path.resolve(__dirname, '../recordings');
 if (!fs.existsSync(OUTPUT_DIR)) {
@@ -24,10 +21,11 @@ async function recordEpisode(epId = 'kimchi-stew') {
   console.log(`========================================`);
 
   const browser = await chromium.launch({
-    headless: false, // 브라우저 창 렌더링 (백그라운드 headless: true 가능)
+    headless: true, // 무인 백그라운드 녹화
     args: [
       '--autoplay-policy=no-user-gesture-required',
-      '--start-maximized',
+      '--no-sandbox',
+      '--disable-setuid-sandbox',
       '--window-size=1920,1080'
     ]
   });
@@ -42,71 +40,118 @@ async function recordEpisode(epId = 'kimchi-stew') {
 
   const page = await context.newPage();
 
-  // 1) 로컬 개발 서버 또는 배포 URL 접속
+  // 1) 로컬 개발 서버 접속
   const targetUrl = `http://localhost:5173/english-speaking-study/kfood/`;
   console.log(`🌐 페이지 접속 중: ${targetUrl}`);
   await page.goto(targetUrl, { waitUntil: 'networkidle' });
 
-  // 2) 에피소드 선택 (드롭다운 변경)
+  // 2) 에피소드 선택 (버튼 클릭)
   console.log(`🎯 에피소드 선택 중: ${epId}`);
-  await page.selectOption('.kf-ep-select', epId);
+  const selected = await page.evaluate((targetId) => {
+    // 모든 .kf-ep-btn 버튼 중 현재 에피소드에 해당하는 버튼 클릭
+    const btns = Array.from(document.querySelectorAll('.kf-ep-btn'));
+    // KFoodYoutubeStudio.vue 의 episodes 목록 중 id 매칭
+    for (const b of btns) {
+      if (b.__vnode?.key === targetId || b.innerText.toLowerCase().includes(targetId.replace('-', ' '))) {
+        b.click();
+        return true;
+      }
+    }
+    // 첫 번째 에피소드(kimchi-stew)인 경우 기본 선택되어 있음
+    if (btns.length > 0) {
+      const idxMap = {
+        'kimchi-stew': 0,
+        'kimchi-fried-rice': 1,
+        'korean-ramen': 2,
+        'chuncheon-dakgalbi': 3,
+        'tteokbokki': 4
+      };
+      if (targetId in idxMap) {
+        btns[idxMap[targetId]].click();
+        return true;
+      }
+    }
+    return false;
+  }, epId);
+
   await page.waitForTimeout(1000);
 
-  // 3) 전체 화면 모드 진입 (웹 풀스크린 토글)
-  const fullscreenBtn = await page.$('.btn-rec-opt:has-text("전체 화면"), .btn-fs-toggle');
-  if (fullscreenBtn) {
-    await fullscreenBtn.click();
+  // 3) 전체 화면 모드 진입
+  console.log(`🖥️ 1080p 풀스크린 스튜디오 모드 전환...`);
+  const fsBtn = await page.$('.kf-fullscreen-btn');
+  if (fsBtn) {
+    await fsBtn.click();
     await page.waitForTimeout(500);
   }
 
-  // 4) 자동 쇼 (Auto Show) 재생 시작
-  console.log(`▶️ 자동 재생(Auto Show) 시작...`);
-  const playBtn = await page.$('.btn-control.btn-play, button:has-text("자동 재생")');
-  if (playBtn) {
-    await playBtn.click();
+  // 4) 자동 쇼 (Auto Broadcast) 시작
+  console.log(`▶️ 자동 쇼(Full Auto Broadcast) 시작...`);
+  const broadcastBtn = await page.$('.kf-btn-broadcast, .rem-primary');
+  if (broadcastBtn) {
+    await broadcastBtn.click();
+  } else {
+    // evaluate fallback
+    await page.evaluate(() => {
+      const btn = document.querySelector('.kf-btn-broadcast') || document.querySelector('.rem-primary');
+      if (btn) btn.click();
+    });
   }
 
-  // 5) 에피소드 완주 대기 (약 3분~4분, 아웃트로 완료 시까지)
-  // slideCursor가 마지막 씬을 지나 완료될 때까지 대기
-  console.log(`⏳ 녹화 진행 중... (약 3~4분 소요)`);
+  // 5) 에피소드 완주 대기 (약 3분~4분)
+  console.log(`⏳ 녹화 진행 중... (약 3분 30초 소요 예정)`);
   
-  // 아웃트로 슬라이드가 끝날 때까지 주기적으로 체크 (최대 5분)
   const maxWaitMs = 5 * 60 * 1000;
   const startTime = Date.now();
-  
+  let completed = false;
+
   while (Date.now() - startTime < maxWaitMs) {
-    await page.waitForTimeout(3000);
-    const isOutroDone = await page.evaluate(() => {
-      // 컴포넌트 내부 상태 확인 또는 완료 텍스트 감지
-      const outroText = document.body.innerText;
-      return outroText.includes('Mission complete') || outroText.includes('See you in the next video');
+    await page.waitForTimeout(4000);
+    const status = await page.evaluate(() => {
+      const text = document.body.innerText;
+      const isOutro = text.includes('Mission complete') || text.includes('See you in the next video') || text.includes('미션 완료');
+      // 현재 진행 씬 확인
+      const stepHeader = document.querySelector('.kf-step-header')?.innerText || '';
+      return { isOutro, stepHeader };
     });
 
-    if (isOutroDone) {
-      console.log(`🎉 에피소드 완주 감지! 5초 추가 버퍼 후 녹화 종료`);
-      await page.waitForTimeout(5000);
+    if (status.stepHeader) {
+      process.stdout.write(`\r   [진행 현황] ${status.stepHeader.slice(0, 45)}...`);
+    }
+
+    if (status.isOutro) {
+      console.log(`\n🎉 에피소드 아웃트로 완주 감지! 6초 버퍼 후 녹화 종료`);
+      await page.waitForTimeout(6000);
+      completed = true;
       break;
     }
   }
 
-  // 6) 컨텍스트 및 브라우저 닫기 (비디오 파일 저장)
+  if (!completed) {
+    console.log(`\n⚠️ 최대 대기 시간 초과로 녹화를 마무리합니다.`);
+  }
+
+  // 6) 컨텍스트 및 브라우저 닫기 (비디오 인코딩 완료 대기)
   await context.close();
   await browser.close();
 
-  // 방금 저장된 비디오 파일명 조회
+  // 저장된 비디오 파일명 확인 및 rename
   const videoFiles = fs.readdirSync(OUTPUT_DIR).filter(f => f.endsWith('.webm'));
   videoFiles.sort((a, b) => fs.statSync(path.join(OUTPUT_DIR, b)).mtimeMs - fs.statSync(path.join(OUTPUT_DIR, a)).mtimeMs);
 
   if (videoFiles.length > 0) {
     const latestVideo = path.join(OUTPUT_DIR, videoFiles[0]);
     const finalName = path.join(OUTPUT_DIR, `${epId}.webm`);
-    fs.renameSync(latestVideo, finalName);
-    console.log(`✅ 비디오 파일 저장 완료: ${finalName}`);
+    if (latestVideo !== finalName) {
+      if (fs.existsSync(finalName)) fs.unlinkSync(finalName);
+      fs.renameSync(latestVideo, finalName);
+    }
+    const fileSizeMb = (fs.statSync(finalName).size / (1024 * 1024)).toFixed(2);
+    console.log(`✅ 비디오 파일 저장 완료: ${finalName} (${fileSizeMb} MB)`);
   }
 }
 
 const targetEp = process.argv[2] || 'kimchi-stew';
 recordEpisode(targetEp).catch(err => {
-  console.error('❌ 녹화 오류:', err);
+  console.error('\n❌ 녹화 오류:', err);
   process.exit(1);
 });

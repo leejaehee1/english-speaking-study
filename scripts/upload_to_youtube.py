@@ -300,6 +300,8 @@ def main():
         sys.exit(1)
 
     title = ep.get("ytTitle") or f"How to Cook Authentic {ep.get('title')} in Easy English | SoundBlock K-Cooking {ep_num}"
+    if len(title) > 95:
+        title = title[:95].strip()
     description = build_all_english_description(ep)
     tags = build_all_english_tags(ep)
     thumb_path = os.path.join("docs/public", ep.get("thumbnailImage", "").lstrip("/"))
