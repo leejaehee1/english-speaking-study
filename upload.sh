@@ -3,7 +3,11 @@
 set -e
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-PROJECT_ROOT="$(dirname "$SCRIPT_DIR")"
+if [ "$(basename "$SCRIPT_DIR")" = "scripts" ]; then
+  PROJECT_ROOT="$(dirname "$SCRIPT_DIR")"
+else
+  PROJECT_ROOT="$SCRIPT_DIR"
+fi
 cd "$PROJECT_ROOT"
 
 export PYTHONPATH="."
