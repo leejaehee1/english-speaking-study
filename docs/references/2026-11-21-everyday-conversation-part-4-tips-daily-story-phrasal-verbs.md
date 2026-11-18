@@ -3,7 +3,7 @@ listen: true
 listeningLang: en-US
 ---
 
-# 2026-11-18 · 녹음 숙제 · Everyday English Podcast (Part 4/4) · Tips, Story & Phrasal Verbs
+# 2026-11-21 (토) · 녹음 숙제 · Everyday English Podcast (Part 4/4 · 완결) · Tips, Story & Phrasal Verbs
 
 **자연스러운 일상 영어 팟캐스트 녹음 대본 (Part 4/4 · 완결)**
 
@@ -109,4 +109,4 @@ listeningLang: en-US
 
 ---
 
-[이전 파트 (Part 3/4)](./2026-11-18-everyday-conversation-part-3-hobbies-plans-travel.md) · [녹음 숙제 목록](../calendar.md)
+[이전 파트 (11월 20일 Part 3/4)](./2026-11-20-everyday-conversation-part-3-hobbies-plans-travel.md) · [녹음 숙제 목록](../calendar.md)

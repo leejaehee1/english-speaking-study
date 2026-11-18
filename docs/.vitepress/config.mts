@@ -118,10 +118,10 @@ export default defineConfig({
         { text: '10월 12일', link: '/daily/2026-10-12' }
       ]) },
       { text: '녹음 숙제', collapsed: true, items: groupByRecentAndWeek([
+        { text: '11월 21일 · Everyday Podcast (4/4) Tips, Story & Phrasal Verbs', link: '/references/2026-11-21-everyday-conversation-part-4-tips-daily-story-phrasal-verbs' },
+        { text: '11월 20일 · Everyday Podcast (3/4) Hobbies, Plans & Travel', link: '/references/2026-11-20-everyday-conversation-part-3-hobbies-plans-travel' },
+        { text: '11월 19일 · Everyday Podcast (2/4) Restaurant, Weekend & Health', link: '/references/2026-11-19-everyday-conversation-part-2-restaurant-weekend-health' },
         { text: '11월 18일 · Everyday Podcast (1/4) Morning, Market & Work', link: '/references/2026-11-18-everyday-conversation-part-1-morning-market-work' },
-        { text: '11월 18일 · Everyday Podcast (2/4) Restaurant, Weekend & Health', link: '/references/2026-11-18-everyday-conversation-part-2-restaurant-weekend-health' },
-        { text: '11월 18일 · Everyday Podcast (3/4) Hobbies, Plans & Travel', link: '/references/2026-11-18-everyday-conversation-part-3-hobbies-plans-travel' },
-        { text: '11월 18일 · Everyday Podcast (4/4) Tips, Story & Phrasal Verbs', link: '/references/2026-11-18-everyday-conversation-part-4-tips-daily-story-phrasal-verbs' },
         { text: '11월 8일 · Cooking in English (2/2) Soup & Idioms', link: '/references/2026-11-08-cooking-in-english-soup-and-idioms-reading' },
         { text: '11월 7일 · Cooking in English (1/2) Prep & Verbs', link: '/references/2026-11-07-cooking-in-english-prep-and-verbs-reading' },
         { text: '11월 6일 · Day 7 (5/5) Food Culture & Closing', link: '/references/2026-11-06-food-culture-and-closing-reading' },

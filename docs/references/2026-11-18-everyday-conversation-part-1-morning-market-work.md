@@ -3,7 +3,7 @@ listen: true
 listeningLang: en-US
 ---
 
-# 2026-11-18 · 녹음 숙제 · Everyday English Podcast (Part 1/4) · Morning, Supermarket & Work
+# 2026-11-18 (수) · 녹음 숙제 · Everyday English Podcast (Part 1/4) · Morning, Supermarket & Work
 
 **자연스러운 일상 영어 팟캐스트 녹음 대본 (Part 1/4)**
 
@@ -270,4 +270,4 @@ David와 Alice가 주고받는 100% 실전 자연스러운 일상 회화 대본�
 
 ---
 
-[녹음 숙제 목록](../calendar.md) · [다음 파트 (Part 2/4)](./2026-11-18-everyday-conversation-part-2-restaurant-weekend-health.md)
+[녹음 숙제 목록](../calendar.md) · [다음 파트 (11월 19일 Part 2/4)](./2026-11-19-everyday-conversation-part-2-restaurant-weekend-health.md)

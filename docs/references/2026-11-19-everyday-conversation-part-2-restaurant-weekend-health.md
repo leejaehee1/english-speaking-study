@@ -3,7 +3,7 @@ listen: true
 listeningLang: en-US
 ---
 
-# 2026-11-18 · 녹음 숙제 · Everyday English Podcast (Part 2/4) · Restaurant, Weekend & Health
+# 2026-11-19 (목) · 녹음 숙제 · Everyday English Podcast (Part 2/4) · Restaurant, Weekend & Health
 
 **자연스러운 일상 영어 팟캐스트 녹음 대본 (Part 2/4)**
 
@@ -184,4 +184,4 @@ David와 Alice가 레스토랑 주문, 주말 휴식과 집안일, 병원 진료
 
 ---
 
-[이전 파트 (Part 1/4)](./2026-11-18-everyday-conversation-part-1-morning-market-work.md) · [녹음 숙제 목록](../calendar.md) · [다음 파트 (Part 3/4)](./2026-11-18-everyday-conversation-part-3-hobbies-plans-travel.md)
+[이전 파트 (11월 18일 Part 1/4)](./2026-11-18-everyday-conversation-part-1-morning-market-work.md) · [녹음 숙제 목록](../calendar.md) · [다음 파트 (11월 20일 Part 3/4)](./2026-11-20-everyday-conversation-part-3-hobbies-plans-travel.md)
