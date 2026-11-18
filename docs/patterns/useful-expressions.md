@@ -10,6 +10,8 @@ listen: true
 
 [Feelings & Emotions · 감정 표현](./feelings-and-emotions.md) — 긍정·부정 감정 형용사, 핵심 20개 표현과 회화 연습
 
+[부정적인 형용사 모음집 60선](./negative-adjectives.md) — 성격·감정·상황·환경별 부정적 형용사 60가지와 실전 예문
+
 [Someone I Admire · 존경하는 사람](./someone-i-admire.md) — 존경하는 이유와 나에게 준 영향 말하기
 
 ## 인사와 근황
@@ -99,7 +101,7 @@ listen: true
 
 **I’m going through a tough time, but I can get through this.** — 지금 힘든 시기를 겪고 있지만, 이겨낼 수 있어요.
 
-**go through**는 겪는 경험을, **get through**는 어려움을 견디고 넘기는 것을 나타냅니다.
+**go through** 는 겪는 경험을, **get through** 는 어려움을 견디고 넘기는 것을 나타냅니다.
 
 [내 영작 5문장과 첨삭](../writing/2026-10-13-go-through.md)
 
@@ -112,7 +114,7 @@ listen: true
 - **One person couldn’t make it today.** — 오늘 한 명이 참석하지 못했어요.
 - **The room was equipped with a TV.** — 그 방에는 TV가 갖춰져 있었어요.
 
-버스에서 내리다는 **get off the bus**, 참석하지 못하다는 **couldn’t make it**으로 익힙니다.
+버스에서 내리다는 **get off the bus**, 참석하지 못하다는 **couldn’t make it** 으로 익힙니다.
 
 [일기 원문과 교정본](../diary/2026-10-13.md) · [KEEP 패턴](./keep.md)
 

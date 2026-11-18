@@ -81,6 +81,8 @@
 
 [Feelings & Emotions · 감정 형용사와 Chunk](./patterns/feelings-and-emotions.md) — 감정 변화·feel/get/make·핵심 20개 표현·상황별 회화
 
+[부정적인 형용사 모음집 60선](./patterns/negative-adjectives.md) — 성격·심리·상황·환경·음식별 부정적 형용사 60가지와 실전 예문
+
 ## 존경하는 사람
 
 [Someone I Admire · 존경하는 사람](./patterns/someone-i-admire.md) — 성품 형용사·핵심 20개 표현·상황별 회화·1분 말하기
