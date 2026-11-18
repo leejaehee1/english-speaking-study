@@ -92,15 +92,11 @@ export default defineConfig({
     nav: [
       { text: '홈', link: '/' },
       { text: '학습 달력', link: '/calendar' },
-      { text: '🎬 K-Food 유튜브 스튜디오', link: '/kfood/' },
       { text: '문장에서 단어 추출 · 발음 연습', link: '/pronunciation/word-practice' },
       { text: '오늘의 기록', link: '/daily/2026-11-11' },
       { text: 'JoyTalk', link: 'https://projects-joytalk.vercel.app/', target: '_blank', rel: 'noopener noreferrer' }
     ],
     sidebar: [
-      { text: '🎬 K-Food 영어 유튜브 스튜디오', collapsed: false, items: [
-        { text: '한식 소리 블록 스튜디오 (김치찌개·볶음밥·라면·불고기)', link: '/kfood/' }
-      ] },
       { text: '학습 가이드', collapsed: true, items: [
         { text: '영어 수준과 학습 시간', link: '/guides/cefr-levels' },
         { text: '외국어 학습법 · 소리와 표현 쌓기', link: '/guides/language-learning-method' },
@@ -151,6 +147,7 @@ export default defineConfig({
         { text: '10월 12일 · 아침 대화', link: '/references/2026-10-12-morning-conversation' }
       ]) },
       { text: '영어 일기', collapsed: true, items: groupByRecentAndWeek([
+        { text: '11월 17일 · 험난했던 AI 대학원 시험과 주말 특강 기획', link: '/diary/2026-11-17' },
         { text: '11월 9일 · 겨울옷 꺼내 입기와 음식 퀴즈·바이브 UI', link: '/diary/2026-11-09' },
         { text: '11월 8일 · 당근 모임 동생과의 오랜만의 만남과 배려', link: '/diary/2026-11-08' },
         { text: '11월 6일 · 바이브 코딩 기획서와 음식 회화 목표', link: '/diary/2026-11-06' },
