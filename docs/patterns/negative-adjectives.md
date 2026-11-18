@@ -3,9 +3,9 @@ listen: true
 listeningLang: en-US
 ---
 
-# 부정적인 형용사 모음집 · Negative Adjectives (상황별 60선)
+# 부정적인 형용사 모음집 · Negative Adjectives (상황별 60선 + 반전 예외 & 구어체)
 
-일상 대화나 일기, 감정 표현에서 무조건 `bad`, `hate`, `not good`만 쓰지 않고, **상황과 사람, 감정의 결을 정확하게 살려주는 실전 부정적 형용사 60가지** 를 카테고리별로 완벽 정리했습니다.
+일상 대화나 일기, 감정 표현에서 무조건 `bad`, `hate`, `not good`만 쓰지 않고, **상황과 사람, 감정의 결을 정확하게 살려주는 실전 부정적 형용사 60가지와 헷갈리기 쉬운 반전 예외 단어(terrific, hilarious, ridiculous, suck)** 를 완벽 정리했습니다.
 
 굵게 표시된 영어 단어와 실전 문장을 클릭하면 원어민 발음으로 바로 들어볼 수 있습니다.
 
@@ -126,6 +126,65 @@ listeningLang: en-US
 - **It was a total disaster.** — 완전히 폭망이었어.
 - **I'm feeling a bit under the weather.** — 오늘 컨디션이 좀 찌뿌둥해.
 - **It's a bit tricky.** — 그게 조금 다루기 까다로워.
+
+---
+
+## 6. 반전 주의! 긍정적인 의미의 예외 단어 & 구어체 필수 표현 (Special Note)
+
+부정적인 어감이나 외형 때문에 오해하기 쉽지만 **실제로는 100% 긍정(극찬)** 으로 쓰이거나, 반대로 **부정과 긍정을 넘나드는 반전 단어**, 그리고 원어민이 일상에서 입에 달고 사는 **초빈출 구어체 표현** 을 정리했습니다.
+
+### ① 🌟 [예외] 겉모습은 부정적인데 실제로는 100% 극찬인 단어!
+
+#### 1. **terrific** — 아주 멋진, 훌륭한, 대단한 (`wonderful`, `fantastic`)
+> [!IMPORTANT]
+> **terrible vs terrific 주의!**
+> - **terrible** (`/ˈterəbl/`): **끔찍한, 형편없는** (100% 부정)
+> - **terrific** (`/təˈrɪfɪk/`): **아주 훌륭한, 멋진, 대단한** (100% 긍정 극찬!)
+>
+> 어원이 `terror`(공포)에서 출발하여 형태가 매우 비슷하지만, 현대 영어에서 **`terrific`은 완전히 '최고다'라는 찬사** 로 쓰입니다.
+
+- **You did a terrific job on the presentation!** — 너 이번 발표 진짜 대단하게 잘했어!
+- **We had a terrific time during our trip to Vancouver.** — 우리 밴쿠버 여행에서 정말 환상적인 시간을 보냈어.
+- **I have some terrific news to share with you.** — 너한테 들려줄 아주 멋진 소식이 있어.
+
+---
+
+#### 2. **hilarious** — 배꼽 잡게 웃긴, 빵 터지는 (`extremely funny`)
+> [!NOTE]
+> 어감이 다소 거칠거나 비웃는 것처럼 오해하기 쉬우나, **"너무 웃겨서 눈물이 날 정도다, 미치도록 웃기다"** 라는 의미의 100% 긍정적인 찬사입니다.
+
+- **His impression of the teacher was absolutely hilarious.** — 그가 선생님 흉내 낸 거 진짜 배꼽 빠지게 웃겼어!
+- **That comedy show was so hilarious that my stomach hurt.** — 그 코미디 쇼 너무 웃겨서 배가 다 아팠어.
+- **She told us a hilarious story about her first day at work.** — 그녀는 첫 출근 날 있었던 빵 터지는 일화를 들려주었어요.
+
+---
+
+### ② 🔄 [반전] 상황에 따라 '어처구니없음(부정)'과 '미친 대박(긍정)'을 넘나드는 단어
+
+#### 3. **ridiculous** — 말도 안 되는, 터무니없는 (황당함 ↔ 미친 실력)
+> 한국어의 **"말도 안 돼!", "진짜 미쳤다!"** 와 쓰임새가 100% 일치합니다. 부정적인 상황에서는 '어처구니없고 터무니없다'는 뜻이고, 칭찬할 때는 '믿기 힘들 정도로 대단하다'는 뜻으로 쓰입니다.
+
+- **[기본·부정] 터무니없고 어처구니없을 때:**
+  - **Forty dollars for a single sandwich? That's ridiculous!** — 샌드위치 하나에 40달러라고? 말도 안 돼!
+  - **Stop making such ridiculous excuses.** — 그렇게 황당하고 말도 안 되는 핑계 좀 그만 대.
+- **[반전·극찬] 믿기 힘들 만큼 엄청나게 멋질 때 (미쳤다!):**
+  - **His guitar skills are just ridiculous.** — 그 사람 기타 실력은 진짜 미쳤어 (말도 안 되게 쩔어).
+  - **The view from the rooftop was ridiculous!** — 옥상에서 본 야경은 진짜 말도 안 되게 끝내줬어!
+
+---
+
+### ③ 💥 [구어체] 원어민이 '진짜 별로다·최악이다' 할 때 매일 쓰는 표현
+
+#### 4. **suck (형용사형: sucky)** — 구리다, 엉망이다, 엿 같다, 진짜 별로다
+> [!CAUTION]
+> 격식 있는 자리(비즈니스 이메일 등)에서는 피해야 하지만, **캐주얼한 일상 회화, 친구 사이, 미드/영화에서는 하루에도 수십 번씩 나오는 대표적인 구어체 표현** 입니다.
+
+- **That sucks!** — 그거 진짜 안됐다! / 진짜 별로다! (상대방의 안 좋은 소식을 들었을 때 가장 많이 쓰는 리액션)
+- **This traffic really sucks.** — 이 교통체증 진짜 엿 같네 / 최악이네.
+- **I had a really sucky day at work.** — 오늘 회사에서 진짜 꿀꿀하고 기분 별로인 하루를 보냈어.
+- **I suck at ~** — 나 ~ 진짜 더럽게 못해 / 소질이 없어 (겸손하거나 자조적인 표현):
+  - **I suck at cooking, but I'm trying to learn.** — 나 요리 진짜 젬병인데, 배우려고 노력 중이야.
+  - **Don't worry, I suck at sports, too.** — 걱정 마, 나도 운동 진짜 못해.
 
 ---
 
