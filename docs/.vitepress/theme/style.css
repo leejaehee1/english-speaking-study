@@ -10,3 +10,87 @@
 .VPSidebarItem.level-1.collapsible > .item:hover > .text {
   color: var(--vp-c-brand-2);
 }
+
+/* ========================================================
+   단어 테스트 모드 (Word Test Mode) 스타일
+   ======================================================== */
+.word-test-active .word-test-target.is-hidden {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  min-width: 86px;
+  min-height: 28px;
+  padding: 3px 12px !important;
+  margin: 1px 0;
+  border-radius: 8px;
+  border: 1.5px dashed var(--vp-c-brand-1, #3b82f6) !important;
+  background-color: var(--vp-c-brand-soft, rgba(59, 130, 246, 0.08)) !important;
+  color: transparent !important;
+  user-select: none !important;
+  cursor: pointer !important;
+  vertical-align: middle;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  box-sizing: border-box;
+}
+
+.word-test-active .word-test-target.is-hidden::after {
+  content: '❓ 클릭하여 확인';
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--vp-c-brand-1, #3b82f6);
+  font-size: 12px;
+  font-weight: 600;
+  pointer-events: none;
+  white-space: nowrap;
+  letter-spacing: -0.3px;
+}
+
+.word-test-active .word-test-target.is-hidden:hover {
+  background-color: var(--vp-c-brand-1, #3b82f6) !important;
+  border-style: solid !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.25);
+}
+
+.word-test-active .word-test-target.is-hidden:hover::after {
+  content: '👀 정답 보기';
+  color: #ffffff !important;
+}
+
+/* 실전 예문 긴 문장용 스타일 */
+.word-test-active .word-test-target.is-hidden[data-test-type="sentence"] {
+  min-width: 150px;
+}
+.word-test-active .word-test-target.is-hidden[data-test-type="sentence"]::after {
+  content: '❓ 실전 예문 확인';
+}
+.word-test-active .word-test-target.is-hidden[data-test-type="sentence"]:hover::after {
+  content: '👀 예문 확인';
+  color: #ffffff !important;
+}
+
+/* 정답 확인된 상태 */
+.word-test-active .word-test-target.is-revealed {
+  display: inline-block !important;
+  padding: 2px 8px !important;
+  border-radius: 6px;
+  background-color: rgba(16, 185, 129, 0.12) !important;
+  border: 1px solid rgba(16, 185, 129, 0.4) !important;
+  color: var(--vp-c-text-1) !important;
+  animation: testRevealPop 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes testRevealPop {
+  0% { transform: scale(0.92); opacity: 0.4; }
+  60% { transform: scale(1.04); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* 표 내부 가려진 항목 호버 시 마우스 커서 */
+.word-test-active table tbody tr td:has(.word-test-target.is-hidden) {
+  cursor: pointer;
+}
