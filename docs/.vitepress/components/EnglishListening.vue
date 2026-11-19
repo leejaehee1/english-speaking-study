@@ -167,9 +167,31 @@ function capture() {
     updatePhonetics(chosen)
   }
 }
+// Active utterances retained to prevent Chrome V8 garbage collection dropping audio mid-speech
+const activeUtterances = new Set()
+let cachedVoice = null
+
+function loadVoice() {
+  if (typeof window === 'undefined' || !('speechSynthesis' in window)) return null
+  const preferredLang = frontmatter.value?.listeningLang || 'en-CA'
+  const voices = window.speechSynthesis.getVoices() || []
+  if (!voices.length) return cachedVoice
+
+  cachedVoice =
+    voices.find(v => v.lang === preferredLang && /Samantha|Alex|Google|Natural|Siri|Karen/i.test(v.name)) ||
+    voices.find(v => v.lang === preferredLang) ||
+    voices.find(v => v.lang === 'en-US' && /Samantha|Alex|Google|Natural|Siri/i.test(v.name)) ||
+    voices.find(v => v.lang === 'en-US') ||
+    voices.find(v => v.lang.startsWith('en')) ||
+    null
+  return cachedVoice
+}
+
 function clickPhrase(event) {
-  if (!frontmatter.value.listen || !supported.value || !window.getSelection()?.isCollapsed) return
-  const strong = event.target.closest?.('.vp-doc strong') || event.target.closest?.('.vp-doc td')?.querySelector('strong')
+  if (!frontmatter.value.listen || !supported.value) return
+  const strong = event.target.closest?.('.vp-doc strong') ||
+                 event.target.closest?.('.vp-doc td')?.querySelector('strong') ||
+                 event.target.closest?.('.vp-doc li')?.querySelector('strong')
   if (!strong || strong.closest('a, button')) return
   const chosen = strong.textContent.replace(/\s*✅\s*$/, '').trim()
   if (isEnglish(chosen)) {
@@ -184,32 +206,56 @@ function stop() {
   revision++
   sequencePlaying.value = false
   activeChipWord.value = ''
-  if (supported.value) window.speechSynthesis.cancel()
+  if (supported.value && typeof window !== 'undefined') {
+    window.speechSynthesis.cancel()
+    activeUtterances.clear()
+  }
   speaking.value = false
   utterance = undefined
 }
 function speakCustom(targetText, onFinish) {
-  if (!targetText || !supported.value) {
+  if (!targetText || !supported.value || typeof window === 'undefined') {
     if (onFinish) onFinish()
     return
   }
   revision++
-  if (supported.value) window.speechSynthesis.cancel()
   const current = revision
-  utterance = new SpeechSynthesisUtterance(targetText.replace(/\s*·\s*/g, ', '))
-  const voices = window.speechSynthesis.getVoices()
-  const preferredLang = frontmatter.value.listeningLang || 'en-CA'
-  const voice = voices.find(v => v.lang === preferredLang) || voices.find(v => v.lang === 'en-US') || voices.find(v => v.lang.startsWith('en'))
-  utterance.lang = voice?.lang || 'en-US'
-  if (voice) utterance.voice = voice
-  utterance.rate = Number(rate.value)
+  const synth = window.speechSynthesis
+
+  // 이전 재생 중인 음성이 있을 경우 깨끗하게 취소
+  const wasBusy = synth.speaking || synth.pending
+  if (wasBusy) {
+    synth.cancel()
+  }
+
+  // 문장 부호 및 발음 방해 기호 정리
+  const cleanText = targetText.replace(/\s*·\s*/g, ', ').replace(/~/g, '')
+  utterance = new SpeechSynthesisUtterance(cleanText)
+  utterance.rate = Number(rate.value) || 0.85
+
+  const voice = loadVoice()
+  if (voice) {
+    utterance.voice = voice
+    utterance.lang = voice.lang
+  } else {
+    utterance.lang = frontmatter.value?.listeningLang || 'en-US'
+  }
+
+  // Chrome V8 가비지 컬렉터에 의해 발음이 중간에 끊기거나 누락되는 버그 방지
+  activeUtterances.add(utterance)
+  const cleanup = () => {
+    activeUtterances.delete(utterance)
+  }
+
   utterance.onend = () => {
+    cleanup()
     if (current === revision) {
       speaking.value = false
       if (onFinish) onFinish()
     }
   }
   utterance.onerror = event => {
+    cleanup()
     if (current !== revision) return
     speaking.value = false
     if (!['canceled', 'interrupted'].includes(event.error)) {
@@ -217,9 +263,26 @@ function speakCustom(targetText, onFinish) {
     }
     if (onFinish) onFinish()
   }
-  message.value = ''
-  speaking.value = true
-  window.speechSynthesis.speak(utterance)
+
+  const executeSpeak = () => {
+    if (current !== revision) return
+    message.value = ''
+    speaking.value = true
+    // Chrome 버그: pause 상태로 굳어있는 경우 resume 호출로 언락
+    if (synth.paused) {
+      synth.resume()
+    }
+    synth.speak(utterance)
+  }
+
+  // macOS Chrome/Safari에서 cancel()과 speak()가 동기적으로 연달아 호출되면
+  // cancel IPC 신호가 새 utterance까지 함께 취소해버리는 레이스 컨디션 버그를 완벽히 해결:
+  // 이전 음성이 재생 중이었던 경우에만 25ms 뒤에 큐에 추가하여 항상 즉각적이고 안정적으로 발음 재생
+  if (wasBusy) {
+    setTimeout(executeSpeak, 25)
+  } else {
+    executeSpeak()
+  }
 }
 function speak() {
   sequencePlaying.value = false
@@ -277,6 +340,12 @@ function close() {
 }
 onMounted(() => {
   supported.value = 'speechSynthesis' in window && 'SpeechSynthesisUtterance' in window
+  if (supported.value) {
+    loadVoice()
+    window.speechSynthesis.onvoiceschanged = () => {
+      loadVoice()
+    }
+  }
   document.addEventListener('selectionchange', capture)
   document.addEventListener('click', clickPhrase)
 })
