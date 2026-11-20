@@ -151,6 +151,7 @@ export default defineConfig({
         { text: '10월 12일 · 아침 대화', link: '/references/2026-10-12-morning-conversation' }
       ]) },
       { text: '영어 일기', collapsed: true, items: groupByRecentAndWeek([
+        { text: '11월 20일 · 매서운 추위와 지름길·입이 트이는 자유로움', link: '/diary/2026-11-20' },
         { text: '11월 19일 · 수능 날의 풍경과 응원·부정적 형용사와 회식', link: '/diary/2026-11-19' },
         { text: '11월 18일 · 겨울 추위와 홀가분한 마음·Claude 영어 회화', link: '/diary/2026-11-18' },
         { text: '11월 17일 · 험난했던 AI 대학원 시험과 주말 특강 기획', link: '/diary/2026-11-17' },
