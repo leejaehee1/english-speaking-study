@@ -118,6 +118,12 @@ export default defineConfig({
         { text: '10월 12일', link: '/daily/2026-10-12' }
       ]) },
       { text: '녹음 숙제', collapsed: true, items: groupByRecentAndWeek([
+        { text: '11월 28일 · Habits Podcast (6/6) Conclusion & Key Phrases', link: '/references/2026-11-28-habits-part-6-conclusion-and-key-phrases' },
+        { text: '11월 27일 · Habits Podcast (5/6) Learning & Habit Building', link: '/references/2026-11-27-habits-part-5-learning-and-habit-building' },
+        { text: '11월 26일 · Habits Podcast (4/6) Money & Self-Talk', link: '/references/2026-11-26-habits-part-4-money-habits-and-self-talk' },
+        { text: '11월 25일 · Habits Podcast (3/6) Exercise & Sleep Science', link: '/references/2026-11-25-habits-part-3-exercise-and-sleep-science' },
+        { text: '11월 24일 · Habits Podcast (2/6) Morning Routines & Reading', link: '/references/2026-11-24-habits-part-2-morning-routines-and-reading' },
+        { text: '11월 23일 · Habits Podcast (1/6) What Is a Habit & Power', link: '/references/2026-11-23-habits-part-1-what-is-a-habit-and-power' },
         { text: '11월 21일 · Everyday Podcast (4/4) Tips, Story & Phrasal Verbs', link: '/references/2026-11-21-everyday-conversation-part-4-tips-daily-story-phrasal-verbs' },
         { text: '11월 20일 · Everyday Podcast (3/4) Hobbies, Plans & Travel', link: '/references/2026-11-20-everyday-conversation-part-3-hobbies-plans-travel' },
         { text: '11월 19일 · Everyday Podcast (2/4) Restaurant, Weekend & Health', link: '/references/2026-11-19-everyday-conversation-part-2-restaurant-weekend-health' },
