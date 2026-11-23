@@ -157,6 +157,7 @@ export default defineConfig({
         { text: '10월 12일 · 아침 대화', link: '/references/2026-10-12-morning-conversation' }
       ]) },
       { text: '영어 일기', collapsed: true, items: groupByRecentAndWeek([
+        { text: '11월 23일 · 강남 청년센터 스터디와 바이브 코딩·감자탕과 낮술', link: '/diary/2026-11-23' },
         { text: '11월 21일 · 대학원 주말 스터디 첫날과 전공 융합 비전', link: '/diary/2026-11-21' },
         { text: '11월 20일 · 매서운 추위와 지름길·입이 트이는 자유로움', link: '/diary/2026-11-20' },
         { text: '11월 19일 · 수능 날의 풍경과 응원·부정적 형용사와 회식', link: '/diary/2026-11-19' },
