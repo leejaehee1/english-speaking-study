@@ -174,4 +174,4 @@ David와 Alice가 주고받는 100% 실전 일상 영어 회화 대본입니다.
 
 ---
 
-[녹음 숙제 목록](../calendar.md) · [다음 파트 (11월 24일 Part 2/5)](./2026-11-24-habits-part-2-morning-reading-exercise-sleep.md)
+[녹음 숙제 목록](../calendar.md) · [다음 파트 (11월 24일 Part 2/5)](./2026-11-24-habits-part-2-morning-reading-exercise.md)

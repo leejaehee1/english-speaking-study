@@ -3,11 +3,11 @@ listen: true
 listeningLang: en-US
 ---
 
-# 2026-11-24 (화) · 녹음 숙제 · The Habits That Quietly Change Your Future (Part 2/5) · 아침 루틴·독서 & 매일 운동·수면의 뇌과학
+# 2026-11-24 (화) · 녹음 숙제 · The Habits That Quietly Change Your Future (Part 2/5) · 아침 루틴·독서 & 매일 운동 (06:20–18:23)
 
-**자연스러운 일상 영어 팟캐스트 녹음 대본 (Part 2/5)**
+**자연스러운 일상 영어 팟캐스트 녹음 대본 (Part 2/5 · 18:23 완료분)**
 
-David와 Alice가 주고받는 100% 실전 일상 영어 회화 대본입니다. 아침 첫 30분 루틴, 매일 10분 독서, 규칙적인 신체 활동과 뇌과학 기반의 수면 위생을 한 번에 낭독 훈련할 수 있는 확장 통합 파트입니다. 문장별로 감정을 실어 낭독해보세요. 굵은 글씨를 클릭하면 원어민 발음으로 바로 들을 수 있습니다.
+David와 Alice가 주고받는 100% 실전 일상 영어 회화 대본입니다. 아침 첫 30분 스마트폰 멀리하기와 물 한 잔, 매일 10분 독서 습관, 주방 댄스와 걷기 등 매일 운동이 주는 뇌 활력 효과를 다룬 대본입니다 (18:23초까지 완료 분량). 굵은 글씨를 클릭하면 원어민 발음으로 바로 들을 수 있습니다.
 
 ---
 
@@ -183,6 +183,8 @@ David와 Alice가 주고받는 100% 실전 일상 영어 회화 대본입니다.
 
 **Alice**: **I am. Reading changed my life. I really believe in it. Okay, let's talk about exercise now because this is a habit**
 
+---
+
 ### 챕터 6 · Benefits of Daily Exercise · 주방 댄스도 운동이다 & 행복 호르몬 (13:45–18:29)
 
 **Alice**: **Okay, let's talk about exercise now because this is a habit that I think everyone knows is important, but many people still don't do it, right? Everyone knows, but knowing and doing are very different things.**
@@ -297,133 +299,15 @@ David와 Alice가 주고받는 100% 실전 일상 영어 회화 대본입니다.
 
 ---
 
-### 챕터 7 · The Science of Sleep · 뇌 청소와 수면 중 기억 저장 (18:29–23:12)
-
-**David**: **Okay, next habit. And this one I think many people ignore it. Which one? Sleeping well. Oh, sleep.**
-
-**Alice**: **Yes, sleep. It sounds so simple, but most people don't sleep enough. How much sleep do we need?**
-
-**David**: **Adults need 7 to 9 hours of sleep per night.**
-
-**Alice**: **to 9 hours. And how much do most people get?**
-
-**David**: **Many people get 5 or 6 hours, some even less. Is that a big problem?**
-
-**Alice**: **A huge problem. Sleep is when your brain and body repair themselves. Repair like fixing things.**
-
-**David**: **Yes. While you sleep, your brain processes information from the day. It stores memories. It cleans itself.**
-
-**Alice**: **Your brain cleans itself while you sleep.**
-
-**David**: **Yes. It removes waste products, toxins that build up during the day. That sounds so important.**
-
-**Alice**: **It's extremely important. If you don't sleep enough, those toxins stay in your brain. And what happens then? You feel foggy, unfocused, irritable.**
-
-**David**: **Foggy like you can't think clearly. Yes.**
-
-**Alice**: **Brain fog. It's like your thoughts are slow and unclear.**
-
-**David**: **I know that feeling. When I sleep badly, my whole day feels harder.**
-
-**Alice**: **Everyone knows that feeling. And it's not in your head. It's science. Bad sleep really does make everything harder.**
-
-**David**: **What about learning English? Does sleep affect that?**
-
-**Alice**: **Oh, absolutely. Sleep is essential for learning.**
-
-**David**: **Essential. Very important. You cannot do without it. Yes, essential. Here's something fascinating. When you sleep, your brain**
-
-**Alice**: **actually practices what you learned during the day.**
-
-**David**: **While you sleep, while you sleep, your brain replays the information. It moves it from short-term memory to long-term memory.**
-
-**Alice**: **Short-term memory, things you remember for a short time. Long-term memory, things you remember for a long time.**
-
-**David**: **Exactly. So, if you study English and then sleep well, you remember it better. Wow. So, sleeping is part of studying.**
-
-**Alice**: **Yes. Don't study all night. Study, then sleep. Your brain will do the rest. I love this advice. Study then sleep, not stay awake all night.**
-
-**David**: **Staying awake all night to study that actually works against you.**
-
-**Alice**: **It works against you. That means it hurts you, not helps you.**
-
-**David**: **Yes, it works against you. You study all night, but your brain can't remember properly because there's no sleep to store the information.**
-
-**Alice**: **That's so interesting. I used to stay up late studying at school.**
-
-**David**: **Many people do, but science shows it's better to study a little, sleep well, and your brain does the rest. I wish I knew that when I was a student.**
-
-**Alice**: **Me, too. Now, let's talk about good sleep habits because sleeping well is a habit, too.**
-
-**David**: **You're right. It's not just about the number of hours. It's also about quality.**
-
-**Alice**: **Exactly. Quality sleep. Deep restful sleep. So, what are good sleep habits?**
-
-**David**: **First, go to sleep and wake up at the same time every day.**
-
-**Alice**: **Same time every day, even on weekends, ideally. Yes. Your body has an internal clock.**
-
-**David**: **Internal clock. Like a clock inside your body. Yes, your body knows when it's time to sleep and wake up. If you keep the same schedule, this clock works perfectly.**
-
-**Alice**: **And if you sleep at different times every day, your internal clock gets confused and you feel tired even after sleeping.**
-
-**David**: **Oh, that explains a lot. I sleep late on weekends and then Monday I feel terrible.**
-
-**Alice**: **Yes, that's very common. People call it social jet lag.**
-
-**David**: **Social jet lag? Like jet lag from flying?**
-
-**Alice**: **Yes, jet lag is when you feel confused from traveling across time zones. Social jet lag is the same feeling but from changing your sleep schedule on weekends.**
-
-**David**: **That's a funny expression, but very accurate.**
-
-**Alice**: **It is. So, tip number one, keep a consistent sleep schedule. Same time every night.**
-
-**David**: **And tip number two, no screens before bed. Put your phone down at least 30 minutes before sleep.**
-
-**Alice**: **The blue light from screens wakes your brain up.**
-
-**David**: **Exactly. Blue light from phones and computers tells your brain, "It's daytime. Wake up." But it's night time and you want to sleep.**
-
-**Alice**: **Yes. So your brain gets confused and it's hard to fall asleep.**
-
-**David**: **So no phone before bed. What should you do instead?**
-
-**Alice**: **Read a book. Listen to calm music. Have a light conversation. Drink some warm tea. Those sound nice, actually.**
-
-**David**: **They create a calm bedtime routine. And calm equals better sleep.**
-
-**Alice**: **Calm equals better sleep. I like that equation.**
-
-**David**: **An equation. See, math and English together.**
-
-**Alice**: **Learning two subjects today. Okay. Sleep habit, consistent schedule, no screens before bed. Anything else? Keep your bedroom cool and dark.**
-
-**David**: **Cool and dark.**
-
-**Alice**: **Yes. Your body temperature drops when you sleep. A cool room helps and dark because light wakes you up.**
-
-**David**: **Yes. Darkness tells your brain it's night. Time to sleep.**
-
-**Alice**: **This all makes so much sense. Simple changes but very effective.**
-
-**David**: **Very effective. Good sleep is one of the most powerful habits for your health, your brain, and your future.**
-
-**Alice**: **And it's free. [laughter] It's completely free. Sleep is free. No gym membership needed. Perfect. Okay, we love free habits.**
-
----
-
-## 🎯 Part 2 핵심 청크 (Chunks) 8선
+## 🎯 Part 2 핵심 청크 (Chunks) 6선
 
 1. **give your best energy to ~** — 하루의 가장 맑고 좋은 에너지를 ~에 쏟다
 2. **get the blood flowing** — 가벼운 스트레칭으로 혈액 순환을 촉진하고 몸을 깨우다
 3. **absorb the language like a sponge** — 스펀지가 물을 빨아들이듯 자연스럽게 언어를 흡수하다
 4. **consistency over amount** — 한 번에 많이 하는 것보다 매일 꾸준히 10분씩 하는 힘
 5. **something is always better than nothing** — 10분 걷기라도 안 하는 것(0)보다는 무조건 낫다
-6. **survive the first 3 weeks** — 새로운 습관이 뇌에 자리잡는 첫 3주(21일)의 고비를 넘겨라
-7. **brain fog** — 수면 부족으로 머리에 안개가 낀 듯 멍하고 집중이 안 되는 상태
-8. **study then sleep** — 밤샘 공부는 역효과! 공부하고 푹 자야 뇌가 장기 기억으로 옮긴다
+6. **survive the first 3 weeks** — 새로운 습관이 뇌에 자리잡는 첫 3주(21일)의 고비를 넘겨라 (18:23)
 
 ---
 
-[이전 파트 (11월 23일 Part 1/5)](./2026-11-23-habits-part-1-what-is-a-habit-and-power.md) · [녹음 숙제 목록](../calendar.md) · [다음 파트 (11월 25일 Part 3/5)](./2026-11-25-habits-part-3-money-habits-and-self-talk.md)
+[이전 파트 (11월 23일 Part 1/5)](./2026-11-23-habits-part-1-what-is-a-habit-and-power.md) · [녹음 숙제 목록](../calendar.md) · [다음 파트 (11월 25일 Part 3/5)](./2026-11-25-habits-part-3-sleep-science-and-money-habits.md)
