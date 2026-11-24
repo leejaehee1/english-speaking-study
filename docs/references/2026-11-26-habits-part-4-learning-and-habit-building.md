@@ -3,9 +3,9 @@ listen: true
 listeningLang: en-US
 ---
 
-# 2026-11-27 (금) · 녹음 숙제 · The Habits That Quietly Change Your Future (Part 5/6) · 매일 배우는 습관과 습관 만들기 4단계
+# 2026-11-26 (목) · 녹음 숙제 · The Habits That Quietly Change Your Future (Part 4/5) · 매일 배우는 습관과 습관 만들기 4단계
 
-**자연스러운 일상 영어 팟캐스트 녹음 대본 (Part 5/6)**
+**자연스러운 일상 영어 팟캐스트 녹음 대본 (Part 4/5)**
 
 David와 Alice가 주고받는 100% 실전 일상 영어 회화 대본입니다. 문장별로 또박또박 발음하며 감정을 실어 낭독 연습을 해보세요. 굵은 글씨를 클릭하면 원어민 발음으로 바로 들을 수 있습니다.
 
@@ -246,7 +246,7 @@ David와 Alice가 주고받는 100% 실전 일상 영어 회화 대본입니다.
 
 ---
 
-## 🎯 Part 5 핵심 청크 (Chunks) 5선
+## 🎯 Part 4 핵심 청크 (Chunks) 5선
 
 1. **spaced repetition** — 망각 곡선을 이겨내는 뇌과학적 간격 반복 학습법
 2. **confident by doing, not by waiting** — 완벽해질 때까지 기다리지 않고 실수를 거듭하며 얻는 진짜 자신감
@@ -256,4 +256,4 @@ David와 Alice가 주고받는 100% 실전 일상 영어 회화 대본입니다.
 
 ---
 
-[이전 파트 (11월 26일 Part 4/6)](./2026-11-26-habits-part-4-money-habits-and-self-talk.md) · [녹음 숙제 목록](../calendar.md) · [다음 파트 (11월 28일 Part 6/6)](./2026-11-28-habits-part-6-conclusion-and-key-phrases.md)
+[이전 파트 (11월 25일 Part 3/5)](./2026-11-25-habits-part-3-money-habits-and-self-talk.md) · [녹음 숙제 목록](../calendar.md) · [다음 파트 (11월 27일 Part 5/5 · 완결)](./2026-11-27-habits-part-5-conclusion-and-key-phrases.md)

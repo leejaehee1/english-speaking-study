@@ -3,9 +3,9 @@ listen: true
 listeningLang: en-US
 ---
 
-# 2026-11-23 (월) · 녹음 숙제 · The Habits That Quietly Change Your Future (Part 1/6) · 습관의 정의와 강력한 힘
+# 2026-11-23 (월) · 녹음 숙제 · The Habits That Quietly Change Your Future (Part 1/5) · 습관의 정의와 강력한 힘
 
-**자연스러운 일상 영어 팟캐스트 녹음 대본 (Part 1/6)**
+**자연스러운 일상 영어 팟캐스트 녹음 대본 (Part 1/5)**
 
 David와 Alice가 주고받는 100% 실전 일상 영어 회화 대본입니다. 문장별로 또박또박 발음하며 감정을 실어 낭독 연습을 해보세요. 굵은 글씨를 클릭하면 원어민 발음으로 바로 들을 수 있습니다.
 
@@ -174,4 +174,4 @@ David와 Alice가 주고받는 100% 실전 일상 영어 회화 대본입니다.
 
 ---
 
-[녹음 숙제 목록](../calendar.md) · [다음 파트 (11월 24일 Part 2/6)](./2026-11-24-habits-part-2-morning-routines-and-reading.md)
+[녹음 숙제 목록](../calendar.md) · [다음 파트 (11월 24일 Part 2/5)](./2026-11-24-habits-part-2-morning-reading-exercise-sleep.md)

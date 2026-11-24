@@ -3,9 +3,9 @@ listen: true
 listeningLang: en-US
 ---
 
-# 2026-11-26 (목) · 녹음 숙제 · The Habits That Quietly Change Your Future (Part 4/6) · 돈 관리 습관과 긍정적 혼잣말
+# 2026-11-25 (수) · 녹음 숙제 · The Habits That Quietly Change Your Future (Part 3/5) · 돈 관리 습관과 긍정적 혼잣말
 
-**자연스러운 일상 영어 팟캐스트 녹음 대본 (Part 4/6)**
+**자연스러운 일상 영어 팟캐스트 녹음 대본 (Part 3/5)**
 
 David와 Alice가 주고받는 100% 실전 일상 영어 회화 대본입니다. 문장별로 또박또박 발음하며 감정을 실어 낭독 연습을 해보세요. 굵은 글씨를 클릭하면 원어민 발음으로 바로 들을 수 있습니다.
 
@@ -196,7 +196,7 @@ David와 Alice가 주고받는 100% 실전 일상 영어 회화 대본입니다.
 
 ---
 
-## 🎯 Part 4 핵심 청크 (Chunks) 5선
+## 🎯 Part 3 핵심 청크 (Chunks) 5선
 
 1. **pay yourself first** — 수입이 생기면 소비하기 전에 무조건 저축부터 자동 이체해두다
 2. **a sale is only a deal if you needed it anyway** — 원래 필요했던 물건일 때만 할인도 진짜 득템이다
@@ -206,4 +206,4 @@ David와 Alice가 주고받는 100% 실전 일상 영어 회화 대본입니다.
 
 ---
 
-[이전 파트 (11월 25일 Part 3/6)](./2026-11-25-habits-part-3-exercise-and-sleep-science.md) · [녹음 숙제 목록](../calendar.md) · [다음 파트 (11월 27일 Part 5/6)](./2026-11-27-habits-part-5-learning-and-habit-building.md)
+[이전 파트 (11월 24일 Part 2/5)](./2026-11-24-habits-part-2-morning-reading-exercise-sleep.md) · [녹음 숙제 목록](../calendar.md) · [다음 파트 (11월 26일 Part 4/5)](./2026-11-26-habits-part-4-learning-and-habit-building.md)

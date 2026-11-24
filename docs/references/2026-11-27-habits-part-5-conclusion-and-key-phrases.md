@@ -3,9 +3,9 @@ listen: true
 listeningLang: en-US
 ---
 
-# 2026-11-28 (토) · 녹음 숙제 · The Habits That Quietly Change Your Future (Part 6/6) · 에피소드 총정리 & 6대 핵심 문장 낭독 훈련
+# 2026-11-27 (금) · 녹음 숙제 · The Habits That Quietly Change Your Future (Part 5/5 · 완결) · 에피소드 총정리 & 6대 핵심 문장 낭독 훈련
 
-**자연스러운 일상 영어 팟캐스트 녹음 대본 (Part 6/6)**
+**자연스러운 일상 영어 팟캐스트 녹음 대본 (Part 5/5 · 완결)**
 
 David와 Alice가 주고받는 100% 실전 일상 영어 회화 대본입니다. 문장별로 또박또박 발음하며 감정을 실어 낭독 연습을 해보세요. 굵은 글씨를 클릭하면 원어민 발음으로 바로 들을 수 있습니다.
 
@@ -142,7 +142,7 @@ David와 Alice가 주고받는 100% 실전 일상 영어 회화 대본입니다.
 
 ---
 
-## 🎯 Part 6 핵심 청크 (Chunks) 5선
+## 🎯 Part 5 핵심 청크 (Chunks) 5선
 
 1. **trust the process** — 당장 결과가 보이지 않더라도 과정과 여정을 믿고 나아가다
 2. **give yourself credit** — 오늘 실천한 작은 노력에 대해 스스로에게 아낌없이 칭찬을 보내다
@@ -152,4 +152,4 @@ David와 Alice가 주고받는 100% 실전 일상 영어 회화 대본입니다.
 
 ---
 
-[이전 파트 (11월 27일 Part 5/6)](./2026-11-27-habits-part-5-learning-and-habit-building.md) · [녹음 숙제 목록](../calendar.md)
+[이전 파트 (11월 26일 Part 4/5)](./2026-11-26-habits-part-4-learning-and-habit-building.md) · [녹음 숙제 목록](../calendar.md)
